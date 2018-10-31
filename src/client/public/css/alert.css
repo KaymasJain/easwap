@@ -1,0 +1,215 @@
+.alertLoaderBackground {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--main-color1-op9);
+}
+
+.alertBox {
+    position: absolute;
+    z-index: 10;
+    height: max-content;
+    width: 90%;
+    max-width: 450px;
+    /* padding: 0px 30px; */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background-color: var(--main-color1);
+    color: var(--main-white);
+    text-align: center;
+    box-shadow: 0px 0px 8px 8px var(--blue-for-hover-op5);
+    border-radius: 4px;
+}
+
+.alertTitle {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px;
+    box-sizing: border-box;
+    background-color: var(--blue-for-hover);
+    border-radius: 4px;
+    color: var(--main-color1)
+}
+
+.alertCon {
+    font-size: 18px;
+    padding: 0px 20px;
+    margin: 30px auto;
+    box-sizing: border-box;
+}
+
+.alertBut {
+    background-color: var(--blue-for-hover);
+    border-radius: 4px;
+    padding: 8px 0px;
+    width: 150px;
+    margin: 20px auto;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+
+.alertBut:hover {
+    background-color: var(--main-white);
+    color: var(--main-color1);
+}
+
+
+.loaderBox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 7;
+    background-color: var(--main-color1-op9);
+}
+
+.loader {
+    z-index: 8;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.dash {
+    margin: 0 15px;
+    width: 35px;
+    height: 15px;
+    border-radius: 8px;
+    background: var(--blue-for-hover);
+    box-shadow: 0 0 10px 0 var(--blue-for-hover-op5);
+}
+
+.uno {
+    margin-right: -18px;
+    transform-origin: center left;
+    animation: spin 3s linear infinite;
+}
+
+.dos {
+    transform-origin: center right;
+    animation: spin2 3s linear infinite;
+    animation-delay: .2s;
+}
+
+.tres {
+    transform-origin: center right;
+    animation: spin3 3s linear infinite;
+    animation-delay: .3s;
+}
+
+.cuatro {
+    transform-origin: center right;
+    animation: spin4 3s linear infinite;
+    animation-delay: .4s;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(360deg);
+    }
+    30% {
+        transform: rotate(370deg);
+    }
+    35% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(0deg);
+    }
+    30% {
+        transform: rotate(-180deg);
+    }
+    35% {
+        transform: rotate(-190deg);
+    }
+    40% {
+        transform: rotate(-180deg);
+    }
+    78% {
+        transform: rotate(-180deg);
+    }
+    95% {
+        transform: rotate(-360deg);
+    }
+    98% {
+        transform: rotate(-370deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes spin3 {
+    0% {
+        transform: rotate(0deg);
+    }
+    27% {
+        transform: rotate(0deg);
+    }
+    40% {
+        transform: rotate(180deg);
+    }
+    45% {
+        transform: rotate(190deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    62% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(360deg);
+    }
+    80% {
+        transform: rotate(370deg);
+    }
+    85% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin4 {
+    0% {
+        transform: rotate(0deg);
+    }
+    38% {
+        transform: rotate(0deg);
+    }
+    60% {
+        transform: rotate(-360deg);
+    }
+    65% {
+        transform: rotate(-370deg);
+    }
+    75% {
+        transform: rotate(-360deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Easwap | Easiest way to swap ERC20 tokens</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/indexF.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/alert.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/tradeE.css"/>
+    <meta name="keywords" content="ethereum,blockchain,contract,trading,dex,swap,kyber network,kyber swap,exchange,decentralised,UI,UX">
+    <meta name="author" content="sjain0410@gmail.com">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <meta name="generator" content="Pagekit">
+    <link rel="canonical" href="https://easwap.com">
+    <meta name="theme-color" content="#24304e">
+    <meta name="msapplication-navbutton-color" content="#24304e">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#24304e">
+    <meta property="twitter:card" content="https://easwap.com/img/logo.png">
+    <meta property="og:site_name" content="Easwap - Tokens trading made easy">
+    <meta property="og:title" content="Easwap - Tokens trading made easy">
+    <meta property="og:url" content="https://easwap.com">
+    <meta name="msapplication-TileImage" content="https://easwap.com/img/logo.png">
+    <link href="https://easwap.com/img/logo.png" rel="shortcut icon" type="image/x-icon">
+    <link href="https://easwap.com/img/logo.png" rel="apple-touch-icon-precomposed">
+    <link id="favicon" rel="icon" type="image/png" href="https://easwap.com/img/logo.png">
+
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72808093-15"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-72808093-15');
+    </script> -->
+    
+</head>
+
+<body>
+
+    <div class="bodyCover">
+
+        <div id="menuIconBox">
+            <a href="https://twitter.com/easwapHQ" target="_blank"><div class="iconBox"><i class="fab fa-twitter-square"></i></div></a>
+            <a href="https://t.me/joinchat/Hzn8rA1IZZCww_29twxLQw" target="_blank"><div class="iconBox"><i class="fab fa-telegram"></i></div></a>
+            <!-- <a href="" target="_blank"><div class="iconBox"><i class="fab fa-medium"></i></div></a> -->
+        </div>
+
+        <div class="midBody">
+
+            <div class="navBar">
+
+                <div class="forMaxWidth">
+
+                    <div class="title">Easwap<div class="beta">BETA</div></div>
+
+                    <div class="navLeftContainer">
+                        <div class="metaAddBox">
+                            <div class="loggedInWith">Login method</div>
+                            <div class="yourAddr">Not connected</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mainBody scrollBar">
+
+                <div id="toolBar">
+                    <div class="toolBarBut toolBarCon" id="showHideQty">SHOW QUANTITY</div>
+                    <!-- <a href="/developer" style="text-decoration: none"><div class="toolBarBut toolBarCon">DEVELOPER</div></a> -->
+                    <div class="toolBarTip toolBarCon">
+                        TRY ON ROPSTEN<span class="toolConText">Try our ropsten version by just shifting to ropsten test network</span>
+                    </div>
+                </div>
+
+                <div class="daiEthDescBox">
+                    <div class="boxEth"></div>
+                    <div class="descLine">
+                        <div>SELECT 2 COINS TO SWAP</div>
+                        <div class="tryMainOrRop">
+                            Metamask/Trust/Status not found!!<span class="tryNetText">For trading through our platform you need to have <a href="https://metamask.io/" target="_blank" style="color: var(--blue-for-hover)">metamask</a> extension installed on your browser or for android/ios you need <a href="https://trustwalletapp.com/features/trust-browser" target="_blank" style="color: var(--blue-for-hover)">trust browser</a> or <a href="https://status.im/" target="_blank" style="color: var(--blue-for-hover)">status</a> installed on your device.</span>
+                        </div>
+                    </div>
+                    <div class="boxEthMob"></div>
+                    <div class="boxDai"></div>
+                </div>
+
+                <div class="tradeDataContainer"></div>
+
+                <div class="searchBar">
+                    <div class="searchBox" onclick="filterSearch('all', this)">ALL</div>
+                </div>
+
+            </div>
+
+            <div class="footer">Powered by <a href="https://kyber.network/" class="footerLink" target="_blank">kyber.network</div></a>
+
+
+        </div>
+
+        <div id="doubleClickProblem" hidden></div>
+
+        <div class="tradeCover" onclick="hideTrade()"hidden></div>
+            <div id="tradeBox" hidden>
+                <i class="fas fa-times crossIcon" onclick="hideTrade()"></i>
+                <div class="tradeInputContainer">
+                    <div class="coinSellBox coinTradeBox">
+                        <div class="tradeImgCon">
+                            <img src="logos/eth.svg" id="imgForSell" style="width:44px; height:44px">
+                        </div>
+                        <div class="coinNameSym">
+                            <div class="coinSymbol" id="sellSymbol">ETH</div>
+                            <div class="coinFullName" id="sellFullName">ethereum</div>
+                        </div>
+                        <div class="inputTradeBox">
+                            <input type="number" min="0" class="inputTrade coinOneInput" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="inputTradeBox inputMobile">
+                        <input type="number" min="0" class="inputTrade coinOneInput" placeholder="0.00">
+                    </div>
+                    <div class="ArrowIcon">
+                        <div id="arrRight">
+                            <i class="fas fa-arrow-right arrowTransform"></i>
+                        </div>
+                        <div id="arrBot">
+                            <i class="fas fa-arrow-down arrowTransform"></i>
+                        </div>
+                        <div id="toggleCoin">toggle</div>
+                    </div>
+                    <div class="coinBuyBox coinTradeBox">
+                        <div class="inputTradeBox">
+                            <input type="number" min="0" class="inputTrade coinTwoInput" placeholder="0.00">
+                        </div>
+                        <div class="coinNameSym">
+                            <div class="coinSymbol" id="buySymbol">ETH</div>
+                            <div class="coinFullName" id="buyFullName">ethereum</div>
+                        </div>
+                        <div class="tradeImgCon">
+                            <img src="logos/eth.svg" id="imgForBuy" style="width:44px; height:44px">
+                        </div>
+                    </div>
+                    <div class="inputTradeBox inputMobile">
+                        <input type="number" min="0" class="inputTrade coinTwoInput" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="ethToToken"></div>
+                <div class="qtyFeesBox">
+                    <div>
+                        <div class="tokenQtyBox">
+                            <div class="tokenQtyValue"></div>
+                            <div class="tradeAllBut" onclick="tradeAllCoin()">TRADE ALL</div>
+                        </div>
+                        <!-- <div class="transFees">Transaction Fees: 0.178 ETH</div> -->
+                    </div>
+                    <div class="butBuySell" id="swapTrade" onclick="swapTokens()">SWAP</div>
+                </div>
+                <div class="tokenQtyBox tokenQtyBoxMob">
+                    <div class="tokenQtyValue"></div>
+                    <div class="tradeAllBut" onclick="tradeAllCoin()">TRADE ALL</div>
+                </div>
+                <div class="advanceSettingBox">
+                    <div class="advanceSetting">Advanced</div>
+                    <div id="advanceToggle" hidden>
+                        <div class="advanceExpand">
+                            <div class="gasPriceContain">
+                                <div class="gasPriceBox">
+                                    <div class="gasPrice">Gas Price :</div>
+                                    <input type="number" class="gasPriceInput" min="0" value="50" onmouseup="gasToTranSet(1)" onkeyup="gasToTranSet(1)">
+                                    <div class="inGwei">Gwei</div>
+                                </div>
+                                <div class="optionGasPrice">
+                                    <div class="gasOpBut" onclick="setGas(1)">Low</div>
+                                    <div class="gasOpBut" onclick="setGas(2)">Standard</div>
+                                    <div class="gasOpBut" onclick="setGas(3)">High</div>
+                                </div>
+                                <div class="maxGas">Max: 50 Gwei</div>
+                            </div>
+                            <div class="minSlipContain">
+                                <div class="minSlipTitle">MIN ACCEPTABLE RATE: 447.1121 KNC</div>
+                                <div class="slipRateBox">
+                                    <div id="sliderCon">
+                                        <input type="range" class="slider" min="90" max="101" value="97">
+                                    </div>
+                                    <div id="sliderVal">97%</div>
+                                </div>
+                                <div class="sliderDetails">Higher MIN ACCEPTABLE RATE typically results in lower success rate when the market is volatile. <span>444.1121 KNC</span> is our suggested MIN ACCEPTABLE RATE by default.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alertLoaderBackground" onclick="hideAlert()" hidden></div>
+
+        <div class="alertBox" hidden>
+            <div class="alertTitle"></div>
+            <div class="alertCon"></div>
+            <div class="alertBut" onclick="hideAlert()">DISMISS</div>
+        </div>
+
+        <div class="loaderBox"></div>
+
+        <div class="loader">
+            <div class="dash uno"></div>
+            <div class="dash dos"></div>
+            <div class="dash tres"></div>
+            <div class="dash cuatro"></div>
+        </div>
+
+    <script src="js/varDefines.js"></script>
+    <script src="js/alert.js"></script>
+    <script src="js/fireC.js"></script>
+    <script src="js/abiB.js"></script>
+    <!-- <script src="js/web3.js"></script> -->
+    <script src="js/ropsten.js"></script>
+    <script src="js/coinDetailsF.js"></script>
+    <script src="js/index10.js"></script>
+    <script src="js/contractFunc.js"></script>
+    <script src="js/tradeK.js"></script>
+    <script src="js/trade/search.js"></script>
+
+</body>
+
+</html>

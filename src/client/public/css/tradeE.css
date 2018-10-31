@@ -1,0 +1,713 @@
+.searchBar {
+    position: fixed;
+    z-index: 2;
+    top: 10px;
+    bottom: 0;
+    right: 6px;
+    margin: auto;
+    height: calc(100vh - 105px);
+    max-height: max-content;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    padding: 5px 10px;
+}
+
+.searchBox {
+    padding: 5px 0px;
+    width: 30px;
+    text-align: center;
+    background-color: var(--blue-for-hover);
+    color: var(--main-white);
+    margin: 5px auto;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.1s linear;
+    position: relative;
+}
+
+.searchBox:hover {
+    background-color: var(--blue-for-hover-op5);
+    color: var(--main-white);
+}
+
+.selectedChar {
+    display: none;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--main-white);
+    border: 1px solid var(--main-color1);
+}
+
+.searchBar::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--main-color1);
+    scroll-behavior: smooth;
+    border-radius: 5px;
+}
+
+.searchBar::-webkit-scrollbar {
+    width: 3px;
+    background-color: var(--main-color1);
+}
+
+.searchBar::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--blue-for-hover);
+}
+
+.buySell {
+    transition: none;
+    background-color: var(--blue-for-hover);
+    color: var(--main-white);
+    /* justify-content: space-around; */
+}
+
+.buySell:hover {
+    animation: none;
+    background-color: var(--blue-for-hover);
+}
+
+.buySell .menuIcon {
+    margin: auto;
+    margin-right: 10px;
+}
+
+.buySell .menuContent {
+    margin: auto;
+    margin-left: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.inputMobile {
+    display: none;
+}
+
+.tradeDataContainer {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(140px, 1fr));
+    grid-gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 40px auto;
+}
+
+.selectCoinBox {
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 2px 2px var(--main-color1-op5);
+    /* display: flex; */
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s linear;
+    color: var(--main-white);
+    outline-offset: -2px;
+    outline: 0px solid black;
+}
+
+.selectCoinBox:hover {
+    color: var(--main-white);
+}
+
+.coinsIconBox {
+    width: max-content;
+    margin: auto;
+}
+
+.coinsDetailBox {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.logoNameBox {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.logoBox,
+.nameBox,
+.nameCodeBox {
+    margin: auto;
+}
+
+.qtyBox {
+    text-align: center;
+}
+
+@keyframes forMainShadow {
+    0% {
+        box-shadow: 0px 0px 0px 0px var(--main-color1-op5);
+    }
+    25% {
+        box-shadow: 0px 0px 4px 4px var(--main-color1-op5);
+    }
+    50% {
+        box-shadow: 0px 0px 0px 0px var(--main-color1-op5);
+    }
+    75% {
+        box-shadow: 0px 0px 4px 4px var(--main-color1-op5);
+    }
+    100% {
+        box-shadow: 0px 0px 0px 0px var(--main-color1-op5);
+    }
+}
+
+.elementToAnimate {
+    animation: forMainShadow 0.5s forwards 0s linear;
+}
+
+.nameToken {
+    font-size: 10px;
+    font-weight: normal;
+}
+
+.nameBox {
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.coinsQtyBox {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+
+
+#doubleClickProblem {
+    position: fixed;
+    z-index: 8;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.tradeCover {
+    position: fixed;
+    z-index: 9;
+    background-color: var(--main-color1-op9);
+    width: 100%;
+    height: 100%;
+}
+
+#tradeBox {
+    max-width: 800px;
+    width: 95%;
+    height: max-content;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0px 0px 4px 4px var(--blue-for-hover-op7);
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background-color: var(--main-color1);
+    color: var(--main-white);
+}
+
+#tradeBox:hover {
+    box-shadow: 0px 0px 8px 8px var(--blue-for-hover-op7);
+}
+
+.butBuySell {
+    padding: 10px 0px;
+    width: 200px;
+    height: max-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 4px;
+    background-color: var(--blue-for-hover);
+    color: var(--main-color1);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    border: 2px solid var(--blue-for-hover);
+    color: white;
+    background-image: linear-gradient(var(--main-color1), var(--main-color1));
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size .5s ease,
+    color .5s ease;
+}
+
+.butBuySell:hover {
+    background-size: 100% 100%;
+    color: var(--blue-for-hover);
+}
+
+.tradeInputContainer {
+    width: 100%;
+    padding: 20px 10px;
+    padding-top: 40px;
+    box-sizing: border-box;
+    display: flex;
+    color: var(--main-white);
+    text-align: center;
+    margin: auto;
+    justify-content: space-evenly;
+}
+
+.coinTradeBox {
+    display: flex;
+    width: 40%;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.tradeImgCon {
+    margin: auto;
+    padding: 0px 10px;
+}
+
+.coinNameSym {
+    margin: auto;
+    width: 35%;
+    padding: 0px 10px;
+}
+
+.coinSymbol {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.inputTradeBox {
+    margin: auto;
+    padding: 0px 10px;
+}
+
+.inputTrade {
+    width: 120px;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 18px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--blue-for-hover-op5);
+    outline: none;
+    color: var(--main-white);
+    text-align: center;
+}
+
+.inputTrade:focus {
+    border-bottom: 2px solid var(--blue-for-hover);
+}
+
+.ArrowIcon {
+    width: max-content;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#arrBot {
+    display: none;
+}
+
+.arrowTransform {
+    animation: arrowColor 1.5s infinite 0s linear;
+    transition: transform 0.5s linear;
+    font-size: 36px;
+}
+@keyframes arrowColor {
+    0% {
+        color: var(--blue-for-hover);
+    }
+    50% {
+        color: var(--blue-for-hover);
+    }
+    100% {
+        color: var(--main-color1);
+    }
+}
+
+#toggleCoin {
+    color: var(--main-white-op5);
+}
+
+.ethToToken {
+    text-align: center;
+    margin: auto;
+    font-size: 12px;
+}
+
+.qtyFeesBox {
+    max-width: 700px;
+    display: flex;
+    margin: 20px auto;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    padding: 0px 30px;
+    box-sizing: border-box;
+}
+
+.tokenQtyBox {
+    display: flex;
+    width: max-content;
+    margin: 10px auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--blue-for-hover);
+    /* animation: outlineAnim 1s infinite 0s linear; */
+}
+
+@keyframes outlineAnim {
+    0% {
+        outline: none;
+        background-color: var(--main-color1);
+    }
+    25% {
+        background-color: var(--blue-for-hover);
+        /* outline: 4px solid rgb(78, 230, 91); */
+    }
+    50% {
+        background-color: var(--main-color1);
+        outline: none;
+    }
+    75% {
+        background-color: var(--blue-for-hover);
+        /* outline: 4px solid rgb(78, 230, 91); */
+    }
+    100% {
+        background-color: var(--main-color1);
+        outline: none;
+    }
+}
+
+.tokenQtyBoxMob {
+    display: none;
+}
+
+.tokenQtyValue {
+    margin: auto;
+    margin-right: 20px;
+}
+
+.tradeAllBut {
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: var(--blue-for-hover);
+    cursor: pointer;
+}
+
+.tradeAllBut:hover {
+    background-color: white;
+    color: var(--main-color1);
+}
+
+.transFees {
+    margin: 20px auto;
+}
+
+.advanceSettingBox {
+    margin-top: 20px;
+}
+
+.advanceSetting {
+    padding: 10px;
+    position: relative;
+    border-top: 1px solid var(--blue-for-hover);
+    border-bottom: 1px solid var(--blue-for-hover);
+    cursor: pointer;
+}
+
+.advanceExpand {
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.gasPriceContain {
+    width: 30%;
+    margin: auto;
+}
+
+.gasPriceBox {
+    /* margin: auto; */
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    font-size: 14px;
+    justify-content: space-evenly;
+    width: max-content;
+    margin: auto;
+}
+
+.gasPrice {
+    margin: auto 10px;
+}
+
+.gasPriceInput {
+    width: 35px;
+    border: none;
+    border-bottom: 1px solid var(--blue-for-hover-op5);
+    background: transparent;
+    padding: 4px 0px;
+    box-sizing: border-box;
+    color: var(--blue-for-hover);
+    outline: none;
+    text-align: center;
+    font-size: 16px;
+}
+
+.inGwei {
+    margin: auto 10px;
+}
+
+.optionGasPrice {
+    display: flex;
+}
+
+.maxGas {
+    margin: 15px auto;
+}
+
+.gasOpBut {
+    width: 30%;
+    margin: 5px auto;
+    padding: 5px 0px;
+    font-size: 12px;
+    background-color: var(--blue-for-hover);
+    text-align: center;
+    border: 1px solid var(--blue-for-hover);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.minSlipContain {
+    width: 50%;
+    margin: 20px auto;
+}
+
+.minSlipTitle {
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--blue-for-hover);
+}
+
+.slipRateBox {
+    margin: auto;
+    padding: 15px 0px;
+    box-sizing: border-box;
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    width: max-content;
+}
+
+.sliderCon {
+    margin: auto;
+    margin-left: 0;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 200px;
+    margin: auto;
+    height: 13px;
+    background: var(--main-white);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    background: var(--blue-for-hover);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: var(--blue-for-hover);
+    cursor: pointer;
+}
+
+#sliderVal {
+    margin: auto;
+    width: 50px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.sliderDetails {
+    margin: auto;
+    font-size: 12px;
+}
+
+.linkColor {
+    color: var(--blue-for-hover);
+}
+
+.crossIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    font-size: 30px;
+    color: var(--main-white-op7);
+    opacity: 0;
+}
+
+
+@media only screen and (max-width: 850px) {
+    #tradeBox {
+        width: 85%;
+        max-width: max-content;
+        margin: auto;
+        max-height: 90%;
+        overflow-y: scroll;
+        box-shadow: 0px 0px 2px 2px var(--blue-for-hover-op7);
+        -webkit-overflow-scrolling: touch;
+    }
+    #tradeBox:hover {
+        box-shadow: 0px 0px 2px 2px var(--blue-for-hover-op7);
+    }
+    #tradeBox::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: var(--main-color1);
+        scroll-behavior: smooth;
+        border-radius: 5px;
+        height: 300px;
+    }
+    #tradeBox::-webkit-scrollbar {
+        height: 300px;
+        width: 6px;
+        background-color: var(--main-color1);
+    }
+    #tradeBox::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: var(--blue-for-hover);
+    }
+    .crossIcon {
+        opacity: 1;
+    }
+    .tradeInputContainer {
+        display: block;
+        padding-top: 20px;
+    }
+    .coinTradeBox {
+        width: max-content;
+    }
+    .ArrowIcon {
+        margin: 20px auto;
+    }
+    .arrowTransform {
+        margin: auto;
+    }
+    #arrRight {
+        display: none;
+    }
+    #arrBot {
+        display: block;
+    }
+    .tokenQtyBox {
+        display: none;
+        border-top: 1px solid var(--blue-for-hover);
+    }
+    .tokenQtyBoxMob {
+        text-align: center;
+        display: block;
+    }
+    .tokenQtyValue {
+        margin: auto;
+        margin-bottom: 5px;
+    }
+    .tradeAllBut {
+        padding: 4px 0px;
+        width: 150px;
+    }
+    .butBuySell {
+        margin: auto;
+    }
+    .advanceExpand {
+        display: block;
+        width: 90%;
+    }
+    .advanceExpand {
+        margin: auto;
+    }
+    .gasPriceContain {
+        width: max-content;
+        margin: auto;
+    }
+    .minSlipContain {
+        width: 100%;
+        margin: 20px auto;
+        border-top: 1px solid var(--blue-for-hover);
+        padding-top: 10px;
+    }
+    .sliderCon {
+        margin: auto;
+    }
+    .sliderDetails {
+        width: 200px;
+        margin: auto
+    }
+    .slider {
+        width: 100px;
+        margin: auto;
+    }
+    .sliderVal {
+        text-align: center;
+        width: max-content;
+        margin: auto
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #tradeBox {
+        max-width: 400px;
+    }
+    .inputTradeBox {
+        display: none;
+    }
+    .inputMobile {
+        display: block;
+        width: 90%;
+        margin: auto;
+    }
+    .butBuySell {
+        width: 150px;
+        padding: 8px 0px;
+    }
+}
