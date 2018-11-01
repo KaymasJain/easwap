@@ -33,11 +33,21 @@ function expectedRateCoinToCoin(coinFrom, coinTo, coinFromDecimal) {
 }
 
 
-function tokenBalance(coinAdd, coinName, coinDecimal) {
+function tokenBalance(key) {
+    var coinAdd;
+    var coinName;
+    var coinDecimal;
     var coinOneContract = web3.eth.contract(tokensAbi).at(coinAdd);
     coinOneContract.balanceOf(account, function (err, res) {
         if (!err) {
-            return [Number(res), Number(res)/10**coinDecimal];
+            var coinQty = Number(res);
+            var coinQtyInWei = coinQty / 10**coinDecimal;
+            var qtyClass = `.${key}Qty`;
+            $(qtyClass).text(`QTY: ${coinQtyInWei.toFixed(6)}`);
+            if (coinQtyInWei > 0) {
+                $(qtyClass).css('color', 'rgb(100, 255, 100)');
+            }
+            return [coinQty, coinQtyInWei];
         } else {
             var title = 'ERROR GETTING QUANTITY';
             var content = `Unable to get quantity of ${coinName} in your wallet`;
@@ -50,7 +60,14 @@ function tokenBalance(coinAdd, coinName, coinDecimal) {
 function ethBalance() {
     web3.eth.getBalance(account, function (err, res) {
         if (!err) {
-            return [Number(res), Number(res)/10**18];
+            var ethQty = Number(res);
+            var ethQtyInWei = ethQty / 10**18;
+            var qtyClass = `.${key}Qty`;
+            $(qtyClass).text(`QTY: ${ethQtyInWei.toFixed(6)}`);
+            if (ethQtyInWei > 0) {
+                $(qtyClass).css('color','rgb(100, 255, 100)');
+            }
+            return [ethQty, ethQtyInWei];
         } else {
             var title = 'ERROR GETTING QUANTITY';
             var content = `Unable to get quantity of ETH in your wallet`;
