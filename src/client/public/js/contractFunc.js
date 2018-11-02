@@ -30,13 +30,25 @@ function expectedRateCoinToCoin(coinFrom, coinTo, coinFromDecimal) {
             return;
         };
     });
+
+    var coinToNum = 10 ** coinToDecimal;
+    mainKyberContract.getExpectedRate(coinFrom, coinTo, coinToNum, function (err, res) {
+        if (!err) {
+            return [String(res[0]), String(res[0])/10**18];
+        } else {
+            var title = 'ERROR GETTING EXPECTED RATE';
+            var content = `Unable to get expected rate maybe because the network is clogged. Please try again later.`;
+            showAlert(title, content);
+            return;
+        };
+    });
 }
 
 
 function tokenBalance(key) {
-    var coinAdd;
+    var coinAdd  = coinsData[key].kyber.contractAddress;
     var coinName;
-    var coinDecimal;
+    var coinDecimal = coinsData[key].kyber.decimals;
     var coinOneContract = web3.eth.contract(tokensAbi).at(coinAdd);
     coinOneContract.balanceOf(account, function (err, res) {
         if (!err) {
@@ -57,7 +69,7 @@ function tokenBalance(key) {
     });
 }
 
-function ethBalance() {
+function ethBalance(key) {
     web3.eth.getBalance(account, function (err, res) {
         if (!err) {
             var ethQty = Number(res);

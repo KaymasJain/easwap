@@ -321,34 +321,6 @@ function funcToSelect(coinId) {
     // expectedRateContract(ethAdd, coinOneAdd);
 };
 
-function expectedRateCoinToCoin(coinOneAdd, coinTwoAdd) {
-    var oneNum = 10 ** coinOneDecimal;
-    mainKyberContract.getExpectedRate(coinOneAdd, coinTwoAdd, oneNum, function (err, res) {
-        if (!err) {
-            maxTwoRateInWei = String(res[0]);
-            maxTwoRate = maxTwoRateInWei / 1000000000000000000;
-            $('.ethToToken').text(`1 ${coinOneName} = ${maxTwoRate.toFixed(6)} ${coinTwoName}`);
-        } else {
-            var title = 'ERROR GETTING EXPECTED RATE';
-            var content = `Unable to get expected rate maybe because the network is clogged. Please try again later.`;
-            showAlert(title, content);
-            console.log(err);
-        };
-    });
-    var TwoNum = 10 ** coinTwoDecimal;
-    mainKyberContract.getExpectedRate(coinTwoAdd, coinOneAdd, TwoNum, function (err, res) {
-        if (!err) {
-            maxOneRateInWei = String(res[0]);
-            maxOneRate = maxOneRateInWei / 1000000000000000000;
-        } else {
-            var title = 'ERROR GETTING EXPECTED RATE';
-            var content = `Unable to get expected rate maybe because the network is clogged. Please try again later.`;
-            showAlert(title, content);
-            console.log(err);
-        };
-    });
-}
-
 var gasDecide = 3;
 function setGas(setVar) {
     if (setVar == 1) {
@@ -476,37 +448,8 @@ function allowance(coinContract, src, srcAmount, dest, maxDestAmount, minDestAmo
                 var title = 'CONFIRM ALLOWANCE TRANSACTION';
                 var content = `Confirm your transaction for allowance of token`;
                 showAlert(title, content);
-                coinContract.Approval({}, 'latest').watch(function (err, event) {
-                    if (!err) {
-                        var eventTx = event.transactionHash;
-                        if (txArr.includes(eventTx)) {
-                            if (!event.removed) {
-                                console.log('approved transaction completed');
-                            } else {
-                                console.log('Transaction Removed from blockchain');
-                            }
-                        }
-                    }
-                });
-                coinContract.approve(mainKyberAdd, allowanceLimit, payObj, function (err, res) {
-                    if (!err) {
-                            var title = 'ALLOWANCE TRANSACTION DEPLOYED';
-                            var content;
-                            if (networkId == 3) {
-                                content = `Check your transaction <a href="https://ropsten.etherscan.io/tx/${res}" class="linkColor" target="_blank">here</a>. Once completed start trade transaction.`;
-                            } else {
-                                content = `Check your transaction <a href="https://etherscan.io/tx/${res}" class="linkColor" target="_blank">here</a>. Once completed start trade transaction.`;
-                            }
-                            showAlert(title, content);
-                            txArr.push(res);
-                            trade(src, srcAmount, dest, account, minDestAmount, 0);
-                    } else {
-                        var title = 'ERROR COMPLETING TRANSACTION';
-                        var content = `Error occured while completing your transaction.<br><b>${err.message}</b>`;
-                        showAlert(title, content);
-                    };
-                    hideLoader();
-                });
+                approvalEvent(coinContract);
+                approve(mainKyberAdd, allowanceLimit, payObj);
             } else {
                 trade(src, srcAmount, dest, account, minDestAmount, 0);
             }
@@ -570,34 +513,15 @@ function trade(src, srcAmount, dest, account, minDestAmount, walletId) {
     });
 }
 
-
-mainKyberContract.ExecuteTrade({}, 'latest').watch(function (err, event) {
-    if (!err) {
-        var eventTx = event.transactionHash;
-        if (txArr.includes(eventTx)) {
-            if (!event.removed) {
-                var title = 'TRANSACTION COMPLETED';
-                var content = 'Your swapping has been successfully completed!';
-                showAlert(title, content);
-                hideTrade();
-            } else {
-                var title = 'TRANSACTION FAILED';
-                var content = `Error occured while completing your transaction.<br><b>${err.message}</b>`;
-                showAlert(title, content);
-            }
-        }
-    }
-});
-
 $('#showHideQty').click(function() {
     if ($('#showHideQty').text() == "SHOW QUANTITY") {
         $('.coinsQtyBox').slideToggle();
         $('#showHideQty').text('HIDE QUANTITY');
         Object.keys(coinsData).forEach(function (key, i) {
             if (key == "eth") {
-                ethQtyCal(coinsData[key].id);
+                ethBalance(coinsData[key].id);
             } else {
-                coinsQtyCal(coinsData[key].id);
+                tokenBalance(coinsData[key].id);
             }
         });
     } else if ($('#showHideQty').text() == "HIDE QUANTITY") {
@@ -605,38 +529,6 @@ $('#showHideQty').click(function() {
         $('#showHideQty').text('SHOW QUANTITY');
     }
 })
-
-function ethQtyCal(key) {
-    web3.eth.getBalance(account, function (err, res) {
-        if (!err) {
-            var coinQty = String(res);
-            coinQty = (coinQty / 1000000000000000000).toFixed(6);
-            var qtyClass = `.${key}Qty`;
-            $(qtyClass).text(`QTY: ${coinQty}`);
-            if (coinQty > 0) {
-                $(qtyClass).css('color','rgb(100, 255, 100)');
-            }
-        } else {
-            console.log(err);
-        };
-    });
-}
-
-function coinsQtyCal(key) {
-    var coinAddress = kyber[coinsData[key].kyber].contractAddress;
-    var coinDecimal = kyber[coinsData[key].kyber].decimals;    
-    var coinContractQty = web3.eth.contract(tokensAbi).at(coinAddress);
-    coinContractQty.balanceOf(account, function (err, res) {
-        if (!err) {
-            var coinQty = String(res);
-            coinQty = (coinQty / (10**coinDecimal)).toFixed(6);
-            var qtyClass = `.${key}Qty`;
-            $(qtyClass).text(`QTY: ${coinQty}`);
-            if (coinQty > 0) {
-                $(qtyClass).css('color', 'rgb(100, 255, 100)');
-            }
-        } else {
-            console.log(err);
-        };
-    });
-}
+// expectedRateCoinToCoin => expectedRateCoinToCoin
+// ethQtyCal => ethBalance
+// coinsQtyCal => tokenBalance
