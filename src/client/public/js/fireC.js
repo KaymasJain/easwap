@@ -11,6 +11,7 @@ var kyber;
 db.ref('kyberMain').once('value', function (snapshot) {
     if (networkId != 3) {
         kyber = snapshot.val();
+        console.log(kyber);
     }
     hideLoader();
 }, function (error) {
