@@ -3,15 +3,28 @@ var networkId;
 var account;
 
 var coinOne = {};
+// coinOne.rate;
 var coinTwo = {};
+// coinTwo.rate;
 
 var toChoose = 0;
 
-var gasDecide = 3;
+// Gas price - 1st element in gwei, 2nd element in wei
+var gas = [];
 
-var finalGasPrice;
-var finalGasInWei;
-
-var allowanceLimit = 2**256 - 1;
+var allowanceLimit = 2**255;
 
 var txArr = [];
+
+var kyber;
+
+var gas;
+
+var gasLow,
+    gasStandard,
+    gasHigh;
+
+
+var toggleNum = 0;
+
+var sliderVal = 97;
