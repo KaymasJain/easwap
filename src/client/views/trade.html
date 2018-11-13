@@ -117,20 +117,22 @@
                 <i class="fas fa-times crossIcon" onclick="hideTrade()"></i>
                 <div class="tradeInputContainer">
                     <div class="coinSellBox coinTradeBox">
-                        <div class="tradeImgCon">
-                            <img src="logos/eth.svg" id="imgForSell" style="width:44px; height:44px">
-                        </div>
-                        <div class="coinNameSym">
-                            <div class="coinSymbol" id="sellSymbol">ETH</div>
-                            <div class="coinFullName" id="sellFullName">ethereum</div>
+                        <div class="imgNameSymbolBox">
+                            <div class="tradeImgCon">
+                                <img src="logos/eth.svg" id="imgForSell" style="width:44px; height:44px">
+                            </div>
+                            <div class="coinNameSym">
+                                <div class="coinSymbol" id="sellSymbol">ETH</div>
+                                <div class="coinFullName" id="sellFullName">ethereum</div>
+                            </div>
                         </div>
                         <div class="inputTradeBox">
                             <input type="number" min="0" class="inputTrade coinOneInput" placeholder="0.00">
                         </div>
                     </div>
-                    <div class="inputTradeBox inputMobile">
+                    <!-- <div class="inputTradeBox inputMobile">
                         <input type="number" min="0" class="inputTrade coinOneInput" placeholder="0.00">
-                    </div>
+                    </div> -->
                     <div class="ArrowIcon">
                         <div id="arrRight">
                             <i class="fas fa-arrow-right arrowTransform"></i>
@@ -144,17 +146,19 @@
                         <div class="inputTradeBox">
                             <input type="number" min="0" class="inputTrade coinTwoInput" placeholder="0.00">
                         </div>
-                        <div class="coinNameSym">
-                            <div class="coinSymbol" id="buySymbol">ETH</div>
-                            <div class="coinFullName" id="buyFullName">ethereum</div>
-                        </div>
-                        <div class="tradeImgCon">
-                            <img src="logos/eth.svg" id="imgForBuy" style="width:44px; height:44px">
+                        <div class="imgNameSymbolBox">
+                            <div class="coinNameSym">
+                                <div class="coinSymbol" id="buySymbol">ETH</div>
+                                <div class="coinFullName" id="buyFullName">ethereum</div>
+                            </div>
+                            <div class="tradeImgCon">
+                                <img src="logos/eth.svg" id="imgForBuy" style="width:44px; height:44px">
+                            </div>
                         </div>
                     </div>
-                    <div class="inputTradeBox inputMobile">
+                    <!-- <div class="inputTradeBox inputMobile">
                         <input type="number" min="0" class="inputTrade coinTwoInput" placeholder="0.00">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="ethToToken"></div>
                 <div class="qtyFeesBox">
@@ -182,9 +186,9 @@
                                     <div class="inGwei">Gwei</div>
                                 </div>
                                 <div class="optionGasPrice">
-                                    <div class="gasOpBut" onclick="setGas(1)">Low</div>
-                                    <div class="gasOpBut" onclick="setGas(2)">Standard</div>
-                                    <div class="gasOpBut" onclick="setGas(3)">High</div>
+                                    <div class="gasOpBut" onclick="setGas(0)">Low</div>
+                                    <div class="gasOpBut" onclick="setGas(1)">Standard</div>
+                                    <div class="gasOpBut" onclick="setGas(2)">High</div>
                                 </div>
                                 <div class="maxGas">Max: 50 Gwei</div>
                             </div>
@@ -223,12 +227,9 @@
 
     <script src="js/varDefines.js"></script>
     <script src="js/alert.js"></script>
-    <script src="js/fireC.js"></script>
     <script src="js/abiB.js"></script>
-    <!-- <script src="js/web3.js"></script> -->
-    <script src="js/ropsten.js"></script>
-    <script src="js/coinDetailsF.js"></script>
     <script src="js/index10.js"></script>
+    <script src="js/fireC.js"></script>
     <script src="js/contractFunc.js"></script>
     <script src="js/tradeK.js"></script>
     <script src="js/trade/search.js"></script>

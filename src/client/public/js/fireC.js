@@ -6,29 +6,36 @@ firebase.initializeApp(config);
 
 var db = firebase.database();
 
-var kyber;
-
-db.ref('kyberMain').once('value', function (snapshot) {
-    if (networkId != 3) {
+function forMain() {
+    db.ref('kyberMain').once('value', function (snapshot) {
         kyber = snapshot.val();
-        console.log(kyber);
-    }
-    hideLoader();
-}, function (error) {
-    if (error) {
-        var title = 'ERROR FETCHING DATA';
-        var content = 'Error in fetching kyber data. Reload and try again if not solve contact us';
-        showAlert(title, content);
-    }
-});
+        showBoxes();
+        hideLoader();
+    }, function (error) {
+        if (error) {
+            var title = 'ERROR FETCHING DATA';
+            var content = 'Error in fetching kyber data. Reload and try again if not solve contact us';
+            showAlert(title, content);
+        }
+    });
+}
 
-var gas;
+function forRopsten() {
+    db.ref('kyberRops').once('value', function (snapshot) {
+        kyber = snapshot.val();
+        showBoxes();
+        hideLoader();
+    }, function (error) {
+        if (error) {
+            var title = 'ERROR FETCHING DATA';
+            var content = 'Error in fetching kyber data. Reload and try again if not solve contact us';
+            showAlert(title, content);
+        }
+    });
+}
 
-var gasLow,
-    gasStandard,
-    gasHigh;
 
-db.ref('gas/gasPrice').on('value', function (snapshot) {
+db.ref('gas').on('value', function (snapshot) {
     data = snapshot.val();
     if (data.fast < 500) {
         gasLow = data.safeLow / 10;
@@ -55,7 +62,7 @@ db.ref('gas/gasPrice').on('value', function (snapshot) {
             gasStandard = 50;
         }
     }
-    setGas(gasDecide);
+    setGas(2);
 }, function (error) {
     if (error) {
         console.log('err - 93284' + error);

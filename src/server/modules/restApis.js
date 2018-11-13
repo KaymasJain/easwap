@@ -33,6 +33,21 @@ module.exports.init = (app) => {
 		}
 	});
 
+	request('https://tracker.kyber.network/api/tokens/supported?chain=ropsten', (err, respond, data) => {
+		if (err) {
+			console.log(err);
+			alert.sendPush('sjain0410@gmail.com', "note", "api Kyber", `Err-4523: ${err}`);
+		} else {
+			var details = JSON.parse(data);
+			var objectData = {};
+			for (i = 0; i < details.length; i++) {
+				var toLower = details[i].symbol.toLowerCase();
+				objectData[toLower] = details[i];
+			}
+			db.ref('kyberRops').set(objectData);
+		}
+	});
+
 	var gasError = 0;
 
 	setInterval(function () {

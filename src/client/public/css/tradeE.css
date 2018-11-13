@@ -109,8 +109,7 @@ input[type=number]::-webkit-outer-spin-button {
 .selectCoinBox {
     padding: 10px;
     box-sizing: border-box;
-    box-shadow: 0px 0px 2px 2px var(--main-color1-op5);
-    /* display: flex; */
+    box-shadow: 0px 0px 2px 2px var(--blue-for-hover);
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
@@ -122,6 +121,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .selectCoinBox:hover {
     color: var(--main-white);
+    box-shadow: 0px 0px 8px 8px var(--blue-for-hover);
 }
 
 .coinsIconBox {
@@ -279,6 +279,12 @@ input[type=number]::-webkit-outer-spin-button {
     margin: auto;
 }
 
+.imgNameSymbolBox {
+    width: 45%;
+    margin: auto;
+    display: flex;
+}
+
 .tradeImgCon {
     margin: auto;
     padding: 0px 10px;
@@ -286,7 +292,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .coinNameSym {
     margin: auto;
-    width: 35%;
+    width: 60%;
     padding: 0px 10px;
 }
 
@@ -298,6 +304,7 @@ input[type=number]::-webkit-outer-spin-button {
 .inputTradeBox {
     margin: auto;
     padding: 0px 10px;
+    width: 35%;
 }
 
 .inputTrade {
@@ -698,14 +705,23 @@ input[type=number]::-webkit-outer-spin-button {
     #tradeBox {
         max-width: 400px;
     }
-    .inputTradeBox {
-        display: none;
+    .imgNameSymbolBox {
+        width: 100%;
+        margin: 10px auto;
     }
-    .inputMobile {
+    .coinTradeBox {
+        display: block;
+    }
+    .inputTradeBox {
+        /* display: none; */
+        width: 100%;
+        margin: auto;
+    }
+    /* .inputMobile {
         display: block;
         width: 90%;
         margin: auto;
-    }
+    } */
     .butBuySell {
         width: 150px;
         padding: 8px 0px;
