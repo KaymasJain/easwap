@@ -11,7 +11,7 @@ window.addEventListener('load', async () => {
         web3 = new Web3(web3.currentProvider);
         getAccountAndNetwork();
     } else {
-        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+        web3 = new Web3(new Web3.providers.HttpProvider("http://mainnet.infura.io/APIKEY"));
     }
 });
 
