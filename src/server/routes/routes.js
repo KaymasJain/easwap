@@ -12,6 +12,10 @@ router.get('/', (req, res) => {
     res.render('trade.html');
 });
 
+router.get('/theme', (req, res) => {
+    res.render('theme.html');
+});
+
 router.get('*', (req, res) => {
     res.redirect('/');
 });
