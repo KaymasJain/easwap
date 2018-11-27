@@ -11,7 +11,7 @@ module.exports.init = (app) => {
 	request('https://tracker.kyber.network/api/tokens/pairs', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			// alert.sendPush('sjain0410@gmail.com', "note", "api Kyber", `Err-7423: ${err}`);
+			alert.sendNotification(`api Kyber - Err-7423: ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			db.ref('kyberData').set(details);
@@ -21,7 +21,7 @@ module.exports.init = (app) => {
 	request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			// alert.sendPush('sjain0410@gmail.com', "note", "api Kyber", `Err-4523: ${err}`);
+			alert.sendNotification(`api Kyber - Err-4523: ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			var objectData = {};
@@ -36,7 +36,7 @@ module.exports.init = (app) => {
 	request('https://tracker.kyber.network/api/tokens/supported?chain=ropsten', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			// alert.sendPush('sjain0410@gmail.com', "note", "api Kyber", `Err-4523: ${err}`);
+			alert.sendNotification(`api Kyber - Err-4523: ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			var objectData = {};
@@ -54,7 +54,7 @@ module.exports.init = (app) => {
 		request("https://ethgasstation.info/json/ethgasAPI.json", (err, data) => {
 			if (err) {
 				console.log(err);
-				// alert.sendPush('sjain0410@gmail.com', "note", "api ethgasstation", `Err-0932: ${err}`);
+				alert.sendNotification(`api ethgasstation - Err-0932: ${err}`, 'danger');
 			} else {
 				try {
 					var details = JSON.parse(data.body);
@@ -62,7 +62,7 @@ module.exports.init = (app) => {
 				} catch (err) {
 					gasError++;
 					if (gasError % 10 == 0) {
-						// alert.sendPush('sjain0410@gmail.com', "note", "JSON PARSE", `error no.-${gasError}`);
+						alert.sendNotification(`JSON PARSE - error no.-${gasError}`, 'danger');
 					}
 				}
 			}
