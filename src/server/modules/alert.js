@@ -1,10 +1,16 @@
-const PushBullet = require('pushbullet');
-const pusher = new PushBullet(require('../keys/push.json').pvt);
+const request = require('request')
 
 module.exports = {
-    sendPush: function (target, type, title, linkORtext) {
-        pusher[type](target, title, linkORtext, function() {
-            console.log(`Push sent to ${target} - ${title}`);
+    sendNotification: function (message, status) {
+        request.post('https://hooks.slack.com/services/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', {
+            json: {
+                text: "New notification from Easwap Server: ",
+                attachments: {
+                    color: status,
+                    text: message
+                }
+            }
         });
+        console.log(`Slack Notification sent !`);
     }
 }
