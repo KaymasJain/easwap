@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
     res.render('trade.html');
 });
 
-router.get('/theme', (req, res) => {
-    res.render('theme.html');
+router.get('/index', (req, res) => {
+    res.render('themeIndex.html');
 });
 
 router.get('*', (req, res) => {
