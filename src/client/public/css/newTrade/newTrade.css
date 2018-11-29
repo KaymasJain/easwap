@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Abel|Teko');
+
+.swapTopButBox {
+    width: 90%;
+    margin: auto;
+}
+
+.daiEthDescBox {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    margin: 40px auto;
+    justify-content: space-between;
+    color: var(--light);
+}
+
+.boxEth,
+.boxDai {
+    width: 25%;
+}
+
+.boxEthMob {
+    display: none;
+}
+
+.descSwapLine {
+    width: 40%;
+}
+
+.descLineMargin {
+    margin-bottom: 10px;
+}
+
+.tradeDataContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    font-family: var(--font-family-sans-serif);
+    color: var(--light);
+}
+
+.selectCoinBox {
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 2px 2px var(--primary);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s linear;
+    color: var(--main-white);
+    border: 0px solid var(--primary);
+}
+
+.selectCoinBox:hover {
+    color: var(--white);
+    box-shadow: 0px 0px 8px 8px var(--primary);
+}
+
+.logoNameBox {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin: auto;
+    height: 60px;
+}
+
+.logoBox,
+.nameBox,
+.nameCodeBox {
+    margin: auto;
+}
+
+.logoBox {
+    width: 40%;
+}
+
+.nameBox {
+    font-size: 20px;
+    margin-bottom: 3px;
+    font-family: 'Abel', sans-serif;
+}
+
+.nameToken {
+    font-size: 10px;
+}
+
+.coinsQtyBox {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+@media only screen and (max-width: 992px) {
+
+}
+
+@media only screen and (max-width: 768px) {
+    
+}
+
+@media only screen and (max-width: 576px) {
+
+    .daiEthDescBox {
+        display: block;
+        margin: 40px auto;
+    }
+
+    .boxEth {
+        display: none;
+    }
+
+    .boxEthMob,
+    .boxDai {
+        width: 100%;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .descSwapLine {
+        width: 100%;
+    }
+
+    .swapButClass {
+        width: 90%;
+    }
+}
