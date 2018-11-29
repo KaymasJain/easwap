@@ -5,10 +5,12 @@ module.exports = {
         request.post('***REMOVED***', {
             json: {
                 text: "New notification from Easwap Server: ",
-                attachments: {
-                    color: status,
-                    text: message
-                }
+                attachments: [
+                    {
+                        color: status,
+                        text: message
+                    }
+                ]
             }
         });
         console.log(`Slack Notification sent !`);
