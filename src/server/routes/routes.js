@@ -16,6 +16,11 @@ router.get('/index', (req, res) => {
     res.render('themeIndex.html');
 });
 
+router.get('/dash', (req, res) => {
+    res.render('dashEas.html');
+});
+
+
 router.get('*', (req, res) => {
     res.redirect('/');
 });
