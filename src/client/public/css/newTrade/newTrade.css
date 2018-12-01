@@ -8,7 +8,7 @@
 .daiEthDescBox {
     display: flex;
     max-width: 1200px;
-    width: 100%;
+    width: 95%;
     margin: 40px auto;
     justify-content: space-between;
     color: var(--light);
@@ -94,19 +94,194 @@
     display: none;
 }
 
+.easSwapBox {
+    width: max-content;
+    height: max-content;
+    margin: 50px auto auto auto;
+    box-shadow: 0px 0px 2px 2px var(--primary);
+    border-radius: 10px;
+    color: var(--light);
+    padding-top: 20px;
+    max-width: 900px;
+}
+
+.tradeInputContainer {
+    display: flex;
+    padding: 20px;
+    width: max-content;
+    box-sizing: border-box;
+    color: var(--lighter);
+}
+
+.coinTradeBox {
+    display: flex;
+}
+
+.imgNameSymbolBox {
+    display: flex;
+}
+
+.tradeImgCon {
+    margin: auto 10px;
+}
+
+.coinNameSym {
+    margin: auto 10px;
+    max-width: 60px;
+}
+
+.coinSymbol {
+    font-size: 20px;
+    text-align: center;
+}
+
+.coinFullName {
+    font-size: 12px;
+}
+
+.inputTradeBox {
+    margin: auto 10px;    
+}
+
+.inputTrade {
+    font-size: 16px;
+}
+
+.ArrowIcon {
+    margin: auto 20px;
+}
+
+#toggleCoin {
+    font-size: 10px;
+}
+
+.toggleIconCon {
+    margin: auto;
+    width: max-content;
+}
+
+.toggleIcon {
+    font-size: 24px;
+    text-align: center;
+    width: max-content;
+    cursor: pointer;
+}
+
+.coinConversionRate {
+    text-align: center;
+}
+
+.swapAllBox {
+    display: flex;
+    margin: 30px auto;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 500px;
+}
+
+.allButbox {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    height: max-content;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary);
+}
+
+.allQty {
+    font-size: 16px;
+    margin: auto 10px;
+}
+
+.tradeAllBut {
+    font-size: 14px;
+    height: max-content;
+    margin: auto 10px;
+}
+
+.swapBut {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 18px;
+}
+
+.advanceColSet {
+    margin: auto;
+    width: 90%;
+}
+
+.advanceBoxInTitle {
+    border-bottom: 1px solid var(--primary);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.finalGasPriceBox {
+    padding: 0px;
+    margin-bottom: 20px;
+}
+
+.finalGasPrice {
+    font-size: 20px;
+}
+
+.priceButBox {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.minConRateText {
+    margin-top: 20px;
+    font-size: 12px;
+    text-align: center;
+    max-width: 300px;
+}
+
+.searchBar {
+    position: absolute;
+    right: 10px;
+    width: max-content;
+    height: max-content;
+    /* background-color: var(--primary); */
+}
+
+.selectedChar {
+    display: none;
+}
+
+/* .searchBox {
+    background-color: var(--primary);
+    color: white;
+} */
+
 @media only screen and (max-width: 992px) {
 
+    .tradeDataContainer,
+    .daiEthDescBox {
+        width: 95%;
+    }
 }
 
 @media only screen and (max-width: 768px) {
-    
+    .tradeDataContainer,
+    .daiEthDescBox {
+        width: 90%;
+    }
 }
 
 @media only screen and (max-width: 576px) {
 
+    .tradeDataContainer {
+        width: calc(100% - 80px);
+        margin-left: 20px;
+    }
+
     .daiEthDescBox {
         display: block;
         margin: 40px auto;
+        width: calc(100% - 80px);
+        margin-left: 20px;
     }
 
     .boxEth {
@@ -127,4 +302,5 @@
     .swapButClass {
         width: 90%;
     }
+
 }
