@@ -38,6 +38,7 @@
   --box-background: #27293d;
   
   --background: #1e1e2f;
+  --background-op9: rgba(30, 30, 47, 0.9);
   --default: #344675;
   --primary: #25a1fa;
   --success: #00f2c3;
@@ -15283,7 +15284,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   background-color: var(--primary); }
 
 .slider.slider-primary.noUi-target {
-  background-color: rgba(249, 99, 50, 0.3); }
+  background-color: var(--light); }
 
 .slider.slider-primary .noUi-handle {
   background-color: var(--primary);

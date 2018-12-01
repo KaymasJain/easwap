@@ -1,4 +1,5 @@
 // Align object box in alphabetical order
+var searchArr = [];
 
 function showBoxes() {
     Object.keys(coinsData)
@@ -27,13 +28,13 @@ function showBoxes() {
             $(".boxEth").append(html);
             $('.boxEthMob').append(html);
         }
-    
-        // $(`${'.'+forClass}`).css('box-shadow', `0px 0px 2px 2px var(--blue-for-hover)`);
-    
-        // $(`${'.'+forClass}`).hover(function () {
-        //     $(this).css('box-shadow', `0px 0px 8px 8px var(--blue-for-hover)`);
-        // }, function () {
-        //     $(this).css('box-shadow', `0px 0px 2px 2px var(--blue-for-hover)`);
-        // });
+
+        // Search Bar
+        var charOne = key.charAt(0);
+        if (searchArr.indexOf(charOne) == -1) {
+            searchArr.push(charOne);
+            var html = `<div><button class="btn btn-sm btn-primary btn-fab btn-icon" onclick="filterSearch('${charOne}', this)">${charOne.toUpperCase()}</button><span class="selectedChar"></span></div>`;
+            $(".searchBar").append(html);
+        }
     });
 }

@@ -1,38 +1,55 @@
-var networkId;
-var config = {
+let config = {
     databaseURL: "***REMOVED***",
 };
 firebase.initializeApp(config);
 
-var db = firebase.database();
-forMain();
-function forMain() {
-    db.ref('kyberMain').once('value', function (snapshot) {
-        coinsData = snapshot.val();
-        showBoxes();
-        // hideLoader();
-    }, function (error) {
-        if (error) {
-            var title = 'ERROR FETCHING DATA';
-            var content = 'Error in fetching kyber data. Reload and try again if not solve contact us';
-            showAlert(title, content);
-        }
-    });
+let db = firebase.database();
+
+function dataAsPerNetwork() {
+    if (networkId == 3) {
+        db.ref('kyberRops').once('value', function (snapshot) {
+            coinsData = snapshot.val();
+            showBoxes();
+        }, function (err) {
+            alert(err);
+        });
+    } else {
+        db.ref('kyberMain').once('value', function (snapshot) {
+            coinsData = snapshot.val();
+            showBoxes();
+        }, function (err) {
+            alert(err);
+        });
+    }
 }
 
-function forRopsten() {
-    db.ref('kyberRops').once('value', function (snapshot) {
-        coinsData = snapshot.val();
-        showBoxes();
-        hideLoader();
-    }, function (error) {
-        if (error) {
-            var title = 'ERROR FETCHING DATA';
-            var content = 'Error in fetching kyber data. Reload and try again if not solve contact us';
-            showAlert(title, content);
-        }
-    });
-}
+// function forMain() {
+//     db.ref('kyberMain').once('value', function (snapshot) {
+//         coinsData = snapshot.val();
+//         showBoxes();
+//         // hideLoader();
+//     }, function (error) {
+//         if (error) {
+//             let title = 'ERROR FETCHING DATA';
+//             let content = 'Error in fetching kyber data. Reload and try again if not solve contact us';
+//             showAlert(title, content);
+//         }
+//     });
+// }
+
+// function forRopsten() {
+//     db.ref('kyberRops').once('value', function (snapshot) {
+//         coinsData = snapshot.val();
+//         showBoxes();
+//         hideLoader();
+//     }, function (error) {
+//         if (error) {
+//             let title = 'ERROR FETCHING DATA';
+//             let content = 'Error in fetching kyber data. Reload and try again if not solve contact us';
+//             showAlert(title, content);
+//         }
+//     });
+// }
 
 
 db.ref('gas').on('value', function (snapshot) {
@@ -66,8 +83,8 @@ db.ref('gas').on('value', function (snapshot) {
 }, function (error) {
     if (error) {
         console.log('err - 93284' + error);
-        var title = 'ERROR FETCHING DATA';
-        var content = 'Error in fetching gas price from database. Reload and try again if not solve contact us';
+        let title = 'ERROR FETCHING DATA';
+        let content = 'Error in fetching gas price from database. Reload and try again if not solve contact us';
         showAlert(title, content);
     }
 });

@@ -1,32 +1,28 @@
-var web3;
-var networkId;
-var account;
+let coinsData = {};
 
-var coinsData = {};
-
-var coinOne = {};
+let coinOne = {};
 // coinOne.rate;
-var coinTwo = {};
+let coinTwo = {};
 // coinTwo.rate;
 
-var toChoose = 0;
+let toChoose = 0;
 
 // Gas price - 1st element in gwei, 2nd element in wei
-var gas = [];
+let gas = [];
 
-var allowanceLimit = 2**255;
+let allowanceLimit = 2**255;
 
-var txArr = [];
+let txArr = [];
 
-var kyber;
+let kyber;
 
-var gas;
+let gas;
 
-var gasLow,
+let gasLow,
     gasStandard,
     gasHigh;
 
 
-var toggleNum = 0;
+let toggleNum = 0;
 
-var sliderVal = 97;
+let sliderVal = 97;
