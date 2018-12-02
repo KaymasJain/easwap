@@ -1,13 +1,13 @@
 // Align object box in alphabetical order
-var searchArr = [];
+let searchArr = [];
 
 function showBoxes() {
     Object.keys(coinsData)
         .sort()
         .forEach(function (key, i) {
-        var forClass = `${key + 'Class'}`;
+        let forClass = `${key + 'Class'}`;
     
-        var html = `<div class="selectCoinBox ${forClass}" onclick="funcToSelect('${key.id}')">
+        let html = `<div class="selectCoinBox ${forClass}" onclick="funcToSelect('${key}')">
                         <div class="logoNameBox">
                             <div class="logoBox">
                                 <img src="logos/${key}.svg" style="width:48px; height:48px">
@@ -30,10 +30,11 @@ function showBoxes() {
         }
 
         // Search Bar
-        var charOne = key.charAt(0);
+        let charOne = key.charAt(0);
+        let searchClass = `search${charOne}`;
         if (searchArr.indexOf(charOne) == -1) {
             searchArr.push(charOne);
-            var html = `<div><button class="btn btn-sm btn-primary btn-fab btn-icon" onclick="filterSearch('${charOne}', this)">${charOne.toUpperCase()}</button><span class="selectedChar"></span></div>`;
+            let html = `<div class="${searchClass}"><button class="btn btn-sm btn-primary btn-fab btn-icon" onclick="filterSearch('${charOne}', this)">${charOne.toUpperCase()}</button><span class="selectedChar"></span></div>`;
             $(".searchBar").append(html);
         }
     });
