@@ -21,6 +21,7 @@ window.addEventListener('load', async () => {
     }
 });
 
+
 function getAccountAndNetwork() {
     web3.version.getNetwork((err, netId) => {
         account = web3.eth.accounts[0];
@@ -58,6 +59,7 @@ function getAccountAndNetwork() {
             $('.navUserAdd').html(link);
         }
         dataAsPerNetwork();
+        loadContractFunc();
     });
 }
 
@@ -83,3 +85,8 @@ function navAlerts(num) {
     });
 }
 
+function loadContractFunc() {
+    mainKyberContract = web3.eth.contract(kyberMainABI).at(mainKyberAdd);
+    kyberEnable();
+    kyberTradeEvent();
+}

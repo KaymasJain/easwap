@@ -1,14 +1,18 @@
+let mainKyberAdd = '0x818E6FECD516Ecc3849DAf6845e3EC868087B755';
+let mainKyberContract;
+
 let coinsData = {};
 
 let coinOne = {};
-// coinOne.rate;
+coinOne.val = 0;
+
 let coinTwo = {};
-// coinTwo.rate;
+coinTwo.val = 0;
 
 let toChoose = 0;
 
 // Gas price - 1st element in gwei, 2nd element in wei
-let gas = [];
+let gasArr = [0, 0];
 
 let allowanceLimit = 2**255;
 
@@ -22,7 +26,7 @@ let gasLow,
     gasStandard,
     gasHigh;
 
+let minRateSlider = 97;
 
 let toggleNum = 0;
 
-let sliderVal = 97;

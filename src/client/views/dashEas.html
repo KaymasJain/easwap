@@ -124,7 +124,7 @@
         </div>
         <!-- End Main Body -->
         <!-- Swapping Box -->
-        <div class="easSwapBox" hidden>
+        <div class="easSwapBox">
             <div class="tradeInputContainer">
                 <div class="coinSellBox coinTradeBox">
                     <div class="imgNameSymbolBox">
@@ -167,7 +167,8 @@
                 <div class="allQty">1.1198 ETH</div>
                 <button class="btn btn-primary btn-round btn-sm tradeAllBut">Trade All</button>
               </div>
-              <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" type="button">SWAP</button>
+              <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" onclick="swapTokens()" type="button">SWAP</button>
+              <button class="btn btn-warning animation-on-hover h2 tradeCloseBut" onclick="hideTrade()" type="button">CLOSE</button>
             </div>
             <center>
               <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#advancedCollapse" aria-expanded="false" aria-controls="collapseExample">
@@ -181,24 +182,24 @@
                     <p class="h4 text-center advanceBoxInTitle">Gas Price Set</p>
                     <div class="gasSetBox">
                         <blockquote class="blockquote finalGasPriceBox">
-                          <p class="mb-0 text-center finalGasPrice">23 GWEI</p>
+                          <p class="mb-0 text-center finalGasPrice"></p>
                         </blockquote>
                       <div id="sliderGasPrice" class="slider slider-primary"></div>
                       <div class="priceButBox">
-                          <button class="btn btn-primary btn-simple btn-sm">Low</button>
-                          <button class="btn btn-primary btn-simple btn-sm">Mid</button>
-                          <button class="btn btn-primary btn-simple btn-sm">High</button>
+                          <button class="btn btn-primary btn-simple btn-sm" onclick="setGas(1)">Low</button>
+                          <button class="btn btn-primary btn-simple btn-sm" onclick="setGas(2)">Standard</button>
+                          <button class="btn btn-primary btn-simple btn-sm" onclick="setGas(3)">High</button>
                       </div>
                     </div>
                 </div>
                 <div class="card card-body col-5 ml-auto mr-auto">
                     <p class="h4 text-center advanceBoxInTitle">Minimum Conversion Rate</p>
                     <div class="gasSetBox">
-                        <blockquote class="blockquote finalGasPriceBox">
-                          <p class="mb-0 text-center finalGasPrice">104 DAI</p>
+                        <blockquote class="blockquote finalMinRateBox">
+                          <p class="mb-0 text-center finalMinRate"></p>
                         </blockquote>
                       <div id="minConRate" class="slider slider-primary"></div>
-                      <div class="minConRateText">Higher MIN ACCEPTABLE RATE typically results in lower success rate when the market is volatile. 104 DAI is our suggested MIN ACCEPTABLE RATE by default.</div>
+                      <div class="minConRateText">Higher MIN ACCEPTABLE RATE typically results in lower success rate when the market is volatile. <span>0.00 ETH</span> is our suggested MIN ACCEPTABLE RATE by default.</div>
                     </div>
                 </div>
               </div>
@@ -231,12 +232,9 @@
   <script src="assets/js/core/jquery.min.js"></script>
 
   <script src="js/newTrade/varDefines.js"></script>
-  <script src="js/newTrade/fire.js"></script>
+  <script src="js/newTrade/fireKyber.js"></script>
   <script src="js/newTrade/index.js"></script>
   <script src="js/newTrade/tradeBoxes.js"></script>
-  <script src="js/newTrade/abi.js"></script>
-  <script src="js/contractFunc.js"></script>
-  <!-- <script src="js/trade/search.js"></script> -->
 
   <!--   Core JS Files   -->
   <script src="assets/js/core/popper.min.js"></script>
@@ -269,9 +267,6 @@
   <script src="assets/js/plugins/jquery-jvectormap.js"></script>
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
   <script src="assets/js/plugins/nouislider.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
   <!-- Chart JS -->
   <script src="assets/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -401,9 +396,12 @@
     });
   </script>
 
-  <!-- Our JS files -->
-  <script src="js/newTrade/uiSlider.js"></script>
-  <script src="js/newTrade/sweetAlert.js"></script>
+  <!-- End JS files -->
+  <script src="js/newTrade/abi.js"></script>
+  <script src="js/newTrade/contractFunc.js"></script>
+  <script src="js/newTrade/main.js"></script>
+  <script src="js/newTrade/endJS.js"></script>
+  <script src="js/newTrade/fireGas.js"></script>
 
 </body>
 
