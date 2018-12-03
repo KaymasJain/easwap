@@ -34,8 +34,45 @@ function showBoxes() {
         let searchClass = `search${charOne}`;
         if (searchArr.indexOf(charOne) == -1) {
             searchArr.push(charOne);
-            let html = `<div class="${searchClass}"><button class="btn btn-sm btn-primary btn-fab btn-icon" onclick="filterSearch('${charOne}', this)">${charOne.toUpperCase()}</button><span class="selectedChar"></span></div>`;
+            let html = `<div class="${searchClass} searchButBox"><button class="btn btn-sm btn-primary btn-fab btn-icon getBut" onclick="filterSearch('${charOne}', this)">${charOne.toUpperCase()}</button><span class="selectedChar"></span></div>`;
             $(".searchBar").append(html);
         }
     });
 }
+
+function filterSearch(letter, toGetElem) {
+    $('.selectCoinBox').css('display', 'block');
+    $('.searchButBox button').removeClass('btn-default');
+    $('.searchButBox button').addClass('btn-primary');
+    $(toGetElem).removeClass('btn-primary');
+    $(toGetElem).addClass('btn-default');
+    if (letter != 'all') {
+        Object.keys(coinsData)
+            .sort()
+            .forEach(function (key, i) {
+            let charOne = key.charAt(0);
+            let forClass = `${key + 'Class'}`;
+            if (charOne != letter) {
+                $(`.${forClass}`).css('display', 'none');
+            }
+        });
+    }
+}
+
+
+$('.showHideQty').click(function() {
+    if ($(this).text() == "Show QTY") {
+        $('.coinsQtyBox').slideToggle();
+        $(this).text('Hide QTY');
+        Object.keys(coinsData).forEach(function (key, i) {
+            if (key == "eth") {
+                ethBalance(key);
+            } else {
+                tokenBalance(key);
+            }
+        });
+    } else if ($(this).text() == "Hide QTY") {
+        $('.coinsQtyBox').slideToggle();
+        $(this).text('Show QTY');
+    }
+})

@@ -9,24 +9,15 @@ $('.ArrowIcon').click(function () {
 // On buy button click on trading popup
 function onBuyClick() {
     toggleNum = 1;
-    $('#imgForSell').attr("src", `logos/${coinOne.id}.svg`);
-    $('#sellSymbol').text(coinOne.symbol);
-    $('#sellFullName').text(coinOne.name);
-    $('#imgForBuy').attr("src", `logos/${coinTwo.id}.svg`);
-    $('#buySymbol').text(coinTwo.symbol);
-    $('#buyFullName').text(coinTwo.name);
-    if (coinOne.qty) {
+    if (coinOne.qty >= 0) {
         $('.allQty').text(`${coinOne.qty.toFixed(8)} ${coinOne.symbol}`);
     }
-    // $('.tokenQtyBox').css('animation', 'outlineAnim 1s forwards 0s linear');
-    // setTimeout(function() {$('.tokenQtyBox').css('animation', 'none')}, 1000);
     $('.toggleIcon').css('transform', 'rotate(0deg)');
-    if (coinTwo.rate) {
+    if (coinTwo.rate >= 0) {
         $('.coinConversionRate').text(`1 ${coinOne.symbol} = ${coinOne.rate.toFixed(6)} ${coinTwo.symbol}`);
     }
     $('.coinOneInput').on();
     changeMinRateText();
-    // transFee(1);
     changeOnInput(1);
     toChoose = 0;
 };
@@ -35,20 +26,21 @@ function onBuyClick() {
 // On sell button click on trading popup
 function onSellClick() {
     toggleNum = 0;
-    $('.allQty').text(`${coinTwo.qty.toFixed(8)} ${coinTwo.symbol}`);
+    if (coinTwo.qty >= 0) {
+        $('.allQty').text(`${coinTwo.qty.toFixed(8)} ${coinTwo.symbol}`);
+    }
     $('.toggleIcon').css('transform', 'rotate(180deg)');
-    if (coinOne.rate) {
+    if (coinOne.rate >= 0) {
         $('.coinConversionRate').text(`1 ${coinTwo.symbol} = ${coinTwo.rate.toFixed(6)} ${coinOne.symbol}`);
     }
     $('.coinOneInput').on();
     changeMinRateText();
     changeOnInput(1);
-    // transFee(2);
 };
 
 
 // Ethereum input on trade section
-$('.coinOneInput').on('keyup', function () {
+$('.coinOneInput').on('keyup keydown change', function () {
     coinOne.val = $(this).val();
     changeOnInput(1);
     changeMinRateText();
@@ -56,7 +48,7 @@ $('.coinOneInput').on('keyup', function () {
 
 
 // Coins input on trade section
-$('.coinTwoInput').on('keyup', function () {
+$('.coinTwoInput').on('keyup keydown change', function () {
     coinTwo.val = $(this).val();
     changeOnInput(2);
     changeMinRateText();
@@ -80,9 +72,9 @@ function changeOnInput(num) {
     } else if (num == 2) {
         if (coinTwo.val > 0) {
             if (toggleNum == 1) {
-                coinOne.val = (coinTwo.val * coinTwo.rate);
-            } else if (toggleNum == 0) {
                 coinOne.val = (coinTwo.val / coinOne.rate);
+            } else if (toggleNum == 0) {
+                coinOne.val = (coinTwo.val * coinTwo.rate);
             }
             $('.coinOneInput').val(coinOne.val.toFixed(6));
         } else {
@@ -110,7 +102,6 @@ function funcToSelect(coinId) {
             coinOne.class = `.${coinOne.id}Class`;
 
             $(coinOne.class).css('outline', `10px solid var(--primary)`);
-            // $(coinOne.class).css('background-color', 'var(--primary)');
 
             if (coinId != 'eth') {
                 coinOne.contract = web3.eth.contract(tokensAbi).at(coinOne.address);
@@ -121,9 +112,7 @@ function funcToSelect(coinId) {
                         coinOne.qty = coinOne.qty / 10 ** coinOne.decimals;
                         $('.allQty').text(`${coinOne.qty.toFixed(8)} ${coinOne.symbol}`);
                     } else {
-                        var title = 'ERROR GETTING QUANTITY';
-                        var content = `Unable to get quantity of ${coinOne.symbol} in your wallet`;
-                        showAlert(title, content);
+                        navAlerts(5);
                         console.log(err);
                     };
                 });
@@ -134,9 +123,7 @@ function funcToSelect(coinId) {
                         coinOne.qty = res / 1000000000000000000;
                         $('.allQty').text(`${coinOne.qty.toFixed(8)} ${coinOne.symbol}`);
                     } else {
-                        var title = 'ERROR GETTING QUANTITY';
-                        var content = `Unable to get quantity of ETH in your wallet`;
-                        showAlert(title, content);
+                        navAlerts(6);
                         console.error(err);
                     };
                 });
@@ -159,10 +146,9 @@ function funcToSelect(coinId) {
                             coinTwo.qty = coinTwo.qtyInWei;
                             coinTwo.qty = coinTwo.qty / 10 ** coinTwo.decimals;
                             onBuyClick();
+                            setIconName();
                         } else {
-                            var title = 'ERROR GETTING QUANTITY';
-                            var content = `Unable to get quantity of ${coinTwo.symbol} in your wallet`;
-                            showAlert(title, content);
+                            navAlerts(7);
                             console.log(err);
                         };
                     });
@@ -172,10 +158,9 @@ function funcToSelect(coinId) {
                             coinTwo.qtyInWei = res;
                             coinTwo.qty = res / 1000000000000000000;
                             onBuyClick();
+                            setIconName();
                         } else {
-                            var title = 'ERROR GETTING QUANTITY';
-                            var content = `Unable to get quantity of ETH in your wallet`;
-                            showAlert(title, content);
+                            navAlerts(8);
                             console.error(err);
                         };
                     });
@@ -183,30 +168,48 @@ function funcToSelect(coinId) {
                 expectedRateCoinToCoin(coinOne.address, coinTwo.address, coinOne.decimals, 1);
                 expectedRateCoinToCoin(coinTwo.address, coinOne.address, coinTwo.decimals, 2);
                 $('.boxesData').css('animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
+                $('.searchBar').css('opacity', '0');
+                $('.searchBar').css('transition', 'opacity 0.4s ease-out 0s');
                 setTimeout(function() {
                     $('.boxesData').css('display', 'none');
                     $('.easSwapBox').css('display', 'block');
                 }, 400);
                 $('.easSwapBox').css('animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
             }
-            $(coinOne.class).css('background-color', 'var(--main-color1)');
             $(coinOne.class).css('outline', '0px solid black');
             $('.selectedChar').css('display', 'none');
         }
+    } else if (networkId) {
+        navAlerts(4);
+    } else if (account) {
+        navAlerts(9);
     } else {
-        var title = 'NOT LOGGED-IN';
-        var content = 'For trading you need to be Logged-in to main network or ropsten test net via metamask or dapp browsers';
-        showAlert(title, content);
+        navAlerts(1);
     }
 };
+
+function setIconName() {
+    $('#imgForSell').attr("src", `logos/${coinOne.id}.svg`);
+    $('#sellSymbol').text(coinOne.symbol);
+    $('#sellFullName').text(coinOne.name);
+    $('#imgForBuy').attr("src", `logos/${coinTwo.id}.svg`);
+    $('#buySymbol').text(coinTwo.symbol);
+    $('#buyFullName').text(coinTwo.name);
+}
 
 function hideTrade() {
     $('.easSwapBox').css('animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
     setTimeout(function() {
         $('.easSwapBox').css('display', 'none');
         $('.boxesData').css('display', 'block');
+        $('.searchBar').css('transition', 'opacity 0.4s ease-in 1s');
+        $('.searchBar').css('opacity', '1');
     }, 400);
     $('.boxesData').css('animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
+    coinOne.val = 0;
+    coinTwo.val = 0;
+    $('.coinOneInput').val('');
+    $('.coinTwoInput').val('');
 }
 
 function setGas(setVar) {
@@ -255,11 +258,11 @@ function tradeAllCoin() {
 
 function changeMinRateText() {
     if (toggleNum == 1) {
-        $('.finalMinRate').text(`${((coinTwo.val*minRateSlider)/100).toFixed(6)} ${coinTwo.symbol} (${minRateSlider} %)`);
-        $('.minConRateText span').text(`${((coinTwo.val*97)/100).toFixed(6)} ${coinTwo.symbol}`);
+        $('.finalMinRate').text(`${((coinTwo.val*minRateSlider)/100).toFixed(4)} ${coinTwo.symbol} (${minRateSlider} %)`);
+        $('.minConRateText span').text(`${((coinTwo.val*97)/100).toFixed(4)} ${coinTwo.symbol}`);
     } else if (toggleNum == 0) {
-        $('.finalMinRate').text(`${((coinOne.val*minRateSlider)/100).toFixed(6)} ${coinOne.symbol} (${minRateSlider} %)`);
-        $('.minConRateText span').text(`${((coinOne.val*97)/100).toFixed(6)} ${coinOne.symbol}`);
+        $('.finalMinRate').text(`${((coinOne.val*minRateSlider)/100).toFixed(4)} ${coinOne.symbol} (${minRateSlider} %)`);
+        $('.minConRateText span').text(`${((coinOne.val*97)/100).toFixed(4)} ${coinOne.symbol}`);
     }
 }
 
@@ -276,7 +279,7 @@ function swapTokens() {
         if (coinFrom.val <= coinFrom.qty) {
             var forDecimal = 10 ** coinFrom.decimals;
             var coinSellQty = coinFrom.val*forDecimal;
-            var coinMinQty = ((coinTo.rateInWei * minRateSlider) / 100).toFixed(0);
+            var coinMinQty = ((coinFrom.rateInWei * minRateSlider) / 100).toFixed(0);
             if (coinFrom.id != 'eth') {
                 console.log(1);
                 allowance(coinFrom.contract, coinFrom.address, coinSellQty, coinTo.address, coinMinQty);
@@ -285,14 +288,11 @@ function swapTokens() {
                 trade(coinFrom.address, coinSellQty, coinTo.address, account, coinMinQty, true);
             }
         } else {
-            var title = 'QUANTITY';
-            var content = `You don't have enough ${coinFrom.symbol} in your wallet`;
-            showAlert(title, content);
+            alertVar = coinFrom.symbol;
+            navAlerts(10);
         }
     } else {
-        var title = 'QUANTITY ERROR';
-        var content = 'Tokens quantity cannot be 0';
-        showAlert(title, content);
+        navAlerts(11);
     }
 }
 
@@ -305,19 +305,14 @@ function allowance(coinContract, src, srcAmount, dest, minDestAmount) {
                 var payObj = {
                     gasPrice: finalGasInWei
                 }
-                showLoader();
-                var title = 'CONFIRM ALLOWANCE TRANSACTION';
-                var content = `Confirm your transaction for allowance of token`;
-                showAlert(title, content);
+                navAlerts(12);
                 approvalEvent(coinContract);
-                approve(coinContract, addressToApprove, allowanceLimit, payObj);
+                approve(coinContract, mainKyberAdd, allowanceLimit, payObj, src, srcAmount, dest, minDestAmount);
             } else {
-                trade(src, srcAmount, dest, account, minDestAmount, TextTrackCueList);
+                trade(src, srcAmount, dest, account, minDestAmount, true);
             }
         } else {
-            var title = 'ERROR CHECKING ALLOWANCE';
-            var content = `Unable to check allowance of token`;
-            showAlert(title, content);
+            navAlerts(13);
             console.log(err);
         };
     })
@@ -354,26 +349,8 @@ function trade(src, srcAmount, dest, account, minDestAmount, approve) {
             }
         }
     }
-    // showLoader();
-    // var title = 'CONFIRM TRADE TRANSACTION';
-    // var content = 'Confirm your transaction for swapping the tokens.';
-    // showAlert(title, content);
+    navAlerts(14);
+    console.log(minDestAmount);
     startTrade(src, srcAmount, dest, account, minDestAmount, payObj);
 }
 
-$('#showHideQty').click(function() {
-    if ($('#showHideQty').text() == "SHOW QUANTITY") {
-        $('.coinsQtyBox').slideToggle();
-        $('#showHideQty').text('HIDE QUANTITY');
-        Object.keys(coinsData).forEach(function (key, i) {
-            if (key == "eth") {
-                ethBalance(coinsData[key].id);
-            } else {
-                tokenBalance(coinsData[key].id);
-            }
-        });
-    } else if ($('#showHideQty').text() == "HIDE QUANTITY") {
-        $('.coinsQtyBox').slideToggle();
-        $('#showHideQty').text('SHOW QUANTITY');
-    }
-})

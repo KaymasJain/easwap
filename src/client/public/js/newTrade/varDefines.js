@@ -3,6 +3,8 @@ let mainKyberContract;
 
 let coinsData = {};
 
+let alertVar;
+
 let coinOne = {};
 coinOne.val = 0;
 
