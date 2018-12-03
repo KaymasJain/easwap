@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <title>
-    Black Dashboard PRO by Creative Tim
+    Easwap
   </title>
 
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
@@ -40,17 +40,35 @@
       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="javascript:void(0)" class="simple-text logo-mini">
-            SJ
+            0x
           </a>
-          <a href="javascript:void(0)" class="simple-text logo-normal">
-            Samyak Jain
+          <a href="javascript:void(0)" class="simple-text logo-normal addressCon">
+            0xxxxx...xxxx
           </a>
         </div>
         <ul class="nav">
           <li class="active">
+            <a href="/dash">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>KYBER TRADE</p>
+            </a>
+          </li>
+          <li class="active">
+            <a href="/">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>TIMELINE</p>
+            </a>
+          </li>
+          <li class="active">
             <a href="../examples/dashboard.html">
               <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Dashboard</p>
+              <p>Kyber Trade</p>
+            </a>
+          </li>
+          <li class="active">
+            <a href="../examples/dashboard.html">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Kyber Trade</p>
             </a>
           </li>
         </ul>
@@ -74,7 +92,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+            <a class="navbar-brand" href="javascript:void(0)">Kyber Trade</a>
           </div>
           <div class="collapse navbar-collapse" id="navigation">
               <ul class="navbar-nav ml-auto">
@@ -97,23 +115,32 @@
       </nav>
       <!-- End Navbar -->
       <div class="content">
+
         <!-- Main Body -->
+        <div class="searchBar">
+            <div class="${searchClass} searchButBox">
+              <button class="btn btn-sm btn-default btn-fab btn-icon" onclick="filterSearch('all', this)">All</button>  
+            </div>
+        </div>
+
         <div class="boxesData">
 
-          <div class="searchBar"></div>
 
           <div class="swapTopButBox">
-              <button class="btn btn-primary btn-round">Show QTY</button>
-              <button class="btn btn-primary btn-round float-right">Show QTY</button>
+            <div class="showHideQtyBox">
+              <button class="btn btn-primary btn-sm btn-round showHideQty">Show QTY</button>
+            </div>
+            <div class="roptenModelButBox">
+              <div class="btn btn-primary btn-sm btn-round roptenModelBut" data-toggle="tooltip" data-placement="top" title="Just shift to ropsten test network via any ethereum provider to use our ropsten version of kyber trade">
+                  Try on Ropsten
+              </div>
+            </div>
           </div>
 
           <div class="daiEthDescBox">
             <div class="boxEth"></div>
             <div class="descSwapLine">
                 <h2 class="text-center descLineMargin">SELECT 2 COINS TO SWAP</h2>
-                <center><div class="btn btn-secondary swapButClass" data-toggle="tooltip" data-placement="top" title="For trading through our platform you need to have Metamask extension for desktop or ethereum browser on mobile">
-                  ETH provider not found!!
-                </div></center>
             </div>
             <div class="boxEthMob"></div>
             <div class="boxDai"></div>
@@ -161,14 +188,18 @@
                     </div>
                 </div>
             </div>
-            <div class="coinConversionRate">1 ETH = 105 DAI</div>
+            <div class="coinConversionRate">1 ETH = 1 ETH</div>
             <div class="swapAllBox">
               <div class="allButbox">
                 <div class="allQty">1.1198 ETH</div>
                 <button class="btn btn-primary btn-round btn-sm tradeAllBut">Trade All</button>
               </div>
-              <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" onclick="swapTokens()" type="button">SWAP</button>
-              <button class="btn btn-warning animation-on-hover h2 tradeCloseBut" onclick="hideTrade()" type="button">CLOSE</button>
+              <div class="swapButBox">
+                <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" onclick="swapTokens()" type="button">SWAP</button>
+              </div>
+              <div class="tradeCloseButBox">
+                <button class="btn btn-warning animation-on-hover h2 tradeCloseBut" onclick="hideTrade()" type="button">CLOSE</button>
+              </div>
             </div>
             <center>
               <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#advancedCollapse" aria-expanded="false" aria-controls="collapseExample">
@@ -177,8 +208,8 @@
             </center>
             <br>
             <div class="collapse advanceColSet" id="advancedCollapse">
-              <div class="row">
-                <div class="card card-body col-5 ml-auto mr-auto">
+              <div class="row advanceSecBox">
+                <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
                     <p class="h4 text-center advanceBoxInTitle">Gas Price Set</p>
                     <div class="gasSetBox">
                         <blockquote class="blockquote finalGasPriceBox">
@@ -186,13 +217,13 @@
                         </blockquote>
                       <div id="sliderGasPrice" class="slider slider-primary"></div>
                       <div class="priceButBox">
-                          <button class="btn btn-primary btn-simple btn-sm" onclick="setGas(1)">Low</button>
-                          <button class="btn btn-primary btn-simple btn-sm" onclick="setGas(2)">Standard</button>
-                          <button class="btn btn-primary btn-simple btn-sm" onclick="setGas(3)">High</button>
+                          <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(1)">Low</button>
+                          <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(2)">Standard</button>
+                          <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(3)">High</button>
                       </div>
                     </div>
                 </div>
-                <div class="card card-body col-5 ml-auto mr-auto">
+                <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
                     <p class="h4 text-center advanceBoxInTitle">Minimum Conversion Rate</p>
                     <div class="gasSetBox">
                         <blockquote class="blockquote finalMinRateBox">
@@ -229,6 +260,7 @@
     </div>
   </div>
   
+  
   <script src="assets/js/core/jquery.min.js"></script>
 
   <script src="js/newTrade/varDefines.js"></script>
@@ -245,158 +277,15 @@
   <script src="assets/js/plugins/bootstrap-switch.js"></script>
   <!--  Plugin for Sweet Alert -->
   <script src="assets/js/plugins/sweetalert2.min.js"></script>
-  <!--  Plugin for Sorting Tables -->
-  <script src="assets/js/plugins/jquery.tablesorter.js"></script>
-  <!-- Forms Validations Plugin -->
-  <script src="assets/js/plugins/jquery.validate.min.js"></script>
-  <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script>
-  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <script src="assets/js/plugins/bootstrap-selectpicker.js"></script>
-  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <script src="assets/js/plugins/bootstrap-datetimepicker.js"></script>
-  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
-  <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-  <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <script src="assets/js/plugins/bootstrap-tagsinput.js"></script>
-  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-  <script src="assets/js/plugins/jasny-bootstrap.min.js"></script>
-  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-  <script src="assets/js/plugins/fullcalendar.min.js"></script>
-  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <script src="assets/js/plugins/jquery-jvectormap.js"></script>
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
   <script src="assets/js/plugins/nouislider.min.js"></script>
-  <!-- Chart JS -->
-  <script src="assets/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
-  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-  <script src="assets/demo/demo.js"></script>
-  <script>
-    $(document).ready(function() {
-      $().ready(function() {
-        $sidebar = $('.sidebar');
-        $navbar = $('.navbar');
-        $main_panel = $('.main-panel');
-
-        $full_page = $('.full-page');
-
-        $sidebar_responsive = $('body > .navbar-collapse');
-        sidebar_mini_active = true;
-        white_color = false;
-
-        window_width = $(window).width();
-
-        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-
-
-        $('.fixed-plugin a').click(function(event) {
-          if ($(this).hasClass('switch-trigger')) {
-            if (event.stopPropagation) {
-              event.stopPropagation();
-            } else if (window.event) {
-              window.event.cancelBubble = true;
-            }
-          }
-        });
-
-        $('.fixed-plugin .background-color span').click(function() {
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
-
-          var new_color = $(this).data('color');
-
-          if ($sidebar.length != 0) {
-            $sidebar.attr('data', new_color);
-          }
-
-          if ($main_panel.length != 0) {
-            $main_panel.attr('data', new_color);
-          }
-
-          if ($full_page.length != 0) {
-            $full_page.attr('filter-color', new_color);
-          }
-
-          if ($sidebar_responsive.length != 0) {
-            $sidebar_responsive.attr('data', new_color);
-          }
-        });
-
-        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
-          var $btn = $(this);
-
-          if (sidebar_mini_active == true) {
-            $('body').removeClass('sidebar-mini');
-            sidebar_mini_active = false;
-            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
-          } else {
-            $('body').addClass('sidebar-mini');
-            sidebar_mini_active = true;
-            blackDashboard.showSidebarMessage('Sidebar mini activated...');
-          }
-
-          // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function() {
-            window.dispatchEvent(new Event('resize'));
-          }, 180);
-
-          // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function() {
-            clearInterval(simulateWindowResize);
-          }, 1000);
-        });
-
-        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
-          var $btn = $(this);
-
-          if (white_color == true) {
-
-            $('body').addClass('change-background');
-            setTimeout(function() {
-              $('body').removeClass('change-background');
-              $('body').removeClass('white-content');
-            }, 900);
-            white_color = false;
-          } else {
-
-            $('body').addClass('change-background');
-            setTimeout(function() {
-              $('body').removeClass('change-background');
-              $('body').addClass('white-content');
-            }, 900);
-
-            white_color = true;
-          }
-
-
-        });
-
-        $('.light-badge').click(function() {
-          $('body').addClass('white-content');
-        });
-
-        $('.dark-badge').click(function() {
-          $('body').removeClass('white-content');
-        });
-      });
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      demo.initDashboardPageCharts();
-
-      demo.initVectorMap();
-
-    });
-  </script>
 
   <!-- End JS files -->
+  <script src="js/newTrade/alert.js"></script>
   <script src="js/newTrade/abi.js"></script>
   <script src="js/newTrade/contractFunc.js"></script>
   <script src="js/newTrade/main.js"></script>

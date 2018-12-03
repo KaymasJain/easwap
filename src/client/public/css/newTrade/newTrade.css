@@ -3,6 +3,8 @@
 .swapTopButBox {
     width: 90%;
     margin: auto;
+    display: flex;
+    justify-content: space-between
 }
 
 .daiEthDescBox {
@@ -10,6 +12,7 @@
     max-width: 1200px;
     width: 95%;
     margin: 40px auto;
+    margin-top: 20px;
     justify-content: space-between;
     color: var(--light);
 }
@@ -25,10 +28,8 @@
 
 .descSwapLine {
     width: 40%;
-}
-
-.descLineMargin {
-    margin-bottom: 10px;
+    height: max-content;
+    margin: auto;
 }
 
 .tradeDataContainer {
@@ -110,6 +111,7 @@
     display: flex;
     padding: 20px;
     width: max-content;
+    margin: auto;
     box-sizing: border-box;
     color: var(--lighter);
 }
@@ -151,6 +153,7 @@
 
 .ArrowIcon {
     margin: auto 20px;
+    cursor: pointer;
 }
 
 #toggleCoin {
@@ -167,6 +170,7 @@
     text-align: center;
     width: max-content;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .coinConversionRate {
@@ -182,10 +186,10 @@
 }
 
 .allButbox {
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: auto;
     display: flex;
     height: max-content;
+    width: max-content;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--primary);
 }
@@ -201,10 +205,20 @@
     margin: auto 10px;
 }
 
+.swapButBox {
+    margin: auto;
+    width: max-content;
+}
+
 .swapBut {
     margin-top: auto;
     margin-bottom: auto;
     font-size: 18px;
+}
+
+.tradeCloseButBox {
+    width: max-content;
+    margin: auto;
 }
 
 .tradeCloseBut {
@@ -242,6 +256,7 @@
 }
 
 .minConRateText {
+    margin: auto;
     margin-top: 20px;
     font-size: 12px;
     text-align: center;
@@ -255,19 +270,64 @@
     height: max-content;
     max-height: calc(100% - 95px);
     overflow-y: scroll;
+    transition: opacity 0.4s ease-out;
+}
+
+
+.searchButBox {
+    position: relative;
+    width: max-content;
 }
 
 .selectedChar {
     display: none;
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--white);
+    border: 1px solid var(--background);
 }
-
-/* .searchBox {
-    background-color: var(--primary);
-    color: white;
-} */
 
 @media only screen and (max-width: 992px) {
 
+}
+
+@media only screen and (max-width: 880px) {
+    .boxEth,
+    .boxDai {
+        width: 30%;
+    }
+    .descSwapLine {
+        width: 35%;
+    }
+    .tradeInputContainer {
+        display: block;
+    }
+    .ArrowIcon {
+        margin: 20px auto;
+    }
+    .toggleIconCon {
+        transform: rotate(90deg);
+    }
+    #toggleCoin {
+        text-align: center;
+    }
+    .swapButBox,
+    .tradeCloseButBox {
+        margin: 20px auto;
+    }
+    .swapAllBox {
+        display: block;
+    }
+    .advanceSecBox {
+        display: block;
+    }
+    .gasMinCon {
+        width: 90%;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -279,14 +339,41 @@
 
 @media only screen and (max-width: 576px) {
 
-    .tradeDataContainer {
+    .coinTradeBox {
+        display: block;
+    }
+
+    .showHideQtyBox,
+    .roptenModelButBox {
+        margin: auto;
+        width: max-content;
+    }
+
+    .roptenModelButBox {
+        display: none
+    }
+
+    .easSwapBox {
+        width: 275.5px;
+    }
+
+    .imgNameSymbolBox {
+        margin: 20px auto;
+        width: max-content;
+    }
+
+    .swapTopButBox {
+        display: block;
+    }
+
+    .tradeDataContainer,
+    .swapTopButBox {
         width: calc(100% - 80px);
         margin-left: 20px;
     }
 
     .daiEthDescBox {
         display: block;
-        margin: 40px auto;
         width: calc(100% - 80px);
         margin-left: 20px;
     }
@@ -306,8 +393,12 @@
         width: 100%;
     }
 
-    .swapButClass {
-        width: 90%;
+    .gasButText {
+        font-size: 10px;
+    }
+
+    .minConRateText {
+        max-width: 200px;
     }
 
 }
