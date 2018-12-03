@@ -17,13 +17,13 @@ function navAlerts(num) {
         content = "<b>Shift to main network to use kyber trade. Kyber trade is also available on Ropsten test network for trial purposes.</b>";
     } else if (num == 5) {
         title = 'ERROR GETTING QUANTITY';
-        content = `<b>Unable to get quantity of ${coinOne.symbol} in your wallet</b>`;
+        content = `<b>Unable to get quantity of ${alertVar} in your wallet</b>`;
     } else if (num == 6) {
         title = 'ERROR GETTING QUANTITY';
         content = `Unable to get quantity of ETH in your wallet`;
     } else if (num == 7) {
         title = 'ERROR GETTING QUANTITY';
-        content = `Unable to get quantity of ${coinTwo.symbol} in your wallet`;
+        content = `Unable to get quantity of ${alertVar} in your wallet`;
     } else if (num == 8) {
         title = 'ERROR GETTING QUANTITY';
         content = `Unable to get quantity of ETH in your wallet`;

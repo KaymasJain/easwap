@@ -112,6 +112,7 @@ function funcToSelect(coinId) {
                         coinOne.qty = coinOne.qty / 10 ** coinOne.decimals;
                         $('.allQty').text(`${coinOne.qty.toFixed(8)} ${coinOne.symbol}`);
                     } else {
+                        alertVar = coinOne.symbol;
                         navAlerts(5);
                         console.log(err);
                     };
@@ -148,6 +149,7 @@ function funcToSelect(coinId) {
                             onBuyClick();
                             setIconName();
                         } else {
+                            alertVar = coinTwo.symbol;
                             navAlerts(7);
                             console.log(err);
                         };
@@ -168,6 +170,7 @@ function funcToSelect(coinId) {
                 expectedRateCoinToCoin(coinOne.address, coinTwo.address, coinOne.decimals, 1);
                 expectedRateCoinToCoin(coinTwo.address, coinOne.address, coinTwo.decimals, 2);
                 $('.boxesData').css('animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
+                $('.boxesData').css('-webkit-animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
                 $('.searchBar').css('opacity', '0');
                 $('.searchBar').css('transition', 'opacity 0.4s ease-out 0s');
                 setTimeout(function() {
@@ -175,6 +178,7 @@ function funcToSelect(coinId) {
                     $('.easSwapBox').css('display', 'block');
                 }, 400);
                 $('.easSwapBox').css('animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
+                $('.easSwapBox').css('-webkit-animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
             }
             $(coinOne.class).css('outline', '0px solid black');
             $('.selectedChar').css('display', 'none');
@@ -199,6 +203,7 @@ function setIconName() {
 
 function hideTrade() {
     $('.easSwapBox').css('animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
+    $('.easSwapBox').css('-webkit-animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
     setTimeout(function() {
         $('.easSwapBox').css('display', 'none');
         $('.boxesData').css('display', 'block');
@@ -206,6 +211,7 @@ function hideTrade() {
         $('.searchBar').css('opacity', '1');
     }, 400);
     $('.boxesData').css('animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
+    $('.boxesData').css('-webkit-animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
     coinOne.val = 0;
     coinTwo.val = 0;
     $('.coinOneInput').val('');
