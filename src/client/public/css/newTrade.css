@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Abel|Teko');
 
+.navList a:hover {
+    color: var(--background) !important;
+}
+
 .swapTopButBox {
     width: 90%;
     margin: auto;
@@ -220,6 +224,11 @@
     margin: auto 10px;
 }
 
+.swapButBox {
+    margin: auto;
+    width: max-content;
+}
+
 .swapBut {
     margin-top: auto;
     margin-bottom: auto;
@@ -288,6 +297,10 @@
     border-radius: 50%;
     background-color: var(--white);
     border: 1px solid var(--background);
+}
+
+.copyright {
+    margin-right: 40px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -399,6 +412,15 @@
         max-width: 200px;
     }
 
+}
+
+@media only screen and (max-width: 400px) {
+    .footer {
+        width: calc(100% - 80px) !important;
+    }
+    .copyright {
+        margin: auto;
+    }
 }
 
 @-webkit-keyframes scale-down-top {

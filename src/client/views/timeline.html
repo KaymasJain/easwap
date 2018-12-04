@@ -4,27 +4,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="keywords" content="ethereum,blockchain,contract,trading,dex,swap,kyber network,kyber swap,exchange,decentralised,UI,UX">
+  <meta name="author" content="sjain0410@gmail.com">
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
-  <title>
-    Easwap
-  </title>
+  <title>Easwap | Many protocols One DApp</title>
+
+  <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <link href="css/newTrade.css" rel="stylesheet"/>
 
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
 
-  <!--     Fonts and icons     -->
+  <meta name="generator" content="Pagekit">
+  <link rel="canonical" href="https://easwap.com">
+  <meta name="theme-color" content="#24304e">
+  <meta name="msapplication-navbutton-color" content="#24304e">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#24304e">
+  <meta property="twitter:card" content="https://easwap.com/img/logo.png">
+  <meta property="og:site_name" content="Easwap - Many protocols One DApp">
+  <meta property="og:title" content="Easwap - Many protocols One DApp">
+  <meta property="og:url" content="https://easwap.com">
+  <meta name="msapplication-TileImage" content="https://easwap.com/img/logo.png">
+
+  <meta name = "google-site-verification" content="13Vvbm4zCdCmwmVd29u7Z59sDRe_fcAXH4z751miKLM"/>
+
+  <link href="https://easwap.com/img/logo.png" rel="shortcut icon" type="image/x-icon">
+  <link href="https://easwap.com/img/logo.png" rel="apple-touch-icon-precomposed">
+  <link id="favicon" rel="icon" type="image/png" href="https://easwap.com/img/logo.png">
+
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-  <!-- Nucleo Icons -->
-  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
-  <!-- CSS Files -->
-  <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <link href="assets/css/nucleo-icons.css" rel="stylesheet"/>
 
-  <!-- Own CSS -->
-  <link href="assets/css/newTrade/newTrade.css" rel="stylesheet" />
-  <link href="assets/css/newTrade/themeChange.css" rel="stylesheet" />
+  <!-- --- GOOGLE ANALYTICS --- -->
   
 </head>
 
@@ -47,28 +61,28 @@
           </a>
         </div>
         <ul class="nav">
-          <li class="active">
+          <li>
             <a href="/dash">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>KYBER TRADE</p>
+              <i class="tim-icons icon-coins"></i>
+              <p style="font-size:12px">KYBER TRADE</p>
             </a>
           </li>
-          <li class="active">
+          <li>
             <a href="/">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>TIMELINE</p>
+              <i class="tim-icons icon-bank"></i>
+              <p style="font-size:12px">HOME PAGE</p>
             </a>
           </li>
           <li class="active">
-            <a href="../examples/dashboard.html">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Kyber Trade</p>
+            <a href="/timeline">
+              <i class="tim-icons icon-watch-time"></i>
+              <p style="font-size:12px">TIMELINE</p>
             </a>
           </li>
-          <li class="active">
-            <a href="../examples/dashboard.html">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Kyber Trade</p>
+          <li>
+            <a href="/about">
+              <i class="tim-icons icon-alert-circle-exc"></i>
+              <p style="font-size:12px">ABOUT</p>
             </a>
           </li>
         </ul>
@@ -197,7 +211,7 @@
             <div class="swapAllBox">
               <div class="allButbox">
                 <div class="allQty">1.1198 ETH</div>
-                <button class="btn btn-primary btn-round btn-sm tradeAllBut">Trade All</button>
+                <button class="btn btn-primary btn-round btn-sm tradeAllBut" onclick="tradeAllCoin()">Trade All</button>
               </div>
               <div class="swapButBox">
                 <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" onclick="swapTokens()" type="button">SWAP</button>
@@ -243,19 +257,39 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          <ul class="nav">
-            <li class="nav-item">
-              <a href="javascript:void(0)" class="nav-link">
-                Samyak Jain
+          <ul class="nav" style="width:max-content">
+            <li class="nav-item" style="margin:auto 5px">
+              <a href="https://twitter.com/easwapHQ" target="_blank">
+                <button class="btn btn-icon btn-twi">
+                    <i class="fab fa-twitter"></i>
+                </button>
+              </a>
+            </li>
+            <li class="nav-item" style="margin:auto 5px">
+              <a href="https://t.me/joinchat/Hzn8rA1IZZCww_29twxLQw" target="_blank">
+                <button class="btn btn-icon btn-telegram">
+                    <i class="fab fa-telegram-plane"></i>
+                </button>
+              </a>
+            </li>
+            <li class="nav-item" style="margin:auto 5px">
+              <a href="https://medium.com/easwap" target="_blank">
+                <button class="btn btn-icon btn-medium">
+                    <i class="fab fa-medium-m"></i>
+                </button>
+              </a>
+            </li>
+            <li class="nav-item" style="margin:auto 5px">
+              <a href="mailto:info@easwap.com" target="_blank">
+                <button class="btn btn-icon btn-mail">
+                    <i class="fas fa-envelope"></i>
+                </button>
               </a>
             </li>
           </ul>
           <div class="copyright">
-            ©
-            <script>
-              document.write(new Date().getFullYear())
-            </script> made with <i class="tim-icons icon-heart-2"></i> by
-            <a href="javascript:void(0)" target="_blank">Samyak Jain</a> for a better web.
+            Powered by
+            <a href="https://kyber.network/" target="_blank">Kyber network</a>.
           </div>
         </div>
       </footer>
@@ -265,10 +299,10 @@
   
   <script src="assets/js/core/jquery.min.js"></script>
 
-  <script src="js/newTrade/varDefines.js"></script>
-  <script src="js/newTrade/fireKyber.js"></script>
-  <script src="js/newTrade/index.js"></script>
-  <script src="js/newTrade/tradeBoxes.js"></script>
+  <script src="js/trade/varDefines.js"></script>
+  <script src="js/trade/fireKyber.js"></script>
+  <script src="js/trade/index.js"></script>
+  <script src="js/trade/tradeBoxes.js"></script>
 
   <!--   Core JS Files   -->
   <script src="assets/js/core/popper.min.js"></script>
@@ -287,12 +321,12 @@
   <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
 
   <!-- End JS files -->
-  <script src="js/newTrade/alert.js"></script>
-  <script src="js/newTrade/abi.js"></script>
-  <script src="js/newTrade/contractFunc.js"></script>
-  <script src="js/newTrade/main.js"></script>
-  <script src="js/newTrade/endJS.js"></script>
-  <script src="js/newTrade/fireGas.js"></script>
+  <script src="js/trade/alert.js"></script>
+  <script src="js/trade/abi.js"></script>
+  <script src="js/trade/contractFunc.js"></script>
+  <script src="js/trade/main.js"></script>
+  <script src="js/trade/endJS.js"></script>
+  <script src="js/trade/fireGas.js"></script>
 
 </body>
 

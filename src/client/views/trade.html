@@ -1,238 +1,332 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Easwap | Easiest way to swap ERC20 tokens</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/indexF.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/alert.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/tradeE.css"/>
-    <meta name="keywords" content="ethereum,blockchain,contract,trading,dex,swap,kyber network,kyber swap,exchange,decentralised,UI,UX">
-    <meta name="author" content="sjain0410@gmail.com">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-        crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="keywords" content="ethereum,blockchain,contract,trading,dex,swap,kyber network,kyber swap,exchange,decentralised,UI,UX">
+  <meta name="author" content="sjain0410@gmail.com">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <title>Easwap | Many protocols One DApp</title>
 
-    <meta name="generator" content="Pagekit">
-    <link rel="canonical" href="https://easwap.com">
-    <meta name="theme-color" content="#24304e">
-    <meta name="msapplication-navbutton-color" content="#24304e">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#24304e">
-    <meta property="twitter:card" content="https://easwap.com/img/logo.png">
-    <meta property="og:site_name" content="Easwap - Tokens trading made easy">
-    <meta property="og:title" content="Easwap - Tokens trading made easy">
-    <meta property="og:url" content="https://easwap.com">
-    <meta name="msapplication-TileImage" content="https://easwap.com/img/logo.png">
-    <link href="https://easwap.com/img/logo.png" rel="shortcut icon" type="image/x-icon">
-    <link href="https://easwap.com/img/logo.png" rel="apple-touch-icon-precomposed">
-    <link id="favicon" rel="icon" type="image/png" href="https://easwap.com/img/logo.png">
+  <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <link href="css/newTrade.css" rel="stylesheet"/>
 
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72808093-15"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
+  <meta name="generator" content="Pagekit">
+  <link rel="canonical" href="https://easwap.com">
+  <meta name="theme-color" content="#24304e">
+  <meta name="msapplication-navbutton-color" content="#24304e">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#24304e">
+  <meta property="twitter:card" content="https://easwap.com/img/logo.png">
+  <meta property="og:site_name" content="Easwap - Many protocols One DApp">
+  <meta property="og:title" content="Easwap - Many protocols One DApp">
+  <meta property="og:url" content="https://easwap.com">
+  <meta name="msapplication-TileImage" content="https://easwap.com/img/logo.png">
 
-        gtag('config', 'UA-72808093-15');
-    </script> -->
-    
+  <meta name = "google-site-verification" content="13Vvbm4zCdCmwmVd29u7Z59sDRe_fcAXH4z751miKLM"/>
+
+  <link href="https://easwap.com/img/logo.png" rel="shortcut icon" type="image/x-icon">
+  <link href="https://easwap.com/img/logo.png" rel="apple-touch-icon-precomposed">
+  <link id="favicon" rel="icon" type="image/png" href="https://easwap.com/img/logo.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link href="assets/css/nucleo-icons.css" rel="stylesheet"/>
+
+  <!-- --- GOOGLE ANALYTICS --- -->
+  
 </head>
 
-<body>
-
-    <div class="bodyCover">
-
-        <div id="menuIconBox">
-            <a href="https://twitter.com/easwapHQ" target="_blank"><div class="iconBox"><i class="fab fa-twitter-square"></i></div></a>
-            <a href="https://t.me/joinchat/Hzn8rA1IZZCww_29twxLQw" target="_blank"><div class="iconBox"><i class="fab fa-telegram"></i></div></a>
-            <!-- <a href="" target="_blank"><div class="iconBox"><i class="fab fa-medium"></i></div></a> -->
+<body class="sidebar-mini">
+  <div class="wrapper">
+    <div class="navbar-minimize-fixed">
+      <button class="minimize-sidebar btn btn-link btn-just-icon">
+        <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+        <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+      </button>
+    </div>
+    <div class="sidebar">
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="javascript:void(0)" class="simple-text logo-mini">
+            0x
+          </a>
+          <a href="javascript:void(0)" class="simple-text logo-normal addressCon">
+            0xxxxx...xxxx
+          </a>
         </div>
-
-        <div class="midBody">
-
-            <div class="navBar">
-
-                <div class="forMaxWidth">
-
-                    <div class="title">Easwap<div class="beta">BETA</div></div>
-
-                    <div class="navLeftContainer">
-                        <div class="metaAddBox">
-                            <div class="loggedInWith">Login method</div>
-                            <div class="yourAddr">Not connected</div>
-                        </div>
-                    </div>
-
-                </div>
-
+        <ul class="nav">
+          <li class="active">
+            <a href="/dash">
+              <i class="tim-icons icon-coins"></i>
+              <p style="font-size:12px">KYBER TRADE</p>
+            </a>
+          </li>
+          <li>
+            <a href="/">
+              <i class="tim-icons icon-bank"></i>
+              <p style="font-size:12px">HOME PAGE</p>
+            </a>
+          </li>
+          <li>
+            <a href="/timeline">
+              <i class="tim-icons icon-watch-time"></i>
+              <p style="font-size:12px">TIMELINE</p>
+            </a>
+          </li>
+          <li>
+            <a href="/about">
+              <i class="tim-icons icon-alert-circle-exc"></i>
+              <p style="font-size:12px">ABOUT</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-minimize d-inline">
+              <button class="minimize-sidebar btn btn-link btn-just-icon" rel="tooltip" data-original-title="Sidebar toggle" data-placement="right">
+                <i class="tim-icons icon-align-center visible-on-sidebar-regular"></i>
+                <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini"></i>
+              </button>
             </div>
-
-            <div class="mainBody scrollBar">
-
-                <div id="toolBar">
-                    <div class="toolBarBut toolBarCon" id="showHideQty">SHOW QUANTITY</div>
-                    <!-- <a href="/developer" style="text-decoration: none"><div class="toolBarBut toolBarCon">DEVELOPER</div></a> -->
-                    <div class="toolBarTip toolBarCon">
-                        TRY ON ROPSTEN<span class="toolConText">Try our ropsten version by just shifting to ropsten test network</span>
-                    </div>
-                </div>
-
-                <div class="daiEthDescBox">
-                    <div class="boxEth"></div>
-                    <div class="descLine">
-                        <div>SELECT 2 COINS TO SWAP</div>
-                        <div class="tryMainOrRop">
-                            Metamask/Trust/Status not found!!<span class="tryNetText">For trading through our platform you need to have <a href="https://metamask.io/" target="_blank" style="color: var(--blue-for-hover)">metamask</a> extension installed on your browser or for android/ios you need <a href="https://trustwalletapp.com/features/trust-browser" target="_blank" style="color: var(--blue-for-hover)">trust browser</a> or <a href="https://status.im/" target="_blank" style="color: var(--blue-for-hover)">status</a> installed on your device.</span>
-                        </div>
-                    </div>
-                    <div class="boxEthMob"></div>
-                    <div class="boxDai"></div>
-                </div>
-
-                <div class="tradeDataContainer"></div>
-
-                <div class="searchBar">
-                    <div class="searchBox" onclick="filterSearch('all', this)">ALL</div>
-                </div>
-
+            <div class="navbar-toggle d-inline">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
             </div>
-
-            <div class="footer">Powered by <a href="https://kyber.network/" class="footerLink" target="_blank">kyber.network</div></a>
-
-
+            <a class="navbar-brand" href="javascript:void(0)">Kyber Trade</a>
+          </div>
+          <div class="collapse navbar-collapse" id="navigation">
+              <ul class="navbar-nav ml-auto">
+                <li class="search-bar input-group">
+                  <div class="networkName">
+                    <button class="btn btn-warning animation-on-hover" type="button">SEARCHING NETWORK</button>
+                  </div>
+                  <div class="modalProviderBox"></div>
+                </li>
+                <li class="search-bar input-group">
+                  <div class="navUserAdd nav-item">
+                      <button class="btn btn-info btn-simple animation-on-hover btn-sm" type="button">
+                        <a class="navbar-brand" href="etherscan.io" target="_blank">GETTING YOUR ADDRESS</a>
+                      </button>
+                  </div>
+                </li>
+              </ul>
+            </div>      
         </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
 
-        <div id="doubleClickProblem" hidden></div>
-
-        <div class="tradeCover" onclick="hideTrade()"hidden></div>
-            <div id="tradeBox" hidden>
-                <i class="fas fa-times crossIcon" onclick="hideTrade()"></i>
-                <div class="tradeInputContainer">
-                    <div class="coinSellBox coinTradeBox">
-                        <div class="imgNameSymbolBox">
-                            <div class="tradeImgCon">
-                                <img src="logos/eth.svg" id="imgForSell" style="width:44px; height:44px">
-                            </div>
-                            <div class="coinNameSym">
-                                <div class="coinSymbol" id="sellSymbol">ETH</div>
-                                <div class="coinFullName" id="sellFullName">ethereum</div>
-                            </div>
-                        </div>
-                        <div class="inputTradeBox">
-                            <input type="number" min="0" class="inputTrade coinOneInput" placeholder="0.00">
-                        </div>
-                    </div>
-                    <!-- <div class="inputTradeBox inputMobile">
-                        <input type="number" min="0" class="inputTrade coinOneInput" placeholder="0.00">
-                    </div> -->
-                    <div class="ArrowIcon">
-                        <div id="arrRight">
-                            <i class="fas fa-arrow-right arrowTransform"></i>
-                        </div>
-                        <div id="arrBot">
-                            <i class="fas fa-arrow-down arrowTransform"></i>
-                        </div>
-                        <div id="toggleCoin">toggle</div>
-                    </div>
-                    <div class="coinBuyBox coinTradeBox">
-                        <div class="inputTradeBox">
-                            <input type="number" min="0" class="inputTrade coinTwoInput" placeholder="0.00">
-                        </div>
-                        <div class="imgNameSymbolBox">
-                            <div class="coinNameSym">
-                                <div class="coinSymbol" id="buySymbol">ETH</div>
-                                <div class="coinFullName" id="buyFullName">ethereum</div>
-                            </div>
-                            <div class="tradeImgCon">
-                                <img src="logos/eth.svg" id="imgForBuy" style="width:44px; height:44px">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="inputTradeBox inputMobile">
-                        <input type="number" min="0" class="inputTrade coinTwoInput" placeholder="0.00">
-                    </div> -->
-                </div>
-                <div class="ethToToken"></div>
-                <div class="qtyFeesBox">
-                    <div>
-                        <div class="tokenQtyBox">
-                            <div class="tokenQtyValue"></div>
-                            <div class="tradeAllBut" onclick="tradeAllCoin()">TRADE ALL</div>
-                        </div>
-                        <!-- <div class="transFees">Transaction Fees: 0.178 ETH</div> -->
-                    </div>
-                    <div class="butBuySell" id="swapTrade" onclick="swapTokens()">SWAP</div>
-                </div>
-                <div class="tokenQtyBox tokenQtyBoxMob">
-                    <div class="tokenQtyValue"></div>
-                    <div class="tradeAllBut" onclick="tradeAllCoin()">TRADE ALL</div>
-                </div>
-                <div class="advanceSettingBox">
-                    <div class="advanceSetting">Advanced</div>
-                    <div id="advanceToggle" hidden>
-                        <div class="advanceExpand">
-                            <div class="gasPriceContain">
-                                <div class="gasPriceBox">
-                                    <div class="gasPrice">Gas Price :</div>
-                                    <input type="number" class="gasPriceInput" min="0" value="50" onmouseup="gasToTranSet(1)" onkeyup="gasToTranSet(1)">
-                                    <div class="inGwei">Gwei</div>
-                                </div>
-                                <div class="optionGasPrice">
-                                    <div class="gasOpBut" onclick="setGas(0)">Low</div>
-                                    <div class="gasOpBut" onclick="setGas(1)">Standard</div>
-                                    <div class="gasOpBut" onclick="setGas(2)">High</div>
-                                </div>
-                                <div class="maxGas">Max: 50 Gwei</div>
-                            </div>
-                            <div class="minSlipContain">
-                                <div class="minSlipTitle">MIN ACCEPTABLE RATE: 447.1121 KNC</div>
-                                <div class="slipRateBox">
-                                    <div id="sliderCon">
-                                        <input type="range" class="slider" min="90" max="101" value="97">
-                                    </div>
-                                    <div id="sliderVal">97%</div>
-                                </div>
-                                <div class="sliderDetails">Higher MIN ACCEPTABLE RATE typically results in lower success rate when the market is volatile. <span>444.1121 KNC</span> is our suggested MIN ACCEPTABLE RATE by default.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Main Body -->
+        <div class="searchBar">
+            <div class="${searchClass} searchButBox">
+              <button class="btn btn-sm btn-default btn-fab btn-icon" onclick="filterSearch('all', this)">All</button>  
             </div>
         </div>
 
-        <div class="alertLoaderBackground" onclick="hideAlert()" hidden></div>
+        <div class="boxesData">
 
-        <div class="alertBox" hidden>
-            <div class="alertTitle"></div>
-            <div class="alertCon"></div>
-            <div class="alertBut" onclick="hideAlert()">DISMISS</div>
+
+          <div class="swapTopButBox">
+            <div class="showHideQtyBox">
+              <button class="btn btn-primary btn-sm btn-round showHideQty">Show QTY</button>
+            </div>
+            <div class="roptenModelButBox">
+              <div class="btn btn-primary btn-sm btn-round roptenModelBut" data-toggle="tooltip" data-placement="top" title="Just shift to ropsten test network via any ethereum provider to use our ropsten version of kyber trade">
+                  Try on Ropsten
+              </div>
+            </div>
+          </div>
+
+          <div class="daiEthDescBox">
+            <div class="boxEth"></div>
+            <div class="descSwapLine">
+                <h2 class="text-center descLineMargin">SELECT 2 COINS TO SWAP</h2>
+            </div>
+            <div class="boxEthMob"></div>
+            <div class="boxDai"></div>
+          </div>
+
+          <div class="tradeDataContainer"></div>
+
         </div>
-
-        <div class="loaderBox"></div>
-
-        <div class="loader">
-            <div class="dash uno"></div>
-            <div class="dash dos"></div>
-            <div class="dash tres"></div>
-            <div class="dash cuatro"></div>
+        <!-- End Main Body -->
+        <!-- Swapping Box -->
+        <div class="easSwapBox">
+            <div class="closeTradeIcon">
+                <button type="button" class="close" onclick="hideTrade()">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+            </div>
+            <div class="tradeInputContainer">
+                <div class="coinSellBox coinTradeBox">
+                    <div class="imgNameSymbolBox">
+                        <div class="tradeImgCon">
+                            <img src="logos/eth.svg" id="imgForSell" height="44px" width="44px">
+                        </div>
+                        <div class="coinNameSym">
+                            <div class="coinSymbol" id="sellSymbol">ETH</div>
+                            <div class="coinFullName" id="sellFullName">ethereum</div>
+                        </div>
+                    </div>
+                    <div class="inputTradeBox">
+                        <input type="number" min="0" class="form-control inputTrade coinOneInput" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="ArrowIcon">
+                    <div class="toggleIconCon">
+                      <i class="tim-icons icon-double-right toggleIcon"></i> 
+                    </div>
+                    <div id="toggleCoin" class="text-muted">toggle</div>
+                </div>
+                <div class="coinBuyBox coinTradeBox">
+                    <div class="inputTradeBox">
+                        <input type="number" min="0" class="form-control inputTrade coinTwoInput" placeholder="0.00">
+                    </div>
+                    <div class="imgNameSymbolBox">
+                        <div class="coinNameSym">
+                            <div class="coinSymbol" id="buySymbol">ETH</div>
+                            <div class="coinFullName" id="buyFullName">ethereum</div>
+                        </div>
+                        <div class="tradeImgCon">
+                            <img src="logos/eth.svg" id="imgForBuy" height="44px" width="44px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="coinConversionRate">1 ETH = 1 ETH</div>
+            <div class="swapAllBox">
+              <div class="allButbox">
+                <div class="allQty">1.1198 ETH</div>
+                <button class="btn btn-primary btn-round btn-sm tradeAllBut" onclick="tradeAllCoin()">Trade All</button>
+              </div>
+              <div class="swapButBox">
+                <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" onclick="swapTokens()" type="button">SWAP</button>
+              </div>
+            </div>
+            <center>
+              <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#advancedCollapse" aria-expanded="false" aria-controls="collapseExample">
+                Advanced
+              </button>
+            </center>
+            <br>
+            <div class="collapse advanceColSet" id="advancedCollapse">
+              <div class="row advanceSecBox">
+                <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
+                    <p class="h4 text-center advanceBoxInTitle">Gas Price Set</p>
+                    <div class="gasSetBox">
+                        <blockquote class="blockquote finalGasPriceBox">
+                          <p class="mb-0 text-center finalGasPrice"></p>
+                        </blockquote>
+                      <div id="sliderGasPrice" class="slider slider-primary"></div>
+                      <div class="priceButBox">
+                          <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(1)">Low</button>
+                          <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(2)">Standard</button>
+                          <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(3)">High</button>
+                      </div>
+                    </div>
+                </div>
+                <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
+                    <p class="h4 text-center advanceBoxInTitle">Minimum Conversion Rate</p>
+                    <div class="gasSetBox">
+                        <blockquote class="blockquote finalMinRateBox">
+                          <p class="mb-0 text-center finalMinRate"></p>
+                        </blockquote>
+                      <div id="minConRate" class="slider slider-primary"></div>
+                      <div class="minConRateText">Higher MIN ACCEPTABLE RATE typically results in lower success rate when the market is volatile. <span>0.00 ETH</span> is our suggested MIN ACCEPTABLE RATE by default.</div>
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>
+        <!-- End Swapping Box -->
 
-    <script src="js/varDefines.js"></script>
-    <script src="js/alert.js"></script>
-    <script src="js/abiB.js"></script>
-    <script src="js/index10.js"></script>
-    <script src="js/fireC.js"></script>
-    <script src="js/contractFunc.js"></script>
-    <script src="js/tradeK.js"></script>
-    <script src="js/trade/search.js"></script>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <ul class="nav" style="width:max-content">
+            <li class="nav-item" style="margin:auto 5px">
+              <a href="https://twitter.com/easwapHQ" target="_blank">
+                <button class="btn btn-icon btn-twi">
+                    <i class="fab fa-twitter"></i>
+                </button>
+              </a>
+            </li>
+            <li class="nav-item" style="margin:auto 5px">
+              <a href="https://t.me/joinchat/Hzn8rA1IZZCww_29twxLQw" target="_blank">
+                <button class="btn btn-icon btn-telegram">
+                    <i class="fab fa-telegram-plane"></i>
+                </button>
+              </a>
+            </li>
+            <li class="nav-item" style="margin:auto 5px">
+              <a href="https://medium.com/easwap" target="_blank">
+                <button class="btn btn-icon btn-medium">
+                    <i class="fab fa-medium-m"></i>
+                </button>
+              </a>
+            </li>
+            <li class="nav-item" style="margin:auto 5px">
+              <a href="mailto:info@easwap.com" target="_blank">
+                <button class="btn btn-icon btn-mail">
+                    <i class="fas fa-envelope"></i>
+                </button>
+              </a>
+            </li>
+          </ul>
+          <div class="copyright">
+            Powered by
+            <a href="https://kyber.network/" target="_blank">Kyber network</a>.
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  
+  <script src="assets/js/core/jquery.min.js"></script>
+
+  <script src="js/trade/varDefines.js"></script>
+  <script src="js/trade/fireKyber.js"></script>
+  <script src="js/trade/index.js"></script>
+  <script src="js/trade/tradeBoxes.js"></script>
+
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script src="assets/js/plugins/bootstrap-switch.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="assets/js/plugins/sweetalert2.min.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="assets/js/plugins/nouislider.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
+
+  <!-- End JS files -->
+  <script src="js/trade/alert.js"></script>
+  <script src="js/trade/abi.js"></script>
+  <script src="js/trade/contractFunc.js"></script>
+  <script src="js/trade/main.js"></script>
+  <script src="js/trade/endJS.js"></script>
+  <script src="js/trade/fireGas.js"></script>
 
 </body>
 
