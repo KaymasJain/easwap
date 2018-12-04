@@ -91,3 +91,5 @@ function navAlerts(num) {
             confirmButtonClass: "btn btn-default"
     });
 }
+
+// blackDashboard.showSidebarMessage("Sidebar mini deactivated...")

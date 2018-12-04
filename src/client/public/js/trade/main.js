@@ -62,7 +62,7 @@ function changeOnInput(num) {
             } else if (toggleNum == 0) {
                 coinTwo.val = (coinOne.val / coinTwo.rate);
             }
-            $('.coinTwoInput').val(coinTwo.val.toFixed(6));
+            $('.coinTwoInput').val(coinTwo.val);
         } else {
             coinOne.val = 0;
             coinTwo.val = 0;
@@ -76,7 +76,7 @@ function changeOnInput(num) {
             } else if (toggleNum == 0) {
                 coinOne.val = (coinTwo.val * coinTwo.rate);
             }
-            $('.coinOneInput').val(coinOne.val.toFixed(6));
+            $('.coinOneInput').val(coinOne.val);
         } else {
             coinOne.val = 0;
             coinTwo.val = 0;
@@ -101,7 +101,7 @@ function funcToSelect(coinId) {
             coinOne.address = coinsData[coinId].contractAddress;
             coinOne.class = `.${coinOne.id}Class`;
 
-            $(coinOne.class).css('outline', `10px solid var(--primary)`);
+            $(coinOne.class).css('outline', `10px solid var(--green)`);
 
             if (coinId != 'eth') {
                 coinOne.contract = web3.eth.contract(tokensAbi).at(coinOne.address);
@@ -246,19 +246,23 @@ function gasToTranSet(numCheck) {
 
 function tradeAllCoin() {
     if (toggleNum == 1) {
+        coinOne.val = coinOne.qty;
         if (coinOne.id != 'eth') {
-            $('.coinOneInput').val(coinOne.qty.toFixed(6) - 0.000001);
+            $('.coinOneInput').val(coinOne.val);
         } else {
-            $('.coinOneInput').val((coinOne.qty - (900000*finalGasPrice)/1000000000).toFixed(6));
+            $('.coinOneInput').val((coinOne.val - (900000*finalGasPrice)/1000000000));
         }
-        $(".coinOneInput").trigger("input");
+        changeOnInput(1);
+        // $(".coinOneInput").trigger("input");
     } else if (toggleNum == 0) {
+        coinTwo.val = coinTwo.qty;
         if (coinTwo.id != 'eth') {
-            $('.coinTwoInput').val(coinTwo.qty.toFixed(6) - 0.000001);
+            $('.coinTwoInput').val(coinTwo.val);
         } else {
-            $('.coinTwoInput').val((coinTwo.qty - (900000 * finalGasPrice) / 1000000000).toFixed(6));
+            $('.coinTwoInput').val((coinTwo.val - (900000 * finalGasPrice) / 1000000000));
         }
-        $(".coinTwoInput").trigger("input");
+        changeOnInput(2);
+        // $(".coinTwoInput").trigger("input");
     }
 }
 

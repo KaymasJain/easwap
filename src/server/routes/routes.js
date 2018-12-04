@@ -8,16 +8,16 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/', (req, res) => {
+// router.get('/', (req, res) => {
+//     res.render('index.html');
+// });
+
+router.get('/dash', (req, res) => {
     res.render('trade.html');
 });
 
-router.get('/index', (req, res) => {
-    res.render('themeIndex.html');
-});
-
-router.get('/dash', (req, res) => {
-    res.render('dashEas.html');
+router.get('/timeline', (req, res) => {
+    res.render('timeline.html');
 });
 
 
