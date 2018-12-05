@@ -50,7 +50,7 @@
 .selectCoinBox {
     padding: 10px;
     box-sizing: border-box;
-    box-shadow: 0px 0px 2px 2px var(--primary);
+    background-color: var(--box-background);
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
@@ -61,7 +61,8 @@
 
 .selectCoinBox:hover {
     color: var(--white);
-    box-shadow: 0px 0px 8px 8px var(--primary);
+    box-shadow: 0px 0px 4px 4px var(--primary);
+    transform: translateY(-5px);
 }
 
 .logoNameBox {
@@ -336,6 +337,9 @@
     .gasMinCon {
         width: 90%;
     }
+    .swapBut {
+        margin-top: 20px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -346,6 +350,10 @@
 }
 
 @media only screen and (max-width: 576px) {
+
+    .sidebarBottom {
+        display: flex;
+    }
 
     .coinTradeBox {
         display: block;

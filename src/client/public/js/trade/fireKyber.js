@@ -10,6 +10,8 @@ function dataAsPerNetwork() {
         db.ref('kyberRops').once('value', function (snapshot) {
             coinsData = snapshot.val();
             showBoxes();
+            $('.loaderBox').css('display', 'none');
+            $('.loader').css('display', 'none');
         }, function (err) {
             alert(err);
         });
@@ -17,6 +19,8 @@ function dataAsPerNetwork() {
         db.ref('kyberMain').once('value', function (snapshot) {
             coinsData = snapshot.val();
             showBoxes();
+            $('.loaderBox').css('display', 'none');
+            $('.loader').css('display', 'none');
         }, function (err) {
             alert(err);
         });

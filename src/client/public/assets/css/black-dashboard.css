@@ -20933,23 +20933,3 @@ Copyright (c) 2015 Daniel Eden
     text-align: center; } }
 
 /*# sourceMappingURL=var(--darker)-dashboard.css.map */
-/* MINE CSS */
-.btn-twi {
-  background-image: linear-gradient(to bottom left, #55acee, #147bc9, #55acee);
-  background-image: -moz-linear-gradient(to bottom left, #55acee, #147bc9, #55acee);
-}
-
-.btn-telegram {
-  background-image: linear-gradient(to bottom left, #42AEEB, #3997C8, #42AEEB);
-  background-image: -webkit-linear-gradient(to bottom left, #42AEEB, #3997C8, #42AEEB);
-}
-
-.btn-medium {
-  background-image: linear-gradient(to bottom left, #221E1F, #000000, #221E1F);
-  background-image: -webkit-linear-gradient(to bottom left, #221E1F, #000000, #221E1F);
-}
-
-.btn-mail {
-  background-image: linear-gradient(to bottom left, #d15244, #b12a1b, #d15244);
-  background-image: -webkit-linear-gradient(to bottom left, #d15244, #b12a1b, #d15244);
-}
