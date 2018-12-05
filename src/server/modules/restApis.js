@@ -54,7 +54,10 @@ module.exports.init = (app) => {
 		request("https://ethgasstation.info/json/ethgasAPI.json", (err, data) => {
 			if (err) {
 				console.log(err);
-				alert.sendNotification(`api ethgasstation - Err-0932: ${err}`, 'danger');
+				gasError++;
+				if (gasError % 10 == 0) {
+					alert.sendNotification(`api ethgasstation - Err-0932: ${err}`, 'danger');
+				}
 			} else {
 				try {
 					var details = JSON.parse(data.body);

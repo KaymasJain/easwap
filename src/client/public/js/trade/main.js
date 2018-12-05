@@ -101,7 +101,7 @@ function funcToSelect(coinId) {
             coinOne.address = coinsData[coinId].contractAddress;
             coinOne.class = `.${coinOne.id}Class`;
 
-            $(coinOne.class).css('outline', `10px solid var(--green)`);
+            $(coinOne.class).css('outline', `10px solid var(--primary)`);
 
             if (coinId != 'eth') {
                 coinOne.contract = web3.eth.contract(tokensAbi).at(coinOne.address);
