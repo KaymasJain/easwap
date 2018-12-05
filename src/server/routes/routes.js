@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     res.render('home.html');
 });
 
-router.get('/dash', (req, res) => {
+router.get('/trade', (req, res) => {
     res.render('trade.html');
 });
 

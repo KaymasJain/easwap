@@ -1,4 +1,73 @@
 .homeTitle {
     font-size: 44px;
     text-align: center;
+    color: var(--primary);
+    margin: 50px auto;
+    transition: opacity 1s linear;
+    max-width: 90%;
+}
+
+.homeTitle span {
+    transition: opacity 0.5s linear;
+}
+
+.titleDesc {
+    text-align: center;
+    width: 600px;
+    max-width: 90%;
+    font-size: 24px;
+    margin: auto;
+    margin-bottom: 80px;
+}
+
+.kyberMakerCon {
+    margin: 50px auto;
+    justify-content: center;
+}
+
+.tabsbutCon {
+    padding: 20px 0px;
+}
+
+.tabsbutCon div {
+    margin: 10px auto;
+}
+
+.switchContent div {
+    font-size: 18px;
+    text-align: center;
+}
+
+.mobileKyberMakerCon {
+    display: none;
+    margin: 50px auto;
+}
+
+.mobileKyberMakerPad {
+    padding-top: 30px;
+}
+
+@media only screen and (max-width: 992px) {
+
+    .kyberMakerCon {
+        display: none;
+    }
+
+    .mobileKyberMakerCon {
+        display: block;
+    }
+
+}
+
+
+@media only screen and (max-width: 350px) {
+
+    .kyberMakerCon {
+        display: block;
+    }
+
+    .mobileKyberMakerCon {
+        display: none;
+    }
+
 }
