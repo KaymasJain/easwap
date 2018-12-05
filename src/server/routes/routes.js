@@ -8,18 +8,17 @@ router.use((req, res, next) => {
     next();
 });
 
-// router.get('/', (req, res) => {
-//     res.render('index.html');
-// });
+router.get('/', (req, res) => {
+    res.render('home.html');
+});
 
 router.get('/dash', (req, res) => {
     res.render('trade.html');
 });
 
-router.get('/timeline', (req, res) => {
-    res.render('timeline.html');
+router.get('/roadmap', (req, res) => {
+    res.render('roadmap.html');
 });
-
 
 router.get('*', (req, res) => {
     res.redirect('/');
