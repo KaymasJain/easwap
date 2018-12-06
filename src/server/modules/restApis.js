@@ -49,6 +49,7 @@ module.exports.init = (app) => {
 	});
 
 	var gasError = 0;
+	var gasSaving = 0;
 
 	setInterval(function () {
 		request("https://ethgasstation.info/json/ethgasAPI.json", (err, data) => {
@@ -63,7 +64,10 @@ module.exports.init = (app) => {
 					var details = JSON.parse(data.body);
 					db.ref('gas').set(details);
 				} catch (error) {
-					alert.sendNotification(`Error saving gas price - ${error}`, 'danger');
+					gasSaving++;
+					if (gasSaving % 10 == 0) {
+						alert.sendNotification(`Error saving gas price - ${error}`, 'danger');
+					} 
 				}
 			}
 		});
@@ -74,7 +78,7 @@ module.exports.init = (app) => {
 			var data = snapshot.val();
 			var cmcQuery = "";
 			Object.keys(data).forEach(function (key, i) {
-				if (key != 'kcc') {
+				if (key != 'kcc' && key != 'pt') {
 					cmcQuery = cmcQuery + data[key].cmcName + ',';
 				}
 			});
