@@ -21,7 +21,7 @@ module.exports.init = (app) => {
 	request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			alert.sendNotification(`api Kyber - Err-4523: ${err}`, 'danger');
+			alert.sendNotification(`Api Kyber - ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			var objectData = {};
@@ -36,7 +36,7 @@ module.exports.init = (app) => {
 	request('https://tracker.kyber.network/api/tokens/supported?chain=ropsten', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			alert.sendNotification(`api Kyber - Err-4523: ${err}`, 'danger');
+			alert.sendNotification(`Ropsten api Kyber - ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			var objectData = {};
@@ -56,17 +56,14 @@ module.exports.init = (app) => {
 				console.log(err);
 				gasError++;
 				if (gasError % 10 == 0) {
-					alert.sendNotification(`api ethgasstation - Err-0932: ${err}`, 'danger');
+					alert.sendNotification(`api ethgasstation - ${err}`, 'danger');
 				}
 			} else {
 				try {
 					var details = JSON.parse(data.body);
 					db.ref('gas').set(details);
-				} catch (err) {
-					gasError++;
-					if (gasError % 10 == 0) {
-						alert.sendNotification(`JSON PARSE - error no.-${gasError}`, 'danger');
-					}
+				} catch (error) {
+					alert.sendNotification(`Error saving gas price - ${error}`, 'danger');
 				}
 			}
 		});
@@ -98,7 +95,7 @@ module.exports.init = (app) => {
 			rp(requestOptions).then(response => {
 				db.ref('coinmarketprice').set(response.data);
 			}).catch((err) => {
-				console.log('API call error:', err.message);
+				alert.sendNotification(`CoinMarketCap - ${err}`, 'danger');
 			});
 		}, function (error) {
 			if (error) {
