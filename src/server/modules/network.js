@@ -6,6 +6,6 @@ module.exports.init = (app) => {
     http.createServer(app).listen(port, error => {
         if (error) throw error
         console.log(`Magic is Happening at here ${port}`);
-        // alert.sendNotification(`Easwap server started at ${port}`, 'good');
+        alert.sendNotification(`Easwap server started at ${port}`, 'good');
     });
 }
