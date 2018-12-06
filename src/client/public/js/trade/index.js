@@ -1,10 +1,10 @@
-// let web3;
+let web3;
 let networkId;
 let account;
 
 window.addEventListener('load', async () => {
     if (window.ethereum) {
-        window.web3 = new Web3(ethereum);
+        web3 = new Web3(ethereum);
         try {
             await ethereum.enable();
             getAccountAndNetwork();
@@ -12,7 +12,7 @@ window.addEventListener('load', async () => {
             console.log(error);
         }
     } else if (window.web3) {
-        window.web3 = new Web3(web3.currentProvider);
+        web3 = new Web3(web3.currentProvider);
         getAccountAndNetwork();
     } else {
         $('.networkName').html(`<button class="btn btn-danger animation-on-hover" type="button" onclick="navAlerts(1)">NO ETH PROVIDER</button>`);
@@ -64,9 +64,6 @@ function getAccountAndNetwork() {
         dataAsPerNetwork();
         loadContractFunc();
     });
-    if (!networkId) {
-        setTimeout({getAccountAndNetwork()}, 1000);
-    }
 }
 
 
