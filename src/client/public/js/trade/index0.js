@@ -64,6 +64,9 @@ function getAccountAndNetwork() {
         dataAsPerNetwork();
         loadContractFunc();
     });
+    if (!networkId) {
+        setTimeout({getAccountAndNetwork()}, 1000);
+    }
 }
 
 
