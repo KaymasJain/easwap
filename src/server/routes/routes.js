@@ -20,6 +20,10 @@ router.get('/roadmap', (req, res) => {
     res.render('roadmap.html');
 });
 
+router.get('/trial', (req, res) => {
+    res.render('trial.html');
+});
+
 router.get('/tradeDeployed', (req, res) => {
     var txHash = req.query.txHash;
     var netId = req.query.net;
