@@ -164,7 +164,8 @@
 }
 
 .inputTradeBox {
-    margin: auto 10px;    
+    margin: auto 10px;
+    max-width: 193.38px; 
 }
 
 .inputTrade {
