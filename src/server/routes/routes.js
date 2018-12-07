@@ -9,11 +9,11 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('home.html');
+    res.render('trade.html');
 });
 
-router.get('/trade', (req, res) => {
-    res.render('trade.html');
+router.get('/home', (req, res) => {
+    res.render('home.html');
 });
 
 router.get('/roadmap', (req, res) => {

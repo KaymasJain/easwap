@@ -38,7 +38,17 @@
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <link href="assets/css/nucleo-icons.css" rel="stylesheet"/>
 
-  <!-- --- GOOGLE ANALYTICS --- -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72808093-15"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-72808093-15');
+  </script>
   
 </head>
 
@@ -62,13 +72,13 @@
         </div>
         <ul class="nav">
           <li>
-            <a href="/">
+            <a href="/home">
               <i class="tim-icons icon-bank"></i>
               <p style="font-size:12px">HOME PAGE</p>
             </a>
           </li>
           <li class="active">
-            <a href="/trade">
+            <a href="/">
               <i class=""><img src="knc_icon.svg"></i>
               <p style="font-size:12px">KYBER TRADE</p>
             </a>
@@ -334,7 +344,7 @@
 
   <script src="js/trade/varDefines.js"></script>
   <script src="js/trade/fireKyber.js"></script>
-  <script src="js/trade/index.js"></script>
+  <script src="js/trade/index1.js"></script>
   <script src="js/trade/tradeBoxes.js"></script>
 
   <!--   Core JS Files   -->
