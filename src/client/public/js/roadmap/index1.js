@@ -1,10 +1,9 @@
-let web3;
 let networkId;
 let account;
 
 window.addEventListener('load', async () => {
     if (window.ethereum) {
-        web3 = new Web3(ethereum);
+        window.web3 = new Web3(ethereum);
         try {
             await ethereum.enable();
             getAccountAndNetwork();
@@ -12,13 +11,12 @@ window.addEventListener('load', async () => {
             console.log(error);
         }
     } else if (window.web3) {
-        web3 = new Web3(web3.currentProvider);
+        window.web3 = new Web3(web3.currentProvider);
         getAccountAndNetwork();
     } else {
         $('.networkName').html(`<button class="btn btn-danger animation-on-hover" type="button" onclick="navAlerts(1)">NO ETH PROVIDER</button>`);
         let link = `<button class="btn btn-info btn-simple animation-on-hover" type="button" onclick="navAlerts(0)">Create ID</button>`;
         $('.navUserAdd').html(link);
-        dataAsPerNetwork();
         // web3 = new Web3(new Web3.providers.HttpProvider("http://mainnet.infura.io/APIKEY"));
     }
 });
@@ -28,7 +26,7 @@ function getAccountAndNetwork() {
     web3.version.getNetwork((err, netId) => {
         $('.swapButClass').css('display', 'none');
         $('.descLineMargin').css('margin', 'auto');
-        account = window.web3.eth.accounts[0];
+        account = web3.eth.accounts[0];
         networkId = netId;
         if (networkId == 1) {
             $('.networkName').html(`<button class="btn btn-success animation-on-hover" type="button" onclick='navAlerts(2)'>MAIN NETWORK</button>`);
@@ -61,14 +59,5 @@ function getAccountAndNetwork() {
             let link = `<button class="btn btn-info btn-simple animation-on-hover btn-sm" type="button">NOT LOGGED-IN</button>`;
             $('.navUserAdd').html(link);
         }
-        dataAsPerNetwork();
-        loadContractFunc();
     });
-}
-
-
-function loadContractFunc() {
-    mainKyberContract = web3.eth.contract(kyberMainABI).at(mainKyberAdd);
-    kyberEnable();
-    kyberTradeEvent();
 }
