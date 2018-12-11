@@ -25,7 +25,7 @@ db.ref('gas').on('value', function (snapshot) {
             gasStandard = 50;
         }
     }
-    setGas(2);
+    setGas(gasDecide);
 }, function (error) {
     if (error) {
         console.log('err - 93284' + error);

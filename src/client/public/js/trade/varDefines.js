@@ -32,3 +32,4 @@ let minRateSlider = 97;
 
 let toggleNum = 0;
 
+var gasDecide = 2;

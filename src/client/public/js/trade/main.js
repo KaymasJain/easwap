@@ -253,7 +253,6 @@ function tradeAllCoin() {
             $('.coinOneInput').val((coinOne.val - (900000*finalGasPrice)/1000000000));
         }
         changeOnInput(1);
-        // $(".coinOneInput").trigger("input");
     } else if (toggleNum == 0) {
         coinTwo.val = coinTwo.qty;
         if (coinTwo.id != 'eth') {
@@ -262,7 +261,6 @@ function tradeAllCoin() {
             $('.coinTwoInput').val((coinTwo.val - (900000 * finalGasPrice) / 1000000000));
         }
         changeOnInput(2);
-        // $(".coinTwoInput").trigger("input");
     }
 }
 
@@ -360,7 +358,6 @@ function trade(src, srcAmount, dest, account, minDestAmount, approve) {
         }
     }
     navAlerts(14);
-    console.log(minDestAmount);
     startTrade(src, srcAmount, dest, account, minDestAmount, payObj);
 }
 

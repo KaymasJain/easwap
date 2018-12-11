@@ -57,7 +57,7 @@ module.exports.init = (app) => {
 				console.log(err);
 				gasError++;
 				if (gasError % 10 == 0) {
-					alert.sendNotification(`api ethgasstation - ${err}`, 'danger');
+					// alert.sendNotification(`api ethgasstation - ${err}`, 'danger');
 				}
 			} else {
 				try {
@@ -66,7 +66,7 @@ module.exports.init = (app) => {
 				} catch (error) {
 					gasSaving++;
 					if (gasSaving % 10 == 0) {
-						alert.sendNotification(`Error saving gas price - ${error}`, 'danger');
+						// alert.sendNotification(`Error saving gas price - ${error}`, 'danger');
 					} 
 				}
 			}
