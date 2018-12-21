@@ -1,10 +1,10 @@
 const request = require('request')
 
 module.exports = {
-    sendNotification: function (message, status) {
+    sendNotification: function (title, message, status) {
         request.post('***REMOVED***', {
             json: {
-                text: "New notification from Easwap Server: ",
+                text: title,
                 attachments: [
                     {
                         color: status,

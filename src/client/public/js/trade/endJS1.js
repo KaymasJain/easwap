@@ -52,5 +52,10 @@ $('.sidebarAdjust').click(function() {
 		});
 	} else {
 		$('.sidebarBottom').css('display', 'flex');
+		$('.sidebarEdit').hover(function(){
+			$('.sidebarBottom').css('display', 'flex');
+		}, function() {
+			$('.sidebarBottom').css('display', 'flex');
+		});
 	}
 });
