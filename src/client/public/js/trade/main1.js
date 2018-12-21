@@ -179,6 +179,7 @@ function funcToSelect(coinId) {
                 }, 400);
                 $('.easSwapBox').css('animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
                 $('.easSwapBox').css('-webkit-animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
+                enterSwap = true;
             }
             $(coinOne.class).css('outline', '0px solid black');
             $('.selectedChar').css('display', 'none');
@@ -212,6 +213,7 @@ function hideTrade() {
     }, 400);
     $('.boxesData').css('animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
     $('.boxesData').css('-webkit-animation', 'scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both');
+    enterSwap = false;
     coinOne.val = 0;
     coinTwo.val = 0;
     $('.coinOneInput').val('');

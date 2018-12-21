@@ -34,18 +34,19 @@ function showBoxes() {
         let searchClass = `search${charOne}`;
         if (searchArr.indexOf(charOne) == -1) {
             searchArr.push(charOne);
-            let html = `<div class="${searchClass} searchButBox"><button class="btn btn-sm btn-primary btn-fab btn-icon getBut" onclick="filterSearch('${charOne}', this)">${charOne.toUpperCase()}</button><span class="selectedChar"></span></div>`;
+            let html = `<div class="${searchClass} searchButBox"><button class="btn btn-sm btn-primary btn-fab btn-icon getBut" onclick="filterSearch('${charOne}')">${charOne.toUpperCase()}</button><span class="selectedChar"></span></div>`;
             $(".searchBar").append(html);
         }
     });
 }
 
-function filterSearch(letter, toGetElem) {
+function filterSearch(letter) {
+    let searchClass = `.search${letter}`;
     $('.selectCoinBox').css('display', 'block');
     $('.searchButBox button').removeClass('btn-default');
     $('.searchButBox button').addClass('btn-primary');
-    $(toGetElem).removeClass('btn-primary');
-    $(toGetElem).addClass('btn-default');
+    $(searchClass).find('button').removeClass('btn-primary');
+    $(searchClass).find('button').addClass('btn-default');
     if (letter != 'all') {
         Object.keys(coinsData)
             .sort()
@@ -76,3 +77,25 @@ $('.showHideQty').click(function() {
         $(this).text('Show QTY');
     }
 })
+
+
+$(document).keypress(function(e) {
+    var string = 'abcdefghijklmnopqrstuvwxyz';
+    var key = 'all';
+	if (e.which > 96 && e.which < 123) {
+        var num = e.which - 97;
+        key = string.slice(num, num+1);
+    } else if (e.which > 64 && e.which < 91) {
+        var num = e.which - 65;
+        key = string.slice(num, num+1);
+    }
+    if (searchArr.indexOf(key) != -1) {
+        filterSearch(key);
+    } else {
+        filterSearch('all');
+    }
+    if (e.which == 13 && enterSwap) {
+        swapTokens();
+    }
+});
+
