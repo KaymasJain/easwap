@@ -18,18 +18,37 @@
     background-image: -webkit-linear-gradient(to bottom left, #d15244, #b12a1b, #d15244);
 }
 
-.sidebarBottom {
+.sideBottomBox {
     position: absolute;
     bottom: 20px;
+    width: 100%;
+}
+
+.sidebarBottom {
     display: none;
     justify-content: space-evenly;
     width: 100%;
 }
 
-@media only screen and (max-width: 576px) {
+.themeChangeBut {
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.fontTheme {
+    color: var(--white);
+    display: none;
+}
+
+@media only screen and (max-width: 992px) {
 
     .sidebarBottom {
         display: flex;
     }
 
+    .fontTheme {
+        color: var(--white);
+        display: block;
+    }
 }
