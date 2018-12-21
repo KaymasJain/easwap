@@ -25,10 +25,10 @@ router.get('/tradeDeployed', (req, res) => {
     var netId = req.query.net;
     if (netId == 3) {
         db.ref(`txHashRop/${txHash}`).set(true);
-        alert.sendNotification(`[ROPSTXHASH] Just Swapped - https://ropsten.etherscan.io/tx/${txHash}`);
+        alert.sendNotification('Ropsten Swap', `[ROPSTXHASH] Just Swapped - https://ropsten.etherscan.io/tx/${txHash}`, 'good');
     } else {
         db.ref(`txHash/${txHash}`).set(true);
-        alert.sendNotification(`[TXHASH] Just Swapped - https://etherscan.io/tx/${txHash}`);
+        alert.sendNotification('Mainnet Swap', `[TXHASH] Just Swapped - https://etherscan.io/tx/${txHash}`, 'good');
     }
     res.end();
 });
