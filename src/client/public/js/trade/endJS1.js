@@ -53,4 +53,4 @@ $('.sidebarAdjust').click(function() {
 	} else {
 		$('.sidebarBottom').css('display', 'flex');
 	}
-})
+});
