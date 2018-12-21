@@ -13,10 +13,16 @@ noUiSlider.create(gasPriceSlider, {
 	}
 });
 
+var sliderGasChangeErr = 0;
+
 gasPriceSlider.noUiSlider.on('update', function (values, handle) {
 	finalGasPrice = values[handle];
 	$('.finalGasPrice').text(`${finalGasPrice} GWEI`);
-	gasToTranSet(1);
+	sliderGasChangeErr++;
+	if (sliderGasChangeErr > 3) {
+		gasToTranSet(1);
+	}
+	setTimeout(function(){sliderGasChangeErr = 0}, 50);
 });
 
 var minConRateSlider = document.getElementById('minConRate');
@@ -35,3 +41,16 @@ minConRateSlider.noUiSlider.on('update', function (values, handle) {
 	$('.finalMinRate').text(`${minRateSlider} %`);
 	changeMinRateText();
 });
+
+$('.sidebarAdjust').click(function() {
+	if (!sidebar_mini_active) {
+		$('.sidebarBottom').css('display', 'none');
+		$('.sidebarEdit').hover(function(){
+			$('.sidebarBottom').css('display', 'flex');
+		}, function() {
+			$('.sidebarBottom').css('display', 'none');
+		});
+	} else {
+		$('.sidebarBottom').css('display', 'flex');
+	}
+})

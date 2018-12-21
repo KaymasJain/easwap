@@ -305,6 +305,10 @@
     margin-right: 40px;
 }
 
+.sidebarEdit:hover .sidebarBottom {
+    display: flex;
+}
+
 @media only screen and (max-width: 992px) {
 
 }
