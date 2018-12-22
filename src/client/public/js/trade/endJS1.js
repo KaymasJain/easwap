@@ -44,11 +44,11 @@ minConRateSlider.noUiSlider.on('update', function (values, handle) {
 
 $('.sidebarAdjust').click(function() {
 	if (!sidebar_mini_active) {
-		$('.sidebarBottom').css('display', 'none');
+		$('.sidebarBottom').css('display', 'block');
 		$('.sidebarEdit').hover(function(){
 			$('.sidebarBottom').css('display', 'flex');
 		}, function() {
-			$('.sidebarBottom').css('display', 'none');
+			$('.sidebarBottom').css('display', 'block');
 		});
 	} else {
 		$('.sidebarBottom').css('display', 'flex');
