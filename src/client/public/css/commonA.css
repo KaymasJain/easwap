@@ -25,9 +25,13 @@
 }
 
 .sidebarBottom {
-    display: none;
-    justify-content: space-evenly;
+    display: block;
     width: 100%;
+}
+
+.sidebarBottom div {
+    width: max-content;
+    margin: auto;
 }
 
 .themeChangeBut {
