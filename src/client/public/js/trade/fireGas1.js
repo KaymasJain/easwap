@@ -20,8 +20,6 @@ db.ref('gas').on('value', function (snapshot) {
     setGas(gasDecide);
 }, function (error) {
     if (error) {
-        let title = 'UNABLE FETCHING GAS';
-        let content = 'Error in fetching gas price from database. Reload and try again if not solve contact us';
-        showAlert(title, content);
+        navAlerts(28);
     }
 });
