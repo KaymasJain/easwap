@@ -84,6 +84,9 @@ function navAlerts(num) {
     } else if (num == 27) {
         title = 'TRANSACTION FAILED';
         content = `Error occured while completing your transaction.<br><b>${alertVar}</b>`;
+    } else if (num == 28) {
+        title = 'UNABLE FETCHING GAS';
+        content = `Error in fetching gas price from database. Reload and try again if not solve contact us`;
     }
     swal({ "title": title,
             "html": content,
