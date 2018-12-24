@@ -78,14 +78,14 @@ $('.showHideQty').click(function() {
     }
 })
 
-
+// search on keypress anywhere on screen
 $(document).keypress(function(e) {
     var string = 'abcdefghijklmnopqrstuvwxyz';
     var key = 'all';
-	if (e.which > 96 && e.which < 123) {
+	if (e.which > 96 && e.which < 123 && !enterSwap) {
         var num = e.which - 97;
         key = string.slice(num, num+1);
-    } else if (e.which > 64 && e.which < 91) {
+    } else if (e.which > 64 && e.which < 91 && !enterSwap) {
         var num = e.which - 65;
         key = string.slice(num, num+1);
     }
