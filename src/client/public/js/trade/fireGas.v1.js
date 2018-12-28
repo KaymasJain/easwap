@@ -1,3 +1,4 @@
+// Gas price data from firebase
 db.ref('gas').on('value', function (snapshot) {
     data = snapshot.val();
     if (data.fast < 500) {

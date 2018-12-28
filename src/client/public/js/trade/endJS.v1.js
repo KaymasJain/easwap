@@ -1,7 +1,7 @@
 // Search Bar smooth scroll
 const ps = new PerfectScrollbar('.searchBar');
 
-// Advance Section Gas and Min conversion rate Slider
+// Advance Section Gas Slider
 var gasPriceSlider = document.getElementById('sliderGasPrice');
 
 noUiSlider.create(gasPriceSlider, {
@@ -25,6 +25,7 @@ gasPriceSlider.noUiSlider.on('update', function (values, handle) {
 	setTimeout(function(){sliderGasChangeErr = 0}, 50);
 });
 
+// Min conversion rate Slider
 var minConRateSlider = document.getElementById('minConRate');
 
 noUiSlider.create(minConRateSlider, {
@@ -42,6 +43,7 @@ minConRateSlider.noUiSlider.on('update', function (values, handle) {
 	changeMinRateText();
 });
 
+// sidebar bottom logo sections
 $('.sidebarAdjust').click(function() {
 	if (!sidebar_mini_active) {
 		$('.sidebarBottom').css('display', 'block');

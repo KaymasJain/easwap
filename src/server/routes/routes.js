@@ -12,14 +12,6 @@ router.get('/', (req, res) => {
     res.render('trade.html');
 });
 
-// router.get('/home', (req, res) => {
-//     res.render('home.html');
-// });
-
-// router.get('/roadmap', (req, res) => {
-//     res.render('roadmap.html');
-// });
-
 router.get('/tradeDeployed', (req, res) => {
     var txHash = req.query.txHash;
     var netId = req.query.net;

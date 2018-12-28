@@ -1,3 +1,4 @@
+// ERC20 ABI
 const tokensAbi = [{
     "constant": true,
     "inputs": [{
@@ -76,7 +77,7 @@ const tokensAbi = [{
 }];
 
 
-
+// Kyber networks main contract ABI
 const kyberMainABI = [{
     "constant": true,
     "inputs": [

@@ -1,6 +1,7 @@
 // Align object box in alphabetical order
 let searchArr = [];
 
+// coin boxes on main page
 function showBoxes() {
     Object.keys(coinsData)
         .sort()
@@ -40,6 +41,7 @@ function showBoxes() {
     });
 }
 
+// search coins
 function filterSearch(letter) {
     let searchClass = `.search${letter}`;
     $('.selectCoinBox').css('display', 'block');
@@ -60,7 +62,7 @@ function filterSearch(letter) {
     }
 }
 
-
+// Tokens quantity user have
 $('.showHideQty').click(function() {
     if ($(this).text() == "Show QTY") {
         $('.coinsQtyBox').slideToggle();

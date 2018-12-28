@@ -6,7 +6,7 @@ $('.ArrowIcon').click(function () {
     }
 })
 
-// On buy button click on trading popup
+// On buying of token
 function onBuyClick() {
     toggleNum = 1;
     if (coinOne.qty >= 0) {
@@ -23,7 +23,7 @@ function onBuyClick() {
 };
 
 
-// On sell button click on trading popup
+// On selling of token
 function onSellClick() {
     toggleNum = 0;
     if (coinTwo.qty >= 0) {
@@ -39,7 +39,7 @@ function onSellClick() {
 };
 
 
-// Ethereum input on trade section
+// first input
 $('.coinOneInput').on('keyup keydown change', function () {
     coinOne.val = $(this).val();
     changeOnInput(1);
@@ -47,7 +47,7 @@ $('.coinOneInput').on('keyup keydown change', function () {
 });
 
 
-// Coins input on trade section
+// Second input
 $('.coinTwoInput').on('keyup keydown change', function () {
     coinTwo.val = $(this).val();
     changeOnInput(2);
@@ -88,10 +88,11 @@ function changeOnInput(num) {
 
 
 
-// On coin select function
+// token select function
 function funcToSelect(coinId) {
     if ((networkId == 1 || networkId == 3) && account) {
         toChoose++;
+        // token one details
         if (toChoose == 1) {
             $(`.search${coinId.charAt(0)} .selectedChar`).css('display', 'block');
             coinOne.symbol = coinsData[coinId].symbol;
@@ -130,6 +131,7 @@ function funcToSelect(coinId) {
                 });
             }
         } else if (toChoose == 2) {
+            // token 2 details
             if (coinId == coinOne.id) {
                 toChoose = 0;
             } else {
@@ -167,6 +169,7 @@ function funcToSelect(coinId) {
                         };
                     });
                 }
+                // Current rate of tokens
                 expectedRateCoinToCoin(coinOne.address, coinTwo.address, coinOne.decimals, 1);
                 expectedRateCoinToCoin(coinTwo.address, coinOne.address, coinTwo.decimals, 2);
                 $('.boxesData').css('animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
@@ -193,6 +196,7 @@ function funcToSelect(coinId) {
     }
 };
 
+// add token details to swap sections
 function setIconName() {
     $('#imgForSell').attr("src", `logos/${coinOne.id}.svg`);
     $('#sellSymbol').text(coinOne.symbol);
@@ -202,6 +206,7 @@ function setIconName() {
     $('#buyFullName').text(coinTwo.name);
 }
 
+// hide swap section
 function hideTrade() {
     $('.easSwapBox').css('animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
     $('.easSwapBox').css('-webkit-animation', 'scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both');
@@ -220,6 +225,7 @@ function hideTrade() {
     $('.coinTwoInput').val('');
 }
 
+// gas price update
 function setGas(setVar) {
     if (setVar == 1) {
         $('.finalGasPrice').text(`${gasLow} GWEI`);
@@ -245,7 +251,7 @@ function gasToTranSet(numCheck) {
     }
 };
 
-
+// trade all coin button
 function tradeAllCoin() {
     if (toggleNum == 1) {
         coinOne.val = coinOne.qty;
@@ -266,6 +272,7 @@ function tradeAllCoin() {
     }
 }
 
+// change min rate according to inputs
 function changeMinRateText() {
     if (toggleNum == 1) {
         $('.finalMinRate').text(`${((coinTwo.val*minRateSlider)/100).toFixed(4)} ${coinTwo.symbol} (${minRateSlider} %)`);
@@ -276,6 +283,7 @@ function changeMinRateText() {
     }
 }
 
+// swap button click
 function swapTokens() {
     if (coinOne.val > 0 && coinTwo.val > 0) {
         var coinFrom, coinTo;
@@ -291,10 +299,8 @@ function swapTokens() {
             var coinSellQty = coinFrom.val*forDecimal;
             var coinMinQty = ((coinFrom.rateInWei * minRateSlider) / 100).toFixed(0);
             if (coinFrom.id != 'eth') {
-                console.log(1);
                 allowance(coinFrom.contract, coinFrom.address, coinSellQty, coinTo.address, coinMinQty);
             } else {
-                console.log(2);
                 trade(coinFrom.address, coinSellQty, coinTo.address, account, coinMinQty, true);
             }
         } else {
@@ -306,8 +312,7 @@ function swapTokens() {
     }
 }
 
-
-
+// Check for allowance
 function allowance(coinContract, src, srcAmount, dest, minDestAmount) {
     coinContract.allowance(account, mainKyberAdd, function (err, res) {
         if (!err) {
@@ -328,7 +333,7 @@ function allowance(coinContract, src, srcAmount, dest, minDestAmount) {
     })
 }
 
-
+// Start Trade
 function trade(src, srcAmount, dest, account, minDestAmount, approve) {
     var payObj = {
         value: 0,

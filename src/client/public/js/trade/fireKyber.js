@@ -5,6 +5,7 @@ firebase.initializeApp(config);
 
 let db = firebase.database();
 
+// Kyber Data from database
 function dataAsPerNetwork() {
     if (networkId == 3) {
         db.ref('kyberRops').once('value', function (snapshot) {
