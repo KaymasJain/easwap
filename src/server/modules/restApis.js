@@ -3,7 +3,7 @@ const request = require('request'),
 
 const alert = require('../modules/alert');
 
-const coinMarketKey = require('../keys/coinMarket.json');
+const coinMarketKey = process.env.COIN_MARKET_KEY;
 
 module.exports.init = (app) => {
 
@@ -90,7 +90,7 @@ module.exports.init = (app) => {
 				symbol: cmcQuery
 				},
 				headers: {
-				'X-CMC_PRO_API_KEY': coinMarketKey.key
+				'X-CMC_PRO_API_KEY': coinMarketKey
 				},
 				json: true,
 				gzip: true
