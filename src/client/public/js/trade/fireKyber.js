@@ -1,5 +1,5 @@
 let config = {
-    databaseURL: "***REMOVED***",
+    databaseURL: "https://easwap-2018.firebaseio.com",
 };
 firebase.initializeApp(config);
 
