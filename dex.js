@@ -8,7 +8,9 @@ const express = require('express'),
 	compression = require('compression'),
 	admin = require('firebase-admin');
 
+
 require('dotenv').load();
+
 
 const network = require('./src/server/modules/network'),
 	routes = require('./src/server/routes/routes'),
