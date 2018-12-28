@@ -1,4 +1,4 @@
-# easwap
+# Easwap
 Easiest way to swap tokens
 
 
