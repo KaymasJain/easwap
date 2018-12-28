@@ -6,7 +6,8 @@ const express = require('express'),
 	bodyParser = require('body-parser'),
 	cookieParser = require('cookie-parser'),
 	compression = require('compression'),
-	admin = require('firebase-admin');
+	admin = require('firebase-admin'),
+	minifyHTML = require('express-minify-html');
 
 require('dotenv').load();
 
@@ -16,6 +17,19 @@ const network = require('./src/server/modules/network'),
 
 // initializing different instances on the server
 const app = express();
+
+app.use(minifyHTML({
+    override:      true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments:            true,
+        collapseWhitespace:        true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes:     true,
+        removeEmptyAttributes:     true,
+        minifyJS:                  true
+    }
+}));
 
 admin.initializeApp({
 	credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_KEYS)),
