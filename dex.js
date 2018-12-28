@@ -8,9 +8,7 @@ const express = require('express'),
 	compression = require('compression'),
 	admin = require('firebase-admin');
 
-
-require('dotenv').load();
-
+require('dotenv').config();
 
 const network = require('./src/server/modules/network'),
 	routes = require('./src/server/routes/routes'),
@@ -20,8 +18,8 @@ const network = require('./src/server/modules/network'),
 const app = express();
 
 admin.initializeApp({
-	credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_KEYS)),
-	databaseURL: process.env.FIREBASE_DATABASE
+	credential: admin.credential.cert(require('./src/server/keys/fire.json')),
+	databaseURL: "https://easwap-2018.firebaseio.com"
 });
 
 // var dbFirestore = admin.firestore();
