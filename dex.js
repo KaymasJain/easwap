@@ -19,7 +19,7 @@ const app = express();
 
 admin.initializeApp({
 	credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_KEYS)),
-	databaseURL:process.env.FIREBASE_DATABASE
+	databaseURL: process.env.FIREBASE_DATABASE
 });
 
 // var dbFirestore = admin.firestore();
