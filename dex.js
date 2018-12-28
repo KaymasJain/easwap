@@ -8,7 +8,7 @@ const express = require('express'),
 	compression = require('compression'),
 	admin = require('firebase-admin');
 
-require('dotenv').config();
+require('dotenv').load();
 
 const network = require('./src/server/modules/network'),
 	routes = require('./src/server/routes/routes'),
@@ -18,7 +18,7 @@ const network = require('./src/server/modules/network'),
 const app = express();
 
 admin.initializeApp({
-	credential: admin.credential.cert(require('./src/server/keys/fire.json')),
+	credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_KEYS)),
 	databaseURL: "***REMOVED***"
 });
 
