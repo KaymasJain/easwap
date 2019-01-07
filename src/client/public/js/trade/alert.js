@@ -8,7 +8,7 @@ function navAlerts(num) {
         content = '<b>This Dapp is made on top of Ethereum blockchain.<br>To use this Dapp<br>For desktop install - <a href="https://metamask.io/" target="_blank">metamask extension</a>.<br>For Android/IOS download ethereum browser - <a href="https://trustwallet.com/" target="_blank">Trust wallet</a></b>';
     } else if (num == 2) {
         title = 'Main network';
-        content = "<b>You are on main network whatever trade you do will involve real assets.</b>";
+        content = "<b>You are on main network whatever trade you do will involves real assets.</b>";
     } else if (num == 3) {
         title = 'Ropsten test network';
         content = "<b>You are good to use ropsten test version of kyber trade. For real assets trading shift to Main network.</b>";

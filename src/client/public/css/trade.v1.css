@@ -4,13 +4,6 @@
     color: var(--background) !important;
 }
 
-.swapTopButBox {
-    width: 90%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between
-}
-
 .daiEthDescBox {
     display: flex;
     max-width: 1200px;
@@ -34,6 +27,12 @@
     width: 40%;
     height: max-content;
     margin: auto;
+}
+
+.showHideQtyBox {
+    margin: auto;
+    margin-top: 10px;
+    width: max-content;
 }
 
 .tradeDataContainer {
@@ -364,16 +363,6 @@
         display: block;
     }
 
-    .showHideQtyBox,
-    .roptenModelButBox {
-        margin: auto;
-        width: max-content;
-    }
-
-    .roptenModelButBox {
-        display: none
-    }
-
     .easSwapBox {
         width: 275.5px;
     }
@@ -386,12 +375,8 @@
     .imgNameSymbolBox:first-of-type {
         margin-top: 0px;
     }
-    .swapTopButBox {
-        display: block;
-    }
 
-    .tradeDataContainer,
-    .swapTopButBox {
+    .tradeDataContainer {
         width: calc(100% - 80px);
         margin-left: 20px;
     }
