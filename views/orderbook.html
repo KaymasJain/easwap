@@ -1,5 +1,149 @@
 {% extends "templates/index.html" %}
+
 {% block content %}
+
+<h1 class="text-center" style="margin-top:30px;margin-bottom:50px">DAI RESERVE STATS</h1>
+
+<div class="reserveStatsContainer">
+    <div class="reserveStatsBox">
+        <div class="bookTitleLogoBox">
+            <div class="bookCoinName">ETH</div>
+            <div class="bookCoinLogo"><img src="logos/eth.svg" height="64px" width="64px"></div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Deposited</div>
+            <div class="bookDepositQty">100</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Current</div>
+            <div class="bookDepositQty">110</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">ETH/USD</div>
+            <div class="bookDepositQty">120</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Value(USD)</div>
+            <div class="bookDepositQty">12000</div>
+        </div>
+        <div class="depositWithdrawButBox">
+            <div class="depositButBox">
+                <button class="btn btn-success animation-on-hover h2" type="button">DEPOSIT</button>
+            </div>
+            <div class="withdrawButBox">
+                <button class="btn btn-warning animation-on-hover h2" type="button">WITHDRAW</button>                
+            </div>
+        </div>
+    </div>
+    <div class="reserveStatsBox">
+        <div class="bookTitleLogoBox">
+            <div class="bookCoinName">DAI</div>
+            <div class="bookCoinLogo"><img src="logos/dai.svg" height="64px" width="64px"></div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Deposited</div>
+            <div class="bookDepositQty">100</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Current</div>
+            <div class="bookDepositQty">110</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">DAI/USD</div>
+            <div class="bookDepositQty">120</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Value(USD)</div>
+            <div class="bookDepositQty">12000</div>
+        </div>
+        <div class="depositWithdrawButBox">
+            <div class="depositButBox">
+                <button class="btn btn-success animation-on-hover h2" type="button">DEPOSIT</button>
+            </div>
+            <div class="withdrawButBox">
+                <button class="btn btn-warning animation-on-hover h2" type="button">WITHDRAW</button>                
+            </div>
+        </div>
+    </div>
+    <div class="reserveStatsBox">
+        <div class="bookTitleLogoBox">
+            <div class="bookCoinName">KNC</div>
+            <div class="bookCoinLogo"><img src="logos/knc.svg" height="64px" width="64px"></div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Deposited</div>
+            <div class="bookDepositQty">100</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Current</div>
+            <div class="bookDepositQty">110</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">KNC/USD</div>
+            <div class="bookDepositQty">120</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Value(USD)</div>
+            <div class="bookDepositQty">12000</div>
+        </div>
+        <div class="depositWithdrawButBox">
+            <div class="depositButBox">
+                <button class="btn btn-success animation-on-hover h2" type="button">DEPOSIT</button>
+            </div>
+            <div class="withdrawButBox">
+                <button class="btn btn-warning animation-on-hover h2" type="button">WITHDRAW</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="text-center" style="margin:50px auto">YOUR PRICE</h2>
+
+<div class="yourPriceBox">
+    <div class="ethCoinPriceBox">
+        <div class="ETHQtyLogo">
+            1 <img src="/logos/eth.svg" height="44px" width="44px">
+        </div>
+        <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
+        <div class="ETHQtyLogo">
+            99 <img src="/logos/dai.svg" height="44px" width="44px">
+        </div>
+    </div>
+    <div class="ethCoinPriceBox">
+        <div class="ETHQtyLogo">
+            1 <img src="/logos/eth.svg" height="44px" width="44px">
+        </div>
+        <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-left"></i></div>
+        <div class="ETHQtyLogo">
+            101 <img src="/logos/dai.svg" height="44px" width="44px">
+        </div>
+    </div>
+    <button class="btn btn-success animation-on-hover h2 btn-lg" style="margin-bottom:0px" type="button">UPDATE</button>
+</div>
+
+<h2 class="text-center" style="margin:50px auto">BEST PRICE</h2>
+
+<div class="yourPriceBox">
+    <div class="ethCoinPriceBox">
+        <div class="ETHQtyLogo">
+            1 <img src="/logos/eth.svg" height="44px" width="44px">
+        </div>
+        <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
+        <div class="ETHQtyLogo">
+            99.5 <img src="/logos/dai.svg" height="44px" width="44px">
+        </div>
+    </div>
+    <div class="ethCoinPriceBox">
+        <div class="ETHQtyLogo">
+            1 <img src="/logos/eth.svg" height="44px" width="44px">
+        </div>
+        <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-left"></i></div>
+        <div class="ETHQtyLogo">
+            105.5 <img src="/logos/dai.svg" height="44px" width="44px">
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
 
