@@ -15,7 +15,7 @@ setInterval(function () {
 			console.log(err);
 			gasError++;
 			if (gasError % 10 == 0) {
-				slackit('Gas station', `api ethgasstation - ${err}`, 'danger');
+				slackit(`Gas from ETHGasStation - ${err}`, "#D50201", false);
 			}
 		} else {
 			try {
@@ -102,7 +102,7 @@ setInterval(function () {
 	// 		rp(requestOptions).then(response => {
 	// 			db.ref('coinmarketprice').set(response.data);
 	// 		}).catch((err) => {
-	// 			slackit('CoinMarketCap', `CoinMarketCap - ${err}`, 'danger');
+	// 			slackit(`CoinMarketCap - ${err}`, "#D50201", false);
 	// 		});
 	// 	}, function (error) {
 	// 		if (error) {
