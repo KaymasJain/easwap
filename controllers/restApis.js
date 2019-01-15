@@ -15,7 +15,7 @@ setInterval(function () {
 			console.log(err);
 			gasError++;
 			if (gasError % 10 == 0) {
-				slackit.sendNotification('Gas station', `api ethgasstation - ${err}`, 'danger');
+				slackit('Gas station', `api ethgasstation - ${err}`, 'danger');
 			}
 		} else {
 			try {
@@ -53,7 +53,7 @@ setInterval(function () {
 	// 			console.log(err);
 	// 			gasError++;
 	// 			if (gasError % 10 == 0) {
-	// 				// slackit.sendNotification('Gas station', `api ethgasstation - ${err}`, 'danger');
+	// 				// slackit('Gas station', `api ethgasstation - ${err}`, 'danger');
 	// 			}
 	// 		} else {
 	// 			try {
@@ -69,7 +69,7 @@ setInterval(function () {
 	// 			} catch (error) {
 	// 				gasSaving++;
 	// 				if (gasSaving % 10 == 0) {
-	// 					// slackit.sendNotification('Gas to database', `Error saving gas price - ${error}`, 'danger');
+	// 					// slackit('Gas to database', `Error saving gas price - ${error}`, 'danger');
 	// 				} 
 	// 			}
 	// 		}
@@ -102,7 +102,7 @@ setInterval(function () {
 	// 		rp(requestOptions).then(response => {
 	// 			db.ref('coinmarketprice').set(response.data);
 	// 		}).catch((err) => {
-	// 			slackit.sendNotification('CoinMarketCap', `CoinMarketCap - ${err}`, 'danger');
+	// 			slackit('CoinMarketCap', `CoinMarketCap - ${err}`, 'danger');
 	// 		});
 	// 	}, function (error) {
 	// 		if (error) {

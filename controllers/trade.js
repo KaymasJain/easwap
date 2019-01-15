@@ -10,7 +10,7 @@ exports.kyberMain = (req, res) => {
     request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			slackit.sendNotification('Kyber Api', `Main network details - ${err}`, 'danger');
+			slackit('Kyber Api', `Main network details - ${err}`, 'danger');
 		} else {
             console.log(1234567876543);
             var details = JSON.parse(data);
@@ -28,7 +28,7 @@ exports.kyberRops = (req, res) => {
     request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			slackit.sendNotification('Kyber Api', `Main network details - ${err}`, 'danger');
+			slackit('Kyber Api', `Main network details - ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			var objectData = {};
@@ -57,7 +57,7 @@ module.exports.init = (app) => {
 	request('https://tracker.kyber.network/api/tokens/pairs', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			slackit.sendNotification('Kyber Api', `Api with many details - ${err}`, 'danger');
+			slackit('Kyber Api', `Api with many details - ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			// db.ref('kyberData').set(details);
@@ -67,7 +67,7 @@ module.exports.init = (app) => {
 	request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			slackit.sendNotification('Kyber Api', `Main network details - ${err}`, 'danger');
+			slackit('Kyber Api', `Main network details - ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			var objectData = {};
@@ -82,7 +82,7 @@ module.exports.init = (app) => {
 	request('https://tracker.kyber.network/api/tokens/supported?chain=ropsten', (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			slackit.sendNotification('Kyber Api', `Ropsten network details - ${err}`, 'danger');
+			slackit('Kyber Api', `Ropsten network details - ${err}`, 'danger');
 		} else {
 			var details = JSON.parse(data);
 			var objectData = {};
@@ -103,7 +103,7 @@ module.exports.init = (app) => {
 				console.log(err);
 				gasError++;
 				if (gasError % 10 == 0) {
-					// slackit.sendNotification('Gas station', `api ethgasstation - ${err}`, 'danger');
+					// slackit('Gas station', `api ethgasstation - ${err}`, 'danger');
 				}
 			} else {
 				try {
@@ -112,7 +112,7 @@ module.exports.init = (app) => {
 				} catch (error) {
 					gasSaving++;
 					if (gasSaving % 10 == 0) {
-						// slackit.sendNotification('Gas to database', `Error saving gas price - ${error}`, 'danger');
+						// slackit('Gas to database', `Error saving gas price - ${error}`, 'danger');
 					} 
 				}
 			}
@@ -145,7 +145,7 @@ module.exports.init = (app) => {
 			rp(requestOptions).then(response => {
 				// db.ref('coinmarketprice').set(response.data);
 			}).catch((err) => {
-				slackit.sendNotification('CoinMarketCap', `CoinMarketCap - ${err}`, 'danger');
+				slackit('CoinMarketCap', `CoinMarketCap - ${err}`, 'danger');
 			});
 		}, function (error) {
 			if (error) {
