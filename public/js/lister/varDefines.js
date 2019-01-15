@@ -1,0 +1,1 @@
+// Define all the lister variables here other than account and networkId

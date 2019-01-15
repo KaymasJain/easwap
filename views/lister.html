@@ -1,0 +1,65 @@
+{% extends "templates/index.html" %}
+{% block content %}
+
+<h1 class="text-center" style="margin-top: 30px">LIST NEW RESERVES</h1>
+
+<div class="listerInput">
+    <input type="text" class="form-control" placeholder="Coin Address">
+</div>
+
+<div class="listBut">
+    <button class="btn btn-success animation-on-hover btn-lg h2" type="button">LIST</button>
+</div>
+
+<h1 class="text-center" style="margin-top: 30px">LISTED RESERVES</h1>
+
+<div class="listedTokensContainer">
+    <div class="listedTokenBox">
+        <div class="logoNameBox">
+            <div class="logoBox">
+                <img src="logos/eth.svg" style="width:64px; height:64px">
+            </div>
+            <div class="nameCodeBox">
+                <div class="nameBox">ETH</div>
+                <div class="nameToken">ETHEREUM</div>
+            </div>
+        </div>
+        <div class="coinsQtyBox">QTY: 0.000000</div>
+    </div>
+    <div class="listedTokenBox">
+        <div class="logoNameBox">
+            <div class="logoBox">
+                <img src="logos/eth.svg" style="width:64px; height:64px">
+            </div>
+            <div class="nameCodeBox">
+                <div class="nameBox">ETH</div>
+                <div class="nameToken">ETHEREUM</div>
+            </div>
+        </div>
+        <div class="coinsQtyBox">QTY: 0.000000</div>
+    </div>
+    <div class="listedTokenBox">
+        <div class="logoNameBox">
+            <div class="logoBox">
+                <img src="logos/eth.svg" style="width:64px; height:64px">
+            </div>
+            <div class="nameCodeBox">
+                <div class="nameBox">ETH</div>
+                <div class="nameToken">ETHEREUM</div>
+            </div>
+        </div>
+        <div class="coinsQtyBox">QTY: 0.000000</div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block lastContent %}
+
+<script src="js/lister/varDefines.v1.js"></script>
+<script src="js/lister/afterWeb3Check.js"></script>
+<script src="js/index.v1.js"></script>
+<script src="js/lister/alert.js"></script>
+
+{% endblock %}

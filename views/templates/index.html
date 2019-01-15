@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+
+  {% include "partials/head.html" %}
+
+  <body class="sidebar-mini">
+    <div class="wrapper">
+
+    {% include "partials/navbar.html" %}
+
+    <div class="main-panel">
+
+    {% include "partials/topNav.html" %}
+
+    <div class="content">
+    {% block content %} {% endblock %}
+    </div>
+
+    {% include "partials/footer.html" %}
+
+    </div>
+
+    {% include "partials/scripts.html" %}
+
+    {% block lastContent %} {% endblock %}
+
+    </div>
+  </body>
+</html>

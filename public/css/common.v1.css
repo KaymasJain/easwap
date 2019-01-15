@@ -1,0 +1,72 @@
+.btn-twi {
+    background-image: linear-gradient(to bottom left, #55acee, #147bc9, #55acee);
+    background-image: -moz-linear-gradient(to bottom left, #55acee, #147bc9, #55acee);
+    background-image: -webkit-linear-gradient(to bottom left, #55acee, #147bc9, #55acee);
+}
+
+.btn-telegram {
+    background-image: linear-gradient(to bottom left, #42AEEB, #3997C8, #42AEEB);
+    background-image: -moz-linear-gradient(to bottom left, #42AEEB, #3997C8, #42AEEB);
+    background-image: -webkit-linear-gradient(to bottom left, #42AEEB, #3997C8, #42AEEB);
+}
+
+.btn-medium {
+    background-image: linear-gradient(to bottom left, #221E1F, #000000, #221E1F);
+    background-image: -moz-linear-gradient(to bottom left, #221E1F, #000000, #221E1F);
+    background-image: -webkit-linear-gradient(to bottom left, #221E1F, #000000, #221E1F);
+}
+
+.btn-mail {
+    background-image: linear-gradient(to bottom left, #d15244, #b12a1b, #d15244);
+    background-image: -moz-linear-gradient(to bottom left, #d15244, #b12a1b, #d15244);
+    background-image: -webkit-linear-gradient(to bottom left, #d15244, #b12a1b, #d15244);
+}
+
+.btn-git {
+    background-image: linear-gradient(to bottom left, #2E2E2E, #080808, #2E2E2E);
+    background-image: -moz-linear-gradient(to bottom left, #2E2E2E, #080808, #2E2E2E);
+    background-image: -webkit-linear-gradient(to bottom left, #2E2E2E, #080808, #2E2E2E);
+}
+
+.sideBottomBox {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.sidebarBottom {
+    display: block;
+    width: 100%;
+}
+
+.sidebarBottom div {
+    width: max-content;
+    margin: auto;
+}
+
+.themeChangeBut {
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.fontTheme {
+    color: var(--white);
+    display: none;
+}
+
+@media only screen and (max-width: 992px) {
+
+    .sidebarBottom {
+        display: flex;
+    }
+
+    .fontTheme {
+        color: var(--white);
+        display: block;
+    }
+}
+
+.copyright {
+    margin-right: 40px;
+}

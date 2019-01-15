@@ -1,0 +1,144 @@
+{% extends "templates/index.html" %}
+{% block content %}
+
+<!-- Main Body -->
+<div class="searchBar">
+    <div class="searchall searchButBox">
+    <button class="btn btn-sm btn-default btn-fab btn-icon" onclick="filterSearch('all')">All</button>  
+    </div>
+</div>
+
+<div class="boxesData">
+
+<div class="daiEthDescBox">
+    <div class="boxEth"></div>
+    <div class="descSwapLine">
+        <h2 class="text-center descLineMargin">SELECT 2 COINS TO SWAP</h2>
+        <div class="showHideQtyBox">
+        <button class="btn btn-primary btn-sm btn-round showHideQty">Show QTY</button>
+        </div>
+    </div>
+    <div class="boxEthMob"></div>
+    <div class="boxDai"></div>
+</div>
+
+<div class="tradeDataContainer"></div>
+
+</div>
+<!-- End Main Body -->
+<!-- Swapping Box -->
+<div class="easSwapBox">
+    <div class="closeTradeIcon">
+        <button type="button" class="close" onclick="hideTrade()">
+            <i class="tim-icons icon-simple-remove"></i>
+        </button>
+    </div>
+    <div class="tradeInputContainer">
+        <div class="coinSellBox coinTradeBox">
+            <div class="imgNameSymbolBox">
+                <div class="tradeImgCon">
+                    <img src="logos/eth.svg" id="imgForSell" height="44px" width="44px">
+                </div>
+                <div class="coinNameSym">
+                    <div class="coinSymbol" id="sellSymbol">ETH</div>
+                    <div class="coinFullName" id="sellFullName">ethereum</div>
+                </div>
+            </div>
+            <div class="inputTradeBox">
+                <input type="number" min="0" class="form-control inputTrade coinOneInput" placeholder="0.00">
+            </div>
+        </div>
+        <div class="ArrowIcon">
+            <div class="toggleIconCon">
+            <i class="tim-icons icon-double-right toggleIcon"></i> 
+            </div>
+            <div id="toggleCoin" class="text-muted">toggle</div>
+        </div>
+        <div class="coinBuyBox coinTradeBox">
+            <div class="inputTradeBox">
+                <input type="number" min="0" class="form-control inputTrade coinTwoInput" placeholder="0.00">
+            </div>
+            <div class="imgNameSymbolBox">
+                <div class="coinNameSym">
+                    <div class="coinSymbol" id="buySymbol">ETH</div>
+                    <div class="coinFullName" id="buyFullName">ethereum</div>
+                </div>
+                <div class="tradeImgCon">
+                    <img src="logos/eth.svg" id="imgForBuy" height="44px" width="44px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="coinConversionRate">1 ETH = 1 ETH</div>
+    <div class="swapAllBox">
+    <div class="allButbox">
+        <div class="allQty">1.1198 ETH</div>
+        <button class="btn btn-primary btn-round btn-sm tradeAllBut" onclick="tradeAllCoin()">Trade All</button>
+    </div>
+    <div class="swapButBox">
+        <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" onclick="swapTokens()" type="button">SWAP</button>
+    </div>
+    </div>
+    <center>
+    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#advancedCollapse" aria-expanded="false" aria-controls="collapseExample">
+        Advanced
+    </button>
+    </center>
+    <br>
+    <div class="collapse advanceColSet" id="advancedCollapse">
+    <div class="row advanceSecBox">
+        <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
+            <p class="h4 text-center advanceBoxInTitle">Gas Price Set</p>
+            <div class="gasSetBox">
+                <blockquote class="blockquote finalGasPriceBox">
+                <p class="mb-0 text-center finalGasPrice"></p>
+                </blockquote>
+            <div id="sliderGasPrice" class="slider slider-primary"></div>
+            <div class="priceButBox">
+                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(1)">Low</button>
+                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(2)">Standard</button>
+                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(3)">High</button>
+            </div>
+            </div>
+        </div>
+        <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
+            <p class="h4 text-center advanceBoxInTitle">Minimum Conversion Rate</p>
+            <div class="gasSetBox">
+                <blockquote class="blockquote finalMinRateBox">
+                <p class="mb-0 text-center finalMinRate"></p>
+                </blockquote>
+            <div id="minConRate" class="slider slider-primary"></div>
+            <div class="minConRateText">Higher MIN ACCEPTABLE RATE typically results in lower success rate when the market is volatile. <span>0.00 ETH</span> is our suggested MIN ACCEPTABLE RATE by default.</div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- End Swapping Box -->
+
+<!-- <div class="loaderBox"></div> -->
+
+<div class="loader">
+    <div class="dash uno"></div>
+    <div class="dash dos"></div>
+    <div class="dash tres"></div>
+    <div class="dash cuatro"></div>
+</div>
+
+{% endblock %}
+
+{% block lastContent %}
+
+<script src="js/trade/varDefines.v1.js"></script>
+<script src="js/trade/afterWeb3Check.js"></script>
+<script src="js/index.v1.js"></script>
+<script src="js/trade/fireKyber.js"></script>
+<script src="js/trade/tradeBoxes.v1.js"></script>
+<script src="js/trade/alert.js"></script>
+<script src="js/trade/abi.js"></script>
+<script src="js/trade/contractFunctions.js"></script>
+<script src="js/trade/main.v1.js"></script>
+<script src="js/trade/endJS.v1.js"></script>
+<script src="js/trade/fireGas.v1.js"></script>
+
+{% endblock %}
