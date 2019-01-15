@@ -106,7 +106,7 @@ function approvalEvent(coinContract) {
 function startTrade(src, srcAmount, dest, account, minDestAmount, payObj) {
     mainKyberContract.trade(src, srcAmount, dest, account, 2 ** 200, minDestAmount, 0, payObj, function (err, res) {
         if (!err) {
-            $.get(`/tradeDeployed?txHash=${res}&net=${networkId}`);
+            $.get(`/trade/tradeHash?txHash=${res}&net=${networkId}`);
             alertVar = res;
             if (networkId == 3) {
                 navAlerts(23);

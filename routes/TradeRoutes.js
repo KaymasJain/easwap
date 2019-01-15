@@ -8,5 +8,6 @@ var TradeController = require('../controllers/trade.js');
 router.get('/kyberMain', TradeController.kyberMain);
 router.get('/kyberRops', TradeController.kyberRops);
 router.get('/gas', TradeController.gas);
+router.get('/tradeHash', TradeController.tradeHash);
 
 module.exports = router;

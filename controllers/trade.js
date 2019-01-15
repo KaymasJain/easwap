@@ -12,7 +12,6 @@ exports.kyberMain = (req, res) => {
 			console.log(err);
 			slackit(`Kyber Mainnet API - ${err}`, "#D50201", false);
 		} else {
-            console.log(1234567876543);
             var details = JSON.parse(data);
 			var objectData = {};
 			for (i = 0; i < details.length; i++) {
@@ -25,7 +24,7 @@ exports.kyberMain = (req, res) => {
 };
 
 exports.kyberRops = (req, res) => {
-    request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
+    request('https://tracker.kyber.network/api/tokens/supported?chain=ropsten', (err, respond, data) => {
 		if (err) {
 			console.log(err);
 			slackit(`Kyber Ropsten API - ${err}`, "#D50201", false);
@@ -49,6 +48,18 @@ exports.gas = (req, res) => {
             res.send(response[0]);
         }
     });
+};
+
+exports.tradeHash = (req, res) => {
+    let hash = req.query.txHash;
+	let networkID = req.query.net;
+	if (networkID == 1) {
+		let text = `Mainnet Swap - https://etherscan.io/tx/${hash}`;
+		slackit(text, "#2EA44E", false);
+	} else {
+		let text = `Ropsten Swap - https://ropsten.etherscan.io/tx/${hash}`;
+		slackit(text, "#2EA44E", false);
+	}
 };
 
 // module.exports.init = (app) => {
