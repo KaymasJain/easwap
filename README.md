@@ -1,6 +1,10 @@
 # Easwap
 Easiest way to swap tokens - [Easwap](https://easwap.com/)
 
+## Prerequisites
+
+- [MongoDB](https://www.mongodb.org/downloads)
+- [Node.js 8.0+](http://nodejs.org)
 
 ## Getting Started
 ---------------
