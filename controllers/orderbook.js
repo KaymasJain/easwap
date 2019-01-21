@@ -12,5 +12,6 @@ exports.orderbook = (req, res) => {
         title: 'Easwap | Create or Manage Orderbook',
         active
     });
+    const coinName = req.params.coin;
 };
 

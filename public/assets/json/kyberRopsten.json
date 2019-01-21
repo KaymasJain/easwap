@@ -1,0 +1,191 @@
+{
+  "adx" : {
+    "cmcName" : "ADX",
+    "contractAddress" : "0x499990DB50b34687CDaFb2C8DaBaE4E99d6F38A7",
+    "decimals" : 4,
+    "name" : "AdEx",
+    "symbol" : "ADX"
+  },
+  "appc" : {
+    "cmcName" : "APPC",
+    "contractAddress" : "0x2799f05B55d56be756Ca01Af40Bf7350787F48d4",
+    "decimals" : 18,
+    "name" : "AppCoins",
+    "symbol" : "APPC"
+  },
+  "ast" : {
+    "cmcName" : "AST",
+    "contractAddress" : "0xeF06F410C26a0fF87b3a43927459Cce99268a2eF",
+    "decimals" : 4,
+    "name" : "AirSwap",
+    "symbol" : "AST"
+  },
+  "bat" : {
+    "cmcName" : "BAT",
+    "contractAddress" : "0xDb0040451F373949A4Be60dcd7b6B8D6E42658B6",
+    "decimals" : 18,
+    "name" : "Basic Attention Token",
+    "symbol" : "BAT"
+  },
+  "bbo" : {
+    "cmcName" : "BBO",
+    "contractAddress" : "0xa94758d328af7ef1815e73053e95b5F86588C16D",
+    "decimals" : 18,
+    "name" : "BigBom",
+    "symbol" : "BBO"
+  },
+  "bitx" : {
+    "cmcName" : "BITX",
+    "contractAddress" : "0x7a17267576318efb728bc4a0833e489a46ba138f",
+    "decimals" : 18,
+    "name" : "BitScreenerToken",
+    "symbol" : "BITX"
+  },
+  "bqx" : {
+    "cmcName" : "BQX",
+    "contractAddress" : "0x9504A86A881F63Da06302FB3639d4582022097DB",
+    "decimals" : 8,
+    "name" : "Ethos",
+    "symbol" : "BQX"
+  },
+  "cofi" : {
+    "cmcName" : "COFI",
+    "contractAddress" : "0xb91786188f8d4e35d6d67799e9f162587bf4da03",
+    "decimals" : 18,
+    "name" : "ConFi",
+    "symbol" : "COFI"
+  },
+  "dai" : {
+    "cmcName" : "DAI",
+    "contractAddress" : "0xaD6D458402F60fD3Bd25163575031ACDce07538D",
+    "decimals" : 18,
+    "name" : "DAI",
+    "symbol" : "DAI"
+  },
+  "elf" : {
+    "cmcName" : "ELF",
+    "contractAddress" : "0x9Fcc27c7320703c43368cf1A4bf076402cd0D6B4",
+    "decimals" : 18,
+    "name" : "AELF",
+    "symbol" : "ELF"
+  },
+  "eng" : {
+    "cmcName" : "ENG",
+    "contractAddress" : "0x95cc8d8f29D0f7fcC425E8708893E759d1599c97",
+    "decimals" : 8,
+    "name" : "Enigma",
+    "symbol" : "ENG"
+  },
+  "eth" : {
+    "cmcName" : "ETH",
+    "contractAddress" : "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "decimals" : 18,
+    "name" : "Ethereum",
+    "symbol" : "ETH"
+  },
+  "gto" : {
+    "cmcName" : "GTO",
+    "contractAddress" : "0xe55c607d58c53b2B06A8E38f67F4c0FcAeEd2c31",
+    "decimals" : 5,
+    "name" : "GIFTO",
+    "symbol" : "GTO"
+  },
+  "iost" : {
+    "cmcName" : "IOST",
+    "contractAddress" : "0x27db28a6C4ac3D82a08D490cfb746E6F02bC467C",
+    "decimals" : 18,
+    "name" : "IOStoken",
+    "symbol" : "IOST"
+  },
+  "knc" : {
+    "cmcName" : "KNC",
+    "contractAddress" : "0x4E470dc7321E84CA96FcAEDD0C8aBCebbAEB68C6",
+    "decimals" : 18,
+    "name" : "Kyber Network",
+    "symbol" : "KNC"
+  },
+  "link" : {
+    "cmcName" : "LINK",
+    "contractAddress" : "0xb4f7332ed719Eb4839f091EDDB2A3bA309739521",
+    "decimals" : 18,
+    "name" : "Chain Link",
+    "symbol" : "LINK"
+  },
+  "mana" : {
+    "cmcName" : "MANA",
+    "contractAddress" : "0xf5E314c435B3B2EE7c14eA96fCB3307C3a3Ef608",
+    "decimals" : 18,
+    "name" : "Decentraland",
+    "symbol" : "MANA"
+  },
+  "moc" : {
+    "cmcName" : "MOC",
+    "contractAddress" : "0x1742c81075031b8f173d2327e3479d1fc3feaa76",
+    "decimals" : 18,
+    "name" : "Moss Coin",
+    "symbol" : "MOC"
+  },
+  "omg" : {
+    "cmcName" : "OMG",
+    "contractAddress" : "0x4BFBa4a8F28755Cb2061c413459EE562c6B9c51b",
+    "decimals" : 18,
+    "name" : "OmiseGO",
+    "symbol" : "OMG"
+  },
+  "powr" : {
+    "cmcName" : "POWR",
+    "contractAddress" : "0xa577731515303F0C0D00E236041855A5C4F114dC",
+    "decimals" : 6,
+    "name" : "Power Ledger",
+    "symbol" : "POWR"
+  },
+  "rcn" : {
+    "cmcName" : "RCN",
+    "contractAddress" : "0x99338aa9218C6C23AA9d8cc2f3EFaf29954ea26B",
+    "decimals" : 18,
+    "name" : "Ripio Credit Network",
+    "symbol" : "RCN"
+  },
+  "rdn" : {
+    "cmcName" : "RDN",
+    "contractAddress" : "0x5422Ef695ED0B1213e2B953CFA877029637D9D26",
+    "decimals" : 18,
+    "name" : "Raiden",
+    "symbol" : "RDN"
+  },
+  "req" : {
+    "cmcName" : "REQ",
+    "contractAddress" : "0xb43D10BbE7222519Da899B72bF2c7f094b6F79D7",
+    "decimals" : 18,
+    "name" : "Request",
+    "symbol" : "REQ"
+  },
+  "salt" : {
+    "cmcName" : "SALT",
+    "contractAddress" : "0xB47f1A9B121BA114d5e98722a8948e274d0F4042",
+    "decimals" : 8,
+    "name" : "Salt",
+    "symbol" : "SALT"
+  },
+  "snt" : {
+    "cmcName" : "SNT",
+    "contractAddress" : "0xbF5d8683b9BE6C43fcA607eb2a6f2626A18837a6",
+    "decimals" : 18,
+    "name" : "Status Network",
+    "symbol" : "SNT"
+  },
+  "storm" : {
+    "cmcName" : "STORM",
+    "contractAddress" : "0x8FFf7De21de8ad9c510704407337542073FDC44b",
+    "decimals" : 18,
+    "name" : "Storm",
+    "symbol" : "STORM"
+  },
+  "zil" : {
+    "cmcName" : "ZIL",
+    "contractAddress" : "0xaD78AFbbE48bA7B670fbC54c65708cbc17450167",
+    "decimals" : 12,
+    "name" : "Zilliqa",
+    "symbol" : "ZIL"
+  }
+}

@@ -4,4 +4,5 @@ function ifWeb3NotConfigured() {
 
 function ifWeb3Configured() {
     // run function accordingly if web3 is connected
+    
 }
