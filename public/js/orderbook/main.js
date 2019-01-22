@@ -7,7 +7,9 @@ function init() {
                 
                 console.log("Done Loading " + kyberRopstenTokenCount + "Tokens");
                 console.log("Active Coin Name:" + getActiveCoinName());
-                updateMainUI(getActiveCoinName());
+                getEthToTokenOrderList(getActiveCoinName());
+                getTokenToEthOrderList(getActiveCoinName());
+                updateMainUI();
             },1000);
 		})
 		.fail(function() {
@@ -204,6 +206,7 @@ function getEthToTokenOrderList(cmcName){
                         // console.log(res);
                         var ind = 0;
                         for (ind = 0; ind <= res.length; ind++){
+                            var tempIndex = res[ind].c[0];
                             Reserve.getEthToTokenOrder(res[ind].c[0], (err, res) => {
                                 if (err) {
                                     console.log(err);
@@ -212,7 +215,7 @@ function getEthToTokenOrderList(cmcName){
                                     if(res[0] != ADD_ZERO){
                                         var srcAmt = (res[1].c[0] / (10 ** ((res[1].c[0].toString().length) - 1)))  * (10 ** res[1].e)
                                         var destAmt = (res[2].c[0] / (10 ** ((res[2].c[0].toString().length) - 1)))  * (10 ** res[2].e)
-                                        var ord = new EthToTokenOrder(res[0], srcAmt, destAmt);
+                                        var ord = new EthToTokenOrder(res[0], srcAmt, destAmt, tempIndex);
                                         EthToTokenOrderList.push(ord);
                                     }
                                 }
@@ -355,6 +358,7 @@ function getTokenToEthOrderList(cmcName){
                         // console.log(res);
                         var ind = 0;
                         for (ind = 0; ind <= res.length; ind++){
+                            var tempIndex = res[ind].c[0];
                             Reserve.getTokenToEthOrder(res[ind].c[0], (err, res) => {
                                 if (err) {
                                     console.log(err);
@@ -363,7 +367,7 @@ function getTokenToEthOrderList(cmcName){
                                     if(res[0] != ADD_ZERO){
                                         var srcAmt = (res[1].c[0] / (10 ** ((res[1].c[0].toString().length) - 1)))  * (10 ** res[1].e)
                                         var destAmt = (res[2].c[0] / (10 ** ((res[2].c[0].toString().length) - 1)))  * (10 ** res[2].e)
-                                        var ord = new TokenToEthOrder(res[0], srcAmt, destAmt);
+                                        var ord = new TokenToEthOrder(res[0], srcAmt, destAmt, tempIndex);
                                         TokenToEthOrderList.push(ord);
                                     }
                                 }
