@@ -8,9 +8,12 @@ exports.orderbook = (req, res) => {
         lister: '',
         orderbook: 'active'
     };
+    const coinName = req.params.coin;
     res.render('orderbook', {
         title: 'Easwap | Create or Manage Orderbook',
-        active
+        active,
+        coinName
     });
+    
 };
 

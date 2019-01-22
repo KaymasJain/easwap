@@ -11,22 +11,22 @@ const lusca = require('lusca');
 const dotenv = require('dotenv');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const flash = require('express-flash');
+const flash = require('express-flash');5
 const path = require('path');
 const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const nunjucks = require('nunjucks');
-const minifyHTML = require('express-minify-html');
+const minifyHTML = require('express-minify-html');  
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
- */
+**/
 if (process.env.NODE_ENV === 'development') {
   dotenv.load({ path: '.env.example' });
 } else {
   dotenv.load({ path: '.env' });
-}
+
 
 /**
  * Controllers
@@ -49,10 +49,12 @@ const app = express();
 /**
  * Connect to MongoDB.
  */
+ console.log("[URI]" + process.env.MONGODB_URI);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.connect(process.env.MONGODB_URI);
+
 mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));

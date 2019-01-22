@@ -4,7 +4,7 @@
 <h1 class="text-center" style="margin-top: 30px">LIST NEW RESERVES</h1>
 
 <div class="listerInput">
-    <input type="text" class="form-control" placeholder="Coin Address">
+    <input type="text" class="form-control" placeholder="Coin Address" id="listerInput">
 </div>
 
 <div class="listBut">
@@ -16,70 +16,7 @@
 <h1 class="text-center" style="margin-top: 30px">LISTED RESERVES</h1>
 
 <div class="listedTokensContainer">
-    <div class="listedTokenBox">
-        <div class="logoNameBox">
-            <div class="logoBox">
-                <img src="logos/eth.svg" style="width:64px; height:64px">
-            </div>
-            <div class="nameCodeBox">
-                <div class="listerNameBox">ETH</div>
-                <div class="listerNameToken">ETHEREUM</div>
-            </div>
-        </div>
-        <div class="btnAddOrderbook">
-            <a href="/orderbook/eth">
-            <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD ORDERBOOK</button>
-            </a>
-        </div>
-    </div>
-    <div class="listedTokenBox">
-        <div class="logoNameBox">
-            <div class="logoBox">
-                <img src="logos/eth.svg" style="width:64px; height:64px">
-            </div>
-            <div class="nameCodeBox">
-                <div class="listerNameBox">ETH</div>
-                <div class="listerNameToken">ETHEREUM</div>
-            </div>
-        </div>
-        <div class="btnAddOrderbook">
-            <a href="/orderbook/eth">
-            <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD ORDERBOOK</button>
-            </a>
-        </div>
-    </div>
-    <div class="listedTokenBox">
-        <div class="logoNameBox">
-            <div class="logoBox">
-                <img src="logos/eth.svg" style="width:64px; height:64px">
-            </div>
-            <div class="nameCodeBox">
-                <div class="listerNameBox">ETH</div>
-                <div class="listerNameToken">ETHEREUM</div>
-            </div>
-        </div>
-        <div class="btnAddOrderbook">
-            <a href="/orderbook/eth">
-            <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD ORDERBOOK</button>
-            </a>
-        </div>
-    </div>
-    <div class="listedTokenBox">
-        <div class="logoNameBox">
-            <div class="logoBox">
-                <img src="logos/eth.svg" style="width:64px; height:64px">
-            </div>
-            <div class="nameCodeBox">
-                <div class="listerNameBox">ETH</div>
-                <div class="listerNameToken">ETHEREUM</div>
-            </div>
-        </div>
-        <div class="btnAddOrderbook">
-            <a href="/orderbook/eth">
-            <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD ORDERBOOK</button>
-            </a>
-        </div>
-    </div>
+    <!--PML Reserves List -->
 </div>
 
 
@@ -87,9 +24,11 @@
 
 {% block lastContent %}
 
-<script src="js/lister/varDefines.v1.js"></script>
+<script src="js/lister/varDefines.js"></script>
 <script src="js/lister/afterWeb3Check.js"></script>
 <script src="js/index.v1.js"></script>
 <script src="js/lister/alert.js"></script>
-
+<script src="js/lister/abi.js"></script>
+<script src="js/lister/uiModifiers.js"></script>
+<script src="js/lister/main.js"></script>
 {% endblock %}

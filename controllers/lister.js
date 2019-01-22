@@ -10,7 +10,7 @@ exports.lister = (req, res) => {
     };
     res.render('lister', {
         title: 'Easwap | List new permissionless reserve',
+        req,
         active
     });
 };
-
