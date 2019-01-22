@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1 class="text-center" style="margin-top:30px;margin-bottom:50px">ORDERBOOK OF A COIN</h1>
+<h1 class="text-center" style="margin-top:30px;margin-bottom:50px">ORDERBOOK OF <p id="coinName" > {{ coinName }} </p></h1>
 
 <div class="reserveStatsContainer">
     <div class="reserveStatsBox">
@@ -149,9 +149,12 @@
 
 {% block lastContent %}
 
-<script src="js/orderbook/varDefines.v1.js"></script>
+<script src="js/orderbook/varDefines.js"></script>
 <script src="js/orderbook/afterWeb3Check.js"></script>
 <script src="js/index.v1.js"></script>
 <script src="js/orderbook/alert.js"></script>
+<script src="js/orderbook/abi.js"></script>
+<script src="js/orderbook/uiModifiers.js"></script>
+<script src="js/orderbook/main.js"></script>
 
 {% endblock %}

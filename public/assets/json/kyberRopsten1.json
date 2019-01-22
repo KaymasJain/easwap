@@ -132,6 +132,13 @@
     "name" : "OmiseGO",
     "symbol" : "OMG"
   },
+  "pml" : {
+    "cmcName" : "PML",
+    "contractAddress" : "0x8a9A3a59EbA6cA45D51ee6F3B33D5c4aDb5F52dc",
+    "decimals" : 13,
+    "name" : "PERMISSIONLESS",
+    "symbol" : "PML"
+  },
   "powr" : {
     "cmcName" : "POWR",
     "contractAddress" : "0xa577731515303F0C0D00E236041855A5C4F114dC",
