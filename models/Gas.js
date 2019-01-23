@@ -1,5 +1,5 @@
 /**
- * Pupose: example
+ * Pupose: Gas Price
  */
 
 var mongoose = require('mongoose');
