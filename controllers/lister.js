@@ -66,28 +66,69 @@ exports.mainLister = (req, res) => {
     });
 };
 
+exports.coinsData = (req, res) => {
+    List.find({}, function(err, response) {
+        console.log(response);
+        if (err) {
+            console.log(`Unable to find data - ${err}`);
+            res.send({
+                status: false,
+                message: `Unable to find data`
+            });
+            return;
+        } else {
+            let objectToSend = {};
+            Object.keys(response).forEach(function (key, i) {
+                objectToSend[response[key].cmcName.toLowerCase()] = response[key];
+            });
+            console.log(objectToSend);
+            res.send(objectToSend);
+        }
+    });
+    // res.send({
+    //     status: true,
+    //     message: `Updated successfully`
+    // });
+};
+
 exports.update = (req, res) => {
     var data = req.body;
     var secret = data.secret;
     var dataToUpdate = data.listedCoins;
-    console.log(data);
     if (secret == process.env.UPDATE_DATA_SECRET) {
         List.deleteMany({}, function(err, response) {
             if (err) {
                 console.log(`COINS Main data delete - ${err}`);
             } else {
-                List.save(function (err, updated) {
-                    if (err) {
-                        console.log(`Gas Price save - ${err}`);
-                    }
+                var num = 0;
+                Object.keys(dataToUpdate).forEach(function (key, i) {
+                    let ListNewToken = new List({
+                        cmcName: dataToUpdate[key].cmcName,
+                        contractAddress: dataToUpdate[key].contractAddress,
+                        decimals: dataToUpdate[key].decimals,
+                        name: dataToUpdate[key].name,
+                        symbol: dataToUpdate[key].symbol
+                    });
+                    ListNewToken.save(function (err, updated) {
+                        if (err) {
+                            console.log(`error updating Coins data - ${err}`);
+                            res.send({
+                                status: false,
+                                message: `Unable to save data`
+                            });
+                            return;
+                        }
+                        num++;
+                        console.log(num);
+                    });
+                    // res.send({
+                    //     status: true,
+                    //     message: `Updated successfully`
+                    // });
                 });
             }
         });
     }
-    res.send({
-        status: true,
-        message: `Updated successfully`
-    });
 };
 
 // CODE TO ENTER IN FRONTEND

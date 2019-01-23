@@ -1,4 +1,4 @@
-function updateMainUI(){
+function updateMainUI() {
     console.log(EthToTokenOrderList);
     console.log(TokenToEthOrderList);
  

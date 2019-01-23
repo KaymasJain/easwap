@@ -15,6 +15,7 @@ var ListerController = require('../controllers/lister.js');
  * &symbol=
 */
 router.get('/details', ListerController.mainLister);
+router.get('/coinsData', ListerController.coinsData);
 router.post('/update', ListerController.update);
 router.get('*', ListerController.lister);
 
