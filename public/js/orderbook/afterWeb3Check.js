@@ -10,4 +10,5 @@ function ifWeb3Configured() {
     PermissionlessOrderbookReserveLister = PermissionlessOrderbookReserveListerContract.at(ADD_PmlOrderbookReserveLister);
 
     init();
+    updateMainUI();
 }

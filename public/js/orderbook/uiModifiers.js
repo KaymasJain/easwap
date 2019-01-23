@@ -1,11 +1,11 @@
 function updateMainUI(){
-    
     console.log(EthToTokenOrderList);
     console.log(TokenToEthOrderList);
  
     var cnt = 0;
     for (cnt=0; cnt < EthToTokenOrderList.length; EthToTokenOrderList++){
-
+        console.log(EthToTokenOrderList[cnt]);
+        
         var ETHQtyLogo = $('<div></div>')
             .addClass("ETHQtyLogo")
             .append(turncate(EthToTokenOrderList[cnt].srcAmount) + "<img src='/logos/eth.svg' height='44px' width='44px'>");
@@ -52,6 +52,17 @@ function updateMainUI(){
 
     console.log("Done Loading " + TokenToEthOrderList.length + " TokenToEth Orders");
 
+    var i = 0;
+    for (i = 0; i < kyberRopstenTokenList.length; i++){
+        if(kyberRopstenTokenList[i].pml){
+            // Navigation
+            var li = $('<li></li>')
+            .append("<a href='/orderbook/" + kyberRopstenTokenList[i].cmcName + "'><span class='sidebar-mini-icon'>D</span><span class='sidebar-normal'>" + kyberRopstenTokenList[i].cmcName + " ORDERBOOK</span></a>");
+
+            $('#orderbooks').append(li)
+        }
+    }
+
 }
 
 function turncate(num){
@@ -61,7 +72,7 @@ function turncate(num){
 }
 /**
 <div class="yourPriceBox">
-    <div class="ETHQtyLogo">
+    <div class="ETHQtyLogo">    
         1
         <img src="/logos/eth.svg" height="44px" width="44px">
     </div>

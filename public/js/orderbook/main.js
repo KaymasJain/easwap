@@ -9,13 +9,13 @@ function init() {
                 console.log("Active Coin Name:" + getActiveCoinName());
                 getEthToTokenOrderList(getActiveCoinName());
                 getTokenToEthOrderList(getActiveCoinName());
-                updateMainUI();
+                setFunds();
+                
             },1000);
 		})
 		.fail(function() {
 			alert("[ERROR] Token Addresses Not Loaded");
         }); 
-    
 }
 
 function getQueryParam(param) {
@@ -385,9 +385,6 @@ function getTokenToEthOrderList(cmcName){
 	}
 }
 
-
-
-
 function addToken(contractAddress){
     var etherscanUrl = "https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=" + contractAddress + "&page=1&offset=1" ;
 
@@ -417,6 +414,109 @@ function addToken(contractAddress){
         alert("[ERROR] Invalid Contract");
     });
 }
+
+var KncFunds = 0;
+var EthFunds = 0;
+var TokenFunds = 0;
+
+var tempAddr = "0x73e5c11b416de31f554b7f4db65a7fc5a85e6db4";
+
+function setFunds(){
+    getKncFunds();
+    getEthFunds();
+    getTokenFunds(getActiveCoinName());
+}
+
+function getKncFunds(){
+    var coinDetails = getTokenDetails(getActiveCoinName());
+    if (coinDetails) {
+        if(coinDetails.pml){
+            var ReserveContract = "";
+            var etherscanUrl = "https://api-ropsten.etherscan.io/api?module=contract&action=getabi&address=" + coinDetails.reserveAddress;
+            $.getJSON(etherscanUrl, function(result) {
+                ReserveContract = web3.eth.contract(JSON.parse(result.result));
+                var Reserve = ReserveContract.at(coinDetails.reserveAddress);
+                Reserve.makerKnc(tempAddr , (err, res) => {
+                    if (err) {
+                        console.log(err);   
+                    } else {
+                        console.log(res);
+                        var tempRes = (res.c[0] / (10 ** ((res.c.toString().length) - 1)))  * (10 ** res.e)
+                        console.log( "KNC" + " : "+ tempRes);
+                        KncFunds = tempRes;
+                    }
+                })
+
+            });
+        }
+        else {
+            console.log("Not PML");
+        }
+    } else {
+        console.log("Invalid Coin.")
+    }  
+}
+
+function getEthFunds(){
+    var coinDetails = getTokenDetails(getActiveCoinName());
+    if (coinDetails) {
+        if(coinDetails.pml){
+            var ReserveContract = "";
+            var etherscanUrl = "https://api-ropsten.etherscan.io/api?module=contract&action=getabi&address=" + coinDetails.reserveAddress;
+            $.getJSON(etherscanUrl, function(result) {
+                ReserveContract = web3.eth.contract(JSON.parse(result.result));
+                var Reserve = ReserveContract.at(coinDetails.reserveAddress);
+                Reserve.makerFunds(tempAddr, getTokenDetails("ETH").contractAddress , (err, res) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(res);
+                        var tempRes = (res.c[0] / (10 ** ((res.c.toString().length) - 1)))  * (10 ** res.e)
+                        console.log( "ETH" + " : "+ tempRes);
+                        EthFunds = tempRes;
+                    }
+                })
+
+            });
+        }
+        else {
+            console.log("Not PML");
+        }
+    } else {
+        console.log("Invalid Coin.")
+    }  
+}
+
+function getTokenFunds(cmcName){
+    var coinDetails = getTokenDetails(getActiveCoinName());
+    if (coinDetails) {
+        if(coinDetails.pml){
+            var ReserveContract = "";
+            var etherscanUrl = "https://api-ropsten.etherscan.io/api?module=contract&action=getabi&address=" + coinDetails.reserveAddress;
+            $.getJSON(etherscanUrl, function(result) {
+                ReserveContract = web3.eth.contract(JSON.parse(result.result));
+                var Reserve = ReserveContract.at(coinDetails.reserveAddress);
+                Reserve.makerFunds(tempAddr, getTokenDetails(cmcName).contractAddress , (err, res) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(res);
+                        var tempRes = (res.c[0] / (10 ** ((res.c.toString().length) - 1)))  * (10 ** res.e)
+                        console.log( cmcName + " : "+ tempRes);
+                        TokenFunds = tempRes;
+                    }
+                })
+
+            });
+        }
+        else {
+            console.log("Not PML");
+        }
+    } else {
+        console.log("Invalid Coin.")
+    }  
+}
+
 
 
 var toFilterName = ""

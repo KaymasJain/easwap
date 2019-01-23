@@ -23,7 +23,7 @@ function updateMainUI(num){
 
             var btnAddOrder = $('<div></div>')
             .addClass("btnAddOrderbook")
-            .append("<a href='/orderbook/" + BOX_sname + "'><button class='btn btn-warning animation-on-hover btn-lg h2' type='button'>ADD ORDER</button></a>");
+            .append("<a href='/orderbook/" + BOX_sname + "'><button class='btn btn-warning animation-on-hover btn-lg h2' type='button'>VIEW ORDERBOOK</button></a>");
 
             var listedTokenBox = $('<div></div>')
             .addClass("listedTokenBox")
@@ -31,9 +31,14 @@ function updateMainUI(num){
 
             $('.listedTokensContainer').append(listedTokenBox); 
 
+            // Navigation
+
+            var li = $('<li></li>')
+            .append("<a href='/orderbook/" + kyberRopstenTokenList[i].cmcName + "'><span class='sidebar-mini-icon'>D</span><span class='sidebar-normal'>" + kyberRopstenTokenList[i].cmcName + " ORDERBOOK</span></a>");
+
+            $('#orderbooks').append(li)
         }
     }
-
 }
 
 $('.listBut').click(function () {
