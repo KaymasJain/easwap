@@ -39,7 +39,6 @@ require('./controllers/restApis');
 const TradeController = require('./routes/TradeRoutes');
 const ListerController = require('./routes/ListerRoutes');
 const OrderbookController = require('./routes/OrderbookRoutes');
-const updateController = require('./routes/UpdateRoutes');
 const IndexController = require('./routes/IndexRoutes');
 
 /**
@@ -135,7 +134,6 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 app.use('/trade', TradeController);
 app.use('/lister', ListerController);
 app.use('/orderbook', OrderbookController);
-app.use('/update', updateController);
 app.use('/', IndexController);
 
 /**

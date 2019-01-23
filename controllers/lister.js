@@ -65,3 +65,44 @@ exports.mainLister = (req, res) => {
         });
     });
 };
+
+exports.update = (req, res) => {
+    var data = req.body;
+    var secret = data.secret;
+    var dataToUpdate = data.listedCoins;
+    console.log(data);
+    if (secret == process.env.UPDATE_DATA_SECRET) {
+        List.deleteMany({}, function(err, response) {
+            if (err) {
+                console.log(`COINS Main data delete - ${err}`);
+            } else {
+                List.save(function (err, updated) {
+                    if (err) {
+                        console.log(`Gas Price save - ${err}`);
+                    }
+                });
+            }
+        });
+    }
+    res.send({
+        status: true,
+        message: `Updated successfully`
+    });
+};
+
+// CODE TO ENTER IN FRONTEND
+
+// function send(secret) {
+// 	var objectToSend = {
+// 		'secret': secret,
+// 		'listedCoins': true
+// 	}
+// 	$.ajax({
+// 		url: "/lister/update",
+// 		type: 'POST',
+// 		contentType:'application/json',
+// 		data: JSON.stringify(objectToSend),
+// 		dataType:'json'
+// 	});
+// 	alert('saved');
+// }

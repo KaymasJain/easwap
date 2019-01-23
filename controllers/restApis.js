@@ -4,7 +4,7 @@ const request = require('request'),
 
 const slackit = require('../util/slack').shoot;
 
-const coinMarketKey = process.env.COIN_MARKET_KEY;
+// const coinMarketKey = process.env.COIN_MARKET_KEY;
 
 var gasError = 0;
 var gasSaving = 0;
