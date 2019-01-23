@@ -245,7 +245,8 @@ function addToken(contractAddress){
                     if (res != ADD_ZERO) {
                         var t = new Tok(tokenSymbol, contractAddress, temp.tokenDecimal, temp.tokenName, tokenSymbol, true, res);
                         kyberRopstenTokenList.push(t);
-                        kyberRopstenTokenCount++;
+						kyberRopstenTokenCount++;
+						
                     } else {
                         var t = new Tok(tokenSymbol, contractAddress, temp.tokenDecimal, temp.tokenName, tokenSymbol, false, ADD_ZERO);
                         kyberRopstenTokenList.push(t);
