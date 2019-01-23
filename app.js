@@ -21,9 +21,9 @@ const minifyHTML = require('express-minify-html');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
-**/
+
 if (process.env.NODE_ENV === 'development') {
-  dotenv.load({ path: '.env.example' });
+
 } else {
   dotenv.load({ path: '.env' });
 }

@@ -18,8 +18,8 @@ function structFactory(names) {
 }
 
 var Tok = structFactory("cmcName contractAddress decimals name symbol pml reserveAddress");
-var EthToTokenOrder = structFactory("maker srcAmount dstAmount");
-var TokenToEthOrder = structFactory("maker srcAmount dstAmount");
+var EthToTokenOrder = structFactory("maker srcAmount dstAmount id");
+var TokenToEthOrder = structFactory("maker srcAmount dstAmount id");
 
 var KyberNetworkContract = "";
 var KyberNetwork = "";
