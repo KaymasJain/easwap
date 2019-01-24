@@ -10,36 +10,40 @@ var gasError = 0;
 var gasSaving = 0;
 
 setInterval(function () {
-	request("https://ethgasstation.info/json/ethgasAPI.json", (err, data) => {
-		if (err) {
-			console.log(err);
-			gasError++;
-			if (gasError % 10 == 0) {
-				slackit(`Gas from ETHGasStation - ${err}`, "#D50201", false);
+	try {
+		request("https://ethgasstation.info/json/ethgasAPI.json", (err, data) => {
+			if (err) {
+				console.log(err);
+				gasError++;
+				if (gasError % 10 == 0) {
+					slackit(`Gas from ETHGasStation - ${err}`, "#D50201", false);
+				}
+			} else {
+				try {
+					var details = JSON.parse(data.body);
+					let gasPrice = new Gas(details);
+					Gas.deleteMany({}, function(err, response) {
+						if (err) {
+							console.log(`Gas Price delete - ${err}`);
+						} else {
+							gasPrice.save(function (err, updated) {
+								if (err) {
+									console.log(`Gas Price save - ${err}`);
+								}
+							});
+						}
+					});
+				} catch (error) {
+					gasSaving++;
+					if (gasSaving % 10 == 0) {
+						slackit(`Gas to database - ${err}`, "#D50201", false);
+					} 
+				}
 			}
-		} else {
-			try {
-				var details = JSON.parse(data.body);
-				let gasPrice = new Gas(details);
-				Gas.deleteMany({}, function(err, response) {
-					if (err) {
-						console.log(`Gas Price delete - ${err}`);
-					} else {
-						gasPrice.save(function (err, updated) {
-							if (err) {
-								console.log(`Gas Price save - ${err}`);
-							}
-						});
-					}
-				});
-			} catch (error) {
-				gasSaving++;
-				if (gasSaving % 10 == 0) {
-					slackit(`Gas to database - ${err}`, "#D50201", false);
-				} 
-			}
-		}
-	});
+		});
+	} catch (errr) {
+		console.log('gas api');
+	}
 }, 15000);
 
 // module.exports.init = (app) => {

@@ -15,7 +15,6 @@ exports.orderbook = (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(response);
             let coinData = response;
             res.render('orderbook', {
                 title: 'Easwap | Create or Manage Orderbook',
