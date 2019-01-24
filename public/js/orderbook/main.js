@@ -1,6 +1,6 @@
 function init() {
     
-	$.getJSON("../public/assets/json/kyberRopsten1.json", function(result) {
+	$.get("/lister/coinsData", function(result) {
             kyberRopstenTokensJSON = result;
             initReserves();
             setTimeout(function(){
