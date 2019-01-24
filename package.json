@@ -9,7 +9,7 @@
     "watch": "NODE_ENV=development nodemon app.js",
     "test": "nyc mocha --timeout=10000 --exit",
     "lint": "eslint \"**/*.js\"",
-    "app": "pm2 stop sample && pm2 start app.js --name sample && pm2 logs"
+    "app": "pm2 stop easwap && pm2 start app.js --name easwap && pm2 logs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",
