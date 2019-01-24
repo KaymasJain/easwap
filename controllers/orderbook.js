@@ -1,3 +1,5 @@
+const List = require('../models/List.js');
+
 /**
  * GET /
  * ORDERBOOK SECTION.
@@ -9,11 +11,18 @@ exports.orderbook = (req, res) => {
         orderbook: 'active'
     };
     const coinName = req.params.coin;
-    res.render('orderbook', {
-        title: 'Easwap | Create or Manage Orderbook',
-        active,
-        coinName
+    List.findOne({cmcName:coinName}, function(err, response) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(response);
+            let coinData = response;
+            res.render('orderbook', {
+                title: 'Easwap | Create or Manage Orderbook',
+                active,
+                coinName,
+                coinData
+            });
+        }
     });
-    
 };
-

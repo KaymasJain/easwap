@@ -1,44 +1,64 @@
-function allowance(coinContract, src, srcAmount, dest, minDestAmount) {
-    coinContract.allowance(account, mainKyberAdd, function (err, res) {
+function allowance(coinDetails, coinContract, amount, num) {
+    coinContract.allowance(account, coinDetails.contractAddress, function (err, res) {
         if (!err) {
-            if (Number(res) < srcAmount) {
-                var payObj = {
-                    gasPrice: finalGasInWei
-                }
-                navAlerts(12);
-                approvalEvent(coinContract);
-                approve(coinContract, mainKyberAdd, allowanceLimit, payObj, src, srcAmount, dest, minDestAmount);
+            if (Number(res) < amount) {
+
             } else {
-                trade(src, srcAmount, dest, account, minDestAmount, true);
             }
         } else {
-            navAlerts(13);
             console.log(err);
         };
-    })
+    });
 }
 
-function depositKncForFee(cmcName){
+function depositKncForFee(cmcName, amount) {
     coinDetails = getTokenDetails(cmcName);
     if (coinDetails) {
-		var CoinReserveContract = "";
-		// var etherscanUrl = "https://api-ropsten.etherscan.io/api?module=contract&action=getabi&address=" + coinDetails.reserveAddress;
-		// $.getJSON(etherscanUrl, function(result) {
-        CoinReserveContract = web3.eth.contract(permissionLessReservesABI);
-        var CoinReserve = CoinReserveContract.at(coinDetails.contractAddress);
-        CoinReserve.depositKncForFee(account, 10000000000000000000000 , (err, res) => {
-            if (err) {
-                console.log(err);
-                console.log('naah');
+        var CoinReserve = web3.eth.contract(permissionLessReservesABI).at(coinDetails.contractAddress);
+        coinContract.allowance(account, coinDetails.contractAddress, function (err, res) {
+            if (!err) {
+                if (Number(res) < amount) {
+                    coinContract.approve(addressToApprove, allowanceLimit, function (err, res) {
+                        if (!err) {
+                            console.log(err);
+                        } else {
+                            console.log('approve event started');
+                        };
+                    });
+                } else {
+                    CoinReserve.depositKncForFee(account, amount, (err, res) => {
+                        if (err) {
+                            console.log(err);
+                            console.log('naah');
+                        } else {
+                            runKncForFee(coinDetails);
+                            console.log('yay');
+                            console.log(res);
+                        }
+                    })
+                }
             } else {
-                console.log('yay');
-                console.log(res);
-            }
-        })
-		// });
+                console.log(err);
+            };
+        });
 	} else {
 		console.log("Invalid Coin.")
     }
+}
+
+function approvalEvent(coinContract) {
+    coinContract.Approval({}, 'latest').watch(function (err, event) {
+        if (!err) {
+            var eventTx = event.transactionHash;
+            if (txArr.includes(eventTx)) {
+                if (!event.removed) {
+                    console.log('approved transaction completed');
+                } else {
+                    console.log('Transaction Removed from blockchain');
+                }
+            }
+        }
+    });
 }
 
 // function depositKncForFee(cmcName){

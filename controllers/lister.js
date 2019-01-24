@@ -68,7 +68,6 @@ exports.mainLister = (req, res) => {
 
 exports.coinsData = (req, res) => {
     List.find({}, function(err, response) {
-        console.log(response);
         if (err) {
             console.log(`Unable to find data - ${err}`);
             res.send({
@@ -81,7 +80,6 @@ exports.coinsData = (req, res) => {
             Object.keys(response).forEach(function (key, i) {
                 objectToSend[response[key].cmcName.toLowerCase()] = response[key];
             });
-            console.log(objectToSend);
             res.send(objectToSend);
         }
     });

@@ -2,7 +2,15 @@
 
 {% block content %}
 
-<h1 class="text-center" style="margin-top:30px;margin-bottom:50px">ORDERBOOK OF <span id="coinName"> {{ coinName }} </span></h1>
+<div style="display:none">
+    <div id="coinCmcName">{{ coinData.cmcName }}</div>
+    <div id="coinContractAdd">{{ coinData.contractAddress }}</div>
+    <div id="coinDecimals">{{ coinData.decimals }}</div>
+    <div id="coinName">{{ coinData.name }}</div>
+    <div id="coinSymbol">{{ coinData.symbol }}</div>
+</div>
+
+<h1 class="text-center" style="margin-top:30px;margin-bottom:50px">ORDERBOOK OF {{ coinName }}</h1>
 
 <div class="reserveStatsContainer">
     <div class="reserveStatsBox">
@@ -117,8 +125,8 @@
 <script src="js/index.v1.js"></script>
 <script src="js/orderbook/alert.js"></script>
 <script src="js/orderbook/abi.js"></script>
-<script src="js/orderbook/uiModifiers.js"></script>
+{# <script src="js/orderbook/uiModifiers.js"></script>
 <script src="js/orderbook/main.js"></script>
-<script src="js/orderbook/deposit.js"></script>
+<script src="js/orderbook/deposit.js"></script> #}
 
 {% endblock %}
