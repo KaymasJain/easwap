@@ -1,5 +1,6 @@
 // var ADD_KyberNetwork = "0x91a502C678605fbCe581eae053319747482276b9"
 var ADD_PmlOrderbookReserveLister = "0x405a5fae110c86eb2e5a76809a17fc5bee2d3ccd"; // Ropsten Lister
+var ADD_coinPmlContract;
 var ADD_ZERO = "0x0000000000000000000000000000000000000000";
 var pmlOrderbookReserveLister;
 var coinPmlContract;
@@ -35,3 +36,6 @@ var KncDetails = {
 	"name" : "Kyber Network",
 	"symbol" : "KNC"
 }
+
+// Hash of all the transaction user do when he/she online
+var txArr = [];
