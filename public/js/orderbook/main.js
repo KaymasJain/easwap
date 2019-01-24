@@ -1,5 +1,5 @@
 function init() {
-    
+
 	$.get("/lister/coinsData", function(result) {
             kyberRopstenTokensJSON = result;
             initReserves();
@@ -10,12 +10,15 @@ function init() {
                 getEthToTokenOrderList(getActiveCoinName());
                 getTokenToEthOrderList(getActiveCoinName());
                 setFunds();
-                
+                setTimeout(function(){
+                    updateMainUI();
+                },2000);
             },1000);
+
 		})
 		.fail(function() {
 			alert("[ERROR] Token Addresses Not Loaded");
-        }); 
+        });
 }
 
 function getQueryParam(param) {
@@ -441,9 +444,9 @@ function getKncFunds(){
                         console.log(err);   
                     } else {
                         console.log(res);
-                        var tempRes = (res.c[0] / (10 ** ((res.c.toString().length) - 1)))  * (10 ** res.e)
+                        var tempRes = '' + res.c[0] + res.c[1];
                         console.log( "KNC" + " : "+ tempRes);
-                        KncFunds = tempRes;
+                        KncFunds = tempRes / (10**coinDetails.decimals) ;
                     }
                 })
 
@@ -473,7 +476,7 @@ function getEthFunds(){
                         console.log(res);
                         var tempRes = (res.c[0] / (10 ** ((res.c.toString().length) - 1)))  * (10 ** res.e)
                         console.log( "ETH" + " : "+ tempRes);
-                        EthFunds = tempRes;
+                        EthFunds = tempRes / (10**coinDetails.decimals) ;
                     }
                 })
 
@@ -503,7 +506,7 @@ function getTokenFunds(cmcName){
                         console.log(res);
                         var tempRes = (res.c[0] / (10 ** ((res.c.toString().length) - 1)))  * (10 ** res.e)
                         console.log( cmcName + " : "+ tempRes);
-                        TokenFunds = tempRes;
+                        TokenFunds = tempRes / (10 ** coinDetails.decimals) ;
                     }
                 })
 
@@ -558,7 +561,12 @@ function getActiveCoinName(){
 function tokenToUsd(cmcName, cur = "USD"){
     var apiUrl = "https://min-api.cryptocompare.com/data/price?fsym=" + cmcName + "&tsyms=" + cur;
     $.getJSON(apiUrl, function(result) {
-        console.log(result[cur]);
+        //console.log(result[cur]);
         tokenToUsdResult = result[cur];
     });
 }
+
+function roundUp(num, precision) {
+    precision = Math.pow(10, precision)
+    return Math.ceil(num * precision) / precision
+  }

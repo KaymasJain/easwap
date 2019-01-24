@@ -17,17 +17,17 @@ const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const nunjucks = require('nunjucks');
-const minifyHTML = require('express-minify-html');  
+const minifyHTML = require('express-minify-html');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
-*/
-
+**/
 if (process.env.NODE_ENV === 'development') {
   dotenv.load({ path: '.env.example' });
 } else {
   dotenv.load({ path: '.env' });
 }
+
 
 /**
  * Controllers
