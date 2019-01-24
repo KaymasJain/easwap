@@ -12,19 +12,15 @@
         </div>
         <div class="bookDepositBox">
             <div class="bookDepositTitle">Deposited</div>
-            <div class="bookDepositQty">100</div>
-        </div>
-        <div class="bookDepositBox">
-            <div class="bookDepositTitle">Current</div>
-            <div class="bookDepositQty">110</div>
+            <div class="bookDepositQty" id="ethStat" >0</div>
         </div>
         <div class="bookDepositBox">
             <div class="bookDepositTitle">ETH/USD</div>
-            <div class="bookDepositQty">120</div>
+            <div class="bookDepositQty" id="ethRate" >0</div>
         </div>
         <div class="bookDepositBox">
             <div class="bookDepositTitle">Value(USD)</div>
-            <div class="bookDepositQty">12000</div>
+            <div class="bookDepositQty" id="ethValue" >0</div>
         </div>
         <div class="depositWithdrawButBox">
             <div class="depositButBox">
@@ -37,24 +33,20 @@
     </div>
     <div class="reserveStatsBox">
         <div class="bookTitleLogoBox">
-            <div class="bookCoinName">DAI</div>
-            <div class="bookCoinLogo"><img src="logos/dai.svg" height="64px" width="64px"></div>
+            <div class="bookCoinName">{{ coinName }}</div>
+            <div class="bookCoinLogo"><img src="logos/{{ coinName }}.svg" height="64px" width="64px"></div>
         </div>
         <div class="bookDepositBox">
             <div class="bookDepositTitle">Deposited</div>
-            <div class="bookDepositQty">100</div>
+            <div class="bookDepositQty" id="tokenStat" >0</div>
         </div>
         <div class="bookDepositBox">
-            <div class="bookDepositTitle">Current</div>
-            <div class="bookDepositQty">110</div>
-        </div>
-        <div class="bookDepositBox">
-            <div class="bookDepositTitle">DAI/USD</div>
-            <div class="bookDepositQty">120</div>
+            <div class="bookDepositTitle">{{ coinName }}/USD</div>
+            <div class="bookDepositQty" id="tokenRate" >0</div>
         </div>
         <div class="bookDepositBox">
             <div class="bookDepositTitle">Value(USD)</div>
-            <div class="bookDepositQty">12000</div>
+            <div class="bookDepositQty" id="tokenValue" >0</div>
         </div>
         <div class="depositWithdrawButBox">
             <div class="depositButBox">
@@ -72,19 +64,15 @@
         </div>
         <div class="bookDepositBox">
             <div class="bookDepositTitle">Deposited</div>
-            <div class="bookDepositQty">100</div>
-        </div>
-        <div class="bookDepositBox">
-            <div class="bookDepositTitle">Current</div>
-            <div class="bookDepositQty">110</div>
+            <div class="bookDepositQty" id="kncStat" >0</div>
         </div>
         <div class="bookDepositBox">
             <div class="bookDepositTitle">KNC/USD</div>
-            <div class="bookDepositQty">120</div>
+            <div class="bookDepositQty" id="kncRate" >0</div>
         </div>
         <div class="bookDepositBox">
             <div class="bookDepositTitle">Value(USD)</div>
-            <div class="bookDepositQty">12000</div>
+            <div class="bookDepositQty" id="kncValue" >0</div>
         </div>
         <div class="depositWithdrawButBox">
             <div class="depositButBox">
@@ -97,14 +85,6 @@
     </div>
 </div>
 
-<h2 class="text-center" style="margin:50px auto">Eth to Token Orders</h2>
-<p class="EthToTokenOrders">
-
-</p>
-<h2 class="text-center" style="margin:50px auto">Token to Eth Orders</h2>
-<p class="TokenToEthOrders">
-    
-</p>
 <!--
 <div class="yourPriceBox">
     <div class="ethCoinPriceBox">

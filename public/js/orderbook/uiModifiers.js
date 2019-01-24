@@ -1,18 +1,59 @@
 function updateMainUI() {
     console.log(EthToTokenOrderList);
     console.log(TokenToEthOrderList);
- 
+
+    updateStatsUI();
+    updateNavigation();
+    updateEthToTokenOrdersUI();
+    updateTokenToEthOrdersUI();
+    
+}
+
+function updateStatsUI(){
+    var cur = "USD";
+    var apiUrl = "https://min-api.cryptocompare.com/data/price?fsym=" + "ETH" + "&tsyms=" + "USD";
+    $.getJSON(apiUrl, function(result) {
+        EthFunds = roundUp(EthFunds, 1);
+        // console.log(EthFunds * result[cur]);
+        $('#ethStat').text(EthFunds);
+        $('#ethRate').text(result[cur]);
+        $('#ethValue').text(roundUp(EthFunds * result[cur], 1));
+    });
+
+    apiUrl = "https://min-api.cryptocompare.com/data/price?fsym=" + "KNC" + "&tsyms=" + "USD";
+    $.getJSON(apiUrl, function(result) {
+        KncFunds = roundUp(KncFunds, 1);
+        // console.log(KncFunds * result[cur]);
+        $('#kncStat').text(KncFunds);
+        $('#kncRate').text(result[cur]);
+        $('#kncValue').text(roundUp(KncFunds * result[cur], 1));
+    });
+
+    apiUrl = "https://min-api.cryptocompare.com/data/price?fsym=" + getActiveCoinName() + "&tsyms=" + "USD";
+    $.getJSON(apiUrl, function(result) {
+        TokenFunds = roundUp(TokenFunds, 1);
+        // console.log(TokenFunds * result[cur]);
+        $('#tokenStat').text(TokenFunds);
+        $('#tokenRate').text(result[cur]);
+        $('#tokenValue').text(roundUp(TokenFunds * result[cur], 1));
+    });
+
+    console.log("Updated Stats.");
+}
+
+function updateEthToTokenOrdersUI(){
+    $('.content').append("<h2 class='text-center' style='margin:50px auto'>Eth to Token Orders</h2><p class='EthToTokenOrders'></p>");
     var cnt = 0;
     for (cnt=0; cnt < EthToTokenOrderList.length; EthToTokenOrderList++){
         console.log(EthToTokenOrderList[cnt]);
         
         var ETHQtyLogo = $('<div></div>')
             .addClass("ETHQtyLogo")
-            .append(turncate(EthToTokenOrderList[cnt].srcAmount) + "<img src='/logos/eth.svg' height='44px' width='44px'>");
+            .append((EthToTokenOrderList[cnt].srcAmount / (10**getTokenDetails("ETH").decimals)) + "<img src='/logos/eth.svg' height='44px' width='44px'>");
 
         var ETHQtyLogo2 = $('<div></div>')
             .addClass("ETHQtyLogo")
-            .append(turncate(EthToTokenOrderList[cnt].dstAmount) + "<img src='/logos/" + getActiveCoinName() + ".svg' height='44px' width='44px'>");
+            .append((EthToTokenOrderList[cnt].dstAmount / (10**getTokenDetails(getActiveCoinName()).decimals)) + "<img src='/logos/" + getActiveCoinName() + ".svg' height='44px' width='44px'>");
 
         var yourPriceBox = $('<div></div>')
             .addClass("yourPriceBox")
@@ -27,16 +68,20 @@ function updateMainUI() {
     }
 
     console.log("Done Loading " + EthToTokenOrderList.length + " EthToToken Orders");
-    
+}
+
+function updateTokenToEthOrdersUI(){
+    $('.content').append("<h2 class='text-center' style='margin:50px auto'>Token To Eth Orders</h2><p class='TokenToEthOrders'></p>");
+    var cnt = 0;
     for (cnt=0; cnt < TokenToEthOrderList.length; TokenToEthOrderList++){
 
         var ETHQtyLogo = $('<div></div>')
             .addClass("ETHQtyLogo")
-            .append(turncate(TokenToEthOrderList[cnt].srcAmount) + "<img src='/logos/eth.svg' height='44px' width='44px'>");
+            .append((TokenToEthOrderList[cnt].srcAmount / (10**getTokenDetails("ETH").decimals)) + "<img src='/logos/eth.svg' height='44px' width='44px'>");
 
         var ETHQtyLogo2 = $('<div></div>')
             .addClass("ETHQtyLogo")
-            .append(turncate(TokenToEthOrderList[cnt].dstAmount) + "<img src='/logos/" + getActiveCoinName() + ".svg' height='44px' width='44px'>");
+            .append((TokenToEthOrderList[cnt].dstAmount / (10**getTokenDetails(getActiveCoinName()).decimals)) + "<img src='/logos/" + getActiveCoinName() + ".svg' height='44px' width='44px'>");
 
         var yourPriceBox = $('<div></div>')
             .addClass("yourPriceBox")
@@ -51,18 +96,19 @@ function updateMainUI() {
     }
 
     console.log("Done Loading " + TokenToEthOrderList.length + " TokenToEth Orders");
+}
 
+function updateNavigation(){
+    // Navigation
     var i = 0;
     for (i = 0; i < kyberRopstenTokenList.length; i++){
-        if(kyberRopstenTokenList[i].pml){
-            // Navigation
+        if(kyberRopstenTokenList[i].pml){        
             var li = $('<li></li>')
             .append("<a href='/orderbook/" + kyberRopstenTokenList[i].cmcName + "'><span class='sidebar-mini-icon'>D</span><span class='sidebar-normal'>" + kyberRopstenTokenList[i].cmcName + " ORDERBOOK</span></a>");
 
             $('#orderbooks').append(li)
         }
     }
-
 }
 
 function turncate(num){
