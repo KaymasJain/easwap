@@ -31,8 +31,10 @@ function checkAllowance(coinContract, coinSymbol) {
         if (!err) {
             if (coinSymbol == "KNC") {
                 console.log(`KNC : ${Number(res)}`);
+                KncDetails.allowance = Number(res);
             } else {
                 console.log(`COIN : ${Number(res)}`);
+                coinDetails.allowance = Number(res);
             }
         } else {
             console.log(err);
@@ -95,13 +97,18 @@ function withdrawEther(amount) {
 }
 
 function depositKnc(amount) {
-    coinPmlContract.depositKncForFee(account, amount, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Deposit KNC transaction');
-        }
-    })
+    if (KncDetails.allowance < amount) {
+        approve(KncERC20Contract, KncDetails.symbol);
+        console.log('confirm approve firstt');
+    } else {
+        coinPmlContract.depositKncForFee(account, amount, (err, res) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Deposit KNC transaction');
+            }
+        });
+    }
 }
 
 function withdrawKnc(amount) {
@@ -115,13 +122,18 @@ function withdrawKnc(amount) {
 }
 
 function depositCoin(amount) {
-    coinPmlContract.depositToken(account, amount, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Deposit Coin transaction');
-        }
-    })
+    if (KncDetails.allowance < amount) {
+        approve(CoinERC20Contract, coinDetails.symbol);
+        console.log('confirm approve first');
+    } else {
+        coinPmlContract.depositToken(account, amount, (err, res) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Deposit Coin transaction');
+            }
+        });
+    }
 }
 
 function withdrawKnc(amount) {
@@ -143,10 +155,12 @@ function makerFunds(coinAddress, coinSymbol) {
                 EthDetails.fundsInWei = Number(res);
                 EthDetails.funds = Number(res)/(10**18);
                 console.log(`User ETH Funds - ${EthDetails.funds}`);
+                $('#ethUnlocked').text(EthDetails.funds);
             } else {
                 coinDetails.fundsInWei = Number(res);
                 coinDetails.funds = Number(res)/(10**coinDetails.decimals);
                 console.log(`User Coin Funds - ${coinDetails.funds}`);
+                $('#tokenUnlocked').text(coinDetails.funds);
             }
         }
     });
@@ -160,6 +174,7 @@ function makerKnc() {
             KncDetails.fundsInWei = Number(res);
             KncDetails.funds = Number(res)/(10**18);
             console.log(`User KNC Funds - ${KncDetails.funds}`);
+            $('#kncUnlocked').text(KncDetails.funds);
         }
     });
 }
@@ -203,13 +218,13 @@ function getEthToCoinMakerOrders() {
             console.log(err);
         } else {
             // console.log(res);
+            if (res.length > 0) {
+                $('#ethToTokenOrdersTitle').css('display', 'block');
+            }
             for (i = 0; i < res.length; i++) {
                 console.log(res[i].c[0]);
+                getEthToCoinOrderById(res[i].c[0]);
             }
-            // TokenToEthOrderListLength = res.length;
-            // for (i = 0; i <= TokenToEthOrderListLength; i++){
-            //     TokenToEthOrderIndicies.push(res[i].c[0]);
-            // }
         }
     });
 }
@@ -219,14 +234,7 @@ function getEthToCoinOrderById(id) {
         if (err) {
             console.log(err);
         } else {
-            // console.log(res);
-            for (i = 0; i < res.length; i++) {
-                console.log(res[i].c[0]);
-            }
-            // TokenToEthOrderListLength = res.length;
-            // for (i = 0; i <= TokenToEthOrderListLength; i++){
-            //     TokenToEthOrderIndicies.push(res[i].c[0]);
-            // }
+            console.log(res);
         }
     });
 }
@@ -236,14 +244,9 @@ function getEthToCoinOrder() {
         if (err) {
             console.log(err);
         } else {
-            // console.log(res);
             for (i = 0; i < res.length; i++) {
                 console.log(res[i].c[0]);
             }
-            // EthToTokenOrderListLength = res.length;
-            // for (i = 0; i <= EthToTokenOrderListLength; i++){
-            //     EthToTokenOrderIndicies.push(res[i].c[0]);
-            // }
         }
     })
 }
@@ -286,14 +289,13 @@ function getCoinToEthMakerOrders() {
         if (err) {
             console.log(err);
         } else {
-            // console.log(res);
-            for (i = 0; i < res.length; i++) {
-                console.log(res[i].c[0]);
+            if (res.length > 0) {
+                $('#tokenToEthOrdersTitle').css('display', 'block');
+                for (i = 0; i < res.length; i++) {
+                    console.log(res[i].c[0]);
+                    getCoinToEthOrderById(res[i].c[0]);
+                }
             }
-            // TokenToEthOrderListLength = res.length;
-            // for (i = 0; i <= TokenToEthOrderListLength; i++){
-            //     TokenToEthOrderIndicies.push(res[i].c[0]);
-            // }
         }
     });
 }
@@ -303,14 +305,7 @@ function getCoinToEthOrderById(id) {
         if (err) {
             console.log(err);
         } else {
-            // console.log(res);
-            for (i = 0; i < res.length; i++) {
-                console.log(res[i].c[0]);
-            }
-            // TokenToEthOrderListLength = res.length;
-            // for (i = 0; i <= TokenToEthOrderListLength; i++){
-            //     TokenToEthOrderIndicies.push(res[i].c[0]);
-            // }
+            console.log(res);
         }
     });
 }
@@ -320,18 +315,36 @@ function getCoinToEthOrder() {
         if (err) {
             console.log(err);
         } else {
-            // console.log(res);
             for (i = 0; i < res.length; i++) {
                 console.log(res[i].c[0]);
             }
-            // TokenToEthOrderListLength = res.length;
-            // for (i = 0; i <= TokenToEthOrderListLength; i++){
-            //     TokenToEthOrderIndicies.push(res[i].c[0]);
-            // }
         }
     });
 }
 
 
-// getTokenToEthMakerOrderIds
-// getEthToTokenMakerOrderIds
+function updateEthToTokenOrdersUI(){
+    $('.content').append("<h2 class='text-center' style='margin:50px auto'>Eth to Token Orders</h2><p class='EthToTokenOrders'></p>");
+    var cnt = 0;
+        
+        var ETHQtyLogo = $('<div></div>')
+            .addClass("ETHQtyLogo")
+            .append(111 + "<img src='/logos/eth.svg' height='44px' width='44px'>");
+
+        var ETHQtyLogo2 = $('<div></div>')
+            .addClass("ETHQtyLogo")
+            .append(111 + "<img src='/logos/" + ".svg' height='44px' width='44px'>");
+
+        var yourPriceBox = $('<div></div>')
+            .addClass("yourPriceBox")
+            .append(ETHQtyLogo)
+            .append("<div style='margin-top:auto;margin-bottom:auto'><i class='tim-icons icon-double-right'></i></div>")
+            .append(ETHQtyLogo2)
+            .append("<button class='btn btn-success animation-on-hover h2 btn-lg' style='margin-bottom:0px' type='button' onclick='updateOrder(id)'>UPDATE</button>")
+            .append("<button class='btn btn-warning animation-on-hover h2 btn-lg' style='margin-bottom:0px' type='button' onclick='cancelOrder(id)'>CANCEL</button>");
+        
+        $('.EthToTokenOrders').append(yourPriceBox);
+
+}
+
+// updateEthToTokenOrdersUI();

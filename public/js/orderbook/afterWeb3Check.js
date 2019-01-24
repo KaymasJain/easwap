@@ -50,4 +50,6 @@ function loadFunctions() {
     // submitCoinToEthOrder(10**20, 10**18);
     getEthToCoinMakerOrders();
     getCoinToEthMakerOrders();
+    // cancelCoinToEthOrder(67);
+    // cancelEthToCoinOrder(67);
 }

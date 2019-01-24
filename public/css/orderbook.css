@@ -56,11 +56,37 @@
 .ethCoinPriceBox {
     display: flex;
     justify-content: space-evenly;
-    width: 35%;
+    width: 40%;
     margin-bottom: auto;
     margin-top: auto;
 }
 
 .ETHQtyLogo {
+    display: flex;
     font-size: 28px;
+}
+
+.coinOrderNameQty {
+    padding: 0px 20px;
+}
+
+.updateCancelBut {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+}
+
+.addNewOrderBox {
+    margin: auto;
+}
+
+.addNewTitle {
+    font-size: 24px;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.addNewOrderBox button {
+    font-size: 20px;
 }
