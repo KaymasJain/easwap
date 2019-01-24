@@ -15,8 +15,7 @@ function init() {
                 },2000);
             },1000);
 
-		})
-		.fail(function() {
+		}).fail(function() {
 			alert("[ERROR] Token Addresses Not Loaded");
         });
 }
@@ -40,6 +39,7 @@ function isPML(obj) {
 				var t1 = new Tok(obj.cmcName, obj.contractAddress, obj.decimals, obj.name, obj.symbol, true, res);
                 kyberRopstenTokenList.push(t1);
                 kyberRopstenTokenCount+=1;
+                console.log(kyberRopstenTokenList);
 			} else {
 				var t1 = new Tok(obj.cmcName, obj.contractAddress, obj.decimals, obj.name, obj.symbol, false, ADD_ZERO);
                 kyberRopstenTokenList.push(t1);
@@ -422,7 +422,7 @@ var KncFunds = 0;
 var EthFunds = 0;
 var TokenFunds = 0;
 
-var tempAddr = "0x73e5c11b416de31f554b7f4db65a7fc5a85e6db4";
+var tempAddr = "0xa7615CD307F323172331865181DC8b80a2834324";
 
 function setFunds(){
     getKncFunds();
@@ -502,8 +502,10 @@ function getTokenFunds(cmcName){
                 Reserve.makerFunds(tempAddr, getTokenDetails(cmcName).contractAddress , (err, res) => {
                     if (err) {
                         console.log(err);
+                        console.log(504);
                     } else {
                         console.log(res);
+                        console.log(507);
                         var tempRes = (res.c[0] / (10 ** ((res.c.toString().length) - 1)))  * (10 ** res.e)
                         console.log( cmcName + " : "+ tempRes);
                         TokenFunds = tempRes / (10 ** coinDetails.decimals) ;

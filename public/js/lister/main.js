@@ -1,6 +1,5 @@
 function init() {
     
-	// $.getJSON("../public/assets/json/kyberRopsten1.json", function(result) {
 	$.get("/lister/coinsData", function(result) {
             kyberRopstenTokensJSON = result;
             initReserves();
@@ -8,8 +7,7 @@ function init() {
                 console.log("Done Loading " + kyberRopstenTokenCount + "Tokens");
                 updateMainUI(kyberRopstenTokenCount);
             },1000);
-		})
-		.fail(function() {
+		}).fail(function() {
 			alert("[ERROR] Token Addresses Not Loaded");
         });
     
@@ -253,7 +251,6 @@ function addToken(contractAddress){
                         kyberRopstenTokenList.push(t);
                         kyberRopstenTokenCount++;
                     }
-
                 }
             })
         }

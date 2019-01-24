@@ -28,7 +28,6 @@ if (process.env.NODE_ENV === 'development') {
   dotenv.load({ path: '.env' });
 }
 
-
 /**
  * Controllers
  */
