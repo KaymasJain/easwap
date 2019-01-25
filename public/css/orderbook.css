@@ -90,3 +90,16 @@
 .addNewOrderBox button {
     font-size: 20px;
 }
+
+.inputModels {
+    color: var(--background);
+    font-size: 20px;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 20px;
+    max-width: 250px;
+}
+
+.inputModels:focus {
+    color: var(--background);
+}

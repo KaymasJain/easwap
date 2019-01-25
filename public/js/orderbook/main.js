@@ -7,9 +7,11 @@ function getBalance(coinAddress, coinSymbol) {
             if (coinSymbol == "KNC") {
                 KncDetails.balanceInWei = Number(res);
                 KncDetails.balance = Number(res)/(10**KncDetails.decimals);
+                modalDescUpdate(5);
             } else {
                 coinDetails.balanceInWei = Number(res);
                 coinDetails.balance = Number(res)/(10**coinDetails.decimals);
+                modalDescUpdate(3);
             }
         }
     });
@@ -20,6 +22,7 @@ function ethBalance() {
         if (!err) {
             EthDetails.balanceInWei = Number(res);
             EthDetails.balance = Number(res)/(10**18);
+            modalDescUpdate(1);
         } else {
             console.error(err);
         };
@@ -99,7 +102,7 @@ function withdrawEther(amount) {
 function depositKnc(amount) {
     if (KncDetails.allowance < amount) {
         approve(KncERC20Contract, KncDetails.symbol);
-        console.log('confirm approve firstt');
+        console.log('confirm approve first');
     } else {
         coinPmlContract.depositKncForFee(account, amount, (err, res) => {
             if (err) {
@@ -136,7 +139,7 @@ function depositCoin(amount) {
     }
 }
 
-function withdrawKnc(amount) {
+function withdrawCoin(amount) {
     coinPmlContract.withdrawToken(amount, (err, res) => {
         if (err) {
             console.log(err);
@@ -154,12 +157,12 @@ function makerFunds(coinAddress, coinSymbol) {
             if (coinSymbol == "ETH") {
                 EthDetails.fundsInWei = Number(res);
                 EthDetails.funds = Number(res)/(10**18);
-                console.log(`User ETH Funds - ${EthDetails.funds}`);
+                modalDescUpdate(2);
                 $('#ethUnlocked').text(EthDetails.funds);
             } else {
                 coinDetails.fundsInWei = Number(res);
                 coinDetails.funds = Number(res)/(10**coinDetails.decimals);
-                console.log(`User Coin Funds - ${coinDetails.funds}`);
+                modalDescUpdate(4);
                 $('#tokenUnlocked').text(coinDetails.funds);
             }
         }
@@ -173,7 +176,7 @@ function makerKnc() {
         } else {
             KncDetails.fundsInWei = Number(res);
             KncDetails.funds = Number(res)/(10**18);
-            console.log(`User KNC Funds - ${KncDetails.funds}`);
+            modalDescUpdate(6);
             $('#kncUnlocked').text(KncDetails.funds);
         }
     });

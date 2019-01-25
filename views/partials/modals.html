@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- ETH DEPOSIT -->
 <div class="modal fade" id="depositEth" tabindex="-1" role="dialog" aria-labelledby="ethDeposit" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -9,17 +9,18 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="number" min="0" class="form-control inputTrade depositEthInput" placeholder="0.00">
+      <p class="h3 text-center ethModalDepositData">Your Wallet is not connected</p>
+        <input type="number" min="0" class="form-control inputModels depositEthInput" placeholder="0.00">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="depositFinally">DEPOSIT</button>
+        <button type="button" class="btn btn-primary" onclick="depositFinally('ETH')">DEPOSIT</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+<!-- ETH WITHDRAW -->
 <div class="modal fade" id="withdrawEth" tabindex="-1" role="dialog" aria-labelledby="ethWithdraw" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -30,18 +31,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="number" min="0" class="form-control inputTrade withdrawEthInput" placeholder="0.00">
+        <p class="h3 text-center ethModalWithdrawData">Your Wallet is not connected</p>
+        <input type="number" min="0" class="form-control inputModels withdrawEthInput" placeholder="0.00">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">WITHDRAW</button>
+        <button type="button" class="btn btn-primary" onclick="withdrawFinally('ETH')">WITHDRAW</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- Modal -->
+<!-- TOKEN DEPOSIT -->
 <div class="modal fade" id="depositToken" tabindex="-1" role="dialog" aria-labelledby="depositToken" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -52,18 +54,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="number" min="0" class="form-control inputTrade depositTokenInput" placeholder="0.00">
+        <p class="h3 text-center tokenModalDepositData">Your Wallet is not connected</p>
+        <input type="number" min="0" class="form-control inputModels depositTokenInput" placeholder="0.00">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">DEPOSIT</button>
+        <button type="button" class="btn btn-primary" onclick="depositFinally('{{coinName}}')">DEPOSIT</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- Modal -->
+<!-- TOKEN WITHDRAW -->
 <div class="modal fade" id="withdrawToken" tabindex="-1" role="dialog" aria-labelledby="withdrawToken" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -74,18 +77,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="number" min="0" class="form-control inputTrade withdrawTokenInput" placeholder="0.00">
+        <p class="h3 text-center tokenModalWithdrawData">Your Wallet is not connected</p>
+        <input type="number" min="0" class="form-control inputModels withdrawTokenInput" placeholder="0.00">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">WITHDRAW</button>
+        <button type="button" class="btn btn-primary" onclick="withdrawFinally('{{coinName}}')">WITHDRAW</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- Modal -->
+<!-- KNC DEPOSIT -->
 <div class="modal fade" id="depositKnc" tabindex="-1" role="dialog" aria-labelledby="depositKnc" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -96,18 +100,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="number" min="0" class="form-control inputTrade depositKncInput" placeholder="0.00">
+        <p class="h3 text-center kncModalDepositData">Your Wallet is not connected</p>
+        <input type="number" min="0" class="form-control inputModels depositKncInput" placeholder="0.00">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">DEPOSIT</button>
+        <button type="button" class="btn btn-primary" onclick="depositFinally('KNC')">DEPOSIT</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- Modal -->
+<!-- KNC WITHDRAW -->
 <div class="modal fade" id="withdrawKnc" tabindex="-1" role="dialog" aria-labelledby="withdrawKnc" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -118,11 +123,63 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="number" min="0" class="form-control inputTrade withdrawKncInput" placeholder="0.00">
+        <p class="h3 text-center kncModalWithdrawData">Your Wallet is not connected</p>
+        <input type="number" min="0" class="form-control inputModels withdrawKncInput" placeholder="0.00">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">WITHDRAW</button>
+        <button type="button" class="btn btn-primary" onclick="withdrawFinally('KNC')">WITHDRAW</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ETH TO TOKEN ORDER -->
+<div class="modal fade" id="ethToTokenSubmit" tabindex="-1" role="dialog" aria-labelledby="ethToTokenSubmit" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ETH TO {{coinName}} ORDER</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="tim-icons icon-simple-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="h3 text-center ethToTokenSubmitData">Your Wallet is not connected</p>
+        <div id="ethToTokenSubmit" class="row">
+          <input type="number" min="0" class="form-control inputModels" placeholder="ETH to sell">
+          <input type="number" min="0" class="form-control inputModels" placeholder="{{coinName}} to buy">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="submitFinally('ETH')">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOKEN TO ETH ORDER -->
+<div class="modal fade" id="tokenToEthSubmit" tabindex="-1" role="dialog" aria-labelledby="ethToTokenSubmit" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{coinName}} TO ETH ORDER</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="tim-icons icon-simple-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="h3 text-center tokenToEthSubmitData">Your Wallet is not connected</p>
+        <div id="tokenToEthSubmit" class="row">
+          <input type="number" min="0" class="form-control inputModels" placeholder="{{coinName}} to sell">
+          <input type="number" min="0" class="form-control inputModels" placeholder="ETH to buy">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="submitFinally('{{coinName}}')">SUBMIT</button>
       </div>
     </div>
   </div>
