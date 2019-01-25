@@ -1,4 +1,7 @@
-// Balance of KNC and COIN that user has deposited
+/**
+ * @def Balance of KNC and COIN that user has deposited
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
 function getBalance(coinAddress, coinSymbol) {
     coinPmlContract.getBalance(coinAddress, account, (err, res) => {
         if (err) {
@@ -15,6 +18,10 @@ function getBalance(coinAddress, coinSymbol) {
     });
 }
 
+/**
+ * @def Balance of ETH that user has deposited
+ */
+
 function ethBalance() {
     web3.eth.getBalance(account, function (err, res) {
         if (!err) {
@@ -25,6 +32,12 @@ function ethBalance() {
         };
     });
 }
+
+/**
+ * @def Check if allowance is provided.
+ * @param {Address} required Coin Contract Address
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
 
 function checkAllowance(coinContract, coinSymbol) {
     coinContract.allowance(account, ADD_coinPmlContract, function (err, res) {
@@ -42,6 +55,12 @@ function checkAllowance(coinContract, coinSymbol) {
     })
 }
 
+/**
+ * @def Approve Contract
+ * @param {Address} required Coin Contract Address
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
+
 function approve(coinContract, coinSymbol) {
     coinContract.approve(ADD_coinPmlContract, 2**250, function (err, res) {
         if (!err) {
@@ -58,6 +77,11 @@ function approve(coinContract, coinSymbol) {
     });
 }
 
+/**
+ * @def Approval Event
+ * @param {Address} required Coin Contract Address
+ */
+
 function approvalEvent(coinContract) {
     coinContract.Approval({}, 'latest').watch(function (err, event) {
         if (!err) {
@@ -73,6 +97,11 @@ function approvalEvent(coinContract) {
     });
 }
 
+/**
+ * @def Deposit Ether
+ * @param {Amount} required Amoun of Ether to Deposit
+ */
+
 function depositEther(amount) {
     var payObj = {
         value: amount
@@ -86,6 +115,11 @@ function depositEther(amount) {
     });
 }
 
+/**
+ * @def Withdraw Ether
+ * @param {Amount} required Amount of Ether to Deposit
+ */
+
 function withdrawEther(amount) {
     coinPmlContract.withdrawEther(amount, (err, res) => {
         if (err) {
@@ -95,6 +129,11 @@ function withdrawEther(amount) {
         }
     });
 }
+
+/**
+ * @def Deposit KNC
+ * @param {Amount} required Amount of KNC to Deposit
+ */
 
 function depositKnc(amount) {
     if (KncDetails.allowance < amount) {
@@ -111,6 +150,11 @@ function depositKnc(amount) {
     }
 }
 
+/**
+ * @def Withdraw KNC
+ * @param {Amount} required Amount of KNC to Withdraw
+ */
+
 function withdrawKnc(amount) {
     coinPmlContract.withdrawKncFee(amount, (err, res) => {
         if (err) {
@@ -120,6 +164,11 @@ function withdrawKnc(amount) {
         }
     })
 }
+
+/**
+ * @def Deposit Token
+ * @param {Amount} required Amount of Token to Deposit
+ */
 
 function depositCoin(amount) {
     if (KncDetails.allowance < amount) {
@@ -136,7 +185,12 @@ function depositCoin(amount) {
     }
 }
 
-function withdrawKnc(amount) {
+/**
+ * @def Withdraw Token
+ * @param {Amount} required Amount of Token to Withdraw
+ */
+
+function withdrawCoin(amount) {
     coinPmlContract.withdrawToken(amount, (err, res) => {
         if (err) {
             console.log(err);
@@ -145,6 +199,12 @@ function withdrawKnc(amount) {
         }
     });
 }
+
+/**
+ * @def  Function to get the Token funds allowed to be spent by the reserve of a coin
+ * @param {Address} required Coin Contract Address
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
 
 function makerFunds(coinAddress, coinSymbol) {
     coinPmlContract.makerFunds(account, coinAddress, (err, res) => {
@@ -166,6 +226,10 @@ function makerFunds(coinAddress, coinSymbol) {
     });
 }
 
+/**
+ * @def  Function to get the KNC funds allowed to be spent by the reserve of a coin
+ */
+
 function makerKnc() {
     coinPmlContract.makerKnc(account, (err, res) => {
         if (err) {
@@ -179,8 +243,12 @@ function makerKnc() {
     });
 }
 
-
-// ETH to Token orders
+/**
+ * @type EthToToken
+ * @def Sumbit an order
+ * @param {Number} required Amount of Ethereum
+ * @param {Number} required Amount of Token
+ */
 
 function submitEthToCoinOrder(srcAmt, dstAmt) {
     coinPmlContract.submitEthToTokenOrder(srcAmt, dstAmt, (err, res) => {
@@ -192,6 +260,14 @@ function submitEthToCoinOrder(srcAmt, dstAmt) {
     })
 }
 
+/**
+ * @type EthToToken
+ * @def Update an order
+ * @param {number} required Order ID
+ * @param {Number} required Amount of Ethereum
+ * @param {Number} required Amount of Token
+ */
+
 function updateEthToCoinOrder(id, srcAmt, dstAmt) {
     coinPmlContract.updateEthToTokenOrder(id, srcAmt, dstAmt, (err, res) => {
         if (err) {
@@ -202,6 +278,12 @@ function updateEthToCoinOrder(id, srcAmt, dstAmt) {
     })
 }
 
+/**
+ * @type EthToToken
+ * @def Delete an order
+ * @param {number} required Order ID
+ */
+
 function cancelEthToCoinOrder(id) {
     coinPmlContract.cancelEthToTokenOrder(id, (err, res) => {
         if (err) {
@@ -211,6 +293,11 @@ function cancelEthToCoinOrder(id) {
         }
     });
 }
+
+/**
+ * @type EthToToken
+ * @def Get the list of orders
+ */
 
 function getEthToCoinMakerOrders() {
     coinPmlContract.getEthToTokenMakerOrderIds(account, (err, res) => {
@@ -229,6 +316,12 @@ function getEthToCoinMakerOrders() {
     });
 }
 
+/**
+ * @type EthToToken
+ * @def Get a specific order
+ * @param {Number} required Order ID
+ */
+
 function getEthToCoinOrderById(id) {
     coinPmlContract.getEthToTokenOrder(id, (err, res) => {
         if (err) {
@@ -238,6 +331,11 @@ function getEthToCoinOrderById(id) {
         }
     });
 }
+
+/**
+ * @type EthToToken
+ * @def Get Eth To Coin Orders
+ */
 
 function getEthToCoinOrder() {
     coinPmlContract.getEthToTokenOrderList((err, res) => {
@@ -251,8 +349,12 @@ function getEthToCoinOrder() {
     })
 }
 
-
-// Token to ETH orders
+/**
+ * @type TokenToEth
+ * @def Sumbit an order
+ * @param {Number} required Amount of Ethereum
+ * @param {Number} required Amount of Token
+ */
 
 function submitCoinToEthOrder(srcAmt, dstAmt) {
     coinPmlContract.submitTokenToEthOrder(srcAmt, dstAmt, (err, res) => {
@@ -264,6 +366,14 @@ function submitCoinToEthOrder(srcAmt, dstAmt) {
     })
 }
 
+/**
+ * @type TokenToEth
+ * @def Update an order
+ * @param {number} required Order ID
+ * @param {Number} required Amount of Ethereum
+ * @param {Number} required Amount of Token
+ */
+
 function updateCoinToEthOrder(id, srcAmt, dstAmt) {
     coinPmlContract.updateTokenToEthOrder(id, srcAmt, dstAmt, (err, res) => {
         if (err) {
@@ -274,6 +384,12 @@ function updateCoinToEthOrder(id, srcAmt, dstAmt) {
     })
 }
 
+/**
+ * @type TokenToEth
+ * @def Delete an order
+ * @param {number} required Order ID
+ */
+
 function cancelCoinToEthOrder(id) {
     coinPmlContract.cancelTokenToEthOrder(id, (err, res) => {
         if (err) {
@@ -283,6 +399,11 @@ function cancelCoinToEthOrder(id) {
         }
     })
 }
+
+/**
+ * @type TokenToEth
+ * @def Get the list of orders
+ */
 
 function getCoinToEthMakerOrders() {
     coinPmlContract.getTokenToEthMakerOrderIds(account, (err, res) => {
@@ -300,6 +421,12 @@ function getCoinToEthMakerOrders() {
     });
 }
 
+/**
+ * @type TokenToEth
+ * @def Get a specific order
+ * @param {Number} required Order ID
+ */
+
 function getCoinToEthOrderById(id) {
     coinPmlContract.getTokenToEthOrder(id, (err, res) => {
         if (err) {
@@ -309,6 +436,11 @@ function getCoinToEthOrderById(id) {
         }
     });
 }
+
+/**
+ * @type TokenToEth
+ * @def Get Token To Eth Orders
+ */
 
 function getCoinToEthOrder() {
     coinPmlContract.getTokenToEthOrderList((err, res) => {
@@ -322,6 +454,9 @@ function getCoinToEthOrder() {
     });
 }
 
+/**
+ * @def Update EthToToken Orders UI
+ */
 
 function updateEthToTokenOrdersUI(){
     $('.content').append("<h2 class='text-center' style='margin:50px auto'>Eth to Token Orders</h2><p class='EthToTokenOrders'></p>");
