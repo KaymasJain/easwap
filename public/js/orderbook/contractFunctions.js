@@ -1,4 +1,7 @@
-// Balance of KNC and COIN that user has deposited
+/**
+ * @def Balance of ERC20 (KNC and COIN) of user's wallet
+ * @param {coinAddress, coinSymbol} required ERC20 address and symbol - DAI, KNC, etc
+ */
 function getBalance(coinAddress, coinSymbol) {
     coinPmlContract.getBalance(coinAddress, account, (err, res) => {
         if (err) {
@@ -17,6 +20,9 @@ function getBalance(coinAddress, coinSymbol) {
     });
 }
 
+/**
+ * @def Balance of ETH of user's wallet
+ */
 function ethBalance() {
     web3.eth.getBalance(account, function (err, res) {
         if (!err) {
@@ -29,6 +35,10 @@ function ethBalance() {
     });
 }
 
+/**
+ * @def Check Allowance of ERC20 (KNC and COIN) to pml contract
+ * @param {coinContract, coinSymbol} required coinContract(define coinContract to call it's functions) and symbol - DAI, KNC, etc
+ */
 function checkAllowance(coinContract, coinSymbol) {
     coinContract.allowance(account, ADD_coinPmlContract, function (err, res) {
         if (!err) {
@@ -43,6 +53,10 @@ function checkAllowance(coinContract, coinSymbol) {
     })
 }
 
+/**
+ * @def Approve of ERC20 (KNC and COIN) to pml contract
+ * @param {coinContract, coinSymbol} required coinContract(define coinContract to call it's functions) and symbol - DAI, KNC, etc
+ */
 function approve(coinContract, coinSymbol) {
     coinContract.approve(ADD_coinPmlContract, 2**250, function (err, res) {
         if (!err) {
@@ -59,6 +73,10 @@ function approve(coinContract, coinSymbol) {
     });
 }
 
+/**
+ * @def Approval event of ERC20 (KNC and COIN) to pml contract
+ * @param {coinContract} required coinContract(define coinContract to call it's functions)
+ */
 function approvalEvent(coinContract) {
     coinContract.Approval({}, 'latest').watch(function (err, event) {
         if (!err) {
@@ -74,6 +92,10 @@ function approvalEvent(coinContract) {
     });
 }
 
+/**
+ * @def pmlReserve function to deposit ETH for orderbook
+ * @param {amount} required amount of ETH to deposit in WEI
+ */
 function depositEther(amount) {
     var payObj = {
         value: amount
@@ -87,6 +109,10 @@ function depositEther(amount) {
     });
 }
 
+/**
+ * @def pmlReserve function to withdraw ETH for orderbook
+ * @param {amount} required amount of ETH to withdraw in WEI
+ */
 function withdrawEther(amount) {
     coinPmlContract.withdrawEther(amount, (err, res) => {
         if (err) {
@@ -97,6 +123,10 @@ function withdrawEther(amount) {
     });
 }
 
+/**
+ * @def pmlReserve function to deposit KNC for fees for orderbook
+ * @param {amount} required amount of KNC to deposit in WEI
+ */
 function depositKnc(amount) {
     if (KncDetails.allowance < amount) {
         approve(KncERC20Contract, KncDetails.symbol);
@@ -112,6 +142,10 @@ function depositKnc(amount) {
     }
 }
 
+/**
+ * @def pmlReserve function to withdraw KNC for orderbook
+ * @param {amount} required amount of KNC to withdraw in WEI
+ */
 function withdrawKnc(amount) {
     coinPmlContract.withdrawKncFee(amount, (err, res) => {
         if (err) {
@@ -122,6 +156,10 @@ function withdrawKnc(amount) {
     })
 }
 
+/**
+ * @def pmlReserve function to deposit token for orderbook
+ * @param {amount} required amount of token to deposit in WEI
+ */
 function depositCoin(amount) {
     if (KncDetails.allowance < amount) {
         approve(CoinERC20Contract, coinDetails.symbol);
@@ -137,6 +175,10 @@ function depositCoin(amount) {
     }
 }
 
+/**
+ * @def pmlReserve function to withdraw token for orderbook
+ * @param {amount} required amount of token to withdraw in WEI
+ */
 function withdrawCoin(amount) {
     coinPmlContract.withdrawToken(amount, (err, res) => {
         if (err) {
@@ -147,6 +189,10 @@ function withdrawCoin(amount) {
     });
 }
 
+/**
+ * @def pmlReserve function to get user's deposited funds which are not in use
+ * @param {coinAddress, coinSymbol} required address of ERC20 and symbol - DAI, KNC, etc
+ */
 function makerFunds(coinAddress, coinSymbol) {
     coinPmlContract.makerFunds(account, coinAddress, (err, res) => {
         if (err) {
@@ -167,6 +213,9 @@ function makerFunds(coinAddress, coinSymbol) {
     });
 }
 
+/**
+ * @def pmlReserve function to get user's deposited KNC for fees which are not in use
+ */
 function makerKnc() {
     coinPmlContract.makerKnc(account, (err, res) => {
         if (err) {
@@ -182,7 +231,10 @@ function makerKnc() {
 
 
 // ETH to Token orders
-
+/**
+ * @def pmlReserve function to submit ETH TO TOKEN order
+ * @param {srcAmt, dstAmt} required ETH amount as source in WEI and Token amount as dest in WEI
+ */
 function submitEthToCoinOrder(srcAmt, dstAmt) {
     coinPmlContract.submitEthToTokenOrder(srcAmt, dstAmt, (err, res) => {
         if (err) {
@@ -193,6 +245,12 @@ function submitEthToCoinOrder(srcAmt, dstAmt) {
     })
 }
 
+/**
+ * @def pmlReserve function to update ETH TO TOKEN order
+ * @param {id, srcAmt, dstAmt} required 
+ * id - order id to get and update the order
+ * ETH amount as source in WEI and Token amount as dest in WEI
+ */
 function updateEthToCoinOrder(id, srcAmt, dstAmt) {
     coinPmlContract.updateEthToTokenOrder(id, srcAmt, dstAmt, (err, res) => {
         if (err) {
@@ -203,6 +261,10 @@ function updateEthToCoinOrder(id, srcAmt, dstAmt) {
     })
 }
 
+/**
+ * @def pmlReserve function to update ETH TO TOKEN order
+ * @param {id} required id - order id to get and cancel the order
+ */
 function cancelEthToCoinOrder(id) {
     coinPmlContract.cancelEthToTokenOrder(id, (err, res) => {
         if (err) {
@@ -213,6 +275,9 @@ function cancelEthToCoinOrder(id) {
     });
 }
 
+/**
+ * @def pmlReserve function to get all the user's orders of ETH TO TOKEN
+ */
 function getEthToCoinMakerOrders() {
     coinPmlContract.getEthToTokenMakerOrderIds(account, (err, res) => {
         if (err) {
@@ -229,6 +294,10 @@ function getEthToCoinMakerOrders() {
     });
 }
 
+/**
+ * @def pmlReserve function to get ETH TO TOKEN order details
+ * @param {id} required id - order id
+ */
 function getEthToCoinOrderById(id) {
     coinPmlContract.getEthToTokenOrder(id, (err, res) => {
         if (err) {
@@ -240,6 +309,9 @@ function getEthToCoinOrderById(id) {
     });
 }
 
+/**
+ * @def pmlReserve function to get ETH TO TOKEN full orderbook
+ */
 function getEthToCoinOrder() {
     coinPmlContract.getEthToTokenOrderList((err, res) => {
         if (err) {
@@ -254,7 +326,10 @@ function getEthToCoinOrder() {
 
 
 // Token to ETH orders
-
+/**
+ * @def pmlReserve function to submit TOKEN TO ETH order
+ * @param {srcAmt, dstAmt} required TOKEN amount as source in WEI and ETH amount as dest in WEI
+ */
 function submitCoinToEthOrder(srcAmt, dstAmt) {
     coinPmlContract.submitTokenToEthOrder(srcAmt, dstAmt, (err, res) => {
         if (err) {
@@ -265,6 +340,12 @@ function submitCoinToEthOrder(srcAmt, dstAmt) {
     })
 }
 
+/**
+ * @def pmlReserve function to update TOKEN TO ETH order
+ * @param {id, srcAmt, dstAmt} required 
+ * id - order id to get and update the order
+ * TOKEN amount as source in WEI and ETH amount as dest in WEI
+ */
 function updateCoinToEthOrder(id, srcAmt, dstAmt) {
     coinPmlContract.updateTokenToEthOrder(id, srcAmt, dstAmt, (err, res) => {
         if (err) {
@@ -275,6 +356,10 @@ function updateCoinToEthOrder(id, srcAmt, dstAmt) {
     })
 }
 
+/**
+ * @def pmlReserve function to update TOKEN TO ETH order
+ * @param {id} required id - order id to get and cancel the order
+ */
 function cancelCoinToEthOrder(id) {
     coinPmlContract.cancelTokenToEthOrder(id, (err, res) => {
         if (err) {
@@ -285,6 +370,9 @@ function cancelCoinToEthOrder(id) {
     })
 }
 
+/**
+ * @def pmlReserve function to get all the user's orders of TOKEN TO ETH
+ */
 function getCoinToEthMakerOrders() {
     coinPmlContract.getTokenToEthMakerOrderIds(account, (err, res) => {
         if (err) {
@@ -300,6 +388,10 @@ function getCoinToEthMakerOrders() {
     });
 }
 
+/**
+ * @def pmlReserve function to get TOKEN TO ETH order details
+ * @param {id} required id - order id
+ */
 function getCoinToEthOrderById(id) {
     coinPmlContract.getTokenToEthOrder(id, (err, res) => {
         if (err) {
@@ -311,6 +403,9 @@ function getCoinToEthOrderById(id) {
     });
 }
 
+/**
+ * @def pmlReserve function to get TOKEN TO ETH full orderbook
+ */
 function getCoinToEthOrder() {
     coinPmlContract.getTokenToEthOrderList((err, res) => {
         if (err) {
@@ -322,5 +417,3 @@ function getCoinToEthOrder() {
         }
     });
 }
-
-// updateEthToTokenOrdersUI();
