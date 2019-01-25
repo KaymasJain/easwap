@@ -33,10 +33,15 @@ function updateMainUI(num){
 
             // Navigation
 
-            var li = $('<li></li>')
-            .append("<a href='/orderbook/" + kyberRopstenTokenList[i].cmcName + "'><span class='sidebar-mini-icon'>D</span><span class='sidebar-normal'>" + kyberRopstenTokenList[i].cmcName + " ORDERBOOK</span></a>");
+            var reserveToNavBar = `<li><a href="/orderbook/${kyberRopstenTokenList[i].cmcName}">
+                                    <span class="sidebar-mini-icon">${(kyberRopstenTokenList[i].cmcName).slice(0,1)}</span>
+                                    <span class="sidebar-normal">${kyberRopstenTokenList[i].cmcName} ORDERBOOK</span>
+                                </a></li>`;
 
-            $('#orderbooks').append(li)
+            // var li = $('<li></li>')
+            // .append("<a href='/orderbook/" + kyberRopstenTokenList[i].cmcName + "'><span class='sidebar-mini-icon'>D</span><span class='sidebar-normal'>" + kyberRopstenTokenList[i].cmcName + " ORDERBOOK</span></a>");
+
+            $('#orderbooks').append(reserveToNavBar);
         }
     }
 }

@@ -86,6 +86,8 @@ function approvalEvent(coinContract) {
             if (txArr.includes(eventTx)) {
                 if (!event.removed) {
                     navAlerts(14);
+                    checkAllowance(CoinERC20Contract, coinDetails.symbol);
+                    checkAllowance(KncERC20Contract, KncDetails.symbol);
                 }
             }
         }
