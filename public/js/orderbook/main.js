@@ -1,326 +1,177 @@
-// Balance of KNC and COIN that user has deposited
-function getBalance(coinAddress, coinSymbol) {
-    coinPmlContract.getBalance(coinAddress, account, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            if (coinSymbol == "KNC") {
-                KncDetails.balanceInWei = Number(res);
-                KncDetails.balance = Number(res)/(10**KncDetails.decimals);
-                modalDescUpdate(5);
-            } else {
-                coinDetails.balanceInWei = Number(res);
-                coinDetails.balance = Number(res)/(10**coinDetails.decimals);
-                modalDescUpdate(3);
-            }
-        }
-    });
-}
+$('#depositEthFinally').click(function() {
+    let value = $('.#depositEthInput').val();
+    
+});
 
-function ethBalance() {
-    web3.eth.getBalance(account, function (err, res) {
-        if (!err) {
-            EthDetails.balanceInWei = Number(res);
-            EthDetails.balance = Number(res)/(10**18);
-            modalDescUpdate(1);
-        } else {
-            console.error(err);
-        };
-    });
-}
-
-function checkAllowance(coinContract, coinSymbol) {
-    coinContract.allowance(account, ADD_coinPmlContract, function (err, res) {
-        if (!err) {
-            if (coinSymbol == "KNC") {
-                KncDetails.allowance = Number(res);
-            } else {
-                coinDetails.allowance = Number(res);
-            }
-        } else {
-            console.log(err);
-        };
-    })
-}
-
-function approve(coinContract, coinSymbol) {
-    coinContract.approve(ADD_coinPmlContract, 2**250, function (err, res) {
-        if (!err) {
-            if (coinSymbol == "KNC") {
-                console.log(`${coinSymbol} - Approve`);
-            } else {
-                console.log(`${coinSymbol} - Approve`);
-            }
-            txArr.push(res);
-            approvalEvent(coinContract);
-        } else {
-            alertVar = err.message;
-        };
-    });
-}
-
-function approvalEvent(coinContract) {
-    coinContract.Approval({}, 'latest').watch(function (err, event) {
-        if (!err) {
-            var eventTx = event.transactionHash;
-            if (txArr.includes(eventTx)) {
-                if (!event.removed) {
-                    console.log('approved transaction completed');
-                } else {
-                    console.log('Transaction Removed from blockchain');
-                }
-            }
-        }
-    });
-}
-
-function depositEther(amount) {
-    var payObj = {
-        value: amount
+function modalDescUpdate(num) {
+    if (num == 1) {
+        $('.ethModalDepositData').text(`You can deposit maximum of ${(EthDetails.balance).toFixed(3)} ETH`);
+    } else if (num == 2) {
+        $('.ethModalWithdrawData').text(`You can withdraw maximum of ${(EthDetails.funds).toFixed(3)} ETH`);
+        $('.ethToTokenSubmitData').text(`You have ${(EthDetails.funds).toFixed(3)} ETH unlocked to create an order`);
+    } else if (num == 3) {
+        $('.tokenModalDepositData').text(`You can deposit maximum of ${(coinDetails.balance).toFixed(3)} ${coinDetails.symbol}`);
+    } else if (num == 4) {
+        $('.tokenModalWithdrawData').text(`You can withdraw maximum of ${(coinDetails.funds).toFixed(3)} ${coinDetails.symbol}`);
+        $('.tokenToEthSubmitData').text(`You have ${(coinDetails.funds).toFixed(3)} ${coinDetails.symbol} unlocked to create an order`);
+    } else if (num == 5) {
+        $('.kncModalDepositData').text(`You can deposit maximum of ${(KncDetails.balance).toFixed(3)} KNC`);
+    } else if (num == 6) {
+        $('.kncModalWithdrawData').text(`You can withdraw maximum of ${(KncDetails.funds).toFixed(3)} KNC`);
     }
-    coinPmlContract.depositEther(account, payObj, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Deposit Ether transaction');
-        }
-    });
 }
 
-function withdrawEther(amount) {
-    coinPmlContract.withdrawEther(amount, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Withdraw Ether transaction');
-        }
-    });
-}
-
-function depositKnc(amount) {
-    if (KncDetails.allowance < amount) {
-        approve(KncERC20Contract, KncDetails.symbol);
-        console.log('confirm approve first');
+function depositFinally(symbol) {
+    if (symbol == "ETH") {
+        var value = $('.depositEthInput').val();
+        var valueInWei = (value)*(10**18);
+        depositEther(valueInWei);
+    } else if (symbol == "KNC") {
+        var value = $('.depositKncInput').val();
+        var valueInWei = (value)*(10**18);
+        depositKnc(valueInWei);
     } else {
-        coinPmlContract.depositKncForFee(account, amount, (err, res) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Deposit KNC transaction');
-            }
-        });
+        var value = $('.depositTokenInput').val();
+        var valueInWei = (value)*(10**(coinDetails.decimals));
+        depositCoin(valueInWei);
     }
 }
 
-function withdrawKnc(amount) {
-    coinPmlContract.withdrawKncFee(amount, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Withdraw KNC transaction');
-        }
-    })
-}
-
-function depositCoin(amount) {
-    if (KncDetails.allowance < amount) {
-        approve(CoinERC20Contract, coinDetails.symbol);
-        console.log('confirm approve first');
+function withdrawFinally(symbol) {
+    if (symbol == "ETH") {
+        var value = $('.withdrawEthInput').val();
+        var valueInWei = (value)*(10**18);
+        withdrawEther(valueInWei);
+    } else if (symbol == "KNC") {
+        var value = $('.withdrawKncInput').val();
+        var valueInWei = (value)*(10**18);
+        withdrawKnc(valueInWei);
     } else {
-        coinPmlContract.depositToken(account, amount, (err, res) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Deposit Coin transaction');
-            }
-        });
+        var value = $('.withdrawTokenInput').val();
+        var valueInWei = (value)*(10**(coinDetails.decimals));
+        withdrawCoin(valueInWei);
     }
 }
 
-function withdrawCoin(amount) {
-    coinPmlContract.withdrawToken(amount, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Withdraw Coin transaction');
-        }
-    });
+function submitFinally(symbol) {
+    if (symbol == "ETH") {
+        var srcAmt = $('#ethToTokenSubmitBody input:eq(0)').val();
+        var srcAmtInWei = srcAmt*(10**18);
+        var dstAmt = $('#ethToTokenSubmitBody input:eq(1)').val();
+        var dstAmtInWei = dstAmt*(10**(coinDetails.decimals));
+        submitEthToCoinOrder(srcAmtInWei, dstAmtInWei);
+    } else {
+        var srcAmt = $('#tokenToEthSubmitBody input:eq(0)').val();
+        var srcAmtInWei = srcAmt*(10**(coinDetails.decimals));
+        var dstAmt = $('#tokenToEthSubmitBody input:eq(1)').val();
+        var dstAmtInWei = dstAmt*(10**18);
+        submitCoinToEthOrder(srcAmtInWei, dstAmtInWei);
+    }
 }
 
-function makerFunds(coinAddress, coinSymbol) {
-    coinPmlContract.makerFunds(account, coinAddress, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            if (coinSymbol == "ETH") {
-                EthDetails.fundsInWei = Number(res);
-                EthDetails.funds = Number(res)/(10**18);
-                modalDescUpdate(2);
-                $('#ethUnlocked').text(EthDetails.funds);
-            } else {
-                coinDetails.fundsInWei = Number(res);
-                coinDetails.funds = Number(res)/(10**coinDetails.decimals);
-                modalDescUpdate(4);
-                $('#tokenUnlocked').text(coinDetails.funds);
-            }
-        }
-    });
+function updateFinally(symbol) {
+    if (symbol == "ETH") {
+        var srcAmt = $('#ethToTokenUpdateBody input:eq(0)').val();
+        var srcAmtInWei = srcAmt*(10**18);
+        var dstAmt = $('#ethToTokenUpdateBody input:eq(1)').val();
+        var dstAmtInWei = dstAmt*(10**(coinDetails.decimals));
+        updateEthToCoinOrder(updateOrderId, srcAmtInWei, dstAmtInWei);
+    } else {
+        var srcAmt = $('#tokenToEthUpdateBody input:eq(0)').val();
+        var srcAmtInWei = srcAmt*(10**(coinDetails.decimals));
+        var dstAmt = $('#tokenToEthUpdateBody input:eq(1)').val();
+        var dstAmtInWei = dstAmt*(10**18);
+        updateCoinToEthOrder(updateOrderId, srcAmtInWei, dstAmtInWei);
+    }
 }
 
-function makerKnc() {
-    coinPmlContract.makerKnc(account, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            KncDetails.fundsInWei = Number(res);
-            KncDetails.funds = Number(res)/(10**18);
-            modalDescUpdate(6);
-            $('#kncUnlocked').text(KncDetails.funds);
-        }
-    });
+function updateOrderSetId(id, symbol) {
+    updateOrderId = id;
+    if (symbol == "ETH") {
+        var order = usersOrdersEth[id];
+        var srcAmtInWei = Number(order[1]);
+        var srcAmt = srcAmtInWei/(10**18);
+        var dstAmtInWei = Number(order[2]);
+        var dstAmt = dstAmtInWei/(10**(coinDetails.decimals));
+        var text = `Your current order is <br> ${srcAmt} ETH -> ${dstAmt} ${coinDetails.symbol}.<br> You have more ${EthDetails.funds} ETH unlocked`;
+        $('.ethToTokenUpdateData').html(text);
+    } else {
+        var order = usersOrdersToken[id];
+        var srcAmtInWei = Number(order[1]);
+        var srcAmt = srcAmtInWei/(10**(coinDetails.decimals));
+        var dstAmtInWei = Number(order[2]);
+        var dstAmt = dstAmtInWei/(10**18);
+        var text = `Your current order is <br> ${srcAmt} ${coinDetails.symbol} -> ${dstAmt} ETH.<br> You have more ${coinDetails.funds} ${coinDetails.symbol} unlocked`;
+        $('.tokenToEthUpdateData').html(text);
+    }
 }
 
-
-// ETH to Token orders
-
-function submitEthToCoinOrder(srcAmt, dstAmt) {
-    coinPmlContract.submitEthToTokenOrder(srcAmt, dstAmt, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-        }
-    })
-}
-
-function updateEthToCoinOrder(id, srcAmt, dstAmt) {
-    coinPmlContract.updateEthToTokenOrder(id, srcAmt, dstAmt, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-        }
-    })
-}
-
-function cancelEthToCoinOrder(id) {
-    coinPmlContract.cancelEthToTokenOrder(id, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-        }
-    });
-}
-
-function getEthToCoinMakerOrders() {
-    coinPmlContract.getEthToTokenMakerOrderIds(account, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            // console.log(res);
-            if (res.length > 0) {
-                $('#ethToTokenOrdersTitle').css('display', 'block');
-            }
-            for (i = 0; i < res.length; i++) {
-                getEthToCoinOrderById(res[i].c[0]);
-            }
-        }
-    });
-}
-
-function getEthToCoinOrderById(id) {
-    coinPmlContract.getEthToTokenOrder(id, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            usersOrdersEth[id] = res;
-            updateAllOrdersUI(id, 1);
-        }
-    });
-}
-
-function getEthToCoinOrder() {
-    coinPmlContract.getEthToTokenOrderList((err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            for (i = 0; i < res.length; i++) {
-                console.log(res[i].c[0]);
-            }
-        }
-    })
+function cancelFinally(id, symbol) {
+    if (symbol == "ETH") {
+        cancelEthToCoinOrder(id);
+    } else {
+        cancelCoinToEthOrder(id);
+    }
 }
 
 
-// Token to ETH orders
-
-function submitCoinToEthOrder(srcAmt, dstAmt) {
-    coinPmlContract.submitTokenToEthOrder(srcAmt, dstAmt, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-        }
-    })
+// if num == 1 (ETH to Token orders), if num == 2 (Token to ETH orders)
+function updateAllOrdersUI(id, num) {
+    if (num == 1) {
+        var order = usersOrdersEth[id];
+        var srcAmtInWei = Number(order[1]);
+        var srcAmt = srcAmtInWei/(10**18);
+        var dstAmtInWei = Number(order[2]);
+        var dstAmt = dstAmtInWei/(10**(coinDetails.decimals));
+        var html = `<div class="yourPriceBox">
+                        <div class="ethCoinPriceBox">
+                            <div class="ETHQtyLogo">
+                                <div><img src="/logos/eth.svg" height="44px" width="44px"></div>
+                                <div class="coinOrderNameQty">${srcAmt} ETH</div>
+                            </div>
+                            <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
+                            <div class="ETHQtyLogo">
+                                <div class="coinOrderNameQty">${dstAmt} ${coinDetails.symbol}</div>            
+                                <div><img src="/logos/${coinDetails.symbol.toLowerCase()}.svg" height="44px" width="44px"></div>
+                            </div>
+                        </div>
+                        <div class="updateCancelBut">
+                            <div>
+                                <button class='btn btn-success animation-on-hover h2 btn-lg' type='button' onclick='updateOrderSetId("${id}", "ETH")' data-toggle="modal" data-target="#ethToTokenUpdate" style="margin-bottom: 0px">UPDATE</button>
+                            </div>
+                            <div>
+                                <button class='btn btn-danger animation-on-hover h2 btn-lg' type='button' onclick='cancelFinally("${id}", "ETH")' style="margin-bottom: 0px">CANCEL</button>
+                            </div>
+                        </div>
+                    </div>`;
+        $('#ethToTokenOrders').append(html);
+    } else {
+        var order = usersOrdersToken[id];
+        var srcAmtInWei = Number(order[1]);
+        var srcAmt = srcAmtInWei/(10**(coinDetails.decimals));
+        var dstAmtInWei = Number(order[2]);
+        var dstAmt = dstAmtInWei/(10**18);
+        var html = `<div class="yourPriceBox">
+                        <div class="ethCoinPriceBox">
+                            <div class="ETHQtyLogo">
+                                <div><img src="/logos/${coinDetails.symbol.toLowerCase()}.svg" height="44px" width="44px"></div>
+                                <div class="coinOrderNameQty">${srcAmt} ${coinDetails.symbol}</div>
+                            </div>
+                            <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
+                            <div class="ETHQtyLogo">
+                                <div class="coinOrderNameQty">${dstAmt} ETH</div>            
+                                <div><img src="/logos/eth.svg" height="44px" width="44px"></div>
+                            </div>
+                        </div>
+                        <div class="updateCancelBut">
+                            <div>
+                                <button class='btn btn-success animation-on-hover h2 btn-lg' type='button' onclick='updateOrderSetId("${id}", "{{coinName}}")' data-toggle="modal" data-target="#tokenToEthUpdate" style="margin-bottom: 0px">UPDATE</button>
+                            </div>
+                            <div>
+                                <button class='btn btn-danger animation-on-hover h2 btn-lg' type='button' onclick='cancelFinally("${id}", "{{coinName}}")' style="margin-bottom: 0px">CANCEL</button>
+                            </div>
+                        </div>
+                    </div>`;
+        $('#tokenToEthOrders').append(html);
+    }
 }
-
-function updateCoinToEthOrder(id, srcAmt, dstAmt) {
-    coinPmlContract.updateTokenToEthOrder(id, srcAmt, dstAmt, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-        }
-    })
-}
-
-function cancelCoinToEthOrder(id) {
-    coinPmlContract.cancelTokenToEthOrder(id, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-        }
-    })
-}
-
-function getCoinToEthMakerOrders() {
-    coinPmlContract.getTokenToEthMakerOrderIds(account, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            if (res.length > 0) {
-                $('#tokenToEthOrdersTitle').css('display', 'block');
-                for (i = 0; i < res.length; i++) {
-                    getCoinToEthOrderById(res[i].c[0]);
-                }
-            }
-        }
-    });
-}
-
-function getCoinToEthOrderById(id) {
-    coinPmlContract.getTokenToEthOrder(id, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            usersOrdersToken[id] = res;
-            updateAllOrdersUI(id, 2);
-        }
-    });
-}
-
-function getCoinToEthOrder() {
-    coinPmlContract.getTokenToEthOrderList((err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            for (i = 0; i < res.length; i++) {
-                console.log(res[i].c[0]);
-            }
-        }
-    });
-}
-
-// updateEthToTokenOrdersUI();

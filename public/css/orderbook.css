@@ -46,7 +46,7 @@
     justify-content: space-evenly;
     max-width: 1200px;
     width: 95%;
-    margin: auto;
+    margin: 30px auto;
     color: var(--light);
     background-color: var(--box-background);
     box-shadow: 0px 0px 2px 2px var(--default);

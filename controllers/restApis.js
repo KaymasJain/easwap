@@ -44,7 +44,7 @@ setInterval(function () {
 	} catch (errr) {
 		console.log('gas api');
 	}
-}, 15000);
+}, 300000);
 
 // module.exports.init = (app) => {
 
