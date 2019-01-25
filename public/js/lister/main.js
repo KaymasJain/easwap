@@ -1,3 +1,7 @@
+/**
+ * @def First function that is run to load token data onto client side.
+ */
+
 function init() {
     
 	$.get("/lister/coinsData", function(result) {
@@ -13,6 +17,10 @@ function init() {
     
 }
 
+/**
+ * @def Used to grab the current parameters from the url.
+ */
+
 function getQueryParam(param) {
     location.search.substr(1)
         .split("&")
@@ -22,6 +30,10 @@ function getQueryParam(param) {
     return param
 }
 
+/**
+ * @def Determines whether the the coin has a permissionless reserve.
+ * @param {Token} required Token data to check.
+ */
 
 function isPML(obj) {
 	PermissionlessOrderbookReserveLister.reserves(obj.contractAddress, (err, res) => {
@@ -41,6 +53,9 @@ function isPML(obj) {
 	})
 }
 
+/**
+ * @def Loads the token data into a client side array.
+ */
 
 function initReserves() {
     kyberRopstenTokenList = [];
@@ -51,6 +66,11 @@ function initReserves() {
 		isPML(kyberRopstenTokensJSON[keys[tem]]);
 	}
 }
+
+/**
+ * @def Add orderbook Contract
+ * @param {Address} required Coin Address to run function for
+ */
 
 function addOrderbookContract(add) {
 	PermissionlessOrderbookReserveLister.addOrderbookContract(add, (err, res) => {
@@ -63,6 +83,11 @@ function addOrderbookContract(add) {
 	})
 }
 
+/**
+ * @def Init orderbook Contract
+ * @param {Address} required Coin Address to run function for
+ */
+
 function initOrderbookContract(add) {
 	PermissionlessOrderbookReserveLister.initOrderbookContract(add, (err, res) => {
 		if (err) {
@@ -74,6 +99,12 @@ function initOrderbookContract(add) {
 	})
 }
 
+/**
+ * @def List orderbook Contract
+ * @param {Address} required Coin Address to run function for
+ */
+
+
 function listOrderbookContract(add) {
 	PermissionlessOrderbookReserveLister.listOrderbookContract(add, (err, res) => {
 		if (err) {
@@ -84,6 +115,11 @@ function listOrderbookContract(add) {
 		}
 	})
 }
+
+/**
+ * @def Main function that creates the orderbook from the Token Name
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
 
 function createOrderBook(cmcName) {
     var coinDetails = getTokenDetails(cmcName);
@@ -128,6 +164,10 @@ function createOrderBook(cmcName) {
 	// listOrderbookContract(add);
 }
 
+/**
+ * @def Provide Allowance to the Reserve to spend a Coin
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
 
 function provideAllowance(cmcName) {
 	var coinDetails = getTokenDetails(cmcName);
@@ -150,6 +190,11 @@ function provideAllowance(cmcName) {
 		console.log("Invalid Coin")
 	}
 }
+
+/**
+ * @def Main function that checks and provides allowance to the Reserve to spend a Coin
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
 
 function checkAllowance(cmcName) {
     
@@ -209,6 +254,11 @@ function checkAllowance(cmcName) {
 
 }
 
+/**
+ * @def Function to deposit KNC for Fee
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
+
 function depositKncForFee(cmcName){
     coinDetails = getTokenDetails(cmcName);
     if (coinDetails) {
@@ -229,6 +279,11 @@ function depositKncForFee(cmcName){
 		console.log("Invalid Coin.")
     }
 }
+
+/**
+ * @def Add a new token to database.
+ * @param {Address} required Coin address to add, eg DAI : 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359
+ */
 
 function addToken(contractAddress){
     var etherscanUrl = "https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=" + contractAddress + "&page=1&offset=1" ;
@@ -260,6 +315,10 @@ function addToken(contractAddress){
     });
 }
 
+/**
+ * @def Function to filter the processed token list to return token data
+ * @param {CoinSymbol} required Coin Short Name. eg ETH, DAI
+ */
 
 var toFilterName = ""
 
@@ -276,6 +335,11 @@ function getTokenDetails(cmcName) {
         return false;
     }
 }
+
+/**
+ * @def Function to filter the processed token list to return token data
+ * @param {Address} required Coin address to add, eg DAI : 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359
+ */
 
 var toFilterContract = ""
 
