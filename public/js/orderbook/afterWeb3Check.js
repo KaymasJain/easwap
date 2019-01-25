@@ -21,7 +21,6 @@ function init() {
 		} else {
 			if (res != ADD_ZERO) {
                 ADD_coinPmlContract = res;
-                console.log(res);
                 coinPmlContract = web3.eth.contract(permissionLessReservesABI).at(ADD_coinPmlContract);
                 loadFunctions();
 			} else {

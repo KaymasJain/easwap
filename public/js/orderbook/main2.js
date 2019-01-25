@@ -55,11 +55,118 @@ function withdrawFinally(symbol) {
 
 function submitFinally(symbol) {
     if (symbol == "ETH") {
-        var srcAmt = ($('#ethToTokenSubmit input')[0]).val();
-        var dstAmt = ($('#ethToTokenSubmit input')[1]).val();
-        alert(srcAmt, dstAmt);
-        // submitEthToCoinOrder(srcAmt, dstAmt);
+        var srcAmt = $('#ethToTokenSubmitBody input:eq(0)').val();
+        var srcAmtInWei = srcAmt*(10**18);
+        var dstAmt = $('#ethToTokenSubmitBody input:eq(1)').val();
+        var dstAmtInWei = dstAmt*(10**(coinDetails.decimals));
+        submitEthToCoinOrder(srcAmtInWei, dstAmtInWei);
     } else {
+        var srcAmt = $('#tokenToEthSubmitBody input:eq(0)').val();
+        var srcAmtInWei = srcAmt*(10**(coinDetails.decimals));
+        var dstAmt = $('#tokenToEthSubmitBody input:eq(1)').val();
+        var dstAmtInWei = dstAmt*(10**18);
+        submitCoinToEthOrder(srcAmtInWei, dstAmtInWei);
+    }
+}
 
+function updateFinally(symbol) {
+    if (symbol == "ETH") {
+        var srcAmt = $('#ethToTokenUpdateBody input:eq(0)').val();
+        var srcAmtInWei = srcAmt*(10**18);
+        var dstAmt = $('#ethToTokenUpdateBody input:eq(1)').val();
+        var dstAmtInWei = dstAmt*(10**(coinDetails.decimals));
+        // submitEthToCoinOrder(srcAmtInWei, dstAmtInWei);
+    } else {
+        var srcAmt = $('#tokenToEthUpdateBody input:eq(0)').val();
+        var srcAmtInWei = srcAmt*(10**(coinDetails.decimals));
+        var dstAmt = $('#tokenToEthUpdateBody input:eq(1)').val();
+        var dstAmtInWei = dstAmt*(10**18);
+        // submitCoinToEthOrder(srcAmtInWei, dstAmtInWei);
+    }
+}
+
+function updateOrderSetId(id, symbol) {
+    updateOrderId = id;
+    if (symbol == "ETH") {
+        var order = usersOrdersEth[id];
+        var srcAmtInWei = Number(order[1]);
+        var srcAmt = srcAmtInWei/(10**18);
+        var dstAmtInWei = Number(order[2]);
+        var dstAmt = dstAmtInWei/(10**(coinDetails.decimals));
+        var text = `Your current order is <br> ${srcAmt} ETH -> ${dstAmt} ${coinDetails.symbol}.<br> You have more ${EthDetails.funds} ETH unlocked`;
+        $('.ethToTokenUpdateData').html(text);
+    } else {
+        var order = usersOrdersToken[id];
+        var srcAmtInWei = Number(order[1]);
+        var srcAmt = srcAmtInWei/(10**(coinDetails.decimals));
+        var dstAmtInWei = Number(order[2]);
+        var dstAmt = dstAmtInWei/(10**18);
+        var text = `Your current order is <br> ${srcAmt} ${coinDetails.symbol} -> ${dstAmt} ETH.<br> You have more ${coinDetails.funds} ${coinDetails.symbol} unlocked`;
+        $('.tokenToEthUpdateData').html(text);
+    }
+}
+
+function updateFinally(symbol) {
+
+}
+
+// if num == 1 (ETH to Token orders), if num == 2 (Token to ETH orders)
+function updateAllOrdersUI(id, num) {
+    if (num == 1) {
+        var order = usersOrdersEth[id];
+        var srcAmtInWei = Number(order[1]);
+        var srcAmt = srcAmtInWei/(10**18);
+        var dstAmtInWei = Number(order[2]);
+        var dstAmt = dstAmtInWei/(10**(coinDetails.decimals));
+        var html = `<div class="yourPriceBox">
+                        <div class="ethCoinPriceBox">
+                            <div class="ETHQtyLogo">
+                                <div><img src="/logos/eth.svg" height="44px" width="44px"></div>
+                                <div class="coinOrderNameQty">${srcAmt} ETH</div>
+                            </div>
+                            <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
+                            <div class="ETHQtyLogo">
+                                <div class="coinOrderNameQty">${dstAmt} ${coinDetails.symbol}</div>            
+                                <div><img src="/logos/${coinDetails.symbol.toLowerCase()}.svg" height="44px" width="44px"></div>
+                            </div>
+                        </div>
+                        <div class="updateCancelBut">
+                            <div>
+                                <button class='btn btn-success animation-on-hover h2 btn-lg' type='button' onclick='updateOrderSetId("${id}", "ETH")' data-toggle="modal" data-target="#ethToTokenUpdate" style="margin-bottom: 0px">UPDATE</button>
+                            </div>
+                            <div>
+                                <button class='btn btn-danger animation-on-hover h2 btn-lg' type='button' onclick='cancelOrderEthToToken("${id}")' style="margin-bottom: 0px">CANCEL</button>
+                            </div>
+                        </div>
+                    </div>`;
+        $('#ethToTokenOrders').append(html);
+    } else {
+        var order = usersOrdersToken[id];
+        var srcAmtInWei = Number(order[1]);
+        var srcAmt = srcAmtInWei/(10**(coinDetails.decimals));
+        var dstAmtInWei = Number(order[2]);
+        var dstAmt = dstAmtInWei/(10**18);
+        var html = `<div class="yourPriceBox">
+                        <div class="ethCoinPriceBox">
+                            <div class="ETHQtyLogo">
+                                <div><img src="/logos/${coinDetails.symbol.toLowerCase()}.svg" height="44px" width="44px"></div>
+                                <div class="coinOrderNameQty">${srcAmt} ${coinDetails.symbol}</div>
+                            </div>
+                            <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
+                            <div class="ETHQtyLogo">
+                                <div class="coinOrderNameQty">${dstAmt} ETH</div>            
+                                <div><img src="/logos/eth.svg" height="44px" width="44px"></div>
+                            </div>
+                        </div>
+                        <div class="updateCancelBut">
+                            <div>
+                                <button class='btn btn-success animation-on-hover h2 btn-lg' type='button' onclick='updateOrderSetId("${id}", "{{coinName}}")' data-toggle="modal" data-target="#tokenToEthUpdate" style="margin-bottom: 0px">UPDATE</button>
+                            </div>
+                            <div>
+                                <button class='btn btn-danger animation-on-hover h2 btn-lg' type='button' onclick='cancelOrderEthToToken("${id}")' style="margin-bottom: 0px">CANCEL</button>
+                            </div>
+                        </div>
+                    </div>`;
+        $('#tokenToEthOrders').append(html);
     }
 }

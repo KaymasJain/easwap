@@ -44,8 +44,8 @@
     box-sizing: border-box;
     display: flex;
     justify-content: space-evenly;
-    max-width: 1000px;
-    width: 90%;
+    max-width: 1200px;
+    width: 95%;
     margin: auto;
     color: var(--light);
     background-color: var(--box-background);
@@ -56,7 +56,7 @@
 .ethCoinPriceBox {
     display: flex;
     justify-content: space-evenly;
-    width: 40%;
+    width: 50%;
     margin-bottom: auto;
     margin-top: auto;
 }
@@ -73,7 +73,7 @@
 .updateCancelBut {
     display: flex;
     width: 40%;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .addNewOrderBox {

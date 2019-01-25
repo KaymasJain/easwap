@@ -39,3 +39,9 @@ var KncDetails = {
 
 // Hash of all the transaction user do when he/she online
 var txArr = [];
+
+var usersOrdersEth = {};
+var usersOrdersToken = {};
+
+// store order id when clicked on update button
+var updateOrderId;

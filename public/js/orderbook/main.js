@@ -33,10 +33,8 @@ function checkAllowance(coinContract, coinSymbol) {
     coinContract.allowance(account, ADD_coinPmlContract, function (err, res) {
         if (!err) {
             if (coinSymbol == "KNC") {
-                console.log(`KNC : ${Number(res)}`);
                 KncDetails.allowance = Number(res);
             } else {
-                console.log(`COIN : ${Number(res)}`);
                 coinDetails.allowance = Number(res);
             }
         } else {
@@ -225,7 +223,6 @@ function getEthToCoinMakerOrders() {
                 $('#ethToTokenOrdersTitle').css('display', 'block');
             }
             for (i = 0; i < res.length; i++) {
-                console.log(res[i].c[0]);
                 getEthToCoinOrderById(res[i].c[0]);
             }
         }
@@ -237,7 +234,8 @@ function getEthToCoinOrderById(id) {
         if (err) {
             console.log(err);
         } else {
-            console.log(res);
+            usersOrdersEth[id] = res;
+            updateAllOrdersUI(id, 1);
         }
     });
 }
@@ -295,7 +293,6 @@ function getCoinToEthMakerOrders() {
             if (res.length > 0) {
                 $('#tokenToEthOrdersTitle').css('display', 'block');
                 for (i = 0; i < res.length; i++) {
-                    console.log(res[i].c[0]);
                     getCoinToEthOrderById(res[i].c[0]);
                 }
             }
@@ -308,7 +305,8 @@ function getCoinToEthOrderById(id) {
         if (err) {
             console.log(err);
         } else {
-            console.log(res);
+            usersOrdersToken[id] = res;
+            updateAllOrdersUI(id, 2);
         }
     });
 }
@@ -323,31 +321,6 @@ function getCoinToEthOrder() {
             }
         }
     });
-}
-
-
-function updateEthToTokenOrdersUI(){
-    $('.content').append("<h2 class='text-center' style='margin:50px auto'>Eth to Token Orders</h2><p class='EthToTokenOrders'></p>");
-    var cnt = 0;
-        
-        var ETHQtyLogo = $('<div></div>')
-            .addClass("ETHQtyLogo")
-            .append(111 + "<img src='/logos/eth.svg' height='44px' width='44px'>");
-
-        var ETHQtyLogo2 = $('<div></div>')
-            .addClass("ETHQtyLogo")
-            .append(111 + "<img src='/logos/" + ".svg' height='44px' width='44px'>");
-
-        var yourPriceBox = $('<div></div>')
-            .addClass("yourPriceBox")
-            .append(ETHQtyLogo)
-            .append("<div style='margin-top:auto;margin-bottom:auto'><i class='tim-icons icon-double-right'></i></div>")
-            .append(ETHQtyLogo2)
-            .append("<button class='btn btn-success animation-on-hover h2 btn-lg' style='margin-bottom:0px' type='button' onclick='updateOrder(id)'>UPDATE</button>")
-            .append("<button class='btn btn-warning animation-on-hover h2 btn-lg' style='margin-bottom:0px' type='button' onclick='cancelOrder(id)'>CANCEL</button>");
-        
-        $('.EthToTokenOrders').append(yourPriceBox);
-
 }
 
 // updateEthToTokenOrdersUI();

@@ -147,7 +147,7 @@
       </div>
       <div class="modal-body">
         <p class="h3 text-center ethToTokenSubmitData">Your Wallet is not connected</p>
-        <div id="ethToTokenSubmit" class="row">
+        <div id="ethToTokenSubmitBody" class="row">
           <input type="number" min="0" class="form-control inputModels" placeholder="ETH to sell">
           <input type="number" min="0" class="form-control inputModels" placeholder="{{coinName}} to buy">
         </div>
@@ -172,7 +172,7 @@
       </div>
       <div class="modal-body">
         <p class="h3 text-center tokenToEthSubmitData">Your Wallet is not connected</p>
-        <div id="tokenToEthSubmit" class="row">
+        <div id="tokenToEthSubmitBody" class="row">
           <input type="number" min="0" class="form-control inputModels" placeholder="{{coinName}} to sell">
           <input type="number" min="0" class="form-control inputModels" placeholder="ETH to buy">
         </div>
@@ -180,6 +180,56 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="submitFinally('{{coinName}}')">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UPDATE ETH TO TOKEN ORDER -->
+<div class="modal fade" id="ethToTokenUpdate" tabindex="-1" role="dialog" aria-labelledby="ethToTokenUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">UPDATE ETH TO {{coinName}} ORDER</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="tim-icons icon-simple-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="h3 text-center ethToTokenUpdateData">Your Wallet is not connected</p>
+        <div id="ethToTokenUpdateBody" class="row">
+          <input type="number" min="0" class="form-control inputModels" placeholder="ETH to sell">
+          <input type="number" min="0" class="form-control inputModels" placeholder="{{coinName}} to buy">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="updateFinally('ETH')">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UPDATE TOKEN TO ETH ORDER -->
+<div class="modal fade" id="tokenToEthUpdate" tabindex="-1" role="dialog" aria-labelledby="tokenToEthUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">UPDATE {{coinName}} TO ETH ORDER</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="tim-icons icon-simple-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="h3 text-center tokenToEthUpdateData">Your Wallet is not connected</p>
+        <div id="tokenToEthUpdateBody" class="row">
+          <input type="number" min="0" class="form-control inputModels" placeholder="{{coinName}} to sell">
+          <input type="number" min="0" class="form-control inputModels" placeholder="ETH to buy">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="updateFinally('{{coinName}}')">SUBMIT</button>
       </div>
     </div>
   </div>
