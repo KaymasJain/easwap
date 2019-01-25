@@ -65,10 +65,12 @@ function approve(coinContract, coinSymbol) {
             } else {
                 console.log(`${coinSymbol} - Approve`);
             }
+            navAlerts(12);
             txArr.push(res);
             approvalEvent(coinContract);
         } else {
             alertVar = err.message;
+            navAlerts(13);
         };
     });
 }
@@ -83,9 +85,7 @@ function approvalEvent(coinContract) {
             var eventTx = event.transactionHash;
             if (txArr.includes(eventTx)) {
                 if (!event.removed) {
-                    console.log('approved transaction completed');
-                } else {
-                    console.log('Transaction Removed from blockchain');
+                    navAlerts(14);
                 }
             }
         }
@@ -104,6 +104,8 @@ function depositEther(amount) {
         if (err) {
             console.log(err);
         } else {
+            alertVar = "ETH";
+            navAlerts(15);
             console.log('Deposit Ether transaction');
         }
     });
@@ -118,6 +120,8 @@ function withdrawEther(amount) {
         if (err) {
             console.log(err);
         } else {
+            alertVar = "ETH";
+            navAlerts(16);
             console.log('Withdraw Ether transaction');
         }
     });
@@ -129,6 +133,8 @@ function withdrawEther(amount) {
  */
 function depositKnc(amount) {
     if (KncDetails.allowance < amount) {
+        alertVar = "KNC";
+        navAlerts(17);
         approve(KncERC20Contract, KncDetails.symbol);
         console.log('confirm approve first');
     } else {
@@ -136,6 +142,8 @@ function depositKnc(amount) {
             if (err) {
                 console.log(err);
             } else {
+                alertVar = "KNC";
+                navAlerts(15);
                 console.log('Deposit KNC transaction');
             }
         });
@@ -151,6 +159,8 @@ function withdrawKnc(amount) {
         if (err) {
             console.log(err);
         } else {
+            alertVar = "KNC";
+            navAlerts(16);
             console.log('Withdraw KNC transaction');
         }
     })
@@ -162,6 +172,8 @@ function withdrawKnc(amount) {
  */
 function depositCoin(amount) {
     if (KncDetails.allowance < amount) {
+        alertVar = coinDetails.symbol;
+        navAlerts(17);
         approve(CoinERC20Contract, coinDetails.symbol);
         console.log('confirm approve first');
     } else {
@@ -169,6 +181,8 @@ function depositCoin(amount) {
             if (err) {
                 console.log(err);
             } else {
+                alertVar = coinDetails.symbol;
+                navAlerts(15);
                 console.log('Deposit Coin transaction');
             }
         });
@@ -184,6 +198,8 @@ function withdrawCoin(amount) {
         if (err) {
             console.log(err);
         } else {
+            alertVar = coinDetails.symbol;
+            navAlerts(16);
             console.log('Withdraw Coin transaction');
         }
     });
@@ -201,13 +217,21 @@ function makerFunds(coinAddress, coinSymbol) {
             if (coinSymbol == "ETH") {
                 EthDetails.fundsInWei = Number(res);
                 EthDetails.funds = Number(res)/(10**18);
+                totalAssets.eth += EthDetails.funds;
+                totalAssets.ethInWei += EthDetails.fundsInWei;
                 modalDescUpdate(2);
                 $('#ethUnlocked').text(EthDetails.funds);
+                $('#ethTotal').text(totalAssets.eth);
+                $('#ethValue').text(totalAssets.eth*EthDetails.USD);
             } else {
                 coinDetails.fundsInWei = Number(res);
                 coinDetails.funds = Number(res)/(10**coinDetails.decimals);
+                totalAssets.coin += coinDetails.funds;
+                totalAssets.coinInWei += coinDetails.fundsInWei;
                 modalDescUpdate(4);
                 $('#tokenUnlocked').text(coinDetails.funds);
+                $('#tokenTotal').text(totalAssets.coin);
+                $('#tokenValue').text(totalAssets.coin*coinDetails.USD);
             }
         }
     });
@@ -223,8 +247,12 @@ function makerKnc() {
         } else {
             KncDetails.fundsInWei = Number(res);
             KncDetails.funds = Number(res)/(10**18);
+            totalAssets.knc += KncDetails.funds;
+            totalAssets.kncInWei += KncDetails.fundsInWei;
             modalDescUpdate(6);
             $('#kncUnlocked').text(KncDetails.funds);
+            $('#kncTotal').text(totalAssets.knc);
+            $('#kncValue').text(totalAssets.knc*KncDetails.USD);
         }
     });
 }
@@ -240,6 +268,7 @@ function submitEthToCoinOrder(srcAmt, dstAmt) {
         if (err) {
             console.log(err);
         } else {
+            navAlerts(18);
             console.log(res);
         }
     })
@@ -256,6 +285,7 @@ function updateEthToCoinOrder(id, srcAmt, dstAmt) {
         if (err) {
             console.log(err);
         } else {
+            navAlerts(19);
             console.log(res);
         }
     })
@@ -270,6 +300,7 @@ function cancelEthToCoinOrder(id) {
         if (err) {
             console.log(err);
         } else {
+            navAlerts(20);
             console.log(res);
         }
     });
@@ -283,7 +314,6 @@ function getEthToCoinMakerOrders() {
         if (err) {
             console.log(err);
         } else {
-            // console.log(res);
             if (res.length > 0) {
                 $('#ethToTokenOrdersTitle').css('display', 'block');
             }
@@ -304,6 +334,13 @@ function getEthToCoinOrderById(id) {
             console.log(err);
         } else {
             usersOrdersEth[id] = res;
+            usersOrdersEth.valueInWei += Number(res[1]);
+            usersOrdersEth.value += Number(res[1])/10**18;
+            totalAssets.ethInWei += usersOrdersEth.valueInWei;
+            totalAssets.eth += usersOrdersEth.value;
+            $('#ethLocked').text(usersOrdersEth.value);
+            $('#ethTotal').text(totalAssets.eth);
+            $('#ethValue').text(totalAssets.eth*EthDetails.USD);
             updateAllOrdersUI(id, 1);
         }
     });
@@ -335,6 +372,7 @@ function submitCoinToEthOrder(srcAmt, dstAmt) {
         if (err) {
             console.log(err);
         } else {
+            navAlerts(18);
             console.log(res);
         }
     })
@@ -351,6 +389,7 @@ function updateCoinToEthOrder(id, srcAmt, dstAmt) {
         if (err) {
             console.log(err);
         } else {
+            navAlerts(19);
             console.log(res);
         }
     })
@@ -365,6 +404,7 @@ function cancelCoinToEthOrder(id) {
         if (err) {
             console.log(err);
         } else {
+            navAlerts(20);
             console.log(res);
         }
     })
@@ -398,6 +438,13 @@ function getCoinToEthOrderById(id) {
             console.log(err);
         } else {
             usersOrdersToken[id] = res;
+            usersOrdersToken.valueInWei += Number(res[1]);
+            usersOrdersToken.value += Number(res[1])/10**(coinDetails.decimals);
+            totalAssets.coin += usersOrdersToken.value;
+            totalAssets.coinInWei += usersOrdersToken.valueInWei;
+            $('#tokenLocked').text(usersOrdersToken.value);
+            $('#tokenTotal').text(totalAssets.coin);
+            $('#tokenValue').text(totalAssets.coin*coinDetails.USD);
             updateAllOrdersUI(id, 2);
         }
     });

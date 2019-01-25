@@ -1,8 +1,3 @@
-$('#depositEthFinally').click(function() {
-    let value = $('.#depositEthInput').val();
-    
-});
-
 function modalDescUpdate(num) {
     if (num == 1) {
         $('.ethModalDepositData').text(`You can deposit maximum of ${(EthDetails.balance).toFixed(3)} ETH`);
@@ -22,38 +17,47 @@ function modalDescUpdate(num) {
 }
 
 function depositFinally(symbol) {
+    alertVar = symbol;
     if (symbol == "ETH") {
         var value = $('.depositEthInput').val();
         var valueInWei = (value)*(10**18);
+        navAlerts(7);
         depositEther(valueInWei);
     } else if (symbol == "KNC") {
         var value = $('.depositKncInput').val();
         var valueInWei = (value)*(10**18);
+        navAlerts(7);
         depositKnc(valueInWei);
     } else {
         var value = $('.depositTokenInput').val();
         var valueInWei = (value)*(10**(coinDetails.decimals));
+        navAlerts(7);
         depositCoin(valueInWei);
     }
 }
 
 function withdrawFinally(symbol) {
+    alertVar = symbol;
     if (symbol == "ETH") {
         var value = $('.withdrawEthInput').val();
         var valueInWei = (value)*(10**18);
+        navAlerts(8);
         withdrawEther(valueInWei);
     } else if (symbol == "KNC") {
         var value = $('.withdrawKncInput').val();
         var valueInWei = (value)*(10**18);
+        navAlerts(8);
         withdrawKnc(valueInWei);
     } else {
         var value = $('.withdrawTokenInput').val();
         var valueInWei = (value)*(10**(coinDetails.decimals));
+        navAlerts(8);
         withdrawCoin(valueInWei);
     }
 }
 
 function submitFinally(symbol) {
+    navAlerts(9);
     if (symbol == "ETH") {
         var srcAmt = $('#ethToTokenSubmitBody input:eq(0)').val();
         var srcAmtInWei = srcAmt*(10**18);
@@ -70,6 +74,7 @@ function submitFinally(symbol) {
 }
 
 function updateFinally(symbol) {
+    navAlerts(10);
     if (symbol == "ETH") {
         var srcAmt = $('#ethToTokenUpdateBody input:eq(0)').val();
         var srcAmtInWei = srcAmt*(10**18);
@@ -107,6 +112,7 @@ function updateOrderSetId(id, symbol) {
 }
 
 function cancelFinally(id, symbol) {
+    navAlerts(11);
     if (symbol == "ETH") {
         cancelEthToCoinOrder(id);
     } else {
@@ -175,3 +181,23 @@ function updateAllOrdersUI(id, num) {
         $('#tokenToEthOrders').append(html);
     }
 }
+
+function tokenToUsd(symbol, cur="USD"){
+    var apiUrl = `https://min-api.cryptocompare.com/data/price?fsym=${symbol}&tsyms=${cur}`;
+    $.getJSON(apiUrl, function(result) {
+        if (symbol == "ETH") {
+            EthDetails.USD = result[cur];
+            $('#ethRate').text(EthDetails.USD);
+        } else if (symbol == "KNC") {
+            KncDetails.USD = result[cur];
+            $('#tokenRate').text(KncDetails.USD);
+        } else {
+            coinDetails.USD = result[cur];
+            $('#kncRate').text(coinDetails.USD);
+        }
+    });
+}
+
+tokenToUsd("ETH");
+tokenToUsd("KNC");
+tokenToUsd(coinDetails.symbol);

@@ -40,8 +40,25 @@ var KncDetails = {
 // Hash of all the transaction user do when he/she online
 var txArr = [];
 
+// Users all orders.....  (value is total worth of assets in use for orders)
 var usersOrdersEth = {};
+usersOrdersEth.valueInWei = 0;
+usersOrdersEth.value = 0;
 var usersOrdersToken = {};
+usersOrdersToken.valueInWei = 0;
+usersOrdersToken.value = 0;
 
 // store order id when clicked on update button
 var updateOrderId;
+
+// total assets locked and unlocked
+var totalAssets = {
+	"ethInWei": 0,
+	"eth": 0,
+	"kncInWei": 0,
+	"knc": 0,
+	"coinInWei": 0,
+	"coin": 0
+}
+
+var alertVar;

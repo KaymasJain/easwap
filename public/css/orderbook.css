@@ -11,14 +11,17 @@
 
 .reserveStatsBox {
     background-color: var(--box-background);
-    padding: 20px 0px 0px 0px;
     border-radius: 10px;
     box-shadow: 0px 0px 2px 2px var(--default);
 }
 
 .bookTitleLogoBox {
     display: flex;
+    width: 90%;
+    margin: auto;
     justify-content: space-evenly;
+    padding: 20px 0px;
+    border-bottom: 2px solid var(--primary);
 }
 
 .bookCoinName {
@@ -31,7 +34,14 @@
     display: flex;
     justify-content: space-evenly;
     margin: 15px auto;
+    width: 90%;
     font-size: 18px;
+}
+
+.bookDepositTitle,
+.bookDepositQty {
+    width: 40%;
+    text-align: center
 }
 
 .depositWithdrawButBox {

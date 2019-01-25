@@ -1,5 +1,5 @@
 function ifWeb3NotConfigured() {
-    
+    navAlerts(1);
 }
 
 function ifWeb3Configured() {
@@ -9,8 +9,7 @@ function ifWeb3Configured() {
         pmlOrderbookReserveLister = web3.eth.contract(ABI_PmlOrderbookReserveLister).at(ADD_PmlOrderbookReserveLister);
         init();
     } else {
-        alert('shift to ropsten');
-        console.log('shift to ropsten');
+        navAlerts(5);
     }
 }
 
@@ -24,8 +23,7 @@ function init() {
                 coinPmlContract = web3.eth.contract(permissionLessReservesABI).at(ADD_coinPmlContract);
                 loadFunctions();
 			} else {
-                alert('not a permission less reserve');
-                console.log('not a permission less reserve');
+                navAlerts(6);
 			}
 		}
 	})
@@ -37,18 +35,9 @@ function loadFunctions() {
     getBalance(KncDetails.contractAddress, KncDetails.symbol);
     checkAllowance(CoinERC20Contract, coinDetails.symbol);
     checkAllowance(KncERC20Contract, KncDetails.symbol);
-    // approve(CoinERC20Contract, coinDetails.symbol);
-    // approve(KncERC20Contract, KncDetails.symbol);
-    // depositCoin(10**20);
-    // depositEther(10**18);
-    // depositKnc(10**20);
     makerFunds(EthDetails.contractAddress, EthDetails.symbol);
     makerFunds(coinDetails.contractAddress, coinDetails.symbol);
     makerKnc();
-    // submitEthToCoinOrder(10**18, 10**20);
-    // submitCoinToEthOrder(10**20, 10**18);
     getEthToCoinMakerOrders();
     getCoinToEthMakerOrders();
-    // cancelCoinToEthOrder(67);
-    // cancelEthToCoinOrder(67);
 }
