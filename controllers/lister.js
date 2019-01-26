@@ -105,7 +105,8 @@ exports.update = (req, res) => {
                         contractAddress: dataToUpdate[key].contractAddress,
                         decimals: dataToUpdate[key].decimals,
                         name: dataToUpdate[key].name,
-                        symbol: dataToUpdate[key].symbol
+                        symbol: dataToUpdate[key].symbol,
+                        reserveAddress: dataToUpdate[key].reserveAddress
                     });
                     ListNewToken.save(function (err, updated) {
                         if (err) {
@@ -119,10 +120,10 @@ exports.update = (req, res) => {
                         num++;
                         console.log(num);
                     });
-                    // res.send({
-                    //     status: true,
-                    //     message: `Updated successfully`
-                    // });
+                });
+                res.send({
+                    status: true,
+                    message: `Updated successfully`
                 });
             }
         });

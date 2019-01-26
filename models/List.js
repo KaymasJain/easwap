@@ -10,7 +10,8 @@ var ListTokenSchema = new Schema({
     "contractAddress": String,
     "decimals": Number,
     "name": String,
-    "symbol": String
+    "symbol": String,
+    "reserveAddress": String
 });
 
 module.exports = mongoose.model('MainLister', ListTokenSchema);

@@ -8,8 +8,8 @@ function ifWeb3Configured() {
     KNCTokenContract = web3.eth.contract(tokensAbi).at(contractAddressKNC);
     mainContract = web3.eth.contract(tokensAbi).at(contractAddressKNC);
 
-    PermissionlessOrderbookReserveListerContract = web3.eth.contract(ABI_PmlOrderbookReserveLister);
-    PermissionlessOrderbookReserveLister = PermissionlessOrderbookReserveListerContract.at(ADD_PmlOrderbookReserveLister);
+    reserveListerContract = web3.eth.contract(ABI_PmlOrderbookReserveLister);
+    reserveLister = reserveListerContract.at(ADD_PmlOrderbookReserveLister);
 
     init();
 }

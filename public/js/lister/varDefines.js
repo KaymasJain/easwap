@@ -1,28 +1,25 @@
-var kyberRopstenTokensJSON = "";
-var kyberRopstenTokenList = [];
-var kyberRopstenTokenCount = 0;
-var ADD_KyberNetwork = "0x91a502C678605fbCe581eae053319747482276b9"
-var ADD_PmlOrderbookReserveLister = "0x405a5fae110c86eb2e5a76809a17fc5bee2d3ccd"
+// data from database of all the PML reserves
+var pmlReservesData = "";
+var ADD_reserveLister = "0x405a5fae110c86eb2e5a76809a17fc5bee2d3ccd"
 var ADD_ZERO = "0x0000000000000000000000000000000000000000"
 
-function structFactory(names) {
-	var names = names.split(' ');
-	var count = names.length;
+// var mainnetReservesAPI = "https://api.kyber.network/currencies"; // Main network
+var ropstenReservesAPI = "https://ropsten-api.kyber.network/currencies"; // Ropsten network
+var apiDataLength = 0;
+var apiDataToObj = {};
 
-	function constructor() {
-		for (var i = 0; i < count; i++) {
-			this[names[i]] = arguments[i];
-		}
-	}
-	return constructor;
-}
+// data filter as per PML
+var dataFilter = {};
 
-var Tok = structFactory("cmcName contractAddress decimals name symbol pml reserveAddress");
-var EthToTokenOrder = structFactory("maker srcAmount dstAmount");
-var TokenToEthOrder = structFactory("maker srcAmount dstAmount");
+var isPMLCount = 0;
 
-var KyberNetworkContract = "";
-var KyberNetwork = "";
+// define reserve contract to call all the functions
+var reserveLister;
 
-var PermissionlessOrderbookReserveListerContract = "";
-var PermissionlessOrderbookReserveLister = "";
+// Secret to update data on server. So no one else can update it
+var secretToStore;
+
+// Coin Address that is to be listed
+var listCoinAdd;
+
+var listingStage = 0;

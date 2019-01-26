@@ -31,7 +31,7 @@ function getQueryParam(param) {
 
 
 function isPML(obj) {
-	PermissionlessOrderbookReserveLister.reserves(obj.contractAddress, (err, res) => {
+	reserveLister.reserves(obj.contractAddress, (err, res) => {
 		if (err) {
 			console.log(err);
 		} else {
@@ -395,7 +395,7 @@ function addToken(contractAddress){
         var temp = result.result[0];
         var tokenSymbol = temp.tokenSymbol;
         if (!getTokenDetails(temp.tokenSymbol)){
-            PermissionlessOrderbookReserveLister.reserves(contractAddress, (err, res) => {
+            reserveLister.reserves(contractAddress, (err, res) => {
                 if (err) {
                     console.log(err);
                 } else {

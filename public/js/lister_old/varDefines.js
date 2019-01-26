@@ -24,5 +24,5 @@ var TokenToEthOrder = structFactory("maker srcAmount dstAmount");
 var KyberNetworkContract = "";
 var KyberNetwork = "";
 
-var PermissionlessOrderbookReserveListerContract = "";
-var PermissionlessOrderbookReserveLister = "";
+var reserveListerContract = "";
+var reserveLister = "";
