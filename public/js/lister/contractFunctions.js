@@ -46,7 +46,6 @@ function addOrderbookContract(coinAddress) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(res);
 			initOrderbookContract(coinAddress);
 		}
 	})
@@ -65,7 +64,6 @@ function initOrderbookContract(coinAddress) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(res);
 			listOrderbookContract(coinAddress);
 		}
 	})
@@ -85,6 +83,25 @@ function listOrderbookContract(coinAddress) {
 			console.log(err);
 		} else {
 			console.log(res);
+			updateListedToken(coinAddress);
+			txArr.push(res);
 		}
 	})
 }
+// TokenOrderbookListingStage
+function isListedEvent() {
+	reserveLister.TokenOrderbookListingStage({}, 'latest').watch(function (err, event) {
+        if (!err) {
+            var eventTx = event.transactionHash;
+            if (txArr.includes(eventTx)) {
+                if (!event.removed) {
+                    console.log('Token successfully listed transaction completed');
+                } else {
+                    console.log('Transaction Removed from blockchain');
+                }
+            }
+        }
+    });
+}
+
+// https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=0x4E470dc7321E84CA96FcAEDD0C8aBCebbAEB68C6&page=1&offset=1

@@ -17,6 +17,7 @@ var ListerController = require('../controllers/lister.js');
 router.get('/details', ListerController.mainLister);
 router.get('/coinsData', ListerController.coinsData);
 router.post('/update', ListerController.update);
+router.post('/add', ListerController.add);
 router.get('*', ListerController.lister);
 
 

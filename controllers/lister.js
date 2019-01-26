@@ -130,19 +130,28 @@ exports.update = (req, res) => {
     }
 };
 
-// CODE TO ENTER IN FRONTEND
-
-// function send(secret) {
-// 	var objectToSend = {
-// 		'secret': secret,
-// 		'listedCoins': true
-// 	}
-// 	$.ajax({
-// 		url: "/lister/update",
-// 		type: 'POST',
-// 		contentType:'application/json',
-// 		data: JSON.stringify(objectToSend),
-// 		dataType:'json'
-// 	});
-// 	alert('saved');
-// }
+exports.add = (req, res) => {
+    var data = req.body;
+    let AddNewToken = new List({
+        cmcName: data.cmcName,
+        contractAddress: data.contractAddress,
+        decimals: data.decimals,
+        name: data.name,
+        symbol: data.symbol
+    });
+    AddNewToken.save(function (err, added) {
+        if (err) {
+            console.log(`error adding Coin data - ${err}`);
+            res.send({
+                status: false,
+                message: `Unable to save data`
+            });
+            return;
+        } else {
+            res.send({
+                status: true,
+                message: `Added successfully`
+            });
+        }
+    });
+};

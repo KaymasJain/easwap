@@ -31,17 +31,45 @@ reservesData();
 
 $('.listBut').click(function() {
     listCoinAdd = $('#listerInput').val();
-    reserveListingStage(coinAddress);
+    reserveListingStage(listCoinAdd);
 });
 
-function startListing() {
-    if (res == 0) {
-        addOrderbookContract(coinAddress);
-    } else if (res == 1) {
-        initOrderbookContract(coinAddress);
-    } else if (res == 2) {
-        listOrderbookContract(coinAddress);
+function startListing(num) {
+    console.log(num);
+    if (num == 0) {
+        addOrderbookContract(listCoinAdd);
+    } else if (num == 1) {
+        initOrderbookContract(listCoinAdd);
+    } else if (num == 2) {
+        listOrderbookContract(listCoinAdd);
     } else {
         console.log("already listed");
     }
+}
+
+function updateListedToken(coinAddress) {
+    var etherscanAPI = `https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=${coinAddress}&page=1&offset=1`;
+    $.get(etherscanAPI, function(result) {
+        var data = result.result[0];
+        var coinData = {
+            "cmcName" : data.tokenSymbol,
+            "contractAddress" : data.contractAddress,
+            "decimals" : data.tokenDecimal,
+            "name" : data.tokenName,
+            "symbol" : data.tokenSymbol
+        }
+        console.log(coinData);
+        $.ajax({
+            url: "/lister/add",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify(coinData),
+            dataType:'json',
+            success: function (data) { 
+                console.log(data);
+            }
+        });
+	}).fail(function() {
+		alert("[ERROR] Token Addresses Not Loaded");
+	});
 }

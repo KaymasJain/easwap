@@ -140,7 +140,7 @@ function createOrderBook(cmcName) {
                         var payObj = {
                             gas: 340000
                         }
-    
+
                         reserveLister.listOrderbookContract(coinDetails.contractAddress, payObj, (err, res) => {
                             if (err) {
                                 console.log(err);

@@ -11,6 +11,7 @@ var apiDataToObj = {};
 // data filter as per PML
 var dataFilter = {};
 
+// PML count++ to update the database
 var isPMLCount = 0;
 
 // define reserve contract to call all the functions
@@ -22,4 +23,5 @@ var secretToStore;
 // Coin Address that is to be listed
 var listCoinAdd;
 
-var listingStage = 0;
+// Transaction hash array
+var txArr = [];
