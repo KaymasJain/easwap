@@ -16,6 +16,40 @@ function updateDatabase(secret) {
 	alert('saved');
 }
 
+// this variable contains all the data about only the permissionless tokens loaded from kyber.
+// just run getJSON() and pmlTokenList will get populated
+
+var pmlTokenList = [];
+
+function setDat(data){
+	var result = data.data;
+	var len = data.data.length;
+	for(i = 1; i < len;i++){
+		PermissionlessOrderbookReserveLister.reserves(result[i].address, (err, res) => {
+			console.log(res);
+			if (res != ADD_ZERO) {
+				var t1 = new Tok(result[i].symbol, result[i].address, result[i].decimals, result[i].name, result[i].symbol, true, res);
+				console.log(t1);
+				pmlTokenList.push(t1);
+			}
+		});
+	}
+	console.log(pmlTokenList);
+}
+
+function getJSON(){
+
+	async function fetchAsync () {
+		let response = await fetch('https://api.kyber.network/currencies');
+		let data = await response.json();
+		return data;
+	}
+
+	fetchAsync()
+			.then(data => setDat(data))
+			.catch(reason => console.log(reason.message));
+}
+
 var daaaataaa = {
 	"adx" : {
 	  "cmcName" : "ADX",
