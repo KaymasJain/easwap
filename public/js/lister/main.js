@@ -15,7 +15,7 @@ function reservesData() {
                             </div>
                             <div class="btnAddOrderbook">
                                 <a href="/orderbook/${coinData.symbol}">
-                                    <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">VIEW ORDERBOOK</button>
+                                    <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD/VIEW ORDERBOOK</button>
                                 </a>
                             </div>
                         </div>`;
