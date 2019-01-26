@@ -129,7 +129,7 @@ function createOrderBook(cmcName) {
                 console.log(err);
             } else {
                 var payObj = {
-                    gasPrice: 750000
+                    gas: 4000000
                 }
     
                 PermissionlessOrderbookReserveLister.initOrderbookContract(coinDetails.contractAddress, payObj, (err, res) => {
@@ -138,7 +138,7 @@ function createOrderBook(cmcName) {
                     } else {
     
                         var payObj = {
-                            gasPrice: 750000
+                            gas: 340000
                         }
     
                         PermissionlessOrderbookReserveLister.listOrderbookContract(coinDetails.contractAddress, payObj, (err, res) => {
@@ -146,15 +146,15 @@ function createOrderBook(cmcName) {
                                 console.log(err);
                             } else {
                                 console.log(res)
-    
+								console.log('all right');
                             }
                         })
                     }
                 })
             }
         });
-        checkAllowance(cmcName);
-        updateMainUI();
+        // checkAllowance(cmcName);
+        // updateMainUI();
 	} else {
 		console.log("Invalid Coin")
     }

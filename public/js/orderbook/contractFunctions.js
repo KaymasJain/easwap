@@ -173,7 +173,7 @@ function withdrawKnc(amount) {
  * @param {amount} required amount of token to deposit in WEI
  */
 function depositCoin(amount) {
-    if (KncDetails.allowance < amount) {
+    if (coinDetails.allowance < amount) {
         alertVar = coinDetails.symbol;
         navAlerts(17);
         approve(CoinERC20Contract, coinDetails.symbol);
