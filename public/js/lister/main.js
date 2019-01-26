@@ -28,21 +28,30 @@ function reservesData() {
 
 reservesData();
 
-
 $('.listBut').click(function() {
-    listCoinAdd = $('#listerInput').val();
-    reserveListingStage(listCoinAdd);
+    if (networkId == 3) {
+        listCoinAdd = $('#listerInput').val();
+        reserveListingStage(listCoinAdd);
+    } else if (networkId) {
+        navAlerts(5);
+    } else {
+        navAlerts(1);
+    }
 });
 
 function startListing(num) {
     console.log(num);
     if (num == 0) {
+        navAlerts(7);
         addOrderbookContract(listCoinAdd);
     } else if (num == 1) {
+        navAlerts(8);
         initOrderbookContract(listCoinAdd);
     } else if (num == 2) {
+        navAlerts(9);
         listOrderbookContract(listCoinAdd);
     } else {
+        navAlerts(10);
         console.log("already listed");
     }
 }

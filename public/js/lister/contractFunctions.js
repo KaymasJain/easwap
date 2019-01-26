@@ -31,6 +31,7 @@ function reserveListingStage(coinAddress) {
 	reserveLister.reserveListingStage(coinAddress, (err, res) => {
 		if (err) {
 			console.log(err);
+			navAlerts(6);
 		} else {
 			startListing(Number(res));
 		}
@@ -95,6 +96,7 @@ function isListedEvent() {
             var eventTx = event.transactionHash;
             if (txArr.includes(eventTx)) {
                 if (!event.removed) {
+					navAlerts(11);
                     console.log('Token successfully listed transaction completed');
                 } else {
                     console.log('Transaction Removed from blockchain');

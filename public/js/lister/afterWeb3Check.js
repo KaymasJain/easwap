@@ -1,5 +1,5 @@
 function ifWeb3NotConfigured() {
-    // run function accordingly if web3 is not connected
+    navAlerts(1);
 }
 
 function ifWeb3Configured() {
