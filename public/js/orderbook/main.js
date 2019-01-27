@@ -23,7 +23,7 @@ function depositFinally(symbol) {
         var valueInWei = (value)*(10**18);
         navAlerts(7);
         depositEther(valueInWei);
-    } else if (symbol == "KNC" && coinDetails.symbol != "KNC") {
+    } else if (symbol == "KNC") {
         var value = $('.depositKncInput').val();
         var valueInWei = (value)*(10**18);
         navAlerts(7);
@@ -43,7 +43,7 @@ function withdrawFinally(symbol) {
         var valueInWei = (value)*(10**18);
         navAlerts(8);
         withdrawEther(valueInWei);
-    } else if (symbol == "KNC" && coinDetails.symbol != "KNC") {
+    } else if (symbol == "KNC") {
         var value = $('.withdrawKncInput').val();
         var valueInWei = (value)*(10**18);
         navAlerts(8);
@@ -188,12 +188,12 @@ function tokenToUsd(symbol, cur="USD"){
         if (symbol == "ETH") {
             EthDetails.USD = result[cur];
             $('#ethRate').text(cleanDecimal(EthDetails.USD, 3));
-        } else if (symbol == "KNC" && coinDetails.symbol != "KNC") {
+        } else if (symbol == "KNC") {
             KncDetails.USD = result[cur];
-            $('#tokenRate').text(cleanDecimal(KncDetails.USD, 3));
+            $('#kncRate').text(cleanDecimal(KncDetails.USD, 3));
         } else {
             coinDetails.USD = result[cur];
-            $('#kncRate').text(cleanDecimal(coinDetails.USD, 3));
+            $('#tokenRate').text(cleanDecimal(coinDetails.USD, 3));
         }
     });
 }

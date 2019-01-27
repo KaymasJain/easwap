@@ -7,7 +7,7 @@ function getBalance(coinAddress, coinSymbol) {
         if (err) {
             console.log(err);
         } else {
-            if (coinSymbol == "KNC" && coinDetails.symbol != "KNC") {
+            if (coinSymbol == "KNC") {
                 KncDetails.balanceInWei = Number(res);
                 KncDetails.balance = Number(res)/(10**KncDetails.decimals);
                 modalDescUpdate(5);
@@ -42,7 +42,7 @@ function ethBalance() {
 function checkAllowance(coinContract, coinSymbol) {
     coinContract.allowance(account, ADD_coinPmlContract, function (err, res) {
         if (!err) {
-            if (coinSymbol == "KNC" && coinDetails.symbol != "KNC") {
+            if (coinSymbol == "KNC") {
                 KncDetails.allowance = Number(res);
             } else {
                 coinDetails.allowance = Number(res);
@@ -60,7 +60,7 @@ function checkAllowance(coinContract, coinSymbol) {
 function approve(coinContract, coinSymbol) {
     coinContract.approve(ADD_coinPmlContract, 2**250, function (err, res) {
         if (!err) {
-            if (coinSymbol == "KNC" && coinDetails.symbol != "KNC") {
+            if (coinSymbol == "KNC") {
                 console.log(`${coinSymbol} - Approve`);
             } else {
                 console.log(`${coinSymbol} - Approve`);
