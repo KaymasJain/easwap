@@ -86,6 +86,7 @@ function listOrderbookContract(coinAddress) {
 			console.log(res);
 			updateListedToken(coinAddress);
 			txArr.push(res);
+			isListedEvent();
 		}
 	})
 }
