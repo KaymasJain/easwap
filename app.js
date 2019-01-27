@@ -15,7 +15,6 @@ const flash = require('express-flash');5
 const path = require('path');
 const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
-const expressStatusMonitor = require('express-status-monitor');
 const nunjucks = require('nunjucks');
 const minifyHTML = require('express-minify-html');
 

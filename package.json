@@ -24,7 +24,6 @@
     "express-flash": "^0.0.2",
     "express-minify-html": "^0.12.0",
     "express-session": "^1.15.6",
-    "express-status-monitor": "^1.1.5",
     "express-validator": "^5.3.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",
