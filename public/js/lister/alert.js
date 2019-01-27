@@ -10,11 +10,11 @@ function navAlerts(num) {
         title = 'Main network';
         content = "<b>You are on main network whatever trade you do will involves real assets.</b>";
     } else if (num == 3) {
-        title = 'Ropsten test network';
-        content = "<b>You are good to use ropsten test version of kyber trade. For real assets trading shift to Main network.</b>";
+        title = 'Not main network';
+        content = "<b>Shift to main network to list new ERC20s.</b>";
     } else if (num == 4) {
         title = 'Not main network';
-        content = "<b>Shift to main network to use kyber trade. Kyber trade is also available on Ropsten test network for trial purposes.</b>";
+        content = "<b>Shift to main network to list new ERC20s.</b>";
     } else if (num == 5) {
         title = 'Shift To Main Network';
         content = "<b>You're using test networks. Shift to Main Network to use List new ERC20.</b>";
@@ -36,6 +36,9 @@ function navAlerts(num) {
     } else if (num == 11) {
         title = 'ERC20 Successfully Listed';
         content = "<b>ERC20 has been successfully listed. Head towards orderbook section to create orderbook.</b>";
+    } else if (num == 12) {
+        title = 'Listing transactions Deployed!';
+        content = "<b>Listing Transactions successfully deployed. We'll let you know once it get confirmed!</b>";
     }
     swal({ "title": title,
             "html": content,

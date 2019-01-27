@@ -86,6 +86,7 @@ function listOrderbookContract(coinAddress) {
 			console.log(res);
 			updateListedToken(coinAddress);
 			txArr.push(res);
+			navAlerts(12);
 			isListedEvent();
 		}
 	})
@@ -106,5 +107,3 @@ function isListedEvent() {
         }
     });
 }
-
-// https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=0x4E470dc7321E84CA96FcAEDD0C8aBCebbAEB68C6&page=1&offset=1

@@ -10,18 +10,17 @@ function navAlerts(num) {
         title = 'Main network';
         content = "<b>You are on main network whatever trade you do will involves real assets.</b>";
     } else if (num == 3) {
-        title = 'Ropsten test network';
-        content = "<b>You are good to use ropsten test version of kyber trade. For real assets trading shift to Main network.</b>";
-    } else if (num == 4) {
         title = 'Not main network';
-        content = "<b>Shift to main network to use kyber trade. Kyber trade is also available on Ropsten test network for trial purposes.</b>";
+        content = "<b>Shift to main network to create orderbooks.</b>";
+    } else if (num == 4) {
+        title = 'Not Main Network';
+        content = "<b>Shift to main network to create orderbooks.</b>";
     } else if (num == 5) {
-        // change to mainnet accordingly
-        title = 'Shift to Ropsten';
-        content = "<b>Shift to Ropsten test network to make OrderBooks.</b>";
+        title = 'Shift to Main Network';
+        content = "<b>Shift to Main network to make OrderBooks.</b>";
     } else if (num == 6) {
         title = 'Not Permissionless Reserve';
-        content = `<b>${coinDetails.symbol} doesn't have a permission less reserve yet. Head to listing section to list this ERC20.</b>`;
+        content = `<b>This ERC20 doesn't have a permission less reserve yet. Head to <a href="/lister">listing section</a> to list this ERC20.</b>`;
     } else if (num == 7) {
         title = `Deposit ${alertVar}`;
         content = `<b>Confirm the transaction to deposit ${alertVar} for orderbook.</b>`;

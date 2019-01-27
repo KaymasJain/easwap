@@ -3,10 +3,10 @@ function ifWeb3NotConfigured() {
 }
 
 function ifWeb3Configured() {
-    if (networkId == 3) {
+    if (networkId == 1) {
         KncERC20Contract = web3.eth.contract(tokensAbi).at(KncDetails.contractAddress);
         CoinERC20Contract = web3.eth.contract(tokensAbi).at(coinDetails.contractAddress);
-        pmlOrderbookReserveLister = web3.eth.contract(ABI_PmlOrderbookReserveLister).at(ADD_PmlOrderbookReserveLister);
+        pmlOrderbookReserveLister = web3.eth.contract(ABI_PmlOrderbookReserveLister).at(ADD_reserveLister);
         mainKyberContract = web3.eth.contract(kyberProxyABI).at(mainKyberAdd);
         init();
     } else {

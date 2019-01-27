@@ -20,7 +20,7 @@ function updateDatabase(dataToStore) {
 
 function getJSON(secret) {
 	secretToStore = secret;
-	$.get(ropstenReservesAPI, function(result) {
+	$.get(reservesAPI, function(result) {
 		var data = result.data;
 		apiDataLength = data.length;
 		Object.keys(data).forEach(function (key, i) {

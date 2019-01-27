@@ -29,7 +29,7 @@ function reservesData() {
 reservesData();
 
 $('.listBut').click(function() {
-    if (networkId == 3) {
+    if (networkId == 1) {
         listCoinAdd = $('#listerInput').val();
         reserveListingStage(listCoinAdd);
     } else if (networkId) {
@@ -57,8 +57,8 @@ function startListing(num) {
 }
 
 function updateListedToken(coinAddress) {
-    var etherscanAPI = `https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=${coinAddress}&page=1&offset=1`;
-    $.get(etherscanAPI, function(result) {
+    var etherscanTokenAPI = `https://${etherscanAPI}/api?module=account&action=tokentx&contractaddress=${coinAddress}&page=1&offset=1`;
+    $.get(etherscanTokenAPI, function(result) {
         var data = result.result[0];
         var coinData = {
             "cmcName" : data.tokenSymbol,
@@ -79,6 +79,6 @@ function updateListedToken(coinAddress) {
             }
         });
 	}).fail(function() {
-		alert("[ERROR] Token Addresses Not Loaded");
+		console.log("[ERROR] Token Addresses Not Loaded");
 	});
 }

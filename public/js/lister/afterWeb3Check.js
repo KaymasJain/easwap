@@ -3,5 +3,9 @@ function ifWeb3NotConfigured() {
 }
 
 function ifWeb3Configured() {
-    reserveLister = web3.eth.contract(ABI_PmlOrderbookReserveLister).at(ADD_reserveLister);
+    if (networkId == 1) {
+        reserveLister = web3.eth.contract(ABI_PmlOrderbookReserveLister).at(ADD_reserveLister);
+    } else {
+        navAlerts(5);
+    }
 }
