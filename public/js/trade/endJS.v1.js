@@ -42,22 +42,3 @@ minConRateSlider.noUiSlider.on('update', function (values, handle) {
 	$('.finalMinRate').text(`${minRateSlider} %`);
 	changeMinRateText();
 });
-
-// sidebar bottom logo sections
-$('.sidebarAdjust').click(function() {
-	if (!sidebar_mini_active) {
-		$('.sidebarBottom').css('display', 'block');
-		$('.sidebarEdit').hover(function(){
-			$('.sidebarBottom').css('display', 'flex');
-		}, function() {
-			$('.sidebarBottom').css('display', 'block');
-		});
-	} else {
-		$('.sidebarBottom').css('display', 'flex');
-		$('.sidebarEdit').hover(function(){
-			$('.sidebarBottom').css('display', 'flex');
-		}, function() {
-			$('.sidebarBottom').css('display', 'flex');
-		});
-	}
-});
