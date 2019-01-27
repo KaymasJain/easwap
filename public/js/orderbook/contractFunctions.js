@@ -222,18 +222,18 @@ function makerFunds(coinAddress, coinSymbol) {
                 totalAssets.eth += EthDetails.funds;
                 totalAssets.ethInWei += EthDetails.fundsInWei;
                 modalDescUpdate(2);
-                $('#ethUnlocked').text(EthDetails.funds);
-                $('#ethTotal').text(totalAssets.eth);
-                $('#ethValue').text(totalAssets.eth*EthDetails.USD);
+                $('#ethUnlocked').text(cleanDecimal(EthDetails.funds, 3));
+                $('#ethTotal').text(cleanDecimal(totalAssets.eth, 3));
+                $('#ethValue').text(cleanDecimal(totalAssets.eth*EthDetails.USD, 3));
             } else {
                 coinDetails.fundsInWei = Number(res);
                 coinDetails.funds = Number(res)/(10**coinDetails.decimals);
                 totalAssets.coin += coinDetails.funds;
                 totalAssets.coinInWei += coinDetails.fundsInWei;
                 modalDescUpdate(4);
-                $('#tokenUnlocked').text(coinDetails.funds);
-                $('#tokenTotal').text(totalAssets.coin);
-                $('#tokenValue').text(totalAssets.coin*coinDetails.USD);
+                $('#tokenUnlocked').text(cleanDecimal(coinDetails.funds, 3));
+                $('#tokenTotal').text(cleanDecimal(totalAssets.coin, 3));
+                $('#tokenValue').text(cleanDecimal(totalAssets.coin*coinDetails.USD, 3));
             }
         }
     });
@@ -252,9 +252,9 @@ function makerKnc() {
             totalAssets.knc += KncDetails.funds;
             totalAssets.kncInWei += KncDetails.fundsInWei;
             modalDescUpdate(6);
-            $('#kncUnlocked').text(KncDetails.funds);
-            $('#kncTotal').text(totalAssets.knc);
-            $('#kncValue').text(totalAssets.knc*KncDetails.USD);
+            $('#kncUnlocked').text(cleanDecimal(KncDetails.funds, 3));
+            $('#kncTotal').text(cleanDecimal(totalAssets.knc, 3));
+            $('#kncValue').text(cleanDecimal(totalAssets.knc*KncDetails.USD, 3));
         }
     });
 }
@@ -340,9 +340,9 @@ function getEthToCoinOrderById(id) {
             usersOrdersEth.value += Number(res[1])/10**18;
             totalAssets.ethInWei += usersOrdersEth.valueInWei;
             totalAssets.eth += usersOrdersEth.value;
-            $('#ethLocked').text(usersOrdersEth.value);
-            $('#ethTotal').text(totalAssets.eth);
-            $('#ethValue').text(totalAssets.eth*EthDetails.USD);
+            $('#ethLocked').text(cleanDecimal(usersOrdersEth.value, 3));
+            $('#ethTotal').text(cleanDecimal(totalAssets.eth, 3));
+            $('#ethValue').text(cleanDecimal(totalAssets.eth*EthDetails.USD, 3));
             updateAllOrdersUI(id, 1);
         }
     });
@@ -444,9 +444,9 @@ function getCoinToEthOrderById(id) {
             usersOrdersToken.value += Number(res[1])/10**(coinDetails.decimals);
             totalAssets.coin += usersOrdersToken.value;
             totalAssets.coinInWei += usersOrdersToken.valueInWei;
-            $('#tokenLocked').text(usersOrdersToken.value);
-            $('#tokenTotal').text(totalAssets.coin);
-            $('#tokenValue').text(totalAssets.coin*coinDetails.USD);
+            $('#tokenLocked').text(cleanDecimal(usersOrdersToken.value, 3));
+            $('#tokenTotal').text(cleanDecimal(totalAssets.coin, 3));
+            $('#tokenValue').text(cleanDecimal(totalAssets.coin*coinDetails.USD, 3));
             updateAllOrdersUI(id, 2);
         }
     });

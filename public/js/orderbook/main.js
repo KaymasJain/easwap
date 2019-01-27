@@ -1,18 +1,18 @@
 function modalDescUpdate(num) {
     if (num == 1) {
-        $('.ethModalDepositData').text(`You can deposit maximum of ${(EthDetails.balance).toFixed(3)} ETH`);
+        $('.ethModalDepositData').text(`You can deposit maximum of ${cleanDecimal(EthDetails.balance, 3)} ETH`);
     } else if (num == 2) {
-        $('.ethModalWithdrawData').text(`You can withdraw maximum of ${(EthDetails.funds).toFixed(3)} ETH`);
-        $('.ethToTokenSubmitData').text(`You have ${(EthDetails.funds).toFixed(3)} ETH unlocked to create an order`);
+        $('.ethModalWithdrawData').text(`You can withdraw maximum of ${cleanDecimal(EthDetails.funds, 3)} ETH`);
+        $('.ethToTokenSubmitData').text(`You have ${cleanDecimal(EthDetails.funds, 3)} ETH unlocked to create an order`);
     } else if (num == 3) {
-        $('.tokenModalDepositData').text(`You can deposit maximum of ${(coinDetails.balance).toFixed(3)} ${coinDetails.symbol}`);
+        $('.tokenModalDepositData').text(`You can deposit maximum of ${cleanDecimal(coinDetails.balance, 3)} ${coinDetails.symbol}`);
     } else if (num == 4) {
-        $('.tokenModalWithdrawData').text(`You can withdraw maximum of ${(coinDetails.funds).toFixed(3)} ${coinDetails.symbol}`);
-        $('.tokenToEthSubmitData').text(`You have ${(coinDetails.funds).toFixed(3)} ${coinDetails.symbol} unlocked to create an order`);
+        $('.tokenModalWithdrawData').text(`You can withdraw maximum of ${cleanDecimal(coinDetails.funds, 3)} ${coinDetails.symbol}`);
+        $('.tokenToEthSubmitData').text(`You have ${cleanDecimal(coinDetails.funds, 3)} ${coinDetails.symbol} unlocked to create an order`);
     } else if (num == 5) {
-        $('.kncModalDepositData').text(`You can deposit maximum of ${(KncDetails.balance).toFixed(3)} KNC`);
+        $('.kncModalDepositData').text(`You can deposit maximum of ${cleanDecimal(KncDetails.balance, 3)} KNC`);
     } else if (num == 6) {
-        $('.kncModalWithdrawData').text(`You can withdraw maximum of ${(KncDetails.funds).toFixed(3)} KNC`);
+        $('.kncModalWithdrawData').text(`You can withdraw maximum of ${cleanDecimal(KncDetails.funds, 3)} KNC`);
     }
 }
 
@@ -98,7 +98,7 @@ function updateOrderSetId(id, symbol) {
         var srcAmt = srcAmtInWei/(10**18);
         var dstAmtInWei = Number(order[2]);
         var dstAmt = dstAmtInWei/(10**(coinDetails.decimals));
-        var text = `Your current order is <br> ${srcAmt} ETH -> ${dstAmt} ${coinDetails.symbol}.<br> You have more ${EthDetails.funds} ETH unlocked`;
+        var text = `Your current order is <br> ${cleanDecimal(srcAmt, 3)} ETH -> ${cleanDecimal(dstAmt, 3)} ${coinDetails.symbol}.<br> You have more ${cleanDecimal(EthDetails.funds, 3)} ETH unlocked`;
         $('.ethToTokenUpdateData').html(text);
     } else {
         var order = usersOrdersToken[id];
@@ -106,7 +106,7 @@ function updateOrderSetId(id, symbol) {
         var srcAmt = srcAmtInWei/(10**(coinDetails.decimals));
         var dstAmtInWei = Number(order[2]);
         var dstAmt = dstAmtInWei/(10**18);
-        var text = `Your current order is <br> ${srcAmt} ${coinDetails.symbol} -> ${dstAmt} ETH.<br> You have more ${coinDetails.funds} ${coinDetails.symbol} unlocked`;
+        var text = `Your current order is <br> ${cleanDecimal(srcAmt, 3)} ${coinDetails.symbol} -> ${cleanDecimal(dstAmt, 3)} ETH.<br> You have more ${cleanDecimal(coinDetails.funds, 3)} ${coinDetails.symbol} unlocked`;
         $('.tokenToEthUpdateData').html(text);
     }
 }
@@ -133,11 +133,11 @@ function updateAllOrdersUI(id, num) {
                         <div class="ethCoinPriceBox">
                             <div class="ETHQtyLogo">
                                 <div><img src="/logos/eth.svg" height="44px" width="44px"></div>
-                                <div class="coinOrderNameQty">${srcAmt} ETH</div>
+                                <div class="coinOrderNameQty">${cleanDecimal(srcAmt, 3)} ETH</div>
                             </div>
                             <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
                             <div class="ETHQtyLogo">
-                                <div class="coinOrderNameQty">${dstAmt} ${coinDetails.symbol}</div>            
+                                <div class="coinOrderNameQty">${cleanDecimal(dstAmt, 3)} ${coinDetails.symbol}</div>            
                                 <div><img src="/logos/${coinDetails.symbol.toLowerCase()}.svg" height="44px" width="44px"></div>
                             </div>
                         </div>
@@ -161,11 +161,11 @@ function updateAllOrdersUI(id, num) {
                         <div class="ethCoinPriceBox">
                             <div class="ETHQtyLogo">
                                 <div><img src="/logos/${coinDetails.symbol.toLowerCase()}.svg" height="44px" width="44px"></div>
-                                <div class="coinOrderNameQty">${srcAmt} ${coinDetails.symbol}</div>
+                                <div class="coinOrderNameQty">${cleanDecimal(srcAmt, 3)} ${coinDetails.symbol}</div>
                             </div>
                             <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
                             <div class="ETHQtyLogo">
-                                <div class="coinOrderNameQty">${dstAmt} ETH</div>            
+                                <div class="coinOrderNameQty">${cleanDecimal(dstAmt, 3)} ETH</div>            
                                 <div><img src="/logos/eth.svg" height="44px" width="44px"></div>
                             </div>
                         </div>
@@ -187,13 +187,13 @@ function tokenToUsd(symbol, cur="USD"){
     $.getJSON(apiUrl, function(result) {
         if (symbol == "ETH") {
             EthDetails.USD = result[cur];
-            $('#ethRate').text(EthDetails.USD);
+            $('#ethRate').text(cleanDecimal(EthDetails.USD, 3));
         } else if (symbol == "KNC") {
             KncDetails.USD = result[cur];
-            $('#tokenRate').text(KncDetails.USD);
+            $('#tokenRate').text(cleanDecimal(KncDetails.USD, 3));
         } else {
             coinDetails.USD = result[cur];
-            $('#kncRate').text(coinDetails.USD);
+            $('#kncRate').text(cleanDecimal(coinDetails.USD, 3));
         }
     });
 }
