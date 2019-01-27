@@ -466,3 +466,30 @@ function getCoinToEthOrder() {
         }
     });
 }
+
+/**
+ * @def pmlReserve function to get TOKEN TO ETH order details
+ * @param {id} required id - order id
+ */
+function expectedRateCoinToCoin(coinFromAdd, coinToAdd, coinFromQty, num) {
+    if (num == 1) {
+        var coinFromQtyInWei = coinFromQty*(10**18);
+    } else {
+        var coinFromQtyInWei = coinFromQty*(10**(coinDetails.decimals));
+    }
+    mainKyberContract.getExpectedRate(coinFromAdd, coinToAdd, coinFromQtyInWei, function (err, res) {
+        if (!err) {
+            if (num == 1) {
+                var rateInWei = Number(res[0]);
+                var rate = Number(res[0])/10**18;
+                $('.ethToCoinPrice').text(`Current best price (${cleanDecimal(coinFromQty, 3)} ${EthDetails.symbol} -> ${cleanDecimal(rate*coinFromQty, 3)} ${coinDetails.symbol})`);
+            } else if (num == 2) {
+                var rateInWei = Number(res[0]);
+                var rate = Number(res[0])/10**18;
+                $('.coinToEthPrice').text(`Current best price (${cleanDecimal(coinFromQty, 3)} ${coinDetails.symbol} -> ${cleanDecimal(rate*coinFromQty, 3)} ${EthDetails.symbol})`);
+            }
+        } else {
+            // navAlerts(17);
+        };
+    });
+}

@@ -5,6 +5,10 @@ var ADD_ZERO = "0x0000000000000000000000000000000000000000";
 var pmlOrderbookReserveLister;
 var coinPmlContract;
 
+// Kyber Proxy contract
+var mainKyberAdd = '0x818E6FECD516Ecc3849DAf6845e3EC868087B755';
+var mainKyberContract;
+
 // KNC ERC20 contract
 var KncERC20Contract;
 

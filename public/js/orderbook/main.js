@@ -201,3 +201,17 @@ function tokenToUsd(symbol, cur="USD"){
 tokenToUsd("ETH");
 tokenToUsd("KNC");
 tokenToUsd(coinDetails.symbol);
+
+
+// ETH to TOKEN getExpectedRate
+$('.ethGetExpectedInput').on('keyup keydown change', function () {
+    var value = $(this).val();
+    expectedRateCoinToCoin(EthDetails.contractAddress, coinDetails.contractAddress, value, 1);
+});
+
+// TOKEN to ETH getExpectedRate
+$('.coinGetExpectedInput').on('keyup keydown change', function () {
+    var value = $(this).val();
+    var valueInWei = value*(10**(coinDetails.decimals));
+    expectedRateCoinToCoin(coinDetails.contractAddress, EthDetails.contractAddress, value, 2);
+});

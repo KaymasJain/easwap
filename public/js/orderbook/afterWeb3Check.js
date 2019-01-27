@@ -7,6 +7,7 @@ function ifWeb3Configured() {
         KncERC20Contract = web3.eth.contract(tokensAbi).at(KncDetails.contractAddress);
         CoinERC20Contract = web3.eth.contract(tokensAbi).at(coinDetails.contractAddress);
         pmlOrderbookReserveLister = web3.eth.contract(ABI_PmlOrderbookReserveLister).at(ADD_PmlOrderbookReserveLister);
+        mainKyberContract = web3.eth.contract(kyberProxyABI).at(mainKyberAdd);
         init();
     } else {
         navAlerts(5);
