@@ -81,7 +81,6 @@ nunjucks.configure(path.join(__dirname, 'views'), {
   express: app
 });
 app.set('view engine', 'html');
-app.use(expressStatusMonitor());
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
