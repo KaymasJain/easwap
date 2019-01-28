@@ -31,7 +31,11 @@ reservesData();
 $('.listBut').click(function() {
     if (networkId == 1) {
         listCoinAdd = $('#listerInput').val();
-        reserveListingStage(listCoinAdd);
+        if (listCoinAdd) {
+            reserveListingStage(listCoinAdd);
+        } else {
+            navAlerts(13);
+        }
     } else if (networkId) {
         navAlerts(5);
     } else {

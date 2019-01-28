@@ -39,6 +39,9 @@ function navAlerts(num) {
     } else if (num == 12) {
         title = 'Listing transactions Deployed!';
         content = "<b>Listing Transactions successfully deployed. We'll let you know once it get confirmed!</b>";
+    } else if (num == 13) {
+        title = 'Input Not Valid';
+        content = "<b>Input should be valid ERC20 address.</b>";
     }
     swal({ "title": title,
             "html": content,
