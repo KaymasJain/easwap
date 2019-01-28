@@ -15,7 +15,6 @@ const flash = require('express-flash');5
 const path = require('path');
 const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
-const expressStatusMonitor = require('express-status-monitor');
 const nunjucks = require('nunjucks');
 const minifyHTML = require('express-minify-html');
 
@@ -82,7 +81,6 @@ nunjucks.configure(path.join(__dirname, 'views'), {
   express: app
 });
 app.set('view engine', 'html');
-app.use(expressStatusMonitor());
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
