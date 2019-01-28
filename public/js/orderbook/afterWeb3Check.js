@@ -41,4 +41,6 @@ function loadFunctions() {
     makerKnc();
     getEthToCoinMakerOrders();
     getCoinToEthMakerOrders();
+    expectedRateCoinToCoin(EthDetails.contractAddress, coinDetails.contractAddress, 1);
+    expectedRateCoinToCoin(coinDetails.contractAddress, EthDetails.contractAddress, 2);
 }

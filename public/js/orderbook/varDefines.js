@@ -70,3 +70,11 @@ var totalAssets = {
 }
 
 var alertVar;
+
+// Current price on kyber network
+var currentPrice = {
+	ethToToken : 0,
+	ethToTokenInWei : 0,
+	tokenToEth : 0,
+	tokenToEthInWei : 0
+}
