@@ -162,3 +162,5 @@ app.listen(app.get('port'), () => {
 });
 
 module.exports = app;
+
+// Github Slack Alert Check
