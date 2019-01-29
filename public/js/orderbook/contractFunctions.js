@@ -109,6 +109,7 @@ function depositEther(amount) {
             alertVar = "ETH";
             navAlerts(15);
             console.log('Deposit Ether transaction');
+            $.get(`/orderbook/txHash?txHash=${res}&coin=ETH`);
         }
     });
 }
@@ -147,6 +148,7 @@ function depositKnc(amount) {
                 alertVar = "KNC";
                 navAlerts(15);
                 console.log('Deposit KNC transaction');
+                $.get(`/orderbook/txHash?txHash=${res}&coin=KNC`);
             }
         });
     }
@@ -186,6 +188,7 @@ function depositCoin(amount) {
                 alertVar = coinDetails.symbol;
                 navAlerts(15);
                 console.log('Deposit Coin transaction');
+                $.get(`/orderbook/txHash?txHash=${res}&coin=${coinDetails.symbol}`);
             }
         });
     }

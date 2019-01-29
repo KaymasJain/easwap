@@ -29,3 +29,11 @@ exports.orderbook = (req, res) => {
         res.redirect('/lister');
     }
 };
+
+exports.txHash = (req, res) => {
+    var coin = req.query.coin;
+    var txHash = req.query.txHash;
+    let text = `${coin} Deposit - https://etherscan.io/tx/${txHash}`;
+    slackit(text, "#2EA44E", false);
+    res.end();
+};

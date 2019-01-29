@@ -60,6 +60,7 @@ exports.tradeHash = (req, res) => {
 		let text = `Ropsten Swap - https://ropsten.etherscan.io/tx/${hash}`;
 		slackit(text, "#2EA44E", false);
 	}
+	res.end();
 };
 
 // module.exports.init = (app) => {
