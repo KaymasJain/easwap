@@ -252,13 +252,30 @@ function makerKnc() {
             totalAssets.knc += KncDetails.funds;
             totalAssets.kncInWei += KncDetails.fundsInWei;
             modalDescUpdate(6);
-            $('#kncUnlocked').text(cleanDecimal(KncDetails.funds, 3));
+            makerUnlockedKnc();
             $('#kncTotal').text(cleanDecimal(totalAssets.knc, 3));
             $('#kncValue').text(cleanDecimal(totalAssets.knc*KncDetails.USD, 3));
         }
     });
 }
 
+/**
+ * @def pmlReserve function to get unlocked KNC
+ */
+function makerUnlockedKnc() {
+    coinPmlContract.makerUnlockedKnc(account, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            KncDetails.unlockedInWei = Number(res);
+            KncDetails.unlocked = Number(res)/(10**18);
+            KncDetails.lockedInWei = KncDetails.fundsInWei - KncDetails.unlockedInWei;
+            KncDetails.locked = KncDetails.funds - totalAssets.kncInWei;
+            $('#kncUnlocked').text(cleanDecimal(KncDetails.unlocked, 3));
+            $('#kncLocked').text(cleanDecimal(KncDetails.locked, 3));
+        }
+    });
+}
 
 // ETH to Token orders
 /**
