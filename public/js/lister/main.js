@@ -3,30 +3,44 @@ function reservesData() {
         Object.keys(result).sort()
         .forEach(function (key, i) {
             var coinData = result[key];
-            var html = `<div class="listedTokenBox">
-                            <div class="logoNameBox">
-                                <div class="logoBox">
-                                    <img src="logos/${key}.svg" style="width:64px; height:64px">
-                                </div>
-                                <div class="nameCodeBox">
-                                    <div class="listerNameBox">${coinData.symbol}</div>
-                                    <div class="listerNameToken">${coinData.name}</div>
-                                </div>
-                            </div>
-                            <div class="btnAddOrderbook">
-                                <a href="/orderbook/${coinData.symbol}">
-                                    <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD/VIEW ORDERBOOK</button>
-                                </a>
-                            </div>
-                        </div>`;
-            $('.listedTokensContainer').append(html); 
+            check(`logos/${key}.svg`).on("error", function(e) {
+                coinData.icon = `<i class="tim-icons icon-alert-circle-exc" style="font-size: 64px; color:var(--primary)"></i>`;
+                listBoxes(coinData);
+            }).on("load", function(e) {
+                coinData.icon = `<img src="logos/${key}.svg" style="width:64px; height:64px">`;
+                listBoxes(coinData);
+            });
         });
     }).fail(function() {
         console.log('Error getting data from database');
     });
 }
 
+function listBoxes(coinData) {
+    var html = `<div class="listedTokenBox">
+                    <div class="logoNameBox">
+                        <div class="logoBox">
+                            ${coinData.icon}
+                        </div>
+                        <div class="nameCodeBox">
+                            <div class="listerNameBox">${coinData.symbol}</div>
+                            <div class="listerNameToken">${coinData.name}</div>
+                        </div>
+                    </div>
+                    <div class="btnAddOrderbook">
+                        <a href="/orderbook/${coinData.symbol}">
+                            <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD/VIEW ORDERBOOK</button>
+                        </a>
+                    </div>
+                </div>`;
+    $('.listedTokensContainer').append(html); 
+}
+
 reservesData();
+
+function check(src) {
+  return $("<img>").attr('src', src);
+}
 
 $('.listBut').click(function() {
     if (networkId == 1) {
