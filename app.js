@@ -39,6 +39,7 @@ const TradeController = require('./routes/TradeRoutes');
 const ListerController = require('./routes/ListerRoutes');
 const OrderbookController = require('./routes/OrderbookRoutes');
 const IndexController = require('./routes/IndexRoutes');
+const TeleController = require('./routes/TeleRoutes');
 
 /**
  * Create Express server.

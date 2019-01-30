@@ -19,5 +19,34 @@ bot.start((req) => {
 bot.command('timepass', (req) => {
     TeleAlert.replyFunction(req);
 });
+// On Command /add
+
+bot.command('add', (req) => {
+    TeleAlert.addFunction(req).catch((err) => {
+        console.error(err);
+    });
+});
+
+// On Command /remove
+bot.command('remove', (req) => {
+    TeleAlert.removeFunction(req).catch((err) => {
+        console.error(err);
+    });
+});
+
+
+// on Command /list
+bot.command('list', (req) => {
+    TeleAlert.removeFunction(req).catch((err) => {
+        console.error(err);
+    });
+});
+
+// On Command /help
+bot.command('help', (req) => {
+    TeleAlert.removeFunction(req).catch((err) => {
+        console.error(err);
+    });
+});
 
 bot.startPolling();

@@ -3,13 +3,13 @@
  */
 
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // chatID -> Unique ID of bot and user
 // alertTime -> time duration of alert
 const TeleBotSchema = new Schema({
-	'cdp' : Number,
-	'chatID' : Number,
+	'EthId': Number,
+	'chatID': Number,
 	'alertTime': Number
 });
 
