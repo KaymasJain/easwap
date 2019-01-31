@@ -6,16 +6,25 @@ const slackit = require('../util/slack').shoot;
 // Markup = require('telegraf/markup');
 
 
+// Making Scenes
+// first Scene
+
+
+
+
 module.exports = {
     // TODO{zubin}
-    // Example function
+    
+
     replyFunction(req) {
         return req.reply('Playing with you').catch((err) => {
             console.error(err);
+            // greeterScene();
         });
     },
     addFunction(req) {
         return req.reply('adding');
+        
     },
     removeFunction(req) {
         return req.reply('removed');
