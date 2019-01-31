@@ -273,7 +273,7 @@ function makerUnlockedKnc() {
             KncDetails.unlockedInWei = Number(res);
             KncDetails.unlocked = Number(res)/(10**18);
             KncDetails.lockedInWei = KncDetails.fundsInWei - KncDetails.unlockedInWei;
-            KncDetails.locked = KncDetails.funds - totalAssets.knc;
+            KncDetails.locked = KncDetails.funds - KncDetails.unlocked;
             $('#kncUnlocked').text(cleanDecimal(KncDetails.unlocked, 3));
             $('#kncLocked').text(cleanDecimal(KncDetails.locked, 3));
         }
