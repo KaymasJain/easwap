@@ -2,15 +2,6 @@ const TeleBot = require('../models/TeleBot.js');
 const helper = require('../util/helper');
 const slackit = require('../util/slack').shoot;
 
-// const Extra = require('telegraf/extra'),
-// Markup = require('telegraf/markup');
-
-
-// Making Scenes
-// first Scene
-
-
-
 
 module.exports = {
     // TODO{zubin}
