@@ -464,6 +464,33 @@ var permissionLessReservesABI = [{
         "payable": false,
         "stateMutability": "view",
         "type": "function"
+    },{
+      "constant": true,
+      "inputs": [
+        
+      ],
+      "name": "limits",
+      "outputs": [
+        {
+          "name": "minNewOrderSizeUsd",
+          "type": "uint256"
+        },
+        {
+          "name": "maxOrdersPerTrade",
+          "type": "uint256"
+        },
+        {
+          "name": "minNewOrderSizeWei",
+          "type": "uint256"
+        },
+        {
+          "name": "minOrderSizeWei",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
     }];
 
 var tokensAbi = [{

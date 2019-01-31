@@ -78,3 +78,12 @@ var currentPrice = {
 	tokenToEth : 0,
 	tokenToEthInWei : 0
 }
+
+var limits = {
+	inUSD : 0,
+	maxOrders : 0,
+	minEthInWei : 0,
+	minEth : 0,
+	minEthToBeValidInWei : 0,
+	minEthToBeValid : 0,
+}
