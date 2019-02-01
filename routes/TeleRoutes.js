@@ -36,9 +36,16 @@ greeterScene.on('message', (req) => req.replyWithMarkdown('Send `hi`'))
 
 
 
+const addScene = new Scene('addScene');
+addScene.enter((req) => req.reply('Enter ETH id'))
+addScene.leave((req) => req.reply('b\'bye'))
+addScene.hears(/(^0x[a-fA-F0-9]{40}$)/, (req) => TeleAlert.addFunction(req))
+addScene.hears('hi', leave('addScene'))
+
+
 
 // Staging scenes here
-const stage = new Stage([greeterScene], {
+const stage = new Stage([greeterScene, addScene], {
     ttl: 10
 })
 
@@ -63,7 +70,7 @@ bot.start((req) => {
 
 // On Command /add
 
-bot.command('add', enter('greeter'));
+bot.command('add', enter('addScene'));
 
 
 // On Command /remove

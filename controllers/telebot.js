@@ -14,7 +14,21 @@ module.exports = {
         });
     },
     addFunction(req) {
-        return req.reply('adding');
+        var data = new TeleBot({
+            EthId : 0,
+            chatId : 0,
+        })
+        data.EthId = req.match;
+        data.chatId = req.chat.id;
+        data.save((err, data) => {
+            if (err){
+                console.error(err)
+                return req.reply("some error occured")
+            }else{
+
+                return req.reply('adding');
+            }
+        } )
         
     },
     removeFunction(req) {

@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 // chatID -> Unique ID of bot and user
 // alertTime -> time duration of alert
 const TeleBotSchema = new Schema({
-	'EthId': Number,
+	'EthId': String,
 	'chatID': Number,
 	'alertTime': Number
 });
