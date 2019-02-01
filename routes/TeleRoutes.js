@@ -83,9 +83,7 @@ bot.command('remove', (req) => {
 
 // on Command /list
 bot.command('list', (req) => {
-    TeleAlert.removeFunction(req).catch((err) => {
-        console.error(err);
-    });
+    TeleAlert.listFunction(req)
 });
 
 // On Command /help
