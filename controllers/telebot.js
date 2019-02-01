@@ -4,7 +4,17 @@ const slackit = require('../util/slack').shoot;
 
 module.exports = {
     // TODO{zubin}
-    
+
+
+
+    start(req){
+        var data = new TeleBot({
+            chatID: req.chat.id,
+        })
+        data.save(function(err){
+            req.reply(req.chat.id)
+        }); 
+    },
 
     replyFunction(req) {
         return req.reply('Playing with you').catch((err) => {
@@ -12,54 +22,54 @@ module.exports = {
             // greeterScene();
         });
     },
+    
+    
+    
+    
     addFunction(req) {
-        TeleBot.find({
-            "EthId": req.match,
-            // chatId: req.chat.id
-        },function(err, isExists) {
-            
-            if (err) {
-                return req.reply("Some Error occured");
-            }
 
-                if (isExists.length >0 ) {
-                console.log(isExists);
-                console.log(req.match[0])
-                return req.reply("ETH Address Already Exists");                
-            }
-
-            var data = new TeleBot({
-                EthId : req.match[0],
-                chatId : req.chat.id
-            });
-
-            data.save((err, data) => {
-                if (err){
-                    console.error(err)
-                    return req.reply("some error occured")
-                } else {
-                    return req.reply('Done');
+        
+        
+        TeleBot.updateOne(
+            { chatID: req.chat.id }, 
+            { $addToSet: { EthId: req.match[0] } },
+            function(err,tank){
+                console.log(tank)
+                if(tank.ok){
+                    if(tank.nModified){
+                        req.reply("added")
+                    }else{
+                        req.reply("already exists")
+                    }
+                }
+                else{
+                    req.reply("some error occured")
                 }
             })
-        })
-        
+            
+            // req.reply("added, i guess");
     },
-    listFunction(req){
+
+
+
+
+
+    listFunction(req) {
         var data = new TeleBot({
-            chatId : req.chat.id,
+            chatId: req.chat.id,
         })
-        
-        TeleBot.find(data , (err, data) => {
-            if(err){
+
+        TeleBot.find(data, (err, data) => {
+            if (err) {
                 console.error(err);
                 return req.reply("some error")
-            }else{
+            } else {
                 return req.reply(data.EthId)
             }
         })
         // return req.reply('here you go!!!')
     },
-    
+
     removeFunction(req) {
         return req.reply('removed');
     },

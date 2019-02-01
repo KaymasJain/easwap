@@ -62,9 +62,7 @@ bot.use(stage.middleware())
 bot.command('greeter', enter('greeter'))
 
 bot.start((req) => {
-    req.reply('Hey! Nice to meet you').catch((err) => {
-        console.error(err);
-    });
+    TeleAlert.start(req);
 });
 
 
