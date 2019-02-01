@@ -7,13 +7,13 @@ module.exports = {
 
 
 
-    start(req){
+    start(req) {
         var data = new TeleBot({
             chatID: req.chat.id,
         })
-        data.save(function(err){
+        data.save(function (err) {
             req.reply(req.chat.id)
-        }); 
+        });
     },
 
     replyFunction(req) {
@@ -22,32 +22,31 @@ module.exports = {
             // greeterScene();
         });
     },
-    
-    
-    
-    
+
+
+
+
     addFunction(req) {
 
-        
-        
-        TeleBot.updateOne(
-            { chatID: req.chat.id }, 
-            { $addToSet: { EthId: req.match[0] } },
-            function(err,tank){
+        TeleBot.updateOne({
+                chatID: req.chat.id
+            }, {
+                $addToSet: {
+                    EthId: req.match[0]
+                }
+            },
+            function (err, tank) {
                 console.log(tank)
-                if(tank.ok){
-                    if(tank.nModified){
+                if (tank.ok) {
+                    if (tank.nModified) {
                         req.reply("added")
-                    }else{
+                    } else {
                         req.reply("already exists")
                     }
-                }
-                else{
+                } else {
                     req.reply("some error occured")
                 }
             })
-            
-            // req.reply("added, i guess");
     },
 
 
@@ -55,16 +54,25 @@ module.exports = {
 
 
     listFunction(req) {
-        var data = new TeleBot({
-            chatId: req.chat.id,
-        })
 
-        TeleBot.find(data, (err, data) => {
+
+        TeleBot.findOne({
+            chatID: req.chat.id
+        }, (err, data) => {
             if (err) {
                 console.error(err);
                 return req.reply("some error")
             } else {
-                return req.reply(data.EthId)
+                arr = data.EthId.
+                console.log(arr)
+                reply = "list of all eth id \n"
+                t = 0
+                for (var x in arr) {
+                    t = t + 1 
+                    reply = reply + " \n " + t + "." + x
+                }
+                console.log(reply)
+                return req.reply(reply)
             }
         })
         // return req.reply('here you go!!!')
