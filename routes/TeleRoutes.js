@@ -27,14 +27,6 @@ const {
 
 
 // Scene Here
-const greeterScene = new Scene('greeter')
-greeterScene.enter((req) => req.reply('Hi'))
-greeterScene.leave((req) => req.reply('Bye'))
-greeterScene.hears('hi', enter('greeter'))
-greeterScene.hears('leave', leave('greater'))
-greeterScene.on('message', (req) => req.replyWithMarkdown('Send `hi`'))
-
-
 
 const addScene = new Scene('addScene');
 addScene.enter((req) => req.reply('Enter ETH id'))
@@ -45,7 +37,7 @@ addScene.hears('hi', leave('addScene'))
 
 
 // Staging scenes here
-const stage = new Stage([greeterScene, addScene], {
+const stage = new Stage([addScene], {
     ttl: 10
 })
 
@@ -59,7 +51,7 @@ bot.use(stage.middleware())
 
 // Commands Here
 
-bot.command('greeter', enter('greeter'))
+
 
 bot.start((req) => {
     TeleAlert.start(req);
@@ -67,7 +59,7 @@ bot.start((req) => {
 
 
 // On Command /add
-
+// bot.hears('/add (.+)/', (req)=> TeleAlert.addFunction(req))
 bot.command('add', enter('addScene'));
 
 

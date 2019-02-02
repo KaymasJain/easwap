@@ -16,18 +16,12 @@ module.exports = {
         });
     },
 
-    replyFunction(req) {
-        return req.reply('Playing with you').catch((err) => {
-            console.error(err);
-            // greeterScene();
-        });
-    },
 
 
 
 
     addFunction(req) {
-
+        console.log(req)
         TeleBot.updateOne({
                 chatID: req.chat.id
             }, {
@@ -54,32 +48,45 @@ module.exports = {
 
 
     listFunction(req) {
-
-
         TeleBot.findOne({
-            chatID: req.chat.id
-        }, (err, data) => {
-            if (err) {
-                console.error(err);
-                return req.reply("some error")
-            } else {
-                arr = data.EthId.
-                console.log(arr)
-                reply = "list of all eth id \n"
-                t = 0
-                for (var x in arr) {
-                    t = t + 1 
-                    reply = reply + " \n " + t + "." + x
+                chatID: req.chat.id
+            }, (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return req.reply("some error")
+                } else {
+                    if (data == null) {
+                        req.reply("some error occured, please /start")
+                    } else {
+
+                        t = data.EthId.length
+
+                        if (t != 0) {
+                            reply = "list of all eth id \n";
+                            x = 0;
+                            while (x < t) {
+                                x = x + 1;
+                                reply = reply + " \n " + x + "." + data.EthId[x - 1];
+                            }
+                        } else {
+                            reply = "list empty"
+                        }
+                        req.reply(reply)
+                    }
                 }
-                console.log(reply)
-                return req.reply(reply)
+
             }
-        })
-        // return req.reply('here you go!!!')
+
+        )
     },
 
+
+
+
     removeFunction(req) {
+
         return req.reply('removed');
+        
     },
     helpFunction(req) {
         return req.reply("help");
