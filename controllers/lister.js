@@ -1,4 +1,5 @@
 const List = require('../models/List.js');
+const ListRops = require('../models/ListRops.js');
 
 /**
  * GET /
@@ -67,7 +68,12 @@ exports.mainLister = (req, res) => {
 };
 
 exports.coinsData = (req, res) => {
-    List.find({}, function(err, response) {
+    var modelList = List;
+    console.log(req.query.ropsten);
+    if (req.query.ropsten) {
+        // modelList = ListRops;
+    }
+    modelList.find({}, function(err, response) {
         if (err) {
             console.log(`Unable to find data - ${err}`);
             res.send({
@@ -83,11 +89,26 @@ exports.coinsData = (req, res) => {
             res.send(objectToSend);
         }
     });
-    // res.send({
-    //     status: true,
-    //     message: `Updated successfully`
-    // });
 };
+
+// exports.coinsDataRops = (req, res) => {
+//     ListRops.find({}, function(err, response) {
+//         if (err) {
+//             console.log(`Unable to find data - ${err}`);
+//             res.send({
+//                 status: false,
+//                 message: `Unable to find data`
+//             });
+//             return;
+//         } else {
+//             let objectToSend = {};
+//             Object.keys(response).forEach(function (key, i) {
+//                 objectToSend[response[key].cmcName.toLowerCase()] = response[key];
+//             });
+//             res.send(objectToSend);
+//         }
+//     });
+// };
 
 exports.update = (req, res) => {
     var data = req.body;
