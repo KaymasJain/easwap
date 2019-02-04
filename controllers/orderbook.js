@@ -65,3 +65,18 @@ exports.withdrawn = (req, res) => {
     slackit(text, "#2EA44E", false);
     res.end();
 };
+
+exports.order = (req, res) => {
+    var act = req.query.act;
+    var txHash = req.query.txHash;
+    var coinOne = req.query.coinOne;
+    var coinTwo = req.query.coinTwo;
+    var text;
+    if (req.query.ropsten) {
+        text = `${act} | ${coinOne} -> ${coinTwo} - https://ropsten.etherscan.io/tx/${txHash}`;
+    } else {
+        text = `${act} | ${coinOne} -> ${coinTwo} - https://etherscan.io/tx/${txHash}`;
+    }
+    slackit(text, "#2EA44E", false);
+    res.end();
+};
