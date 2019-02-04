@@ -1,4 +1,5 @@
 const List = require('../models/List.js');
+const ListRops = require('../models/ListRops.js');
 
 /**
  * GET /
@@ -10,19 +11,27 @@ exports.orderbook = (req, res) => {
         lister: '',
         orderbook: 'active'
     };
+    var modelList = List;
+    if (req.query.ropsten) {
+        modelList = ListRops;
+    }
     const coinName = req.params.coin;
     if (coinName != "KNC") {
-        List.findOne({cmcName:coinName}, function(err, response) {
+        modelList.findOne({cmcName:coinName}, function(err, response) {
             if (err) {
                 console.log(err);
             } else {
-                let coinData = response;
-                res.render('orderbook', {
-                    title: 'Easwap | Create or Manage Orderbook',
-                    active,
-                    coinName,
-                    coinData
-                });
+                if (response) {
+                    let coinData = response;
+                    res.render('orderbook', {
+                        title: 'Easwap | Create or Manage Orderbook',
+                        active,
+                        coinName,
+                        coinData
+                    });
+                } else {
+                    res.redirect('/lister');                    
+                }
             }
         });
     } else {

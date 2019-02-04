@@ -82,7 +82,11 @@ function updateListedToken(coinAddress) {
             "contractAddress" : data.contractAddress,
             "decimals" : data.tokenDecimal,
             "name" : data.tokenName,
-            "symbol" : data.tokenSymbol
+            "symbol" : data.tokenSymbol,
+            "ropsten" : false
+        }
+        if (networkId == 3) {
+            coinData.ropsten = true;
         }
         console.log(coinData);
         $.ajax({

@@ -24,7 +24,11 @@ exports.mainLister = (req, res) => {
     let decimals = req.query.decimals;
     let name = req.query.name;
     let symbol = req.query.symbol;
-    List.findOne({
+    var modelList = List;
+    if (req.query.ropsten) {
+        modelList = ListRops;
+    }
+    modelList.findOne({
         "contractAddress": contractAddress,
     }, function (err, isListed) {
         if (err) {
@@ -42,7 +46,7 @@ exports.mainLister = (req, res) => {
             });
         }
 
-        let ListNewToken = new List({
+        let ListNewToken = new modelList({
             cmcName: cmcName,
             contractAddress: contractAddress,
             decimals: decimals,
@@ -69,9 +73,8 @@ exports.mainLister = (req, res) => {
 
 exports.coinsData = (req, res) => {
     var modelList = List;
-    console.log(req.query.ropsten);
     if (req.query.ropsten) {
-        // modelList = ListRops;
+        modelList = ListRops;
     }
     modelList.find({}, function(err, response) {
         if (err) {
@@ -114,14 +117,18 @@ exports.update = (req, res) => {
     var data = req.body;
     var secret = data.secret;
     var dataToUpdate = data.listedCoins;
+    var modelList = List;
+    if (data.ropsten) {
+        modelList = ListRops;
+    }
     if (secret == process.env.UPDATE_DATA_SECRET) {
-        List.deleteMany({}, function(err, response) {
+        modelList.deleteMany({}, function(err, response) {
             if (err) {
-                console.log(`COINS Main data delete - ${err}`);
+                console.log(`Coins data delete - ${err}`);
             } else {
                 var num = 0;
                 Object.keys(dataToUpdate).forEach(function (key, i) {
-                    let ListNewToken = new List({
+                    let ListNewToken = new modelList({
                         cmcName: dataToUpdate[key].cmcName,
                         contractAddress: dataToUpdate[key].contractAddress,
                         decimals: dataToUpdate[key].decimals,
@@ -153,7 +160,11 @@ exports.update = (req, res) => {
 
 exports.add = (req, res) => {
     var data = req.body;
-    let AddNewToken = new List({
+    var modelList = List;
+    if (data.ropsten) {
+        modelList = ListRops;
+    }
+    let AddNewToken = new modelList({
         cmcName: data.cmcName,
         contractAddress: data.contractAddress,
         decimals: data.decimals,
