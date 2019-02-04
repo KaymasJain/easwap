@@ -320,6 +320,11 @@ function submitEthToCoinOrder(srcAmt, dstAmt) {
         } else {
             navAlerts(18);
             console.log(res);
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}`);
+            }
         }
     })
 }
@@ -337,6 +342,11 @@ function updateEthToCoinOrder(id, srcAmt, dstAmt) {
         } else {
             navAlerts(19);
             console.log(res);
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}`);
+            }
         }
     })
 }
@@ -352,6 +362,11 @@ function cancelEthToCoinOrder(id) {
         } else {
             navAlerts(20);
             console.log(res);
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Cancel&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Cancel&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}`);
+            }
         }
     });
 }
@@ -424,6 +439,11 @@ function submitCoinToEthOrder(srcAmt, dstAmt) {
         } else {
             navAlerts(18);
             console.log(res);
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH`);
+            }
         }
     })
 }
@@ -441,6 +461,11 @@ function updateCoinToEthOrder(id, srcAmt, dstAmt) {
         } else {
             navAlerts(19);
             console.log(res);
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH`);
+            }
         }
     })
 }
@@ -456,6 +481,11 @@ function cancelCoinToEthOrder(id) {
         } else {
             navAlerts(20);
             console.log(res);
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Cancel&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Cancel&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH`);
+            }
         }
     })
 }
