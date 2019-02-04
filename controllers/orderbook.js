@@ -1,5 +1,6 @@
 const List = require('../models/List.js');
 const ListRops = require('../models/ListRops.js');
+const slackit = require('../util/slack').shoot;
 
 /**
  * GET /
@@ -39,10 +40,28 @@ exports.orderbook = (req, res) => {
     }
 };
 
-exports.txHash = (req, res) => {
+exports.deposited = (req, res) => {
     var coin = req.query.coin;
     var txHash = req.query.txHash;
-    let text = `${coin} Deposit - https://etherscan.io/tx/${txHash}`;
+    var text;
+    if (req.query.ropsten) {
+        text = `${coin} Deposited - https://ropsten.etherscan.io/tx/${txHash}`;
+    } else {
+        text = `${coin} Deposited - https://etherscan.io/tx/${txHash}`;
+    }
+    slackit(text, "#2EA44E", false);
+    res.end();
+};
+
+exports.withdrawn = (req, res) => {
+    var coin = req.query.coin;
+    var txHash = req.query.txHash;
+    var text;
+    if (req.query.ropsten) {
+        text = `${coin} Withdrawn - https://ropsten.etherscan.io/tx/${txHash}`;
+    } else {
+        text = `${coin} Withdrawn - https://etherscan.io/tx/${txHash}`;
+    }
     slackit(text, "#2EA44E", false);
     res.end();
 };

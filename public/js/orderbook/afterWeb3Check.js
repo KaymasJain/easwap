@@ -3,7 +3,10 @@ function ifWeb3NotConfigured() {
 }
 
 function ifWeb3Configured() {
-    if (networkId == 1) {
+    if (networkId == 1 || networkId == 3) {
+        if (networkId == 3) {
+            defineRopsvar();
+        }
         KncERC20Contract = web3.eth.contract(tokensAbi).at(KncDetails.contractAddress);
         CoinERC20Contract = web3.eth.contract(tokensAbi).at(coinDetails.contractAddress);
         pmlOrderbookReserveLister = web3.eth.contract(ABI_PmlOrderbookReserveLister).at(ADD_reserveLister);
@@ -12,6 +15,11 @@ function ifWeb3Configured() {
     } else {
         navAlerts(5);
     }
+}
+
+function defineRopsvar() {
+    ADD_reserveLister = "0x405a5fae110c86eb2e5a76809a17fc5bee2d3ccd";
+    KncDetails.contractAddress = "0x4E470dc7321E84CA96FcAEDD0C8aBCebbAEB68C6";
 }
 
 function init() {

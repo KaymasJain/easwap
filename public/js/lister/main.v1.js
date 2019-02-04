@@ -1,5 +1,4 @@
 function reservesData() {
-    console.log("why why why");
     $.get(dataUrl, function(result) {
         Object.keys(result).sort()
         .forEach(function (key, i) {
@@ -18,6 +17,10 @@ function reservesData() {
 }
 
 function listBoxes(coinData) {
+    var orderbookUrl = coinData.symbol;
+    if (networkId == 3) {
+        orderbookUrl = `${coinData.symbol}?ropsten=true`;
+    }
     var html = `<div class="listedTokenBox">
                     <div class="logoNameBox">
                         <div class="logoBox">
@@ -29,7 +32,7 @@ function listBoxes(coinData) {
                         </div>
                     </div>
                     <div class="btnAddOrderbook">
-                        <a href="/orderbook/${coinData.symbol}">
+                        <a href="/orderbook/${orderbookUrl}">
                             <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD/VIEW ORDERBOOK</button>
                         </a>
                     </div>

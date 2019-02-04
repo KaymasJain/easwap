@@ -10,8 +10,8 @@ function navAlerts(num) {
         title = 'Main network';
         content = "<b>You are on main network whatever trade you do will involves real assets.</b>";
     } else if (num == 3) {
-        title = 'Not main network';
-        content = "<b>Shift to main network to create orderbooks.</b>";
+        title = 'Ropsten test network';
+        content = "<b>You are good to use ropsten test version of Token's ropsten orderbook. For real assets orderbook shift to Main Network.</b>";
     } else if (num == 4) {
         title = 'Not Main Network';
         content = "<b>Shift to main network to create orderbooks.</b>";

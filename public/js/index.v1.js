@@ -1,5 +1,7 @@
 let networkId; // network ID
 let account; // user account
+let dataUrl = "/lister/coinsData";
+// let dataUrl = "/lister/coinsData?ropsten=true" // for ropsten
 
 window.addEventListener('load', async () => {
     if (window.ethereum) {
@@ -18,6 +20,7 @@ window.addEventListener('load', async () => {
         let link = `<button class="btn btn-info btn-simple animation-on-hover" type="button" onclick="navAlerts(0)">Create ID</button>`;
         $('.navUserAdd').html(link);
         ifWeb3NotConfigured();
+        updateNavOrderbook();
     }
 });
 
@@ -31,6 +34,7 @@ function getAccountAndNetwork() {
         if (networkId == 1) {
             $('.networkName').html(`<button class="btn btn-success animation-on-hover" type="button" onclick='navAlerts(2)'>MAIN NETWORK</button>`);
         } else if (networkId == 3) {
+            dataUrl = "/lister/coinsData?ropsten=true";
             $('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(3)'>ROPSTEN TEST NETWORK</button>`);
         } else {
             $('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(4)'>NOT MAIN NETWORK</button>`);
@@ -60,5 +64,6 @@ function getAccountAndNetwork() {
             $('.navUserAdd').html(link);
         }
         ifWeb3Configured();
+        updateNavOrderbook();
     });
 }

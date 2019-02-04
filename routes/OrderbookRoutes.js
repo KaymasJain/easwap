@@ -5,7 +5,8 @@ var OrderbookController = require('../controllers/orderbook.js');
 /*
  * GET all CDP all acts
  */
-router.get('/txHash', OrderbookController.txHash);
+router.get('/deposited', OrderbookController.deposited);
+router.get('/withdrawn', OrderbookController.withdrawn);
 router.get('/:coin', OrderbookController.orderbook);
 router.get('*', OrderbookController.orderbook);
 /*

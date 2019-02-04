@@ -109,7 +109,11 @@ function depositEther(amount) {
             alertVar = "ETH";
             navAlerts(15);
             console.log('Deposit Ether transaction');
-            $.get(`/orderbook/txHash?txHash=${res}&coin=ETH`);
+            if (networkId == 3) {
+                $.get(`/orderbook/deposited?txHash=${res}&coin=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/deposited?txHash=${res}&coin=ETH`);
+            }
         }
     });
 }
@@ -126,6 +130,11 @@ function withdrawEther(amount) {
             alertVar = "ETH";
             navAlerts(16);
             console.log('Withdraw Ether transaction');
+            if (networkId == 3) {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=ETH`);
+            }
         }
     });
 }
@@ -148,7 +157,11 @@ function depositKnc(amount) {
                 alertVar = "KNC";
                 navAlerts(15);
                 console.log('Deposit KNC transaction');
-                $.get(`/orderbook/txHash?txHash=${res}&coin=KNC`);
+                if (networkId == 3) {
+                    $.get(`/orderbook/deposited?txHash=${res}&coin=KNC&ropsten=true`);
+                } else {
+                    $.get(`/orderbook/deposited?txHash=${res}&coin=KNC`);
+                }
             }
         });
     }
@@ -166,6 +179,11 @@ function withdrawKnc(amount) {
             alertVar = "KNC";
             navAlerts(16);
             console.log('Withdraw KNC transaction');
+            if (networkId == 3) {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=KNC&ropsten=true`);
+            } else {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=KNC`);
+            }
         }
     })
 }
@@ -188,7 +206,12 @@ function depositCoin(amount) {
                 alertVar = coinDetails.symbol;
                 navAlerts(15);
                 console.log('Deposit Coin transaction');
-                $.get(`/orderbook/txHash?txHash=${res}&coin=${coinDetails.symbol}`);
+                if (networkId == 3) {
+                    $.get(`/orderbook/deposited?txHash=${res}&coin=${coinDetails.symbol}&ropsten=true`);
+                } else {
+                    $.get(`/orderbook/deposited?txHash=${res}&coin=${coinDetails.symbol}`);
+                }
+                alert('deposited');
             }
         });
     }
@@ -206,6 +229,11 @@ function withdrawCoin(amount) {
             alertVar = coinDetails.symbol;
             navAlerts(16);
             console.log('Withdraw Coin transaction');
+            if (networkId == 3) {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=${coinDetails.symbol}&ropsten=true`);
+            } else {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=${coinDetails.symbol}`);
+            }
         }
     });
 }
