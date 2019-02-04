@@ -1,5 +1,5 @@
 function reservesData() {
-    $.get("/lister/coinsData", function(result) {
+    $.get(dataUrl, function(result) {
         Object.keys(result).sort()
         .forEach(function (key, i) {
             var coinData = result[key];
@@ -17,6 +17,10 @@ function reservesData() {
 }
 
 function listBoxes(coinData) {
+    var orderbookUrl = coinData.symbol;
+    if (networkId == 3) {
+        orderbookUrl = `${coinData.symbol}?ropsten=true`;
+    }
     var html = `<div class="listedTokenBox">
                     <div class="logoNameBox">
                         <div class="logoBox">
@@ -28,7 +32,7 @@ function listBoxes(coinData) {
                         </div>
                     </div>
                     <div class="btnAddOrderbook">
-                        <a href="/orderbook/${coinData.symbol}">
+                        <a href="/orderbook/${orderbookUrl}">
                             <button class="btn btn-warning animation-on-hover btn-lg h2" type="button">ADD/VIEW ORDERBOOK</button>
                         </a>
                     </div>
@@ -36,14 +40,12 @@ function listBoxes(coinData) {
     $('.listedTokensContainer').append(html); 
 }
 
-reservesData();
-
 function check(src) {
   return $("<img>").attr('src', src);
 }
 
 $('.listBut').click(function() {
-    if (networkId == 1) {
+    if (networkId == 1 || networkId == 3) {
         listCoinAdd = $('#listerInput').val();
         if (listCoinAdd) {
             reserveListingStage(listCoinAdd);
@@ -83,7 +85,11 @@ function updateListedToken(coinAddress) {
             "contractAddress" : data.contractAddress,
             "decimals" : data.tokenDecimal,
             "name" : data.tokenName,
-            "symbol" : data.tokenSymbol
+            "symbol" : data.tokenSymbol,
+            "ropsten" : false
+        }
+        if (networkId == 3) {
+            coinData.ropsten = true;
         }
         console.log(coinData);
         $.ajax({

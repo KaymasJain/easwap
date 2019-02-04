@@ -3,7 +3,11 @@
 function updateDatabase(dataToStore) {
 	var objectToSend = {
 		'secret': secretToStore,
-		'listedCoins': dataToStore // object of tokens
+		'listedCoins': dataToStore, // object of tokens
+		'ropsten': false
+	}
+	if (networkId == 3) {
+		objectToSend.ropsten = true;
 	}
 	$.ajax({
 		url: "/lister/update",
@@ -13,9 +17,10 @@ function updateDatabase(dataToStore) {
         dataType:'json',
         success: function (data) { 
             console.log(data);
+			alert('saved');
         }
 	});
-	alert('saved');
+	alert('saving in process');
 }
 
 function getJSON(secret) {
