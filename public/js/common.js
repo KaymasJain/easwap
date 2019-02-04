@@ -7,7 +7,7 @@ function cleanDecimal(num, power) {
 }
 
 function updateNavOrderbook() {
-    $.get("/lister/coinsData", function(result) {
+    $.get(dataUrl, function(result) {
         Object.keys(result).sort()
         .forEach(function (key, i) {
             var coinData = result[key];
@@ -21,5 +21,3 @@ function updateNavOrderbook() {
         console.log('Error getting data from database');
     });
 }
-
-updateNavOrderbook();

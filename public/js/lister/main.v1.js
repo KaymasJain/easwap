@@ -1,5 +1,6 @@
 function reservesData() {
-    $.get("/lister/coinsData", function(result) {
+    console.log("why why why");
+    $.get(dataUrl, function(result) {
         Object.keys(result).sort()
         .forEach(function (key, i) {
             var coinData = result[key];
@@ -36,14 +37,12 @@ function listBoxes(coinData) {
     $('.listedTokensContainer').append(html); 
 }
 
-reservesData();
-
 function check(src) {
   return $("<img>").attr('src', src);
 }
 
 $('.listBut').click(function() {
-    if (networkId == 1) {
+    if (networkId == 1 || networkId == 3) {
         listCoinAdd = $('#listerInput').val();
         if (listCoinAdd) {
             reserveListingStage(listCoinAdd);

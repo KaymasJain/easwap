@@ -4,6 +4,9 @@ var ADD_reserveLister = "0x84afa106fbf9b45e369724024cae14e8c7529c26"; // Main ne
 // var ADD_reserveLister = "0x405a5fae110c86eb2e5a76809a17fc5bee2d3ccd" // Ropsten lister contract address
 var ADD_ZERO = "0x0000000000000000000000000000000000000000"
 
+var dataUrl = "/lister/coinsData"
+// var dataUrl = "/lister/coinsData?ropsten=true" // for ropsten
+
 var reservesAPI = "https://api.kyber.network/currencies?only_official_reserve=false"; // Main network
 // var reservesAPI = "https://ropsten-api.kyber.network/currencies?only_official_reserve=false"; // Ropsten network
 var apiDataLength = 0;
