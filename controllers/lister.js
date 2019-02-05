@@ -87,7 +87,7 @@ exports.coinsData = (req, res) => {
         } else {
             let objectToSend = {};
             Object.keys(response).forEach(function (key, i) {
-                objectToSend[response[key].cmcName.toLowerCase()] = response[key];
+                objectToSend[response[key].symbol.toLowerCase()] = response[key];
             });
             res.send(objectToSend);
         }
@@ -128,6 +128,9 @@ exports.update = (req, res) => {
             } else {
                 var num = 0;
                 Object.keys(dataToUpdate).forEach(function (key, i) {
+                    if ((dataToUpdate[key].symbol).includes('.')) {
+                        return;
+                    }
                     let ListNewToken = new modelList({
                         cmcName: dataToUpdate[key].cmcName,
                         contractAddress: dataToUpdate[key].contractAddress,
