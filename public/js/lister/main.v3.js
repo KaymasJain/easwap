@@ -4,28 +4,27 @@ function reservesData() {
         .forEach(function (key, i) {
             var coinData = result[key];
             check(`logos/${key}.svg`).on("error", function(e) {
-                coinData.icon = `<i class="tim-icons icon-alert-circle-exc" style="font-size: 64px; color:var(--primary)"></i>`;
-                listBoxes(coinData);
+                var icon = `<i class="tim-icons icon-alert-circle-exc" style="font-size: 64px; color:var(--primary)"></i>`;
+                $(`.${key}LogoBox`).html(icon);
             }).on("load", function(e) {
-                coinData.icon = `<img src="logos/${key}.svg" style="width:64px; height:64px">`;
-                listBoxes(coinData);
+                var icon = `<img src="logos/${key}.svg" style="width:64px; height:64px">`;
+                $(`.${key}LogoBox`).html(icon);
             });
+            listBoxes(coinData, key);
         });
     }).fail(function() {
         console.log('Error getting data from database');
     });
 }
 
-function listBoxes(coinData) {
+function listBoxes(coinData, key) {
     var orderbookUrl = coinData.symbol;
     if (networkId == 3) {
         orderbookUrl = `${coinData.symbol}?ropsten=true`;
     }
     var html = `<div class="listedTokenBox">
                     <div class="logoNameBox">
-                        <div class="logoBox">
-                            ${coinData.icon}
-                        </div>
+                        <div class="logoBox ${key}LogoBox"></div>
                         <div class="nameCodeBox">
                             <div class="listerNameBox">${coinData.symbol}</div>
                             <div class="listerNameToken">${coinData.name}</div>
