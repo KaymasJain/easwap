@@ -12,6 +12,12 @@ const slackit = require('../util/slack').shoot;
 // const coinMarketKey = process.env.COIN_MARKET_KEY;
 
 exports.update = (req, res) => {
+	if (req.query.secret != process.env.UPDATE_DATA_SECRET) {
+		return res.send({
+			status: false,
+			data: "wrong secret phrase"
+		})
+	}
 	var reservesAPI = "api";
 	var modelTrade = Trade;
 	var modelLister = List;
@@ -26,74 +32,89 @@ exports.update = (req, res) => {
 			console.log(err);
 			slackit(`Kyber Ropsten API - ${err}`, "#D50201", false);
 		} else {
-			Object.keys(data).forEach(function (key, i) {
-                if (data[key].symbol) {
-					let TradeToken = new modelTrade({
-                        cmcName: dataToUpdate[key].cmcName,
-                        contractAddress: dataToUpdate[key].contractAddress,
-                        decimals: dataToUpdate[key].decimals,
-                        name: dataToUpdate[key].name,
-                        symbol: dataToUpdate[key].symbol
-					});
-					TradeToken.save(function (err, updated) {
-                        if (err) {
-                            console.log(`error updating trade Coins data - ${err}`);
-                            res.send({
-                                status: false,
-                                message: `Unable to save data`
-                            });
-                            return;
-                        }
-                        num++;
-                        console.log(num);
-                    });
+			modelTrade.deleteMany({}, function(err, response) {
+				if (err) {
+					console.log(`Coins data delete - ${err}`);
 				} else {
-					modelLister.find({
-						contractAddress : data[key].contractAddress
-					}, function(err, response) {
-						if (err) {
-							console.log(`Unable to find data - ${err}`);
-							res.send({
-								status: false,
-								message: `Unable to find data`
+					var coinsData = JSON.parse(data);
+					coinsData = coinsData.data;
+					var num = 0;
+					Object.keys(coinsData).forEach(function (key, i) {
+						if (coinsData[key].symbol) {
+							let TradeToken = new modelTrade({
+								cmcName: coinsData[key].symbol,
+								contractAddress: coinsData[key].address,
+								decimals: coinsData[key].decimals,
+								name: coinsData[key].name,
+								symbol: coinsData[key].symbol
 							});
-							return;
+							TradeToken.save(function (err, updated) {
+								if (err) {
+									console.log(`error updating trade Coins data - ${err}`);
+									res.send({
+										status: false,
+										message: `Unable to save data`
+									});
+									return;
+								}
+								num++;
+								console.log(num);
+							});
 						} else {
-							let objectToSend = {};
-							Object.keys(response).forEach(function (key, i) {
-								objectToSend[response[key].symbol.toLowerCase()] = response[key];
+							modelLister.findOne({
+								contractAddress : coinsData[key].address
+							}, function(err, response) {
+								if (err) {
+									console.log(`Unable to find data - ${err}`);
+									res.send({
+										status: false,
+										message: `Unable to find data`
+									});
+									return;
+								} else {
+									var symbol = response.symbol;
+									if (symbol.includes('.')) {
+										return;
+									}
+									let TradeToken = new modelTrade({
+										cmcName: response.symbol,
+										contractAddress: response.contractAddress,
+										decimals: response.decimals,
+										name: response.name,
+										symbol: response.symbol
+									});
+									TradeToken.save(function (err, updated) {
+										if (err) {
+											console.log(`error updating trade Coins data - ${err}`);
+											res.send({
+												status: false,
+												message: `Unable to save data`
+											});
+											return;
+										}
+										num++;
+										console.log(num);
+									});
+								}
 							});
-							res.send(objectToSend);
 						}
 					});
+					res.send({
+						success: true
+					})
 				}
-            });          
+			});
 		}
 	});
 };
 
 
-exports.kyberMain = (req, res) => {
-    // request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
-	// 	if (err) {
-	// 		console.log(err);
-	// 		slackit(`Kyber Mainnet API - ${err}`, "#D50201", false);
-	// 	} else {
-    //         var details = JSON.parse(data);
-	// 		var objectData = {};
-	// 		for (i = 0; i < details.length; i++) {
-	// 			var toLower = details[i].symbol.toLowerCase();
-	// 			objectData[toLower] = details[i];
-    //         }
-    //         res.send(objectData);
-	// 	}
-	// });
-
-	var modelList = List;
+exports.tradeData = (req, res) => {
+	var modelTrade = Trade;
     if (req.query.ropsten) {
-        modelList = ListRops;
+        modelTrade = TradeRops;
     }
-    modelList.find({}, function(err, response) {
+    modelTrade.find({}, function(err, response) {
         if (err) {
             console.log(`Unable to find data - ${err}`);
             res.send({
@@ -104,28 +125,13 @@ exports.kyberMain = (req, res) => {
         } else {
             let objectToSend = {};
             Object.keys(response).forEach(function (key, i) {
-                objectToSend[response[key].symbol.toLowerCase()] = response[key];
+				var symbolLowercase = response[key].symbol.toLowerCase();
+                objectToSend[symbolLowercase] = response[key];
             });
-            res.send(objectToSend);
+			res.send(objectToSend);
+			res.end();
         }
     });
-};
-
-exports.kyberRops = (req, res) => {
-    request('https://tracker.kyber.network/api/tokens/supported?chain=ropsten', (err, respond, data) => {
-		if (err) {
-			console.log(err);
-			slackit(`Kyber Ropsten API - ${err}`, "#D50201", false);
-		} else {
-			var details = JSON.parse(data);
-			var objectData = {};
-			for (i = 0; i < details.length; i++) {
-				var toLower = details[i].symbol.toLowerCase();
-				objectData[toLower] = details[i];
-            }
-            res.send(objectData);            
-		}
-	});
 };
 
 exports.gas = (req, res) => {
