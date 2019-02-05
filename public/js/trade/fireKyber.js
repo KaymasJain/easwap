@@ -15,7 +15,7 @@ function dataAsPerNetwork() {
             showBoxes();
         });
     } else {
-        $.get("/trade/kyberMain", function(data, status){
+        $.get("/lister/coinsData", function(data, status){
             $('.loaderBox').css('display', 'none');
             $('.loader').css('display', 'none');
             coinsData = data;

@@ -87,7 +87,7 @@ exports.coinsData = (req, res) => {
         } else {
             let objectToSend = {};
             Object.keys(response).forEach(function (key, i) {
-                objectToSend[response[key].cmcName.toLowerCase()] = response[key];
+                objectToSend[response[key].symbol.toLowerCase()] = response[key];
             });
             res.send(objectToSend);
         }

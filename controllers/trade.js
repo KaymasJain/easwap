@@ -2,25 +2,113 @@ const Gas = require('../models/Gas.js');
 const request = require('request'),
 	rp = require('request-promise');
 
+const List = require('../models/List.js');
+const ListRops = require('../models/ListRops.js');
+const Trade = require('../models/Trade.js');
+const TradeRops = require('../models/TradeRops.js');
+
 const slackit = require('../util/slack').shoot;
 
 // const coinMarketKey = process.env.COIN_MARKET_KEY;
 
-exports.kyberMain = (req, res) => {
-    request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
+exports.update = (req, res) => {
+	var reservesAPI = "api";
+	var modelTrade = Trade;
+	var modelLister = List;
+	if (req.query.ropsten) {
+		reservesAPI = "ropsten-api";
+		modelTrade = TradeRops;
+		modelLister = ListRops;
+	}
+	var apiData = `https://${reservesAPI}.kyber.network/currencies?only_official_reserve=false`;
+    request(apiData, (err, respond, data) => {
 		if (err) {
 			console.log(err);
-			slackit(`Kyber Mainnet API - ${err}`, "#D50201", false);
+			slackit(`Kyber Ropsten API - ${err}`, "#D50201", false);
 		} else {
-            var details = JSON.parse(data);
-			var objectData = {};
-			for (i = 0; i < details.length; i++) {
-				var toLower = details[i].symbol.toLowerCase();
-				objectData[toLower] = details[i];
-            }
-            res.send(objectData);
+			Object.keys(data).forEach(function (key, i) {
+                if (data[key].symbol) {
+					let TradeToken = new modelTrade({
+                        cmcName: dataToUpdate[key].cmcName,
+                        contractAddress: dataToUpdate[key].contractAddress,
+                        decimals: dataToUpdate[key].decimals,
+                        name: dataToUpdate[key].name,
+                        symbol: dataToUpdate[key].symbol
+					});
+					TradeToken.save(function (err, updated) {
+                        if (err) {
+                            console.log(`error updating trade Coins data - ${err}`);
+                            res.send({
+                                status: false,
+                                message: `Unable to save data`
+                            });
+                            return;
+                        }
+                        num++;
+                        console.log(num);
+                    });
+				} else {
+					modelLister.find({
+						contractAddress : data[key].contractAddress
+					}, function(err, response) {
+						if (err) {
+							console.log(`Unable to find data - ${err}`);
+							res.send({
+								status: false,
+								message: `Unable to find data`
+							});
+							return;
+						} else {
+							let objectToSend = {};
+							Object.keys(response).forEach(function (key, i) {
+								objectToSend[response[key].symbol.toLowerCase()] = response[key];
+							});
+							res.send(objectToSend);
+						}
+					});
+				}
+            });          
 		}
 	});
+};
+
+
+exports.kyberMain = (req, res) => {
+    // request('https://tracker.kyber.network/api/tokens/supported', (err, respond, data) => {
+	// 	if (err) {
+	// 		console.log(err);
+	// 		slackit(`Kyber Mainnet API - ${err}`, "#D50201", false);
+	// 	} else {
+    //         var details = JSON.parse(data);
+	// 		var objectData = {};
+	// 		for (i = 0; i < details.length; i++) {
+	// 			var toLower = details[i].symbol.toLowerCase();
+	// 			objectData[toLower] = details[i];
+    //         }
+    //         res.send(objectData);
+	// 	}
+	// });
+
+	var modelList = List;
+    if (req.query.ropsten) {
+        modelList = ListRops;
+    }
+    modelList.find({}, function(err, response) {
+        if (err) {
+            console.log(`Unable to find data - ${err}`);
+            res.send({
+                status: false,
+                message: `Unable to find data`
+            });
+            return;
+        } else {
+            let objectToSend = {};
+            Object.keys(response).forEach(function (key, i) {
+                objectToSend[response[key].symbol.toLowerCase()] = response[key];
+            });
+            res.send(objectToSend);
+        }
+    });
 };
 
 exports.kyberRops = (req, res) => {
