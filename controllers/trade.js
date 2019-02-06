@@ -11,6 +11,10 @@ const slackit = require('../util/slack').shoot;
 
 // const coinMarketKey = process.env.COIN_MARKET_KEY;
 
+exports.index = (req, res) => {
+    res.redirect("/");
+};
+
 exports.update = (req, res) => {
 	if (req.query.secret != process.env.UPDATE_DATA_SECRET) {
 		return res.send({

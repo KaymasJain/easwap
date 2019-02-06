@@ -94,25 +94,6 @@ exports.coinsData = (req, res) => {
     });
 };
 
-// exports.coinsDataRops = (req, res) => {
-//     ListRops.find({}, function(err, response) {
-//         if (err) {
-//             console.log(`Unable to find data - ${err}`);
-//             res.send({
-//                 status: false,
-//                 message: `Unable to find data`
-//             });
-//             return;
-//         } else {
-//             let objectToSend = {};
-//             Object.keys(response).forEach(function (key, i) {
-//                 objectToSend[response[key].cmcName.toLowerCase()] = response[key];
-//             });
-//             res.send(objectToSend);
-//         }
-//     });
-// };
-
 exports.update = (req, res) => {
     var data = req.body;
     var secret = data.secret;
