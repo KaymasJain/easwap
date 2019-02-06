@@ -72,29 +72,31 @@ exports.update = (req, res) => {
 									});
 									return;
 								} else {
-									var symbol = response.symbol;
-									if (symbol.includes('.')) {
-										return;
-									}
-									let TradeToken = new modelTrade({
-										cmcName: response.symbol,
-										contractAddress: response.contractAddress,
-										decimals: response.decimals,
-										name: response.name,
-										symbol: response.symbol
-									});
-									TradeToken.save(function (err, updated) {
-										if (err) {
-											console.log(`error updating trade Coins data - ${err}`);
-											res.send({
-												status: false,
-												message: `Unable to save data`
-											});
+									if (response) {
+										var symbol = response.symbol;
+										if (symbol.includes('.')) {
 											return;
 										}
-										num++;
-										console.log(num);
-									});
+										let TradeToken = new modelTrade({
+											cmcName: response.symbol,
+											contractAddress: response.contractAddress,
+											decimals: response.decimals,
+											name: response.name,
+											symbol: response.symbol
+										});
+										TradeToken.save(function (err, updated) {
+											if (err) {
+												console.log(`error updating trade Coins data - ${err}`);
+												res.send({
+													status: false,
+													message: `Unable to save data`
+												});
+												return;
+											}
+											num++;
+											console.log(num);
+										});
+									}
 								}
 							});
 						}
