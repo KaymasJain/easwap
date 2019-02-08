@@ -13,6 +13,8 @@ function modalDescUpdate(num) {
         $('.kncModalDepositData').text(`You can deposit maximum of ${cleanDecimal(KncDetails.balance, 3)} KNC`);
     } else if (num == 6) {
         $('.kncModalWithdrawData').text(`You can withdraw maximum of ${cleanDecimal(KncDetails.funds, 3)} KNC`);
+    } else if (num == 7) {
+        $('.minEthRequired').text(`Min ${cleanDecimal(limits.minEth, 3)} ETH and ${cleanDecimal(limits.minKnc, 3)} KNC/ETH required to create order`);
     }
 }
 

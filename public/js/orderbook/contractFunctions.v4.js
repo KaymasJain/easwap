@@ -545,7 +545,6 @@ function getCoinToEthOrder() {
     });
 }
 
-
 /**
  * @def pmlReserve function to get Overall order details like min order size
  */
@@ -560,6 +559,22 @@ function getLimits() {
             limits.minEth = Number(res[2]/(10**18));
             limits.minEthToBeValidInWei = Number(res[3]);
             limits.minEthToBeValid = Number(res[3]/(10**18));
+            modalDescUpdate(7);
+        }
+    });
+}
+
+/**
+ * @def pmlReserve function to get Overall order details like min order size
+ */
+function minKncRequired(ethQtyInWei) {
+    coinPmlContract.calcKncStake(ethQtyInWei, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            limits.minKnc = Number(res/10**18);
+            limits.minKncInWei = Number(res);
+            modalDescUpdate(7);
         }
     });
 }

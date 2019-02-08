@@ -49,6 +49,8 @@ function loadFunctions() {
     makerKnc();
     getEthToCoinMakerOrders();
     getCoinToEthMakerOrders();
+    getLimits();
+    minKncRequired(1000000000000000000);
     expectedRateCoinToCoin(EthDetails.contractAddress, coinDetails.contractAddress, 1);
     expectedRateCoinToCoin(coinDetails.contractAddress, EthDetails.contractAddress, 2);
 }
