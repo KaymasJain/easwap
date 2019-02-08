@@ -35,7 +35,7 @@ function init() {
                 navAlerts(6);
 			}
 		}
-	})
+	});
 }
 
 function loadFunctions() {
