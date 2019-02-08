@@ -5,9 +5,9 @@ var ADD_coinPmlContract;
 var ADD_ZERO = "0x0000000000000000000000000000000000000000";
 var reserveLister;
 var tokensData = {};
+var tokensDataLength = 0;
+var tokensReserves = {};
 
-// Tokens reserves define contract
-var tokensContract = {};
 
 var EthDetails = {
 	"cmcName" : "ETH",

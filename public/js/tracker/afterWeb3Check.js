@@ -17,9 +17,14 @@ function ifWeb3Configured() {
 function reservesData() {
     $.get(dataUrl, function(result) {
         tokensData = result;
-        Object.keys(tokensData)
+        tokensDataLength = Object.keys(tokensData).length;;
+        Object.keys(tokensData).sort()
         .forEach(function (key, i) {
-            console.log(tokensData[key]);
+            var html = `<div class="tokenOrderbooks ${key}OrdersBox">
+                            <h2 class="text-center tokenOrderTitle">${tokensData[key].symbol} Orderbook</h2>
+                        </div>`;
+            $('.tokensTrackerContainer').append(html);
+            getTokenReserve(tokensData[key]);
         });
     }).fail(function() {
         console.log('Error getting data from database');

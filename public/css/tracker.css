@@ -1,0 +1,12 @@
+.tokenOrderbooks {
+    display: none;
+    border-top: 2px solid var(--primary);
+}
+
+.tokenOrderTitle {
+    margin: auto;
+    width: max-content;
+    margin-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--primary);
+}
