@@ -9,6 +9,14 @@ var TradeController = require('../controllers/trade.js');
 /*
  * ?secret=SECRET_PHRASE
  * ?ropsten=true for ropsten data update
+ * ?symbol=TOKEN_SYMBOL to add new token to trading section
+ */
+router.get('/add', TradeController.add);
+
+
+/*
+ * ?secret=SECRET_PHRASE
+ * ?ropsten=true for ropsten data update
  */
 router.get('/update', TradeController.update);
 

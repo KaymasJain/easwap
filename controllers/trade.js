@@ -15,6 +15,79 @@ exports.index = (req, res) => {
     res.redirect("/");
 };
 
+
+exports.add = (req, res) => {
+    if (req.query.secret != process.env.UPDATE_DATA_SECRET) {
+		return res.send({
+			status: false,
+			data: "wrong secret phrase"
+		})
+	}
+	var symbol = req.query.symbol;
+	var modelTrade = Trade;
+	var modelLister = List;
+	if (req.query.ropsten) {
+		modelTrade = TradeRops;
+		modelLister = ListRops;
+	}
+	modelTrade.findOne({
+		'symbol' : symbol
+	}, function(err, isInTrade) {
+		if (err) {
+			console.log(`Unable to find data - ${err}`);
+			res.send({
+				status: false,
+				message: `Unable to find data`
+			});
+			return;
+		}
+		if (!isInTrade) {
+			modelLister.findOne({
+				'symbol' : symbol
+			}, function(err, response) {
+				if (err) {
+					console.log(`Unable to find data - ${err}`);
+					return res.send({
+						status: false,
+						message: `Unable to find data`
+					});
+				} else {
+					if (response) {
+						let TradeToken = new modelTrade({
+							cmcName: response.symbol,
+							contractAddress: response.contractAddress,
+							decimals: response.decimals,
+							name: response.name,
+							symbol: response.symbol
+						});
+						TradeToken.save(function (err, updated) {
+							if (err) {
+								console.log(`error updating trade Coins data - ${err}`);
+								return res.send({
+									status: false,
+									message: `Unable to save data`
+								});
+							}
+							if (updated) {
+								return res.send({
+									status: true,
+									message: `Token saved for trading section`
+								});
+							}
+						});
+					}
+				}
+			});
+		} else {
+			return res.send({
+				status: true,
+				message: `Token Already exist in trade`
+			});
+		}
+	});
+};
+
+
 exports.update = (req, res) => {
 	if (req.query.secret != process.env.UPDATE_DATA_SECRET) {
 		return res.send({
@@ -22,6 +95,7 @@ exports.update = (req, res) => {
 			data: "wrong secret phrase"
 		})
 	}
+	var newToken = req.query.newToken;
 	var reservesAPI = "api";
 	var modelTrade = Trade;
 	var modelLister = List;
@@ -42,7 +116,6 @@ exports.update = (req, res) => {
 				} else {
 					var coinsData = JSON.parse(data);
 					coinsData = coinsData.data;
-					var num = 0;
 					Object.keys(coinsData).forEach(function (key, i) {
 						if (coinsData[key].symbol) {
 							let TradeToken = new modelTrade({
@@ -61,10 +134,8 @@ exports.update = (req, res) => {
 									});
 									return;
 								}
-								num++;
-								console.log(num);
 							});
-						} else {
+						} else if (newToken) {
 							modelLister.findOne({
 								contractAddress : coinsData[key].address
 							}, function(err, response) {
@@ -97,8 +168,6 @@ exports.update = (req, res) => {
 												});
 												return;
 											}
-											num++;
-											console.log(num);
 										});
 									}
 								}
