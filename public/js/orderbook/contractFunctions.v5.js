@@ -109,6 +109,7 @@ function depositEther(amount) {
             alertVar = "ETH";
             navAlerts(15);
             console.log('Deposit Ether transaction');
+            $("#depositEth").modal('hide');
             if (networkId == 3) {
                 $.get(`/orderbook/deposited?txHash=${res}&coin=ETH&ropsten=true`);
             } else {
@@ -130,6 +131,7 @@ function withdrawEther(amount) {
             alertVar = "ETH";
             navAlerts(16);
             console.log('Withdraw Ether transaction');
+            $("#withdrawEth").modal('hide');
             if (networkId == 3) {
                 $.get(`/orderbook/withdrawn?txHash=${res}&coin=ETH&ropsten=true`);
             } else {
@@ -157,6 +159,7 @@ function depositKnc(amount) {
                 alertVar = "KNC";
                 navAlerts(15);
                 console.log('Deposit KNC transaction');
+                $("#depositKnc").modal('hide');
                 if (networkId == 3) {
                     $.get(`/orderbook/deposited?txHash=${res}&coin=KNC&ropsten=true`);
                 } else {
@@ -179,6 +182,7 @@ function withdrawKnc(amount) {
             alertVar = "KNC";
             navAlerts(16);
             console.log('Withdraw KNC transaction');
+            $("#withdrawKnc").modal('hide');
             if (networkId == 3) {
                 $.get(`/orderbook/withdrawn?txHash=${res}&coin=KNC&ropsten=true`);
             } else {
@@ -206,6 +210,7 @@ function depositCoin(amount) {
                 alertVar = coinDetails.symbol;
                 navAlerts(15);
                 console.log('Deposit Coin transaction');
+                $("#depositToken").modal('hide');
                 if (networkId == 3) {
                     $.get(`/orderbook/deposited?txHash=${res}&coin=${coinDetails.symbol}&ropsten=true`);
                 } else {
@@ -229,6 +234,7 @@ function withdrawCoin(amount) {
             alertVar = coinDetails.symbol;
             navAlerts(16);
             console.log('Withdraw Coin transaction');
+            $("#withdrawToken").modal('hide');
             if (networkId == 3) {
                 $.get(`/orderbook/withdrawn?txHash=${res}&coin=${coinDetails.symbol}&ropsten=true`);
             } else {
@@ -320,6 +326,7 @@ function submitEthToCoinOrder(srcAmt, dstAmt) {
         } else {
             navAlerts(18);
             console.log(res);
+            $("#ethToTokenSubmit").modal('hide');
             if (networkId == 3) {
                 $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}&ropsten=true`);
             } else {
@@ -342,6 +349,7 @@ function updateEthToCoinOrder(id, srcAmt, dstAmt) {
         } else {
             navAlerts(19);
             console.log(res);
+            $("#ethToTokenUpdate").modal('hide');
             if (networkId == 3) {
                 $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}&ropsten=true`);
             } else {
@@ -439,6 +447,7 @@ function submitCoinToEthOrder(srcAmt, dstAmt) {
         } else {
             navAlerts(18);
             console.log(res);
+            $("#tokenToEthSubmit").modal('hide');
             if (networkId == 3) {
                 $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH&ropsten=true`);
             } else {
@@ -461,6 +470,7 @@ function updateCoinToEthOrder(id, srcAmt, dstAmt) {
         } else {
             navAlerts(19);
             console.log(res);
+            $("#tokenToEthUpdate").modal('hide');
             if (networkId == 3) {
                 $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH&ropsten=true`);
             } else {
