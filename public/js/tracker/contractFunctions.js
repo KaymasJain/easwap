@@ -8,8 +8,6 @@ function getTokenReserve(tokenData) {
                 tokensReserves[id] = web3.eth.contract(permissionLessReservesABI).at(res);
                 getEthToCoinOrder(id);
                 getCoinToEthOrder(id);
-			} else {
-                navAlerts(6);
 			}
 		}
 	});
