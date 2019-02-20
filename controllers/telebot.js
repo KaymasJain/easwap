@@ -25,7 +25,7 @@ module.exports = {
         TeleBot.updateOne({
                 chatID: req.chat.id
             }, {
-                $addToSet: {
+                $set: {
                     EthId: req.match[0]
                 }
             },
@@ -43,50 +43,28 @@ module.exports = {
             })
     },
 
-
-
-
-
-    listFunction(req) {
-        TeleBot.findOne({
-                chatID: req.chat.id
-            }, (err, data) => {
-                if (err) {
-                    console.error(err);
-                    return req.reply("some error")
-                } else {
-                    if (data == null) {
-                        req.reply("some error occured, please /start")
-                    } else {
-
-                        t = data.EthId.length
-
-                        if (t != 0) {
-                            reply = "list of all eth id \n";
-                            x = 0;
-                            while (x < t) {
-                                x = x + 1;
-                                reply = reply + " \n " + x + "." + data.EthId[x - 1];
-                            }
-                        } else {
-                            reply = "list empty"
-                        }
-                        req.reply(reply)
-                    }
-                }
-
-            }
-
-        )
-    },
-
-
-
-
     removeFunction(req) {
+        console.log(req)
+        TeleBot.updateOne({
+                chatID: req.chat.id
+            }, {
+                $set: {
+                    EthId: ""
+                }
+            },
+            function (err, tank) {
+                console.log(tank)
+                if (tank.ok) {
+                    if (tank.nModified) {
+                        req.reply("Removed")
+                    } else {
+                        req.reply("already blank")
+                    }
+                } else {
+                    req.reply("some error occured")
+                }
+            })
 
-        return req.reply('removed');
-        
     },
     helpFunction(req) {
         return req.reply("help");

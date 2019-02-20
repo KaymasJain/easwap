@@ -35,9 +35,8 @@ addScene.hears(/(^0x[a-fA-F0-9]{40}$)/, (req) => TeleAlert.addFunction(req))
 addScene.hears('hi', leave('addScene'))
 
 
-
 // Staging scenes here
-const stage = new Stage([addScene], {
+const stage = new Stage([addScene, removeScene], {
     ttl: 10
 })
 
@@ -71,10 +70,7 @@ bot.command('remove', (req) => {
 });
 
 
-// on Command /list
-bot.command('list', (req) => {
-    TeleAlert.listFunction(req)
-});
+
 
 // On Command /help
 bot.command('help', (req) => {
