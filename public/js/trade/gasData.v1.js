@@ -5,7 +5,7 @@ setInterval(function() {
         if (data.fast < 500) {
             gasLow = data.safeLow / 10;
             gasHigh = data.fast / 10;
-            gasStandard = data.average / 10;
+            gasStandard = (data.average / 10) + 2;
         } else {
             if (data.safeLow < 500) {
                 gasLow = data.safeLow / 10;

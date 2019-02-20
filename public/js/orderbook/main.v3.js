@@ -13,6 +13,8 @@ function modalDescUpdate(num) {
         $('.kncModalDepositData').text(`You can deposit maximum of ${cleanDecimal(KncDetails.balance, 3)} KNC`);
     } else if (num == 6) {
         $('.kncModalWithdrawData').text(`You can withdraw maximum of ${cleanDecimal(KncDetails.funds, 3)} KNC`);
+    } else if (num == 7) {
+        $('.minEthRequired').text(`Min ${cleanDecimal(limits.minEth, 3)} ETH and ${cleanDecimal(limits.minKnc, 3)} KNC/ETH required to create order`);
     }
 }
 
@@ -201,17 +203,3 @@ function tokenToUsd(symbol, cur="USD"){
 tokenToUsd("ETH");
 tokenToUsd("KNC");
 tokenToUsd(coinDetails.symbol);
-
-
-// ETH to TOKEN getExpectedRate
-$('.ethGetExpectedInput').on('keyup keydown change', function () {
-    var value = $(this).val();
-    expectedRateCoinToCoin(EthDetails.contractAddress, coinDetails.contractAddress, value, 1);
-});
-
-// TOKEN to ETH getExpectedRate
-$('.coinGetExpectedInput').on('keyup keydown change', function () {
-    var value = $(this).val();
-    var valueInWei = value*(10**(coinDetails.decimals));
-    expectedRateCoinToCoin(coinDetails.contractAddress, EthDetails.contractAddress, value, 2);
-});

@@ -49,10 +49,13 @@
     font-size: 18px;
 }
 
-.bookDepositTitle,
+.bookDepositTitle {
+    width: 35%;
+}
+
 .bookDepositQty {
-    width: 40%;
-    text-align: center
+    width: 35%;
+    text-align: right;
 }
 
 .depositWithdrawButBox {
@@ -123,4 +126,8 @@
 
 .inputModels:focus {
     color: var(--background);
+}
+
+.minEthRequired {
+    color: var(--danger) !important;
 }

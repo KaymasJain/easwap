@@ -10,8 +10,8 @@ function navAlerts(num) {
         title = 'Main network';
         content = "<b>You are on main network whatever trade you do will involves real assets.</b>";
     } else if (num == 3) {
-        title = 'Not main network';
-        content = "<b>Shift to main network to list new ERC20s.</b>";
+        title = 'Ropsten test network';
+        content = "<b>You are good to use ropsten test version of List ropsten Token. For real assets listing shift to Main network.</b>";
     } else if (num == 4) {
         title = 'Not main network';
         content = "<b>Shift to main network to list new ERC20s.</b>";
@@ -39,6 +39,9 @@ function navAlerts(num) {
     } else if (num == 12) {
         title = 'Listing transactions Deployed!';
         content = "<b>Listing Transactions successfully deployed. We'll let you know once it get confirmed!</b>";
+    } else if (num == 13) {
+        title = 'Input Not Valid';
+        content = "<b>Input should be valid ERC20 address.</b>";
     }
     swal({ "title": title,
             "html": content,

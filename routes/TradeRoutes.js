@@ -3,11 +3,41 @@ var router = express.Router();
 var TradeController = require('../controllers/trade.js');
 
 /*
- * GET all CDP all acts
+ * GET /trade routes
  */
-router.get('/kyberMain', TradeController.kyberMain);
-router.get('/kyberRops', TradeController.kyberRops);
+
+/*
+ * ?secret=SECRET_PHRASE
+ * ?ropsten=true for ropsten data update
+ * ?symbol=TOKEN_SYMBOL to add new token to trading section
+ */
+router.get('/add', TradeController.add);
+
+
+/*
+ * ?secret=SECRET_PHRASE
+ * ?ropsten=true for ropsten data update
+ */
+router.get('/update', TradeController.update);
+
+/*
+ * ?ropsten=true for ropsten data on trade section
+ */
+router.get('/tradeData', TradeController.tradeData);
+
+/*
+ * Current gas status
+ */
 router.get('/gas', TradeController.gas);
+
+/*
+ * Transaction hash when trade happens
+ */
 router.get('/tradeHash', TradeController.tradeHash);
+
+/*
+ * Transaction hash when trade happens
+ */
+router.get('*', TradeController.index);
 
 module.exports = router;
