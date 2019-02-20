@@ -12,7 +12,7 @@ const lusca = require('lusca');
 const dotenv = require('dotenv');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const flash = require('express-flash');5
+const flash = require('express-flash');
 const path = require('path');
 const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
@@ -39,6 +39,7 @@ require('./controllers/restApis');
 const TradeController = require('./routes/TradeRoutes');
 const ListerController = require('./routes/ListerRoutes');
 const OrderbookController = require('./routes/OrderbookRoutes');
+const TrackerController = require('./routes/TrackerRoutes');
 const IndexController = require('./routes/IndexRoutes');
 const TeleController = require('./routes/TeleRoutes');
 
@@ -134,6 +135,7 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 app.use('/trade', TradeController);
 app.use('/lister', ListerController);
 app.use('/orderbook', OrderbookController);
+app.use('/tracker', TrackerController);
 app.use('/', IndexController);
 
 /**

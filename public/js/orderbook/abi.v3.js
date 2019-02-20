@@ -181,6 +181,24 @@ var permissionLessReservesABI = [{
         "stateMutability": "view",
         "type": "function"
     },{
+      "constant": true,
+      "inputs": [
+        {
+          "name": "maker",
+          "type": "address"
+        }
+      ],
+      "name": "makerUnlockedKnc",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },{
         "constant": false,
         "inputs": [
           {
@@ -446,6 +464,52 @@ var permissionLessReservesABI = [{
         "payable": false,
         "stateMutability": "view",
         "type": "function"
+    },{
+      "constant": true,
+      "inputs": [
+        
+      ],
+      "name": "limits",
+      "outputs": [
+        {
+          "name": "minNewOrderSizeUsd",
+          "type": "uint256"
+        },
+        {
+          "name": "maxOrdersPerTrade",
+          "type": "uint256"
+        },
+        {
+          "name": "minNewOrderSizeWei",
+          "type": "uint256"
+        },
+        {
+          "name": "minOrderSizeWei",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "weiAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "calcKncStake",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
     }];
 
 var tokensAbi = [{

@@ -48,38 +48,6 @@ setInterval(function () {
 
 // module.exports.init = (app) => {
 
-	// var gasError = 0;
-	// var gasSaving = 0;
-
-	// setInterval(function () {
-	// 	request("https://ethgasstation.info/json/ethgasAPI.json", (err, data) => {
-	// 		if (err) {
-	// 			console.log(err);
-	// 			gasError++;
-	// 			if (gasError % 10 == 0) {
-	// 				// slackit('Gas station', `api ethgasstation - ${err}`, 'danger');
-	// 			}
-	// 		} else {
-	// 			try {
-	// 				var details = JSON.parse(data.body);
-	// 				let gasPrice = new TeleBot(details);
-	// 				gasPrice.updateAll(function (err, updated) {
-	// 					if (err) {
-	// 						console.log(`Gas Price - ${err}`);
-	// 					} else {
-	// 						'yay'
-	// 					}
-	// 				});
-	// 			} catch (error) {
-	// 				gasSaving++;
-	// 				if (gasSaving % 10 == 0) {
-	// 					// slackit('Gas to database', `Error saving gas price - ${error}`, 'danger');
-	// 				} 
-	// 			}
-	// 		}
-	// 	});
-	// }, 1500);
-
 	// setInterval(function () {
 	// 	db.ref('kyberMain').once('value', function (snapshot) {
 	// 		var data = snapshot.val();

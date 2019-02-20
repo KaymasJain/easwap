@@ -10,9 +10,7 @@ function showBoxes() {
     
         let html = `<div class="selectCoinBox ${forClass}" onclick="funcToSelect('${key}')">
                         <div class="logoNameBox">
-                            <div class="logoBox">
-                                <img src="logos/${key}.svg" style="width:48px; height:48px">
-                            </div>
+                            <div class="logoBox ${key}LogoBox"></div>
                             <div class="nameCodeBox">
                                 <div class="nameBox">${coinsData[key].symbol}</div>
                                 <div class="nameToken">${coinsData[key].name}</div>
@@ -30,6 +28,15 @@ function showBoxes() {
             $('.boxEthMob').append(html);
         }
 
+        // Logo box
+        check(`logos/${key}.svg`).on("error", function(e) {
+            var icon = `<i class="tim-icons icon-alert-circle-exc" style="font-size: 48px; color:var(--primary)"></i>`;
+            $(`.${key}LogoBox`).html(icon);
+        }).on("load", function(e) {
+            var icon = `<img src="logos/${key}.svg" style="width:48px; height:48px">`;
+            $(`.${key}LogoBox`).html(icon);
+        });
+
         // Search Bar
         let charOne = key.charAt(0);
         let searchClass = `search${charOne}`;
@@ -39,6 +46,10 @@ function showBoxes() {
             $(".searchBar").append(html);
         }
     });
+}
+
+function check(src) {
+    return $("<img>").attr('src', src);
 }
 
 // search coins

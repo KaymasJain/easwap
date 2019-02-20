@@ -109,6 +109,12 @@ function depositEther(amount) {
             alertVar = "ETH";
             navAlerts(15);
             console.log('Deposit Ether transaction');
+            $("#depositEth").modal('hide');
+            if (networkId == 3) {
+                $.get(`/orderbook/deposited?txHash=${res}&coin=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/deposited?txHash=${res}&coin=ETH`);
+            }
         }
     });
 }
@@ -125,6 +131,12 @@ function withdrawEther(amount) {
             alertVar = "ETH";
             navAlerts(16);
             console.log('Withdraw Ether transaction');
+            $("#withdrawEth").modal('hide');
+            if (networkId == 3) {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=ETH`);
+            }
         }
     });
 }
@@ -147,6 +159,12 @@ function depositKnc(amount) {
                 alertVar = "KNC";
                 navAlerts(15);
                 console.log('Deposit KNC transaction');
+                $("#depositKnc").modal('hide');
+                if (networkId == 3) {
+                    $.get(`/orderbook/deposited?txHash=${res}&coin=KNC&ropsten=true`);
+                } else {
+                    $.get(`/orderbook/deposited?txHash=${res}&coin=KNC`);
+                }
             }
         });
     }
@@ -164,6 +182,12 @@ function withdrawKnc(amount) {
             alertVar = "KNC";
             navAlerts(16);
             console.log('Withdraw KNC transaction');
+            $("#withdrawKnc").modal('hide');
+            if (networkId == 3) {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=KNC&ropsten=true`);
+            } else {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=KNC`);
+            }
         }
     })
 }
@@ -186,6 +210,13 @@ function depositCoin(amount) {
                 alertVar = coinDetails.symbol;
                 navAlerts(15);
                 console.log('Deposit Coin transaction');
+                $("#depositToken").modal('hide');
+                if (networkId == 3) {
+                    $.get(`/orderbook/deposited?txHash=${res}&coin=${coinDetails.symbol}&ropsten=true`);
+                } else {
+                    $.get(`/orderbook/deposited?txHash=${res}&coin=${coinDetails.symbol}`);
+                }
+                alert('deposited');
             }
         });
     }
@@ -203,6 +234,12 @@ function withdrawCoin(amount) {
             alertVar = coinDetails.symbol;
             navAlerts(16);
             console.log('Withdraw Coin transaction');
+            $("#withdrawToken").modal('hide');
+            if (networkId == 3) {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=${coinDetails.symbol}&ropsten=true`);
+            } else {
+                $.get(`/orderbook/withdrawn?txHash=${res}&coin=${coinDetails.symbol}`);
+            }
         }
     });
 }
@@ -252,13 +289,30 @@ function makerKnc() {
             totalAssets.knc += KncDetails.funds;
             totalAssets.kncInWei += KncDetails.fundsInWei;
             modalDescUpdate(6);
-            $('#kncUnlocked').text(cleanDecimal(KncDetails.funds, 3));
+            makerUnlockedKnc();
             $('#kncTotal').text(cleanDecimal(totalAssets.knc, 3));
             $('#kncValue').text(cleanDecimal(totalAssets.knc*KncDetails.USD, 3));
         }
     });
 }
 
+/**
+ * @def pmlReserve function to get unlocked KNC
+ */
+function makerUnlockedKnc() {
+    coinPmlContract.makerUnlockedKnc(account, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            KncDetails.unlockedInWei = Number(res);
+            KncDetails.unlocked = Number(res)/(10**18);
+            KncDetails.lockedInWei = KncDetails.fundsInWei - KncDetails.unlockedInWei;
+            KncDetails.locked = KncDetails.funds - KncDetails.unlocked;
+            $('#kncUnlocked').text(cleanDecimal(KncDetails.unlocked, 3));
+            $('#kncLocked').text(cleanDecimal(KncDetails.locked, 3));
+        }
+    });
+}
 
 // ETH to Token orders
 /**
@@ -272,6 +326,12 @@ function submitEthToCoinOrder(srcAmt, dstAmt) {
         } else {
             navAlerts(18);
             console.log(res);
+            $("#ethToTokenSubmit").modal('hide');
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}`);
+            }
         }
     })
 }
@@ -289,6 +349,12 @@ function updateEthToCoinOrder(id, srcAmt, dstAmt) {
         } else {
             navAlerts(19);
             console.log(res);
+            $("#ethToTokenUpdate").modal('hide');
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}`);
+            }
         }
     })
 }
@@ -304,6 +370,11 @@ function cancelEthToCoinOrder(id) {
         } else {
             navAlerts(20);
             console.log(res);
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Cancel&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Cancel&txHash=${res}&coinOne=ETH&coinTwo=${coinDetails.symbol}`);
+            }
         }
     });
 }
@@ -376,6 +447,12 @@ function submitCoinToEthOrder(srcAmt, dstAmt) {
         } else {
             navAlerts(18);
             console.log(res);
+            $("#tokenToEthSubmit").modal('hide');
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Submit&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH`);
+            }
         }
     })
 }
@@ -393,6 +470,12 @@ function updateCoinToEthOrder(id, srcAmt, dstAmt) {
         } else {
             navAlerts(19);
             console.log(res);
+            $("#tokenToEthUpdate").modal('hide');
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Update&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH`);
+            }
         }
     })
 }
@@ -408,6 +491,11 @@ function cancelCoinToEthOrder(id) {
         } else {
             navAlerts(20);
             console.log(res);
+            if (networkId == 3) {
+                $.get(`/orderbook/order?act=Cancel&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH&ropsten=true`);
+            } else {
+                $.get(`/orderbook/order?act=Cancel&txHash=${res}&coinOne=${coinDetails.symbol}&coinTwo=ETH`);
+            }
         }
     })
 }
@@ -468,27 +556,64 @@ function getCoinToEthOrder() {
 }
 
 /**
+ * @def pmlReserve function to get Overall order details like min order size
+ */
+function getLimits() {
+    coinPmlContract.limits((err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            limits.inUSD = Number(res[0]);
+            limits.maxOrders = Number(res[1]);
+            limits.minEthInWei = Number(res[2]);
+            limits.minEth = Number(res[2]/(10**18));
+            limits.minEthToBeValidInWei = Number(res[3]);
+            limits.minEthToBeValid = Number(res[3]/(10**18));
+            modalDescUpdate(7);
+        }
+    });
+}
+
+/**
+ * @def pmlReserve function to get Overall order details like min order size
+ */
+function minKncRequired(ethQtyInWei) {
+    coinPmlContract.calcKncStake(ethQtyInWei, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            limits.minKnc = Number(res/10**18);
+            limits.minKncInWei = Number(res);
+            modalDescUpdate(7);
+        }
+    });
+}
+
+
+/**
  * @def pmlReserve function to get TOKEN TO ETH order details
  * @param {id} required id - order id
  */
-function expectedRateCoinToCoin(coinFromAdd, coinToAdd, coinFromQty, num) {
+function expectedRateCoinToCoin(coinFromAdd, coinToAdd, num) {
+    var coinFromQtyInWei;
     if (num == 1) {
-        var coinFromQtyInWei = coinFromQty*(10**18);
+        coinFromQtyInWei = 10**18;
     } else {
-        var coinFromQtyInWei = coinFromQty*(10**(coinDetails.decimals));
+        coinFromQtyInWei = 10**(coinDetails.decimals);
     }
     mainKyberContract.getExpectedRate(coinFromAdd, coinToAdd, coinFromQtyInWei, function (err, res) {
         if (!err) {
             if (num == 1) {
-                var rateInWei = Number(res[0]);
-                var rate = Number(res[0])/10**18;
-                $('.ethToCoinPrice').text(`Current best price (${cleanDecimal(coinFromQty, 3)} ${EthDetails.symbol} -> ${cleanDecimal(rate*coinFromQty, 3)} ${coinDetails.symbol})`);
+                currentPrice.ethToTokenInWei = Number(res[0]);
+                currentPrice.ethToToken = Number(res[0])/10**18;
+                $('.ethToCoinPrice').text(`Current best price (1 ETH -> ${cleanDecimal(currentPrice.ethToToken, 3)} ${coinDetails.symbol})`);
             } else if (num == 2) {
-                var rateInWei = Number(res[0]);
-                var rate = Number(res[0])/10**18;
-                $('.coinToEthPrice').text(`Current best price (${cleanDecimal(coinFromQty, 3)} ${coinDetails.symbol} -> ${cleanDecimal(rate*coinFromQty, 3)} ${EthDetails.symbol})`);
+                currentPrice.tokenToEthInWei = Number(res[0]);
+                currentPrice.tokenToEth = Number(res[0])/10**18;
+                $('.coinToEthPrice').text(`Current best price (1 ${coinDetails.symbol} -> ${cleanDecimal(currentPrice.tokenToEth, 5)} ETH)`);
             }
         } else {
+            console.log(err);
             // navAlerts(17);
         };
     });
