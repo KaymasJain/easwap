@@ -1,10 +1,8 @@
 const TeleBot = require('../models/TeleBot.js');
 const helper = require('../util/helper');
-const slackit = require('../util/slack').shoot;
+// const slackit = require('../util/slack').shoot;
 
 module.exports = {
-    // TODO{zubin}
-
 
 
     start(req) {
@@ -44,12 +42,11 @@ module.exports = {
     },
 
     removeFunction(req) {
-        console.log(req)
         TeleBot.updateOne({
                 chatID: req.chat.id
             }, {
                 $set: {
-                    EthId: ""
+                    EthId: null
                 }
             },
             function (err, tank) {
@@ -58,16 +55,33 @@ module.exports = {
                     if (tank.nModified) {
                         req.reply("Removed")
                     } else {
-                        req.reply("already blank")
+                        req.reply("EthId doesnt exist.")
                     }
                 } else {
                     req.reply("some error occured")
                 }
             })
+    },
+    aboutFunction(req) {
+        TeleBot.findOne({
+            chatID: req.chat.id
+        }, function (err, tank) {
+            if (err) return console.error(err)
+            if (tank.EthId == null) {
 
+                req.reply("no eth id set");
+            } else {
+                // console.log(tank.EthId) // REMOVE LATER
+                req.reply(tank.EthId);
+            }
+        })
     },
     helpFunction(req) {
-        return req.reply("help");
+        req.reply("help");
+    },
+
+    statsFunction(req){
+        req.reply('stats')
     },
 
 }

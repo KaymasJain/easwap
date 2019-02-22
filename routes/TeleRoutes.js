@@ -26,17 +26,19 @@ const {
 } = Stage
 
 
-// Scene Here
+// Scenes Here
 
+
+// add Scene
 const addScene = new Scene('addScene');
 addScene.enter((req) => req.reply('Enter ETH id'))
 addScene.leave((req) => req.reply('b\'bye'))
 addScene.hears(/(^0x[a-fA-F0-9]{40}$)/, (req) => TeleAlert.addFunction(req))
-addScene.hears('hi', leave('addScene'))
+addScene.hears("bye", leave('addScene'))
 
 
 // Staging scenes here
-const stage = new Stage([addScene, removeScene], {
+const stage = new Stage([addScene], {
     ttl: 10
 })
 
@@ -64,9 +66,7 @@ bot.command('add', enter('addScene'));
 
 // On Command /remove
 bot.command('remove', (req) => {
-    TeleAlert.removeFunction(req).catch((err) => {
-        console.error(err);
-    });
+    TeleAlert.removeFunction(req)
 });
 
 
@@ -74,14 +74,17 @@ bot.command('remove', (req) => {
 
 // On Command /help
 bot.command('help', (req) => {
-    TeleAlert.removeFunction(req).catch((err) => {
-        console.error(err);
-    });
+    TeleAlert.helpFunction(req)
 });
 
 
+bot.command('about', (req) => {
+    TeleAlert.aboutFunction(req)
+});
 
-
+bot.command('stats', (req) =>{
+    TeleAlert.statsFunction(req)
+});
 
 // Start Polling.
 bot.startPolling();
