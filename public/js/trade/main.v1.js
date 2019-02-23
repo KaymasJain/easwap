@@ -254,7 +254,7 @@ function gasToTranSet(numCheck) {
 // trade all coin button
 function tradeAllCoin() {
     if (toggleNum == 1) {
-        coinOne.val = coinOne.qty;
+        coinOne.val = coinOne.qty - 0.0000001;
         if (coinOne.id != 'eth') {
             $('.coinOneInput').val(coinOne.val);
         } else {
@@ -262,7 +262,7 @@ function tradeAllCoin() {
         }
         changeOnInput(1);
     } else if (toggleNum == 0) {
-        coinTwo.val = coinTwo.qty;
+        coinTwo.val = coinTwo.qty - 0.0000001;
         if (coinTwo.id != 'eth') {
             $('.coinTwoInput').val(coinTwo.val);
         } else {
