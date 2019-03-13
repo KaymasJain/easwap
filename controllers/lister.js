@@ -1,6 +1,8 @@
 const List = require('../models/List.js');
 const ListRops = require('../models/ListRops.js');
 
+const slackit = require('../util/slack').shoot;
+
 /**
  * GET /
  * LISTER SECTION.
@@ -87,8 +89,11 @@ exports.coinsData = (req, res) => {
         } else {
             let objectToSend = {};
             Object.keys(response).forEach(function (key, i) {
-                if (response[key].symbol.toLowerCase()) {
+                try {
                     objectToSend[response[key].symbol.toLowerCase()] = response[key];
+                } catch(err) {
+					slackit(`Lister coinsData - ${response[key].symbol} - ${err}`, "#D50201", false);
+                    console.log(err);
                 }
             });
             res.send(objectToSend);
