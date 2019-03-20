@@ -92,7 +92,7 @@ exports.coinsData = (req, res) => {
                 try {
                     objectToSend[response[key].symbol.toLowerCase()] = response[key];
                 } catch(err) {
-					slackit(`Lister coinsData - ${response[key].symbol} - ${err}`, "#D50201", false);
+					slackit(`Lister coinsData - ${response[key]} - ${err}`, "#D50201", false);
                     console.log(err);
                 }
             });
