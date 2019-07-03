@@ -1,5 +1,6 @@
-/**
+ /**
  * Module dependencies.
+
  */
 const express = require('express');
 const compression = require('compression');
@@ -40,6 +41,7 @@ const ListerController = require('./routes/ListerRoutes');
 const OrderbookController = require('./routes/OrderbookRoutes');
 const TrackerController = require('./routes/TrackerRoutes');
 const IndexController = require('./routes/IndexRoutes');
+const TeleController = require('./routes/TeleRoutes');
 
 /**
  * Create Express server.

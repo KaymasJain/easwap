@@ -34,7 +34,8 @@
     "nunjucks": "^3.1.6",
     "popper.js": "^1.14.4",
     "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "telegraf": "^3.26.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -46,7 +47,8 @@
     "nyc": "^13.0.1",
     "sinon": "^6.3.3",
     "sinon-mongoose": "^2.2.1",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "ws": "3.3.2"
   },
   "engines": {
     "node": ">=8.11.3",
